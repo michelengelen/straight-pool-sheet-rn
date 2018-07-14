@@ -1,0 +1,3 @@
+rootProject.name = 'straightPoolSheet'
+
+include ':app'
