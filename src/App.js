@@ -3,7 +3,7 @@ import {View, StatusBar} from 'react-native';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 
-// import project files
+// project files
 import reducers from './reducers';
 import GameSettings from './components/GameSettings';
 import SPS from './common/variables';

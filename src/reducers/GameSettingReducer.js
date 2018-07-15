@@ -9,7 +9,7 @@ const initialState = {
   },
 };
 
-export default (state = initialState, action) => {
+const GameSettingReducer = (state = initialState, action) => {
   const {payload} = action;
   let newState = {...state};
 
@@ -21,3 +21,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default GameSettingReducer;
