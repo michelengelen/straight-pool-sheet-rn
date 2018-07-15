@@ -1,20 +1,20 @@
 const initialState = {
   players: {
     playerOne: {
-      name: ""
+      name: '',
     },
     playerTwo: {
-      name: ""
-    }
-  }
+      name: '',
+    },
+  },
 };
 
 export default (state = initialState, action) => {
-  const { payload } = action;
+  const {payload} = action;
+  let newState = {...state};
 
   switch (action.type) {
-    case "update_player":
-      let newState = { ...state };
+    case 'update_player':
       newState.players[payload.key].name = payload.name;
       return newState;
     default:

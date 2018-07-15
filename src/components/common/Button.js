@@ -1,15 +1,25 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import { LoadingIndicator } from './LoadingIndicator';
+import PropTypes from 'prop-types';
+import {Text, TouchableOpacity} from 'react-native';
+import {LoadingIndicator} from './LoadingIndicator';
 
-const Button = ({ onPress, loading, buttonText }) => {
-  const { buttonStyle, textStyle } = styles;
+const Button = ({onPress, loading, buttonText}) => {
+  const {buttonStyle, textStyle} = styles;
 
   return (
     <TouchableOpacity onPress={onPress} style={buttonStyle}>
-      {loading ? <LoadingIndicator size={'medium'} /> : <Text style={textStyle}>{buttonText}</Text>}
+      {loading
+        ? <LoadingIndicator size={'medium'} />
+        : <Text style={textStyle}>{buttonText}</Text>
+      }
     </TouchableOpacity>
   );
+};
+
+Button.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  buttonText: PropTypes.string,
 };
 
 const styles = {
@@ -27,8 +37,8 @@ const styles = {
     borderColor: '#fff',
     margin: 15,
     padding: 10,
-    minHeight: 30
+    minHeight: 30,
   },
 };
 
-export { Button };
+export {Button};

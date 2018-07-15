@@ -1,10 +1,16 @@
 import React from 'react';
-import { TextInput, View, Text } from 'react-native';
+import {TextInput, View, Text} from 'react-native';
 
 import SPS from '../../common/variables';
 
-const CustomInput = ({ label, value, onChangeText, placeholder, secureTextEntry }) => {
-  const { inputStyle, labelStyle, containerStyle } = styles;
+const CustomInput = ({
+  label,
+  value,
+  onChangeText,
+  placeholder,
+  secureTextEntry,
+}) => {
+  const {inputStyle, labelStyle, containerStyle} = styles;
 
   return (
     <View style={containerStyle}>
@@ -21,7 +27,7 @@ const CustomInput = ({ label, value, onChangeText, placeholder, secureTextEntry 
   );
 };
 
-const { colors } = SPS.variables;
+const {colors} = SPS.variables;
 const styles = {
   inputStyle: {
     backgroundColor: colors.backgroundColor,
@@ -40,8 +46,8 @@ const styles = {
   containerStyle: {
     padding: 20,
     flexDirection: 'column',
-    alignItems: 'stretch'
-  }
+    alignItems: 'stretch',
+  },
 };
 
-export { CustomInput };
+export {CustomInput};

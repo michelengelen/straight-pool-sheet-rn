@@ -1,3 +1,5 @@
-export default (AuthReducer = () => {
+const AuthReducer = () => {
   return [];
-});
+};
+
+export default AuthReducer;

@@ -1,22 +1,22 @@
 import React from 'react';
-import { View } from 'react-native';
+import {View} from 'react-native';
 import Image from 'react-native-remote-svg';
 
-const LoadingIndicator = ({ size }) => {
-  const { containerStyle } = styles;
+const LoadingIndicator = ({size}) => {
+  const {containerStyle} = styles;
   const dots = require('../../assets/dots.svg');
 
   switch (size) {
     case 'full-size':
       return (
         <View style={containerStyle}>
-          <Image source={dots} style={{ width: 120, height: 30 }} />
+          <Image source={dots} style={{width: 120, height: 30}} />
         </View>
       );
     case 'medium':
-      return <Image source={dots} style={{ width: 80, height: 20 }} />;
+      return <Image source={dots} style={{width: 80, height: 20}} />;
     default:
-      return <Image source={dots} style={{ width: 40, height: 10 }} />;
+      return <Image source={dots} style={{width: 40, height: 10}} />;
   }
 };
 
@@ -28,4 +28,4 @@ const styles = {
   },
 };
 
-export { LoadingIndicator };
+export {LoadingIndicator};
