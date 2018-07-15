@@ -33,6 +33,5 @@ module.exports = {
       "error",
       "always"
     ],
-    "no-case-declarations": 0
   }
 };
