@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {View} from 'react-native';
+import PropType from 'prop-types';
 
 import {CustomInput} from './common';
 import * as actions from '../actions';
@@ -64,6 +65,11 @@ class GameSettings extends Component {
     );
   }
 }
+
+GameSettings.propTypes = {
+  players: PropType.array,
+  updatePlayer: PropType.func.isRequired,
+};
 
 const mapStateToProps = (state) => {
   // TODO@Michel: Remove console.log calls

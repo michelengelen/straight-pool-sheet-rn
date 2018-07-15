@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {TextInput, View, Text} from 'react-native';
 
+// Constant import
 import SPS from '../../common/variables';
 
 const CustomInput = ({
@@ -25,6 +27,14 @@ const CustomInput = ({
       {label && <Text style={labelStyle}>{label}</Text>}
     </View>
   );
+};
+
+CustomInput.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChangeText: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  secureTextEntry: PropTypes.bool.isRequired,
 };
 
 const {colors} = SPS.variables;

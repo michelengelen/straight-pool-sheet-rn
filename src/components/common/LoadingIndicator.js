@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import Image from 'react-native-remote-svg';
+import PropTypes from 'prop-types';
 
 const LoadingIndicator = ({size}) => {
   const {containerStyle} = styles;
@@ -18,6 +19,10 @@ const LoadingIndicator = ({size}) => {
     default:
       return <Image source={dots} style={{width: 40, height: 10}} />;
   }
+};
+
+LoadingIndicator.propTypes = {
+  size: PropTypes.string,
 };
 
 const styles = {
