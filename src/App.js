@@ -4,9 +4,9 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 
 // project files
-import reducers from './reducers';
-import GameSettings from './components/GameSettings';
-import SPS from './common/variables';
+import reducers from 'Reducers';
+import GameSettings from 'Components/GameSettings';
+import SPS from 'Common/variables';
 
 const App = () => {
   return (

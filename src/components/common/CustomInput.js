@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {TextInput, View, Text} from 'react-native';
 
 // Constant import
-import SPS from '../../common/variables';
+import SPS from 'Common/variables';
 
 const CustomInput = ({
   label,

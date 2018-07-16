@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import {View} from 'react-native';
 import PropType from 'prop-types';
 
-import {CustomInput} from './common';
-import * as actions from '../actions';
+import {CustomInput} from 'Components/common';
+import * as actions from 'Actions';
 
 /**
  * Gamesettings Component
