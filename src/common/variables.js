@@ -1,4 +1,4 @@
-const SPS = {};
+let SPS = {};
 
 SPS.variables = {
   colors: {

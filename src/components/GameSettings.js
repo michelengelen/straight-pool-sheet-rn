@@ -5,6 +5,7 @@ import PropType from 'prop-types';
 
 import {CustomInput} from 'Components/common';
 import * as actions from 'Actions';
+import {getSettings} from 'Reducers/GameSettingReducer';
 
 /**
  * Gamesettings Component
@@ -36,9 +37,6 @@ class GameSettings extends Component {
    */
   render() {
     const inputIds = ['One', 'Two'];
-    // TODO@Michel: Remove console.log calls
-    /* eslint-disable-next-line */
-    console.log(this.props);
 
     return (
       <View style={{flex: 1}}>
@@ -48,7 +46,7 @@ class GameSettings extends Component {
               key={index}
               id={'player' + id}
               label={'Input name for player ' + (index + 1)}
-              value={this.props.players['player' + id].name}
+              value={this.props.gameSettings.players['player' + id].name}
               style={{flex: 1}}
               onChangeText={(name) =>
                 this.props.updatePlayer({
@@ -67,17 +65,19 @@ class GameSettings extends Component {
 }
 
 GameSettings.propTypes = {
-  players: PropType.array,
-  updatePlayer: PropType.func.isRequired,
+  gameSettings: PropType.object,
+  updatePlayer: PropType.func,
 };
 
 const mapStateToProps = (state) => {
-  // TODO@Michel: Remove console.log calls
-  /* eslint-disable-next-line */
-  console.log(state);
   return {
-    players: state.gameSettings.players,
+    ...getSettings(state),
   };
 };
 
-export default connect(mapStateToProps, actions)(GameSettings);
+const mapDispatchToProps = (dispatch) => ({
+  updatePlayer: (playerData) =>
+    actions.updatePlayerAction(dispatch, playerData),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameSettings);
