@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {View} from 'react-native';
 import PropType from 'prop-types';
 
-import {CustomInput} from 'Components/common';
+import {CustomInput, CustomSlider, Header} from 'Components/common';
 import * as actions from 'Actions';
 import {getSettings} from 'Reducers/GameSettingReducer';
 
@@ -37,16 +37,18 @@ class GameSettings extends Component {
    */
   render() {
     const inputIds = ['One', 'Two'];
+    const {gameSettings} = this.props;
 
     return (
       <View style={{flex: 1}}>
+        <Header headerText={'New Game'} />
         {inputIds.map((id, index) => {
           return (
             <CustomInput
               key={index}
               id={'player' + id}
               label={'Input name for player ' + (index + 1)}
-              value={this.props.gameSettings.players['player' + id].name}
+              value={gameSettings.players['player' + id].name}
               style={{flex: 1}}
               onChangeText={(name) =>
                 this.props.updatePlayer({
@@ -59,6 +61,20 @@ class GameSettings extends Component {
             />
           );
         })}
+        <CustomSlider
+          label={'Maximum Points'}
+          value={gameSettings.maxPoints}
+          minimumValue={50}
+          maximumValue={200}
+          onSlidingComplete={(value) => this.props.updatePoints(value)}
+        />
+        <CustomSlider
+          label={'Maximum Rounds'}
+          value={gameSettings.maxRounds}
+          minimumValue={15}
+          maximumValue={50}
+          onSlidingComplete={(value) => this.props.updateRounds(value)}
+        />
       </View>
     );
   }
@@ -67,6 +83,8 @@ class GameSettings extends Component {
 GameSettings.propTypes = {
   gameSettings: PropType.object,
   updatePlayer: PropType.func,
+  updatePoints: PropType.func,
+  updateRounds: PropType.func,
 };
 
 const mapStateToProps = (state) => {
@@ -78,6 +96,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   updatePlayer: (playerData) =>
     actions.updatePlayerAction(dispatch, playerData),
+  updatePoints: (maxPoints) =>
+    actions.updatePointsAction(dispatch, maxPoints),
+  updateRounds: (maxRounds) =>
+    actions.updateRoundsAction(dispatch, maxRounds),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameSettings);

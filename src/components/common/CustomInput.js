@@ -23,6 +23,7 @@ const CustomInput = ({
         style={inputStyle}
         value={value}
         onChangeText={onChangeText}
+        placeholderTextColor={colors.textColorDim}
       />
       {label && <Text style={labelStyle}>{label}</Text>}
     </View>
@@ -40,8 +41,7 @@ CustomInput.propTypes = {
 const {colors} = SPS.variables;
 const styles = {
   inputStyle: {
-    backgroundColor: colors.backgroundColor,
-    borderBottomWidth: 2,
+    backgroundColor: colors.backgroundColors.dimm,
     borderColor: colors.textColorDim,
     color: colors.textColor,
     padding: 10,

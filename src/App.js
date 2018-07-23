@@ -16,8 +16,7 @@ const App = () => {
     <Provider store={store}>
       <View style={{
         flex: 1,
-        paddingTop: 15,
-        backgroundColor: SPS.variables.colors.backgroundColor,
+        backgroundColor: SPS.variables.colors.backgroundColors.dark,
       }}>
         <StatusBar barStyle={'light-content'} />
         <GameSettings updatePlayer={reducers.updatePlayer}/>

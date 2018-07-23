@@ -58,5 +58,5 @@ buck-out/
 
 # Bundles
 # --------- #
-ios
-android
+ios/
+android/
