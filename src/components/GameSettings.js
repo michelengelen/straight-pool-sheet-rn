@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import PropType from 'prop-types';
 
 import {CustomInput, CustomSlider, Header} from 'Components/common';
-import * as actions from 'Actions';
+import {gameSettingActions} from 'Actions';
 import {getSettings} from 'Reducers/GameSettingReducer';
 
 /**
@@ -95,11 +95,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   updatePlayer: (playerData) =>
-    actions.updatePlayerAction(dispatch, playerData),
+    gameSettingActions.updatePlayerAction(dispatch, playerData),
   updatePoints: (maxPoints) =>
-    actions.updatePointsAction(dispatch, maxPoints),
+    gameSettingActions.updatePointsAction(dispatch, maxPoints),
   updateRounds: (maxRounds) =>
-    actions.updateRoundsAction(dispatch, maxRounds),
+    gameSettingActions.updateRoundsAction(dispatch, maxRounds),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameSettings);

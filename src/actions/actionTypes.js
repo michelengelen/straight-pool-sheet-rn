@@ -1,5 +1,5 @@
 export const updateSettings = {
   updatePlayer: 'SETTINGS_update_player',
-  updateRounds: 'SETGINGS_update_rounds',
-  updatePoints: 'SETGINGS_update_points',
+  updateRounds: 'SETTINGS_update_rounds',
+  updatePoints: 'SETTINGS_update_points',
 };
