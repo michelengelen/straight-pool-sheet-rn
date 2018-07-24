@@ -2,7 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropType from 'prop-types';
 
-import {CustomInput, CustomSlider, PageContainer, PageIntro} from 'Components/common';
+import {
+  CustomInput,
+  CustomSlider,
+  PageContainer,
+  PageIntro,
+} from 'Components/common';
 import {gameSettingActions} from 'Actions';
 import {getSettings} from 'Reducers/GameSettingReducer';
 
