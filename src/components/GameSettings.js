@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View} from 'react-native';
 import PropType from 'prop-types';
 
-import {CustomInput, CustomSlider} from 'Components/common';
+import {CustomInput, CustomSlider, PageContainer} from 'Components/common';
 import {gameSettingActions} from 'Actions';
 import {getSettings} from 'Reducers/GameSettingReducer';
 
@@ -40,7 +39,7 @@ class GameSettings extends Component {
     const {gameSettings} = this.props;
 
     return (
-      <View style={{flex: 1}}>
+      <PageContainer darkMode={true}>
         {inputIds.map((id, index) => {
           return (
             <CustomInput
@@ -74,7 +73,7 @@ class GameSettings extends Component {
           maximumValue={50}
           onSlidingComplete={(value) => this.props.updateRounds(value)}
         />
-      </View>
+      </PageContainer>
     );
   }
 }

@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
+import PropType from 'prop-types';
 import {connect} from 'react-redux';
-import {View, Text} from 'react-native';
+import {Text, Button} from 'react-native';
+
+import {PageContainer} from 'Components/common';
+
 
 /**
  * Gamesettings Component
@@ -14,14 +18,22 @@ class Home extends Component {
    */
   render() {
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <PageContainer
+        darkMode={true}
+        style={{alignItems: 'center', justifyContent: 'center'}}
+      >
         <Text>Hello World</Text>
-      </View>
+        <Button
+          title="New Game"
+          onPress={() => this.props.navigation.navigate('GameSettings')}
+        />
+      </PageContainer>
     );
   }
 }
 
 Home.propTypes = {
+  navigation: PropType.object,
 };
 
 const mapStateToProps = (state) => {
