@@ -5,12 +5,12 @@ SPS.variables = {
     backgroundColors: {
       light: 'rgba(230, 230, 230, 1)',
       lighter: 'rgba(245, 245, 245, 1)',
-      dark: 'rgba(50, 50, 70, 1)',
-      darker: 'rgba(31, 31, 31, 1)',
-      dimm: 'rgba(10, 10, 10, .25)',
+      dark: 'rgba(69, 101, 117, 1)',
+      darker: 'rgba(61, 84, 96, 1)',
+      dimm: 'rgba(10, 10, 10, .1)',
     },
     textColor: 'rgba(240, 240, 240, 1)',
-    textColorDim: 'rgba(245, 245, 245, .6)',
+    textColorDim: 'rgba(245, 245, 245, .4)',
     textColorLink: '',
   },
   sizes: {

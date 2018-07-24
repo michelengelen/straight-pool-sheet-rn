@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {View} from 'react-native';
 import PropType from 'prop-types';
 
-import {CustomInput, CustomSlider, Header} from 'Components/common';
+import {CustomInput, CustomSlider} from 'Components/common';
 import {gameSettingActions} from 'Actions';
 import {getSettings} from 'Reducers/GameSettingReducer';
 
@@ -41,7 +41,6 @@ class GameSettings extends Component {
 
     return (
       <View style={{flex: 1}}>
-        <Header headerText={'New Game'} />
         {inputIds.map((id, index) => {
           return (
             <CustomInput

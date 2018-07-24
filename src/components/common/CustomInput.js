@@ -16,16 +16,16 @@ const CustomInput = ({
 
   return (
     <View style={containerStyle}>
+      {label && <Text style={labelStyle}>{label}</Text>}
       <TextInput
         secureTextEntry={secureTextEntry}
-        placeholder={placeholder}
+        // placeholder={placeholder}
         autoCorrect={false}
         style={inputStyle}
         value={value}
         onChangeText={onChangeText}
         placeholderTextColor={colors.textColorDim}
       />
-      {label && <Text style={labelStyle}>{label}</Text>}
     </View>
   );
 };
@@ -38,23 +38,24 @@ CustomInput.propTypes = {
   secureTextEntry: PropTypes.bool.isRequired,
 };
 
-const {colors} = SPS.variables;
+const {colors, sizes} = SPS.variables;
 const styles = {
   inputStyle: {
     backgroundColor: colors.backgroundColors.dimm,
     borderColor: colors.textColorDim,
+    borderBottomWidth: 2,
     color: colors.textColor,
-    padding: 10,
-    fontSize: 18,
-    lineHeight: 23,
+    padding: (sizes.gutter / 2),
+    fontSize: sizes.font_L,
+    lineHeight: sizes.gutter,
   },
   labelStyle: {
-    color: colors.textColor,
-    fontSize: 10,
-    padding: 5,
+    color: colors.textColorDim,
+    fontSize: sizes.font_L,
+    padding: (sizes.gutter / 4),
   },
   containerStyle: {
-    padding: 20,
+    padding: sizes.gutter,
     flexDirection: 'column',
     alignItems: 'stretch',
   },
