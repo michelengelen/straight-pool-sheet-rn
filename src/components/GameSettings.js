@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropType from 'prop-types';
 
-import {CustomInput, CustomSlider, PageContainer} from 'Components/common';
+import {CustomInput, CustomSlider, PageContainer, PageIntro} from 'Components/common';
 import {gameSettingActions} from 'Actions';
 import {getSettings} from 'Reducers/GameSettingReducer';
 
@@ -40,6 +40,16 @@ class GameSettings extends Component {
 
     return (
       <PageContainer darkMode={true}>
+        <PageIntro
+          headerText={'Create new 14/1 game'}
+          introText={
+            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, ' +
+            'sed diam nonumy eirmod tempor invidunt ut labore et dolore ' +
+            'magna aliquyam erat, sed diam voluptua. At vero eos et ' +
+            'accusam et justo duo dolores et ea rebum. Stet clita kasd ' +
+            'gubergren, no sea takimata sanctus est ' +
+            'Lorem ipsum dolor sit amet.'}
+        />
         {inputIds.map((id, index) => {
           return (
             <CustomInput

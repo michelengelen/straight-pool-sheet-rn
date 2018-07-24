@@ -2,7 +2,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import PropType from 'prop-types';
-import SPS from '../../common/variables';
+import SPS from 'Common/variables';
 
 // Make a component
 const Header = (props) => {
@@ -22,11 +22,9 @@ Header.propTypes = {
 const {colors, sizes} = SPS.variables;
 const styles = {
   viewStyle: {
-    backgroundColor: colors.backgroundColors.darker,
     justifyContent: 'center',
     alignItems: 'center',
     height: 60,
-    paddingTop: 15,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.2,

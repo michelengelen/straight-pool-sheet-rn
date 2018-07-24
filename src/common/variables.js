@@ -1,3 +1,5 @@
+import {Dimensions} from 'react-native';
+
 let SPS = {};
 
 SPS.variables = {
@@ -9,7 +11,7 @@ SPS.variables = {
       darker: 'rgba(61, 84, 96, 1)',
       dimm: 'rgba(10, 10, 10, .1)',
     },
-    textColor: 'rgba(240, 240, 240, 1)',
+    textColor: 'rgba(240, 240, 240, .8)',
     textColorDim: 'rgba(245, 245, 245, .4)',
     textColorLink: '',
   },
@@ -19,6 +21,7 @@ SPS.variables = {
     font_M: 10,
     font_L: 14,
     font_XL: 20,
+    dimensions: Dimensions.get('window'),
   },
 };
 

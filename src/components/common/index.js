@@ -4,3 +4,4 @@ export * from './CustomInput';
 export * from './CustomSlider';
 export * from './Header';
 export * from './PageContainer';
+export * from './PageIntro';

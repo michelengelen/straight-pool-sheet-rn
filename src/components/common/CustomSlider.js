@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
-import {Dimensions} from 'react-native';
 import PropType from 'prop-types';
 import {Slider, View, Text} from 'react-native';
 
 // Constant import
 import SPS from 'Common/variables';
-
-const {width} = Dimensions.get('window');
 
 /**
  * CustomSlider which updates label itself,
@@ -85,6 +82,7 @@ CustomSlider.propTypes = {
 };
 
 const {colors, sizes} = SPS.variables;
+const {dimensions} = sizes;
 const styles = {
   containerStyle: {
     padding: sizes.gutter,
@@ -97,10 +95,10 @@ const styles = {
     padding: (sizes.gutter / 4),
   },
   inputStyle: {
-    width: (width - 2 * sizes.gutter),
+    width: (dimensions.width - 2 * sizes.gutter),
   },
   valueContainer: {
-    width: (width - 2 * sizes.gutter),
+    width: (dimensions.width - 2 * sizes.gutter),
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
