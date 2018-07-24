@@ -60,7 +60,7 @@ class GameSettings extends Component {
             <CustomInput
               key={index}
               id={'player' + id}
-              label={'Input name for player ' + (index + 1)}
+              label={'Player ' + (index + 1)}
               value={gameSettings.players['player' + id].name}
               style={{flex: 1}}
               onChangeText={(name) =>

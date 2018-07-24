@@ -6,7 +6,7 @@ import {createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 // project files
-import rootReducer from 'Reducers';
+import {rootReducer} from 'Reducers';
 import GameSettings from 'Components/GameSettings';
 import Home from 'Components/Home';
 

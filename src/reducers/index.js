@@ -7,4 +7,4 @@ const rootReducer = combineReducers({
   gameSettings: GameSettingReducer,
 });
 
-export default rootReducer;
+export {rootReducer};

@@ -90,7 +90,7 @@ const styles = {
     alignItems: 'stretch',
   },
   labelStyle: {
-    color: colors.textColorDim,
+    color: colors.textColor,
     fontSize: sizes.font_L,
     padding: (sizes.gutter / 4),
   },
