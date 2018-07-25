@@ -41,7 +41,7 @@ CustomInput.propTypes = {
 const {colors, sizes} = SPS.variables;
 const styles = {
   inputStyle: {
-    backgroundColor: colors.backgroundColors.dimm,
+    backgroundColor: colors.backgroundColors.darker,
     borderColor: colors.textColorDim,
     borderBottomWidth: 2,
     color: colors.textColor,

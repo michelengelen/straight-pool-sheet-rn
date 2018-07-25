@@ -5,6 +5,7 @@ import PropType from 'prop-types';
 import {
   CustomInput,
   CustomSlider,
+  CustomButton,
   PageContainer,
   PageIntro,
 } from 'Components/common';
@@ -79,19 +80,11 @@ class GameSettings extends Component {
           maximumValue={50}
           onSlidingComplete={(value) => this.props.updateRounds(value)}
         />
-        <CustomSlider
-          label={'Maximum Rounds'}
-          value={gameSettings.maxRounds}
-          minimumValue={15}
-          maximumValue={50}
-          onSlidingComplete={(value) => this.props.updateRounds(value)}
-        />
-        <CustomSlider
-          label={'Maximum Rounds'}
-          value={gameSettings.maxRounds}
-          minimumValue={15}
-          maximumValue={50}
-          onSlidingComplete={(value) => this.props.updateRounds(value)}
+        <CustomButton
+          title={'Start Game'}
+          onPress={() => {
+            return false;
+          }}
         />
       </PageContainer>
     );

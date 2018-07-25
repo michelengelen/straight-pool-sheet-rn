@@ -3,6 +3,7 @@ export * from './Button';
 export * from './CustomInput';
 export * from './CustomButton';
 export * from './CustomSlider';
+export * from './CustomStatusBar';
 export * from './Header';
 export * from './PageContainer';
 export * from './PageIntro';

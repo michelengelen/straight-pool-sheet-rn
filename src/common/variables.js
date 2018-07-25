@@ -7,8 +7,8 @@ SPS.variables = {
     backgroundColors: {
       light: 'rgba(230, 230, 230, 1)',
       lighter: 'rgba(245, 245, 245, 1)',
-      dark: 'rgba(77, 43, 91, 1)',
-      darker: 'rgba(61, 84, 96, 1)',
+      dark: 'rgba(49, 79, 96, 1)',
+      darker: 'rgba(45, 73, 89, 1)',
       dimm: 'rgba(10, 10, 10, .1)',
     },
     textColor: 'rgba(240, 240, 240, .8)',

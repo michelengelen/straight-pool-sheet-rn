@@ -1,23 +1,25 @@
 import React from 'react';
 import PropType from 'prop-types';
-import {TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text} from 'react-native';
 
 // Constant import
 import SPS from 'Common/variables';
 
 const CustomButton = (props) => {
-  const {buttonStyle, textStyle} = styles;
+  const {containerStyle, buttonStyle, textStyle} = styles;
   const {title, ...other} = props;
 
   return (
-    <TouchableOpacity style={buttonStyle} {...other}>
-      <Text style={textStyle}>{title}</Text>
-    </TouchableOpacity>
+    <View style={containerStyle}>
+      <TouchableOpacity style={buttonStyle} {...other}>
+        <Text style={textStyle}>{title}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 CustomButton.propTypes = {
-  title: PropType.string,
+  title: PropType.string.isRequired,
   children: PropType.node,
 };
 
@@ -38,6 +40,11 @@ const styles = {
     fontSize: sizes.font_XL,
     fontWeight: 'bold',
     color: colors.textColor,
+  },
+  containerStyle: {
+    padding: sizes.gutter,
+    flexDirection: 'column',
+    alignItems: 'stretch',
   },
 };
 

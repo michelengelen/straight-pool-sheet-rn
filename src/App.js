@@ -7,8 +7,10 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 // project files
 import {rootReducer} from 'Reducers';
+import {CustomStatusBar} from 'Components/common';
 import GameSettings from 'Components/GameSettings';
 import Home from 'Components/Home';
+import SPS from 'Common/variables';
 
 const store = createStore(rootReducer, composeWithDevTools());
 const RootStack = createStackNavigator(
@@ -24,10 +26,20 @@ const RootStack = createStackNavigator(
   },
 );
 
+const {colors} = SPS.variables;
+
 const App = () => {
   return (
     <Provider store={store}>
-      <View style={{flex: 1}}>
+      <View style={{
+        flex: 1,
+        backgroundColor: colors.backgroundColors.dark,
+      }}>
+        <CustomStatusBar
+          barStyle={'light-content'}
+          backgroundColor={colors.backgroundColors.darker}
+          darkMode
+        />
         <RootStack />
       </View>
     </Provider>

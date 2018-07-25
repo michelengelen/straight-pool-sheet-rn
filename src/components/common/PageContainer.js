@@ -1,22 +1,29 @@
 import React from 'react';
-import {StatusBar, View, ScrollView} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import PropType from 'prop-types';
 
 import SPS from 'Common/variables';
 
 const ConditionalView = (props) => {
-  const {scrollable, ...other} = props;
+  const {scrollable, style, ...other} = props;
 
   if (scrollable) {
+    const {alignItems} = style;
+    delete style.alignItems;
+
     return (
-      <ScrollView {...other}>
+      <ScrollView
+        contenContainerStyle={{alignItems}}
+        style={style}
+        {...other}
+      >
         {props.children}
       </ScrollView>
     );
   }
 
   return (
-    <View {...other}>
+    <View style={style} {...other}>
       {props.children}
     </View>
   );
@@ -24,19 +31,18 @@ const ConditionalView = (props) => {
 
 ConditionalView.propTypes = {
   children: PropType.node,
+  style: PropType.object,
   scrollable: PropType.bool.isRequired,
 };
 
 const PageContainer = (props) => {
   const {viewStyle} = styles;
-  const statusBarStyle = props.darkMode ? 'light-content' : 'dark-content';
 
   return (
     <ConditionalView
       style={{...viewStyle, ...props.style}}
       scrollable={props.scrollable}
     >
-      <StatusBar barStyle={statusBarStyle} />
       {props.children}
     </ConditionalView>
   );
@@ -44,19 +50,16 @@ const PageContainer = (props) => {
 
 PageContainer.propTypes = {
   children: PropType.node,
-  darkMode: PropType.bool,
   style: PropType.object,
   scrollable: PropType.bool.isRequired,
 };
 
-const {colors} = SPS.variables;
+const {colors, sizes} = SPS.variables;
 const styles = {
   viewStyle: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: colors.backgroundColors.dark,
   },
 };
 
-// Make the component available to other parts of the app
 export {PageContainer};
