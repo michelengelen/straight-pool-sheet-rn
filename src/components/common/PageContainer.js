@@ -54,7 +54,7 @@ PageContainer.propTypes = {
   scrollable: PropType.bool.isRequired,
 };
 
-const {colors, sizes} = SPS.variables;
+const {colors} = SPS.variables;
 const styles = {
   viewStyle: {
     flex: 1,
