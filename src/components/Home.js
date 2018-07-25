@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
-import {Text, Button} from 'react-native';
+import {Text} from 'react-native';
 
-import {PageContainer} from 'Components/common';
-
+import {PageContainer, CustomButton} from 'Components/common';
 
 /**
  * Gamesettings Component
@@ -20,10 +19,11 @@ class Home extends Component {
     return (
       <PageContainer
         darkMode={true}
+        scrollable={false}
         style={{alignItems: 'center', justifyContent: 'center'}}
       >
-        <Text>Hello World</Text>
-        <Button
+        <Text>Straight Pool Sheet</Text>
+        <CustomButton
           title="New Game"
           onPress={() => this.props.navigation.navigate('GameSettings')}
         />

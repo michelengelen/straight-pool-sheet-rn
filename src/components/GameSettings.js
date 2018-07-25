@@ -27,15 +27,6 @@ class GameSettings extends Component {
   }
 
   /**
-   * React Lifecycle - componentDiDUpdate()
-   */
-  componentDidUpdate() {
-    // TODO@Michel: Remove console.log calls
-    /* eslint-disable-next-line */
-    console.log(this.props);
-  }
-
-  /**
    * React render function
    * @return {*}
    */
@@ -44,7 +35,7 @@ class GameSettings extends Component {
     const {gameSettings} = this.props;
 
     return (
-      <PageContainer darkMode={true}>
+      <PageContainer darkMode scrollable>
         <PageIntro
           headerText={'Create new 14/1 game'}
           introText={
@@ -80,6 +71,20 @@ class GameSettings extends Component {
           minimumValue={50}
           maximumValue={200}
           onSlidingComplete={(value) => this.props.updatePoints(value)}
+        />
+        <CustomSlider
+          label={'Maximum Rounds'}
+          value={gameSettings.maxRounds}
+          minimumValue={15}
+          maximumValue={50}
+          onSlidingComplete={(value) => this.props.updateRounds(value)}
+        />
+        <CustomSlider
+          label={'Maximum Rounds'}
+          value={gameSettings.maxRounds}
+          minimumValue={15}
+          maximumValue={50}
+          onSlidingComplete={(value) => this.props.updateRounds(value)}
         />
         <CustomSlider
           label={'Maximum Rounds'}
