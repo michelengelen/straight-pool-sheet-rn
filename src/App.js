@@ -9,6 +9,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {rootReducer} from 'Reducers';
 import {CustomStatusBar} from 'Components/common';
 import GameSettings from 'Components/GameSettings';
+import GameSheet from 'Components/GameSheet';
 import Home from 'Components/Home';
 import SPS from 'Common/variables';
 
@@ -17,6 +18,7 @@ const RootStack = createStackNavigator(
   {
     Home: Home,
     GameSettings: GameSettings,
+    GameSheet: GameSheet,
   },
   {
     initialRouteName: 'Home',

@@ -9,7 +9,10 @@ import {
   PageContainer,
   PageIntro,
 } from 'Components/common';
-import {gameSettingActions} from 'Actions';
+import {
+  gameSettingActions,
+  gameSheetActions,
+} from 'Actions';
 import {getSettings} from 'Reducers/GameSettingReducer';
 
 /**
@@ -28,6 +31,18 @@ class GameSettings extends Component {
   }
 
   /**
+   * Asynchronous Action for starting a new Game
+   * Is needed for setting the game-params before loading the
+   * GameSheet Component
+   *
+   * @param {object} gameSettings
+   * @return {Promise<void>}
+   */
+  async startNewGame(gameSettings) {
+    await this.props.startGame(gameSettings);
+  }
+
+  /**
    * React render function
    * @return {*}
    */
@@ -38,6 +53,7 @@ class GameSettings extends Component {
       updatePoints,
       updatePlayer,
       updateRounds,
+      navigation,
     } = this.props;
     const {playerOne, playerTwo} = gameSettings.players;
 
@@ -93,7 +109,10 @@ class GameSettings extends Component {
           }
           loading={false}
           onPress={() => {
-            return false;
+            this.startNewGame(gameSettings)
+              .then(function() {
+                navigation.navigate('GameSheet');
+              });
           }}
         />
       </PageContainer>
@@ -106,6 +125,8 @@ GameSettings.propTypes = {
   updatePlayer: PropType.func,
   updatePoints: PropType.func,
   updateRounds: PropType.func,
+  startGame: PropType.func,
+  navigation: PropType.object,
 };
 
 const mapStateToProps = (state) => {
@@ -121,6 +142,8 @@ const mapDispatchToProps = (dispatch) => ({
     gameSettingActions.updatePointsAction(dispatch, maxPoints),
   updateRounds: (maxRounds) =>
     gameSettingActions.updateRoundsAction(dispatch, maxRounds),
+  startGame: (settings) =>
+    gameSheetActions.startGameAction(dispatch, settings),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameSettings);
