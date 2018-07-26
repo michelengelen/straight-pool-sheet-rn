@@ -29,8 +29,9 @@ const styles = {
     height: 21,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.6,
     elevation: 2,
+    position: 'relative',
     backgroundColor: colors.backgroundColors.darker,
   },
 };

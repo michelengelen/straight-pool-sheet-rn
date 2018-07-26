@@ -7,6 +7,7 @@ import SPS from 'Common/variables';
 
 const CustomButton = (props) => {
   const {containerStyle, buttonStyle, textStyle} = styles;
+  console.log(' ##### Props - CustomButton', props);
   const {title, ...other} = props;
 
   return (
@@ -21,6 +22,7 @@ const CustomButton = (props) => {
 CustomButton.propTypes = {
   title: PropType.string.isRequired,
   children: PropType.node,
+  disabled: PropType.bool,
 };
 
 const {colors, sizes} = SPS.variables;

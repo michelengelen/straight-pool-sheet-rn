@@ -33,7 +33,13 @@ class GameSettings extends Component {
    */
   render() {
     const inputIds = ['One', 'Two'];
-    const {gameSettings} = this.props;
+    const {
+      gameSettings,
+      updatePoints,
+      updatePlayer,
+      updateRounds,
+    } = this.props;
+    const {playerOne, playerTwo} = gameSettings.players;
 
     return (
       <PageContainer darkMode scrollable>
@@ -56,7 +62,7 @@ class GameSettings extends Component {
               value={gameSettings.players['player' + id].name}
               style={{flex: 1}}
               onChangeText={(name) =>
-                this.props.updatePlayer({
+                updatePlayer({
                   key: 'player' + id,
                   name: name,
                 })
@@ -71,17 +77,20 @@ class GameSettings extends Component {
           value={gameSettings.maxPoints}
           minimumValue={50}
           maximumValue={200}
-          onSlidingComplete={(value) => this.props.updatePoints(value)}
+          onSlidingComplete={(value) => updatePoints(value)}
         />
         <CustomSlider
           label={'Maximum Rounds'}
           value={gameSettings.maxRounds}
           minimumValue={15}
           maximumValue={50}
-          onSlidingComplete={(value) => this.props.updateRounds(value)}
+          onSlidingComplete={(value) => updateRounds(value)}
         />
         <CustomButton
           title={'Start Game'}
+          disabled={
+            !playerOne.name || !playerTwo.name
+          }
           onPress={() => {
             return false;
           }}
