@@ -2,26 +2,33 @@ import React from 'react';
 import PropType from 'prop-types';
 import {View, TouchableOpacity, Text} from 'react-native';
 
-// Constant import
+// Custom Component imports
+import {LoadingIndicator} from 'Components/common';
+
+// Constant imports
 import SPS from 'Common/variables';
 
 const CustomButton = (props) => {
   const {containerStyle, buttonStyle, textStyle} = styles;
-  const {title, ...other} = props;
+  const {buttonText, loading, ...other} = props;
 
   return (
     <View style={containerStyle}>
       <TouchableOpacity style={buttonStyle} {...other}>
-        <Text style={textStyle}>{title}</Text>
+        {loading
+          ? <LoadingIndicator size={'medium'} />
+          : <Text style={textStyle}>{buttonText}</Text>
+        }
       </TouchableOpacity>
     </View>
   );
 };
 
 CustomButton.propTypes = {
-  title: PropType.string.isRequired,
+  buttonText: PropType.string.isRequired,
   children: PropType.node,
   disabled: PropType.bool,
+  loading: PropType.bool.isRequired,
 };
 
 const {colors, sizes} = SPS.variables;

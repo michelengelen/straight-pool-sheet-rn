@@ -87,10 +87,11 @@ class GameSettings extends Component {
           onSlidingComplete={(value) => updateRounds(value)}
         />
         <CustomButton
-          title={'Start Game'}
+          buttonText={'Start Game'}
           disabled={
             !playerOne.name || !playerTwo.name
           }
+          loading={false}
           onPress={() => {
             return false;
           }}

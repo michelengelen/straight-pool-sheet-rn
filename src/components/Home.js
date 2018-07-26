@@ -24,7 +24,8 @@ class Home extends Component {
       >
         <Text>Straight Pool Sheet</Text>
         <CustomButton
-          title="New Game"
+          buttonText="New Game"
+          loading={false}
           onPress={() => this.props.navigation.navigate('GameSettings')}
         />
       </PageContainer>
