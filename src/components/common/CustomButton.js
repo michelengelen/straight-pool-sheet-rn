@@ -7,7 +7,6 @@ import SPS from 'Common/variables';
 
 const CustomButton = (props) => {
   const {containerStyle, buttonStyle, textStyle} = styles;
-  console.log(' ##### Props - CustomButton', props);
   const {title, ...other} = props;
 
   return (
