@@ -6,6 +6,7 @@ import {
   PageContainer,
 } from 'Components/common';
 import {gameSheetActions} from 'Actions';
+import {PlayerOverview} from './gameSheet/playerOverview';
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState} from 'Reducers/GameSheetReducer';
 
@@ -29,8 +30,11 @@ class GameSheet extends Component {
    * @return {*}
    */
   render() {
+    const {gameSheet} = this.props;
+    const {players} = gameSheet;
     return (
       <PageContainer darkMode scrollable>
+        <PlayerOverview players={players} />
       </PageContainer>
     );
   }
@@ -38,6 +42,7 @@ class GameSheet extends Component {
 
 GameSheet.propTypes = {
   gameSettings: PropType.object,
+  gameSheet: PropType.object,
 };
 
 const mapStateToProps = (state) => {

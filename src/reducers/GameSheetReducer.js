@@ -15,7 +15,17 @@ const INITIAL_STATE = {
       averageScore: 0.00,
     },
   },
+  rounds: [[
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+  ]],
   currentRound: 1,
+  currentPlayer: 1,
   maxPoints: 100,
   maxRounds: 25,
 };
@@ -47,7 +57,7 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
 };
 
 export const getGameState = (state) => ({
-  gameState: state.gameState,
+  gameSheet: state.gameSheet,
 });
 
 export default GameSheetReducer;

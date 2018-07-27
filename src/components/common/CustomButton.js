@@ -12,6 +12,9 @@ const CustomButton = (props) => {
   const {containerStyle, buttonStyle, textStyle} = styles;
   const {buttonText, loading, ...other} = props;
 
+  // Decrease opacity when the button is disabled to make a change more visible
+  buttonStyle.opacity = props.disabled ? 0.5 : 1;
+
   return (
     <View style={containerStyle}>
       <TouchableOpacity style={buttonStyle} {...other}>
