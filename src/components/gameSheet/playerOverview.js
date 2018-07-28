@@ -22,18 +22,20 @@ const SinglePlayer = (props) => {
     highestScoreStyle,
   } = styles;
 
+  const mergedContainerStyle = {...containerStyle, ...props.style};
+
   return (
-    <View style={containerStyle}>
+    <View style={mergedContainerStyle}>
       <View style={currentScoreViewStyle}>
         <Text style={nameStyle}>{name}</Text>
         <Text style={currentScoreStyle}>{currentScore}</Text>
       </View>
       <View style={subContainerStyle}>
         <View style={averageScoreViewStyle}>
-          <Text style={averageScoreStyle}>{averageScore}</Text>
+          <Text style={averageScoreStyle}>{`AVG = ${averageScore}`}</Text>
         </View>
         <View style={highestScoreViewStyle}>
-          <Text style={highestScoreStyle}>{highestScore}</Text>
+          <Text style={highestScoreStyle}>{`Max = ${highestScore}`}</Text>
         </View>
       </View>
     </View>
@@ -47,6 +49,7 @@ SinglePlayer.propTypes = {
     highestScore: PropType.number,
     averageScore: PropType.number,
   }),
+  style: PropType.object,
 };
 
 const PlayerOverview = (props) => {
@@ -57,8 +60,13 @@ const PlayerOverview = (props) => {
       borderBottomWidth: 1,
       borderColor: colors.textColorDim,
     }}>
-      <SinglePlayer player={props.players.playerOne}/>
-      <SinglePlayer player={props.players.playerTwo}/>
+      <SinglePlayer
+        player={props.players.playerOne}
+        style={{borderRightWidth: 1, borderColor: colors.textColorDim}}
+      />
+      <SinglePlayer
+        player={props.players.playerTwo}
+      />
     </View>
   );
 };
@@ -89,6 +97,7 @@ const styles = {
   nameStyle: {
     fontSize: sizes.font_L,
     fontWeight: 'bold',
+    padding: sizes.gutter / 2,
     color: colors.textColor,
   },
   currentScoreViewStyle: {
