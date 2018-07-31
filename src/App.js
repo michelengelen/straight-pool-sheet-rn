@@ -39,7 +39,7 @@ const App = () => {
       }}>
         <CustomStatusBar
           barStyle={'light-content'}
-          backgroundColor={colors.backgroundColors.darker}
+          backgroundColor={colors.backgroundColors.darkGrey}
           darkMode
         />
         <RootStack />

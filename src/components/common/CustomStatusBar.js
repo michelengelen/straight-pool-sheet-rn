@@ -5,12 +5,12 @@ import PropType from 'prop-types';
 import SPS from 'Common/variables';
 
 const CustomStatusBar = (props) => {
-  const {viewStyle} = styles;
+  let {viewStyle} = styles;
   // TODO@Michel: Add conditional style for light and dark layouts
   // const statusBarStyle = props.darkMode ? 'light-content' : 'dark-content';
 
   return (
-    <View style={viewStyle}>
+    <View style={{...viewStyle, backgroundColor: props.backgroundColor}}>
       <StatusBar barStyle={props.barStyle}/>
     </View>
   );
@@ -27,12 +27,11 @@ const styles = {
   viewStyle: {
     width: sizes.dimensions.width,
     height: 21,
-    shadowColor: '#000',
+    shadowColor: colors.shadow,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.6,
-    elevation: 2,
+    elevation: 4,
     position: 'relative',
-    backgroundColor: colors.backgroundColors.darker,
   },
 };
 

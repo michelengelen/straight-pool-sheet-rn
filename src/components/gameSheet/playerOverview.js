@@ -1,7 +1,40 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import PropType from 'prop-types';
+import FontAwesome, {Icons} from 'react-native-fontawesome';
 import SPS from 'Common/variables';
+
+const CalculatedScore = (props) => {
+  const {iconType, calculatedScore} = props;
+  const {
+    calculatedScoreWrapper,
+    calculatedScoreViewStyle,
+    calculatedScoreTextStyle,
+    iconViewStyle,
+  } = styles.CalculatedScore;
+
+  return (
+    <View style={calculatedScoreWrapper}>
+      <View style={iconViewStyle}>
+        <Text style={calculatedScoreTextStyle}>
+          <FontAwesome>
+            {Icons[iconType]}
+          </FontAwesome>
+        </Text>
+      </View>
+      <View style={calculatedScoreViewStyle}>
+        <Text style={calculatedScoreTextStyle}>
+          {calculatedScore}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+CalculatedScore.propTypes = {
+  calculatedScore: PropType.number.isRequired,
+  iconType: PropType.string.isRequired,
+};
 
 const SinglePlayer = (props) => {
   const {
@@ -12,31 +45,26 @@ const SinglePlayer = (props) => {
   } = props.player;
   const {
     containerStyle,
-    subContainerStyle,
-    nameStyle,
     currentScoreViewStyle,
-    averageScoreViewStyle,
-    highestScoreViewStyle,
-    currentScoreStyle,
-    averageScoreStyle,
-    highestScoreStyle,
-  } = styles;
+    currentScoreTextStyle,
+    playernameViewStyle,
+    playernameTextStyle,
+    subContainerStyle,
+  } = styles.SinglePlayer;
 
   const mergedContainerStyle = {...containerStyle, ...props.style};
 
   return (
     <View style={mergedContainerStyle}>
+      <View style={playernameViewStyle}>
+        <Text style={playernameTextStyle}>{name}</Text>
+      </View>
       <View style={currentScoreViewStyle}>
-        <Text style={nameStyle}>{name}</Text>
-        <Text style={currentScoreStyle}>{currentScore}</Text>
+        <Text style={currentScoreTextStyle}>{currentScore}</Text>
       </View>
       <View style={subContainerStyle}>
-        <View style={averageScoreViewStyle}>
-          <Text style={averageScoreStyle}>{`AVG = ${averageScore}`}</Text>
-        </View>
-        <View style={highestScoreViewStyle}>
-          <Text style={highestScoreStyle}>{`Max = ${highestScore}`}</Text>
-        </View>
+        <CalculatedScore calculatedScore={averageScore} iconType={'ban'}/>
+        <CalculatedScore calculatedScore={highestScore} iconType={'lineChart'}/>
       </View>
     </View>
   );
@@ -52,17 +80,25 @@ SinglePlayer.propTypes = {
   style: PropType.object,
 };
 
+/**
+ * Main Component for the rendering of the overView above the GameSheet-Table
+ *
+ * Components that are needed to render correctly:
+ * - SinglePlayer
+ * - CalculatedScore (inside SinglePlayer)
+ *
+ * @param {object} props
+ * @return {*}
+ * @constructor
+ */
 const PlayerOverview = (props) => {
+  const {wrapperStyle, firstPlayerStyle} = styles.PlayerOverview;
+
   return (
-    <View style={{
-      flexDirection: 'row',
-      alignItems: 'stretch',
-      borderBottomWidth: 1,
-      borderColor: colors.textColorDim,
-    }}>
+    <View style={wrapperStyle}>
       <SinglePlayer
         player={props.players.playerOne}
-        style={{borderRightWidth: 1, borderColor: colors.textColorDim}}
+        style={firstPlayerStyle}
       />
       <SinglePlayer
         player={props.players.playerTwo}
@@ -77,58 +113,90 @@ PlayerOverview.propTypes = {
 
 const {colors, sizes} = SPS.variables;
 const styles = {
-  containerStyle: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
-    elevation: 2,
+  // Styles for the main-component 'PlayerOverview'
+  PlayerOverview: {
+    wrapperStyle: {
+      flexDirection: 'row',
+      alignItems: 'stretch',
+      borderBottomWidth: 1,
+      borderColor: colors.borderColors.darker,
+      backgroundColor: colors.backgroundColors.dark,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 3},
+      shadowOpacity: 0.3,
+      elevation: 2,
+    },
+    firstPlayerStyle: {
+      borderRightWidth: 1,
+      borderColor: colors.borderColors.darker,
+    },
   },
-  subContainerStyle: {
-    flex: 1,
-    borderTopWidth: 1,
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    borderColor: colors.textColorDim,
+  // Styles for the sub-component 'SinglePlayer'
+  SinglePlayer: {
+    containerStyle: {
+      flex: 1,
+      flexDirection: 'column',
+      alignItems: 'stretch',
+      justifyContent: 'flex-start',
+    },
+    currentScoreViewStyle: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    currentScoreTextStyle: {
+      fontSize: sizes.font_XXL,
+      fontWeight: 'bold',
+      color: colors.textColorDim,
+      padding: sizes.gutter / 2,
+    },
+    playernameViewStyle: {
+      flex: 1,
+      alignItems: 'center',
+      padding: sizes.gutter / 4,
+      backgroundColor: colors.backgroundColors.darker,
+      borderBottomWidth: 1,
+      borderColor: colors.borderColors.darker,
+    },
+    playernameTextStyle: {
+      fontSize: sizes.font_L,
+      fontWeight: 'bold',
+      color: colors.textColorDim,
+    },
+    subContainerStyle: {
+      flex: 1,
+      borderTopWidth: 1,
+      flexDirection: 'row',
+      alignItems: 'stretch',
+      borderColor: colors.borderColors.darker,
+    },
   },
-  nameStyle: {
-    fontSize: sizes.font_L,
-    fontWeight: 'bold',
-    padding: sizes.gutter / 2,
-    color: colors.textColor,
-  },
-  currentScoreViewStyle: {
-    flex: 1,
-    minHeight: 80,
-    alignItems: 'center',
-  },
-  averageScoreViewStyle: {
-    flex: 1,
-    borderRightWidth: 1,
-    borderColor: colors.textColorDim,
-    alignItems: 'center',
-  },
-  highestScoreViewStyle: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  currentScoreStyle: {
-    fontSize: sizes.font_XXL,
-    fontWeight: 'bold',
-    color: colors.textColor,
-  },
-  averageScoreStyle: {
-    fontSize: sizes.font_L,
-    fontWeight: 'bold',
-    color: colors.textColorDim,
-  },
-  highestScoreStyle: {
-    fontSize: sizes.font_L,
-    fontWeight: 'bold',
-    color: colors.textColorDim,
+  // Styles for the sub-component 'CalculatedScore'
+  CalculatedScore: {
+    calculatedScoreWrapper: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderColor: colors.borderColors.darker,
+    },
+    calculatedScoreViewStyle: {
+      flex: 3,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    calculatedScoreTextStyle: {
+      fontSize: sizes.font_L,
+      fontWeight: 'bold',
+      color: colors.textColorDim,
+    },
+    iconViewStyle: {
+      flex: 1,
+      aspectRatio: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: sizes.gutter / 4,
+      backgroundColor: colors.backgroundColors.darker,
+    },
   },
 };
 
