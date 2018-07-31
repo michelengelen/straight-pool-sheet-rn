@@ -6,7 +6,7 @@ import {
   PageContainer,
 } from 'Components/common';
 import {gameSheetActions} from 'Actions';
-import {PlayerOverview} from './gameSheet/playerOverview';
+import {PlayerOverview} from './gameSheet';
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState} from 'Reducers/GameSheetReducer';
 

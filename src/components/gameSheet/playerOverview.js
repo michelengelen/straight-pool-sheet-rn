@@ -4,6 +4,16 @@ import PropType from 'prop-types';
 import FontAwesome, {Icons} from 'react-native-fontawesome';
 import SPS from 'Common/variables';
 
+/**
+ * Renders the calculated score for a player
+ *
+ * Gets implemented by:
+ * - SinglePlayer
+ *
+ * @param {object} props
+ * @return {*}
+ * @constructor
+ */
 const CalculatedScore = (props) => {
   const {iconType, calculatedScore} = props;
   const {
@@ -36,6 +46,19 @@ CalculatedScore.propTypes = {
   iconType: PropType.string.isRequired,
 };
 
+/**
+ * SinglePlayer component (renders one players score)
+ *
+ * Components that are needed to render correctly:
+ * - CalculatedScore
+ *
+ * Gets implemented by:
+ * - PlayerOverview
+ *
+ * @param {object} props
+ * @return {*}
+ * @constructor
+ */
 const SinglePlayer = (props) => {
   const {
     name,
@@ -85,7 +108,7 @@ SinglePlayer.propTypes = {
  *
  * Components that are needed to render correctly:
  * - SinglePlayer
- * - CalculatedScore (inside SinglePlayer)
+ * - CalculatedScore (implemented by SinglePlayer component)
  *
  * @param {object} props
  * @return {*}
