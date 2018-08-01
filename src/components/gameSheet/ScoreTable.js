@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import PropType from 'prop-types';
-import FontAwesome, {Icons} from 'react-native-fontawesome';
 import SPS from 'Common/variables';
 
 /**
