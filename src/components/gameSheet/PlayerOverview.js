@@ -42,7 +42,10 @@ const CalculatedScore = (props) => {
 };
 
 CalculatedScore.propTypes = {
-  calculatedScore: PropType.number.isRequired,
+  calculatedScore: PropType.oneOfType([
+    PropType.number,
+    PropType.string,
+  ]).isRequired,
   iconType: PropType.string.isRequired,
 };
 
@@ -62,7 +65,7 @@ CalculatedScore.propTypes = {
 const SinglePlayer = (props) => {
   const {
     name,
-    currentScore,
+    totalScore,
     highestScore,
     averageScore,
   } = props.player;
@@ -83,7 +86,7 @@ const SinglePlayer = (props) => {
         <Text style={playernameTextStyle}>{name}</Text>
       </View>
       <View style={currentScoreViewStyle}>
-        <Text style={currentScoreTextStyle}>{currentScore}</Text>
+        <Text style={currentScoreTextStyle}>{totalScore}</Text>
       </View>
       <View style={subContainerStyle}>
         <CalculatedScore calculatedScore={averageScore} iconType={'ban'}/>
@@ -96,9 +99,18 @@ const SinglePlayer = (props) => {
 SinglePlayer.propTypes = {
   player: PropType.shape({
     name: PropType.string,
-    currentScore: PropType.number,
-    highestScore: PropType.number,
-    averageScore: PropType.number,
+    totalScore: PropType.oneOfType([
+      PropType.number,
+      PropType.string,
+    ]),
+    highestScore: PropType.oneOfType([
+      PropType.number,
+      PropType.string,
+    ]),
+    averageScore: PropType.oneOfType([
+      PropType.number,
+      PropType.string,
+    ]),
   }),
   style: PropType.object,
 };
@@ -139,6 +151,8 @@ const styles = {
   // Styles for the main-component 'PlayerOverview'
   PlayerOverview: {
     wrapperStyle: {
+      flex: 1,
+      maxHeight: 120,
       flexDirection: 'row',
       alignItems: 'stretch',
       borderBottomWidth: 1,
@@ -163,8 +177,9 @@ const styles = {
       justifyContent: 'flex-start',
     },
     currentScoreViewStyle: {
-      flex: 1,
+      flex: 4,
       alignItems: 'center',
+      justifyContent: 'space-around',
     },
     currentScoreTextStyle: {
       fontSize: sizes.font_XXL,
@@ -186,7 +201,7 @@ const styles = {
       color: colors.textColorDim,
     },
     subContainerStyle: {
-      flex: 1,
+      flex: 2,
       borderTopWidth: 1,
       flexDirection: 'row',
       alignItems: 'stretch',

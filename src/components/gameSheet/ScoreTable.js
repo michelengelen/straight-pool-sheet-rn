@@ -4,35 +4,41 @@ import PropType from 'prop-types';
 import SPS from 'Common/variables';
 
 /**
- * Renders the calculated score for a player
+ * Displays a ScoreSet for a player
  *
  * Gets implemented by:
- * - SinglePlayer
+ * - ScoreTableRow
  *
  * @param {object} props
  * @return {*}
  * @constructor
  */
 const ScoreTableRowSet = (props) => {
-  const {scoreSet = {}} = props;
+  let {scoreSet = {}} = props;
   const {defaultCellStyle} = styles;
   const header = scoreSet === null;
+
+  for (const p in scoreSet) {
+    if (scoreSet.hasOwnProperty(p)) {
+      scoreSet[p] = `${scoreSet[p]}`;
+    }
+  }
 
   return (
     <View style={{flex: 5, flexDirection: 'row'}}>
       <View style={{...defaultCellStyle, flex: 3}}>
         <Text style={{color: 'white', fontSize: 10}}>
-          {header ? '+' : (scoreSet.score === 0 ? '0' : '')}
+          {header ? '+' : (scoreSet.score || '')}
         </Text>
       </View>
       <View style={{...defaultCellStyle, flex: 1}}>
         <Text style={{color: 'white', fontSize: 10}}>
-          {header ? '-' : (scoreSet.fouls === 0 ? '0' : '')}
+          {header ? '-' : (scoreSet.fouls || '')}
         </Text>
       </View>
       <View style={{...defaultCellStyle, flex: 1}}>
         <Text style={{color: 'white', fontSize: 10}}>
-          {header ? 'E' : (scoreSet.totalScore === 0 ? '0' : '')}
+          {header ? 'E' : (scoreSet.totalScore || '')}
         </Text>
       </View>
       <View style={{...defaultCellStyle, flex: 1}}>
@@ -49,10 +55,10 @@ ScoreTableRowSet.propTypes = {
 };
 
 /**
- * Renders the calculated score for a player
+ * Renders 2 ScoreSets for the players
  *
  * Gets implemented by:
- * - SinglePlayer
+ * - ScoreTable
  *
  * @param {object} props
  * @return {*}
@@ -65,7 +71,6 @@ const ScoreTableRow = (props) => {
   const score = header ? [null, null] : roundScore;
 
   const containerStyle = {
-    flex: 1,
     flexDirection: 'row',
     backgroundColor: roundIndex % 2 !== 1
       ? colors.backgroundColors.dimm
@@ -92,11 +97,11 @@ ScoreTableRow.propTypes = {
 };
 
 /**
- * Main Component for the rendering of the overView above the GameSheet-Table
+ * Main Component for the rendering of the ScoreTable
  *
  * Components that are needed to render correctly:
- * - SinglePlayer
- * - CalculatedScore (implemented by SinglePlayer component)
+ * - ScoreTableRow
+ * - ScoreTableRowSet
  *
  * @param {object} props
  * @return {*}

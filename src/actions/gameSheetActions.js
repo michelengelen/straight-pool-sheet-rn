@@ -14,6 +14,12 @@ const updatePlayerScore = (playerData) => {
   };
 };
 
+const incrementCurrentScore = () => {
+  return {
+    type: updateGameSheet.incrementCurrentScore,
+  };
+};
+
 export const updatePlayerScoreAction = (dispatch, payload) => {
   return dispatch(updatePlayerScore(payload));
 };
@@ -21,3 +27,9 @@ export const updatePlayerScoreAction = (dispatch, payload) => {
 export const startGameAction = (dispatch, payload) => {
   return dispatch(startGame(payload));
 };
+
+export const incrementCurrentScoreAction = (dispatch) => {
+  return dispatch(incrementCurrentScore());
+};
+
+

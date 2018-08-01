@@ -4,7 +4,7 @@ import PropType from 'prop-types';
 
 import {PageContainer} from 'Components/common';
 import {gameSheetActions} from 'Actions';
-import {PlayerOverview, ScoreTable} from './gameSheet';
+import {PlayerOverview, ScoreControls, ScoreTable} from './gameSheet';
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState} from 'Reducers/GameSheetReducer';
 
@@ -15,12 +15,29 @@ import {getGameState} from 'Reducers/GameSheetReducer';
  */
 class GameSheet extends Component {
   /**
-   * React Lifecycle - componentDidMount()
+   * Constructor function for the class-component
+   *
+   * @param {object} props
    */
-  componentDidMount() {
-    // TODO@Michel: Remove console.log calls
-    /* eslint-disable-next-line */
-    console.log(this.props);
+  constructor(props) {
+    super(props);
+
+    this.handleCurrentScoreIncrement =
+      this.handleCurrentScoreIncrement.bind(this);
+  }
+  /**
+   * handle Score increment with ScoreControls component
+   */
+  handleCurrentScoreIncrement() {
+    const {updatePlayerScore, incrementCurrentScore} = this.props;
+    incrementCurrentScore();
+    updatePlayerScore(
+      this.props.gameSheet.rounds[
+        this.props.gameSheet.gameState.currentRound - 1
+      ][
+        this.props.gameSheet.gameState.currentPlayer
+      ].totalScore
+    );
   }
 
   /**
@@ -31,9 +48,12 @@ class GameSheet extends Component {
     const {gameSheet} = this.props;
     const {players, rounds} = gameSheet;
     return (
-      <PageContainer darkMode scrollable>
+      <PageContainer darkMode scrollable={false}>
         <PlayerOverview players={players} />
         <ScoreTable rounds={rounds} />
+        <ScoreControls
+          incrementCurrentScore={this.handleCurrentScoreIncrement}
+        />
       </PageContainer>
     );
   }
@@ -42,6 +62,8 @@ class GameSheet extends Component {
 GameSheet.propTypes = {
   gameSettings: PropType.object,
   gameSheet: PropType.object,
+  updatePlayerScore: PropType.func,
+  incrementCurrentScore: PropType.func,
 };
 
 const mapStateToProps = (state) => {
@@ -54,6 +76,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   updatePlayerScore: (playerData) =>
     gameSheetActions.updatePlayerScoreAction(dispatch, playerData),
+  incrementCurrentScore: () =>
+    gameSheetActions.incrementCurrentScoreAction(dispatch, undefined),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameSheet);

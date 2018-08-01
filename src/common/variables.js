@@ -9,7 +9,7 @@ SPS.variables = {
       lighter: 'rgba(245, 245, 245, 1)',
       dark: 'rgba(49, 79, 96, 1)',
       darker: 'rgba(45, 73, 89, 1)',
-      dimm: 'rgba(10, 10, 10, .3)',
+      dimm: 'rgba(10, 10, 10, .15)',
       grey: 'rgba(70, 70, 70 ,1)',
       darkGrey: 'rgba(45, 45, 45, 1)',
     },
