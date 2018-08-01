@@ -1,1 +1,2 @@
-export * from './playerOverview';
+export * from './PlayerOverview';
+export * from './ScoreTable';

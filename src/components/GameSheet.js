@@ -2,11 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropType from 'prop-types';
 
-import {
-  PageContainer,
-} from 'Components/common';
+import {PageContainer} from 'Components/common';
 import {gameSheetActions} from 'Actions';
-import {PlayerOverview} from './gameSheet';
+import {PlayerOverview, ScoreTable} from './gameSheet';
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState} from 'Reducers/GameSheetReducer';
 
@@ -31,10 +29,11 @@ class GameSheet extends Component {
    */
   render() {
     const {gameSheet} = this.props;
-    const {players} = gameSheet;
+    const {players, rounds} = gameSheet;
     return (
       <PageContainer darkMode scrollable>
         <PlayerOverview players={players} />
+        <ScoreTable rounds={rounds} />
       </PageContainer>
     );
   }

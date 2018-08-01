@@ -30,6 +30,10 @@ const RootStack = createStackNavigator(
 
 const {colors} = SPS.variables;
 
+// TODO@Michel: Remove when yellow warning-boxes are needed.
+// eslint-disable-next-line
+console.disableYellowBox = true;
+
 const App = () => {
   return (
     <Provider store={store}>

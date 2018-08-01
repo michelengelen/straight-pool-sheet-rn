@@ -23,9 +23,138 @@ const INITIAL_STATE = {
       remainingBalls: 15,
       highestScore: false,
     },
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+  ], [
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+  ], [
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+  ], [
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+  ], [
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+  ], [
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+  ], [
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+  ], [
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+  ], [
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
+    {
+      score: 0,
+      fouls: 0,
+      totalScore: 0,
+      remainingBalls: 15,
+      highestScore: false,
+    },
   ]],
-  currentRound: 1,
-  currentPlayer: 1,
+  gameState: {
+    currentRound: 1,
+    currentPlayer: 1,
+  },
   maxPoints: 100,
   maxRounds: 25,
 };
