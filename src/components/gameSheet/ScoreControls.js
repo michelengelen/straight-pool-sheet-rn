@@ -33,7 +33,27 @@ const ScoreControls = (props) => {
       >
         <Text style={controlTextStyle}>
           <FontAwesome>
-            {Icons.minus}
+            {Icons.minusCircle}
+          </FontAwesome>
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={controlViewStyle}
+        onPress={props.switchPlayer}
+      >
+        <Text style={controlTextStyle}>
+          <FontAwesome>
+            {Icons.refresh}
+          </FontAwesome>
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={controlViewStyle}
+        onPress={props.incrementFouls}
+      >
+        <Text style={controlTextStyle}>
+          <FontAwesome>
+            {Icons.timesCircle}
           </FontAwesome>
         </Text>
       </TouchableOpacity>
@@ -42,6 +62,8 @@ const ScoreControls = (props) => {
 };
 
 ScoreControls.propTypes = {
+  switchPlayer: PropType.func.isRequired,
+  incrementFouls: PropType.func.isRequired,
   incrementCurrentScore: PropType.func.isRequired,
 };
 
@@ -51,7 +73,7 @@ const styles = {
   ScoreControls: {
     wrapperStyle: {
       flex: 1,
-      maxHeight: 50,
+      maxHeight: 60,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-around',
@@ -62,11 +84,10 @@ const styles = {
   Control: {
     controlViewStyle: {
       padding: sizes.gutter / 2,
-      backgroundColor: colors.backgroundColors.dimm,
     },
     controlTextStyle: {
       color: colors.textColor,
-      fontSize: sizes.font_L,
+      fontSize: sizes.font_XL,
     },
   },
 };

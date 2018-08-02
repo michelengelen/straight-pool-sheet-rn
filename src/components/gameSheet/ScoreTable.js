@@ -15,35 +15,46 @@ import SPS from 'Common/variables';
  */
 const ScoreTableRowSet = (props) => {
   let {scoreSet = {}} = props;
-  const {defaultCellStyle} = styles;
+  const {
+    defaultCellViewStyle,
+    defaultCellTextStyle,
+  } = styles;
   const header = scoreSet === null;
+
+  let foulCellStyle = {...defaultCellViewStyle};
+
+  if (scoreSet && scoreSet.fouls > 0) {
+    foulCellStyle.backgroundColor = colors.backgroundColors.darkRed;
+  }
+
+  let parsedScoreSet = {};
 
   for (const p in scoreSet) {
     if (scoreSet.hasOwnProperty(p)) {
-      scoreSet[p] = `${scoreSet[p]}`;
+      parsedScoreSet[p] = `${scoreSet[p]}`;
     }
   }
 
   return (
-    <View style={{flex: 5, flexDirection: 'row'}}>
-      <View style={{...defaultCellStyle, flex: 3}}>
-        <Text style={{color: 'white', fontSize: 10}}>
-          {header ? '+' : (scoreSet.score || '')}
+    <View style={{flex: 6, flexDirection: 'row'}}>
+      <View style={{...defaultCellViewStyle, flex: 4}}>
+        <Text style={defaultCellTextStyle}>
+          {header ? '+' : (parsedScoreSet.currentScore || ' ')}
         </Text>
       </View>
-      <View style={{...defaultCellStyle, flex: 1}}>
-        <Text style={{color: 'white', fontSize: 10}}>
-          {header ? '-' : (scoreSet.fouls || '')}
+      <View style={foulCellStyle}>
+        <Text style={defaultCellTextStyle}>
+          {header ? '-' : (parsedScoreSet.fouls || ' ')}
         </Text>
       </View>
-      <View style={{...defaultCellStyle, flex: 1}}>
-        <Text style={{color: 'white', fontSize: 10}}>
-          {header ? 'E' : (scoreSet.totalScore || '')}
+      <View style={{...defaultCellViewStyle, flex: 1}}>
+        <Text style={defaultCellTextStyle}>
+          {header ? 'E' : (parsedScoreSet.totalScore || ' ')}
         </Text>
       </View>
-      <View style={{...defaultCellStyle, flex: 1}}>
-        <Text style={{color: 'white', fontSize: 10}}>
-          {header ? 'R' : (scoreSet.remainingBalls || '')}
+      <View style={{...defaultCellViewStyle, flex: 1}}>
+        <Text style={defaultCellTextStyle}>
+          {header ? 'R' : (parsedScoreSet.remainingBalls || ' ')}
         </Text>
       </View>
     </View>
@@ -66,7 +77,10 @@ ScoreTableRowSet.propTypes = {
  */
 const ScoreTableRow = (props) => {
   const {roundScore, roundIndex, header} = props;
-  const {defaultCellStyle} = styles;
+  const {
+    defaultCellViewStyle,
+    defaultCellTextStyle,
+  } = styles;
 
   const score = header ? [null, null] : roundScore;
 
@@ -80,8 +94,12 @@ const ScoreTableRow = (props) => {
   return (
     <View style={containerStyle}>
       <ScoreTableRowSet scoreSet={score[0]}/>
-      <View style={{...defaultCellStyle, flex: 2}}>
-        <Text style={{color: 'white', fontSize: 10}}>
+      <View style={{
+        ...defaultCellViewStyle,
+        flex: 1,
+        backgroundColor: colors.backgroundColors.darkerGrey,
+      }}>
+        <Text style={defaultCellTextStyle}>
           {header ? '#' : roundIndex}
         </Text>
       </View>
@@ -149,12 +167,17 @@ const styles = {
   ScoreTableRow: {
   },
   // Styles every cell in the table have in common
-  defaultCellStyle: {
+  defaultCellViewStyle: {
     padding: sizes.gutter / 6,
     alignItems: 'center',
     borderRightWidth: StyleSheet.hairlineWidth,
     backgroundColor: colors.backgroundColors.dimm,
     borderColor: colors.borderColors.dark,
+  },
+  defaultCellTextStyle: {
+    color: 'white',
+    fontSize: sizes.font_S,
+    textAlign: 'center',
   },
 };
 

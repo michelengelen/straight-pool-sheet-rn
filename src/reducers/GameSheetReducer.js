@@ -1,5 +1,15 @@
 import {updateGameSheet} from 'Actions/actionTypes';
 
+const roundTemplate = {
+  score: 0,
+  fouls: 0,
+  breaks: [],
+  totalScore: 0,
+  currentScore: 0,
+  remainingBalls: 15,
+  highestScore: false,
+};
+
 const INITIAL_STATE = {
   players: {
     playerOne: {
@@ -17,21 +27,29 @@ const INITIAL_STATE = {
   },
   rounds: [[
     {
-      score: 0,
-      fouls: 0,
-      breaks: 0,
-      totalScore: 0,
-      remainingBalls: 15,
-      highestScore: false,
+      ...roundTemplate,
     },
   ]],
   gameState: {
     currentRound: 1,
     currentPlayer: 0,
-    currentPlayerKey: 'playerOne',
+    remainingBalls: 15,
   },
   maxPoints: 100,
   maxRounds: 25,
+};
+
+const getCurrentPlayerKey =
+  (player) => player === 0 ? 'playerOne' : 'playerTwo';
+
+const buildCurrentScoreText = (score, breaks) => {
+  if (breaks.length < 1) return `${score}`;
+
+  let currentScore = '';
+  for (let i = 0; i < breaks.length; i++) {
+    currentScore += breaks[i] + ' / ';
+  }
+  return currentScore + score;
 };
 
 const GameSheetReducer = (state = INITIAL_STATE, action) => {
@@ -39,9 +57,18 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
   let newState = {...state};
 
   // Define values that get used later on
-  const {currentRound, currentPlayer, currentPlayerKey} = state.gameState;
+  const {currentRound, currentPlayer} = state.gameState;
   const roundIndex = currentRound - 1;
-  let averageScoreFloat;
+  // case: updatePlayerScore
+  const currentPlayerKey =
+    getCurrentPlayerKey(newState.gameState.currentPlayer);
+  let averageScoreFloat = 0;
+  let highestScoreIndex = 0;
+  // case: SwitchPlayer
+  let newRoundSet = {
+    ...roundTemplate,
+    breaks: [],
+  };
 
   switch (action.type) {
     case updateGameSheet.startGame:
@@ -50,28 +77,77 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
       newState.maxPoints = payload.maxPoints;
       newState.maxRounds = payload.maxRounds;
       break;
+
     case updateGameSheet.updatePlayerScore:
-      // update the total Score which gets used in PlayerOverview as well
-      newState.players[currentPlayerKey].totalScore++;
-      // update highestScore when it gets higher than the one stored
-      newState.players[currentPlayerKey].highestScore =
-        payload.score > newState.players[currentPlayerKey].highestScore
-          ? payload
-          : newState.players[currentPlayerKey].highestScore;
+      newState.players[currentPlayerKey].totalScore = 0;
+
+      for (let i = 0; i < state.rounds.length; i++) {
+        newState.players[currentPlayerKey].totalScore +=
+          state.rounds[i][currentPlayer].totalScore -
+          state.rounds[i][currentPlayer].fouls;
+
+        newState.rounds[i][currentPlayer].highestScore = false;
+
+        if (state.rounds[i][currentPlayer].totalScore
+            > newState.players[currentPlayerKey].highestScore) {
+          newState.players[currentPlayerKey].highestScore =
+            state.rounds[i][currentPlayer].totalScore;
+          highestScoreIndex = i;
+        }
+      }
+      newState.rounds[highestScoreIndex][currentPlayer].highestScore =
+        false;
+
       // update the average score based on the totalScore and the played rounds
       averageScoreFloat =
         newState.players[currentPlayerKey].totalScore / currentRound;
+
       newState.players[currentPlayerKey].averageScore =
         parseFloat(Math.round(averageScoreFloat * 100) / 100).toFixed(2);
       break;
+
     case updateGameSheet.incrementCurrentScore:
+      newState.rounds[roundIndex][currentPlayer].score++;
       newState.rounds[roundIndex][currentPlayer].totalScore++;
       newState.rounds[roundIndex][currentPlayer].remainingBalls--;
+
       if (newState.rounds[roundIndex][currentPlayer].remainingBalls < 2) {
-        newState.rounds[roundIndex][currentPlayer].breaks++;
+        newState.rounds[roundIndex][currentPlayer].breaks.push(
+          newState.rounds[roundIndex][currentPlayer].score < 14
+            ? newState.rounds[roundIndex][currentPlayer].score
+            : '*'
+        );
+        newState.rounds[roundIndex][currentPlayer].score = 0;
         newState.rounds[roundIndex][currentPlayer].remainingBalls = 15;
-      };
+      }
+
+      newState.rounds[roundIndex][currentPlayer].currentScore =
+          buildCurrentScoreText(
+            newState.rounds[roundIndex][currentPlayer].score -
+            newState.rounds[roundIndex][currentPlayer].fouls,
+            newState.rounds[roundIndex][currentPlayer].breaks
+          );
       break;
+
+    case updateGameSheet.switchPlayer:
+      newRoundSet.remainingBalls =
+      newState.gameState.remainingBalls =
+        state.rounds[roundIndex][currentPlayer].remainingBalls;
+
+      if (currentPlayer === 0) {
+        newState.gameState.currentPlayer++;
+        newState.rounds[roundIndex].push(newRoundSet);
+      } else {
+        newState.gameState.currentPlayer--;
+        newState.gameState.currentRound++;
+        newState.rounds.push([newRoundSet]);
+      }
+      break;
+
+    case updateGameSheet.incrementFouls:
+      newState.rounds[roundIndex][currentPlayer].fouls++;
+      break;
+
     default:
       return state;
   }

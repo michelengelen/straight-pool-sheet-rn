@@ -7,11 +7,13 @@ SPS.variables = {
     backgroundColors: {
       light: 'rgba(230, 230, 230, 1)',
       lighter: 'rgba(245, 245, 245, 1)',
-      dark: 'rgba(49, 79, 96, 1)',
-      darker: 'rgba(45, 73, 89, 1)',
+      dark: 'rgba(35, 63, 76, 1)',
+      darker: 'rgba(26, 48, 58, 1)',
       dimm: 'rgba(10, 10, 10, .15)',
       grey: 'rgba(70, 70, 70 ,1)',
       darkGrey: 'rgba(45, 45, 45, 1)',
+      darkerGrey: 'rgba(40, 40, 40, .7)',
+      darkRed: 'rgba(127, 7, 7, 1)',
     },
     borderColors: {
       dark: 'rgba(33, 33, 33, .2)',
@@ -24,11 +26,11 @@ SPS.variables = {
   },
   sizes: {
     gutter: 20,
-    font_S: 9,
-    font_M: 10,
-    font_L: 14,
-    font_XL: 20,
-    font_XXL: 28,
+    font_S: 11,
+    font_M: 13,
+    font_L: 16,
+    font_XL: 24,
+    font_XXL: 32,
     dimensions: Dimensions.get('window'),
   },
 };

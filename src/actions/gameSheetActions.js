@@ -20,6 +20,18 @@ const incrementCurrentScore = () => {
   };
 };
 
+const incrementFouls = () => {
+  return {
+    type: updateGameSheet.incrementFouls,
+  };
+};
+
+const switchPlayer = () => {
+  return {
+    type: updateGameSheet.switchPlayer,
+  };
+};
+
 export const updatePlayerScoreAction = (dispatch, payload) => {
   return dispatch(updatePlayerScore(payload));
 };
@@ -30,6 +42,14 @@ export const startGameAction = (dispatch, payload) => {
 
 export const incrementCurrentScoreAction = (dispatch) => {
   return dispatch(incrementCurrentScore());
+};
+
+export const incrementFoulsAction = (dispatch) => {
+  return dispatch(incrementFouls());
+};
+
+export const switchPlayerAction = (dispatch) => {
+  return dispatch(switchPlayer());
 };
 
 

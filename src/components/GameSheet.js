@@ -22,22 +22,42 @@ class GameSheet extends Component {
   constructor(props) {
     super(props);
 
-    this.handleCurrentScoreIncrement =
-      this.handleCurrentScoreIncrement.bind(this);
+    this.handleCurrentScoreIncrement = this.handleCurrentScoreIncrement.bind(
+      this
+    );
+    this.handleFoulIncrement = this.handleFoulIncrement.bind(
+      this
+    );
+    this.handlePlayerSwitch = this.handlePlayerSwitch.bind(
+      this
+    );
   }
+
   /**
    * handle Score increment with ScoreControls component
    */
   handleCurrentScoreIncrement() {
     const {updatePlayerScore, incrementCurrentScore} = this.props;
     incrementCurrentScore();
-    updatePlayerScore(
-      this.props.gameSheet.rounds[
-        this.props.gameSheet.gameState.currentRound - 1
-      ][
-        this.props.gameSheet.gameState.currentPlayer
-      ].totalScore
-    );
+    updatePlayerScore();
+  }
+
+  /**
+   * handle Score increment with ScoreControls component
+   */
+  handleFoulIncrement() {
+    const {updatePlayerScore, incrementFouls} = this.props;
+    incrementFouls();
+    updatePlayerScore();
+  }
+
+  /**
+   * handle Score increment with ScoreControls component
+   */
+  handlePlayerSwitch() {
+    const {updatePlayerScore, switchPlayer} = this.props;
+    switchPlayer();
+    updatePlayerScore();
   }
 
   /**
@@ -52,7 +72,9 @@ class GameSheet extends Component {
         <PlayerOverview players={players} />
         <ScoreTable rounds={rounds} />
         <ScoreControls
+          incrementFouls={this.handleFoulIncrement}
           incrementCurrentScore={this.handleCurrentScoreIncrement}
+          switchPlayer={this.handlePlayerSwitch}
         />
       </PageContainer>
     );
@@ -62,7 +84,9 @@ class GameSheet extends Component {
 GameSheet.propTypes = {
   gameSettings: PropType.object,
   gameSheet: PropType.object,
+  switchPlayer: PropType.func,
   updatePlayerScore: PropType.func,
+  incrementFouls: PropType.func,
   incrementCurrentScore: PropType.func,
 };
 
@@ -74,10 +98,14 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  updatePlayerScore: (playerData) =>
-    gameSheetActions.updatePlayerScoreAction(dispatch, playerData),
+  updatePlayerScore: () =>
+    gameSheetActions.updatePlayerScoreAction(dispatch, undefined),
+  incrementFouls: () =>
+    gameSheetActions.incrementFoulsAction(dispatch, undefined),
   incrementCurrentScore: () =>
     gameSheetActions.incrementCurrentScoreAction(dispatch, undefined),
+  switchPlayer: () =>
+    gameSheetActions.switchPlayerAction(dispatch, undefined),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameSheet);
