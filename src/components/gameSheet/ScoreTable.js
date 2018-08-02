@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, SectionList, View, Text} from 'react-native';
 import PropType from 'prop-types';
 import SPS from 'Common/variables';
 
@@ -19,16 +19,20 @@ const ScoreTableRowSet = (props) => {
     defaultCellViewStyle,
     defaultCellTextStyle,
   } = styles;
+
+  let cellViewStyle = {...defaultCellViewStyle};
+
   const header = scoreSet === null;
+  if (header) {
+    cellViewStyle.backgroundColor = colors.backgroundColors.darkGrey;
+  }
 
   let foulCellStyle = {...defaultCellViewStyle};
-
   if (scoreSet && scoreSet.fouls > 0) {
     foulCellStyle.backgroundColor = colors.backgroundColors.darkRed;
   }
 
   let parsedScoreSet = {};
-
   for (const p in scoreSet) {
     if (scoreSet.hasOwnProperty(p)) {
       parsedScoreSet[p] = `${scoreSet[p]}`;
@@ -114,6 +118,13 @@ ScoreTableRow.propTypes = {
   roundScore: PropType.array,
 };
 
+const renderItem = (item, index) =>
+  <ScoreTableRow
+    key={`ScoreTableRow_${index}`}
+    roundIndex={index + 1}
+    roundScore={item}
+  />;
+
 /**
  * Main Component for the rendering of the ScoreTable
  *
@@ -129,17 +140,22 @@ const ScoreTable = (props) => {
   const {rounds} = props;
   const {wrapperStyle} = styles.ScoreTable;
 
+  const sections = [
+    {
+      title: 'ScoreTable',
+      data: rounds,
+    },
+  ];
+
   return (
     <View style={wrapperStyle}>
-      <ScoreTableRow header />
-      {rounds.map(
-        (round, index) =>
-          <ScoreTableRow
-            key={`ScoreTableRow_${index}`}
-            roundIndex={index + 1}
-            roundScore={round}
-          />
-      )}
+      <SectionList
+        renderItem={({item, index}) => renderItem(item, index)}
+        renderSectionHeader={() => <ScoreTableRow header />}
+        sections={sections}
+        keyExtractor={(item, index) => `ScoreTableRow_${index}`}
+        stickySectionHeadersEnabled={true}
+      />
     </View>
   );
 };

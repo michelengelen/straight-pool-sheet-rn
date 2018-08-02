@@ -22,7 +22,7 @@ const INITIAL_STATE = {
       name: '',
       totalScore: 0,
       highestScore: 0,
-      averageScore: 0,
+      averageScore: 0.00,
     },
   },
   rounds: [[

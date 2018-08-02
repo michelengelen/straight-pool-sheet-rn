@@ -31,7 +31,7 @@ const PageIntro = (props) => {
 
 PageIntro.propTypes = {
   headerText: PropType.string.isRequired,
-  introText: PropType.string.isRequired,
+  introText: PropType.string,
   alignHeadline: PropType.string,
 };
 
