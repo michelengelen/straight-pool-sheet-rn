@@ -52,7 +52,7 @@ class GameSheet extends Component {
   }
 
   /**
-   * handle Score increment with ScoreControls component
+   * handle switching the player with ScoreControls component
    */
   handlePlayerSwitch() {
     const {updatePlayerScore, switchPlayer} = this.props;

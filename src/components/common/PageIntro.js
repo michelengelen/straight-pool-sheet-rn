@@ -14,8 +14,15 @@ const PageIntro = (props) => {
 
   return (
     <View style={viewStyle}>
-      <View style={headlineViewStyle}>
-        <Text style={headlineStyle}>{props.headerText}</Text>
+      <View
+        style={{
+          ...headlineViewStyle,
+          alignItems: props.alignHeadline || 'flex-start',
+        }}
+      >
+        <Text style={headlineStyle}>
+          {props.headerText}
+        </Text>
       </View>
       <Text style={textStyle}>{props.introText}</Text>
     </View>
@@ -25,6 +32,7 @@ const PageIntro = (props) => {
 PageIntro.propTypes = {
   headerText: PropType.string.isRequired,
   introText: PropType.string.isRequired,
+  alignHeadline: PropType.string,
 };
 
 const {colors, sizes} = SPS.variables;

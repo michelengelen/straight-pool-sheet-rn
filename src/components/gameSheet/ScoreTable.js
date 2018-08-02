@@ -175,7 +175,7 @@ const styles = {
     borderColor: colors.borderColors.dark,
   },
   defaultCellTextStyle: {
-    color: 'white',
+    color: colors.textColor,
     fontSize: sizes.font_S,
     textAlign: 'center',
   },

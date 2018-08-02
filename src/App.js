@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {View} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
+import SplashScreen from 'react-native-splash-screen';
 
 // project files
 import {rootReducer} from 'Reducers';
@@ -34,22 +35,36 @@ const {colors} = SPS.variables;
 // eslint-disable-next-line
 console.disableYellowBox = true;
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <View style={{
-        flex: 1,
-        backgroundColor: colors.backgroundColors.dark,
-      }}>
-        <CustomStatusBar
-          barStyle={'light-content'}
-          backgroundColor={colors.backgroundColors.darkGrey}
-          darkMode
-        />
-        <RootStack />
-      </View>
-    </Provider>
-  );
-};
+/**
+ * This is the main class that renders the complete App
+ */
+export default class App extends Component {
+  /**
+   * React lifecycle hook: componentDidMount
+   */
+  componentDidMount() {
+    SplashScreen.hide();
+  }
 
-export default App;
+  /**
+   * React-Native render function
+   * @return {*}
+   */
+  render() {
+    return (
+      <Provider store={store}>
+        <View style={{
+          flex: 1,
+          backgroundColor: colors.backgroundColors.dark,
+        }}>
+          <CustomStatusBar
+            barStyle={'light-content'}
+            backgroundColor={colors.backgroundColors.darkGrey}
+            darkMode
+          />
+          <RootStack />
+        </View>
+      </Provider>
+    );
+  }
+}

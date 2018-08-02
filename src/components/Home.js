@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
-import {Text} from 'react-native';
 
-import {PageContainer, CustomButton} from 'Components/common';
+import {
+  PageContainer,
+  CustomButton,
+  PageIntro,
+} from 'Components/common';
 
 /**
  * Gamesettings Component
@@ -22,7 +25,10 @@ class Home extends Component {
         scrollable={false}
         style={{alignItems: 'center', justifyContent: 'center'}}
       >
-        <Text>Straight Pool Sheet</Text>
+        <PageIntro
+          headerText={'Straight Pool Sheet'}
+          alignHeadline={'center'}
+        />
         <CustomButton
           buttonText="New Game"
           loading={false}
