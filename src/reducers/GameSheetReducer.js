@@ -11,20 +11,20 @@ const roundTemplate = {
 };
 
 const INITIAL_STATE = {
-  players: {
-    playerOne: {
+  players: [
+    {
       name: '',
       totalScore: 0,
       highestScore: 0,
       averageScore: 0,
     },
-    playerTwo: {
+    {
       name: '',
       totalScore: 0,
       highestScore: 0,
       averageScore: 0.00,
     },
-  },
+  ],
   rounds: [[
     {
       ...roundTemplate,
@@ -34,13 +34,11 @@ const INITIAL_STATE = {
     currentRound: 1,
     currentPlayer: 0,
     remainingBalls: 15,
+    winner: -1,
   },
   maxPoints: 100,
   maxRounds: 25,
 };
-
-const getCurrentPlayerKey =
-  (player) => player === 0 ? 'playerOne' : 'playerTwo';
 
 const buildCurrentScoreText = (score, breaks) => {
   if (breaks.length < 1) return `${score}`;
@@ -60,8 +58,6 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
   const {currentRound, currentPlayer} = state.gameState;
   const roundIndex = currentRound - 1;
   // case: updatePlayerScore
-  const currentPlayerKey =
-    getCurrentPlayerKey(newState.gameState.currentPlayer);
   let averageScoreFloat = 0;
   let highestScoreIndex = 0;
   // case: SwitchPlayer
@@ -72,24 +68,24 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     case updateGameSheet.startGame:
-      newState.players.playerOne.name = payload.players.playerOne.name;
-      newState.players.playerTwo.name = payload.players.playerTwo.name;
+      newState.players[0].name = payload.players[0].name;
+      newState.players[1].name = payload.players[1].name;
       newState.maxPoints = payload.maxPoints;
       newState.maxRounds = payload.maxRounds;
       break;
 
     case updateGameSheet.updatePlayerScore:
-      newState.players[currentPlayerKey].totalScore = 0;
+      newState.players[currentPlayer].totalScore = 0;
 
       for (let i = 0; i < state.rounds.length; i++) {
-        newState.players[currentPlayerKey].totalScore +=
+        newState.players[currentPlayer].totalScore +=
           state.rounds[i][currentPlayer].totalScore;
 
         newState.rounds[i][currentPlayer].highestScore = false;
 
         if (state.rounds[i][currentPlayer].totalScore
-            > newState.players[currentPlayerKey].highestScore) {
-          newState.players[currentPlayerKey].highestScore =
+            > newState.players[currentPlayer].highestScore) {
+          newState.players[currentPlayer].highestScore =
             state.rounds[i][currentPlayer].totalScore;
           highestScoreIndex = i;
         }
@@ -99,9 +95,9 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
 
       // update the average score based on the totalScore and the played rounds
       averageScoreFloat =
-        newState.players[currentPlayerKey].totalScore / currentRound;
+        newState.players[currentPlayer].totalScore / currentRound;
 
-      newState.players[currentPlayerKey].averageScore =
+      newState.players[currentPlayer].averageScore =
         parseFloat(Math.round(averageScoreFloat * 100) / 100).toFixed(2);
       break;
 
@@ -125,9 +121,20 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
             newState.rounds[roundIndex][currentPlayer].score,
             newState.rounds[roundIndex][currentPlayer].breaks
           );
+
+      if (newState.rounds[roundIndex][currentPlayer].score
+          === state.maxPoints) {
+        newState.gameState.winner = currentPlayer;
+      }
       break;
 
     case updateGameSheet.switchPlayer:
+      if (currentPlayer === 1 && roundIndex === state.maxRounds) {
+        newState.gameState.winner =
+          state.players[0].totalScore > state.players[1].totalScore ? 0 : 1;
+        break;
+      }
+
       newRoundSet.remainingBalls =
       newState.gameState.remainingBalls =
         state.rounds[roundIndex][currentPlayer].remainingBalls;

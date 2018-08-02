@@ -132,11 +132,11 @@ const PlayerOverview = (props) => {
   return (
     <View style={wrapperStyle}>
       <SinglePlayer
-        player={props.players.playerOne}
+        player={props.players[0]}
         style={firstPlayerStyle}
       />
       <SinglePlayer
-        player={props.players.playerTwo}
+        player={props.players[1]}
       />
     </View>
   );

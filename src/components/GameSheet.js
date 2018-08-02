@@ -7,6 +7,7 @@ import {gameSheetActions} from 'Actions';
 import {PlayerOverview, ScoreControls, ScoreTable} from './gameSheet';
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState} from 'Reducers/GameSheetReducer';
+import FullscreenModal from './FullscreenModal';
 
 /**
  * Gamesettings Component
@@ -69,6 +70,7 @@ class GameSheet extends Component {
     const {players, rounds} = gameSheet;
     return (
       <PageContainer darkMode scrollable={false}>
+        {gameSheet.gameState.winner > -1 && <FullscreenModal/>}
         <PlayerOverview players={players} />
         <ScoreTable rounds={rounds} />
         <ScoreControls

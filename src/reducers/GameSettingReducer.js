@@ -1,14 +1,14 @@
 import {updateSettings} from 'Actions/actionTypes';
 
 const INITIAL_STATE = {
-  players: {
-    playerOne: {
+  players: [
+    {
       name: '',
     },
-    playerTwo: {
+    {
       name: '',
     },
-  },
+  ],
   maxPoints: 100,
   maxRounds: 25,
 };
@@ -19,7 +19,7 @@ const GameSettingReducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     case updateSettings.updatePlayer:
-      newState.players[payload.key].name = payload.name;
+      newState.players[payload.index].name = payload.name;
       break;
     case updateSettings.updatePoints:
       newState.maxPoints = payload;

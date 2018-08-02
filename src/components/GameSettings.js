@@ -55,7 +55,7 @@ class GameSettings extends Component {
       updateRounds,
       navigation,
     } = this.props;
-    const {playerOne, playerTwo} = gameSettings.players;
+    const {players} = gameSettings;
 
     return (
       <PageContainer darkMode scrollable>
@@ -67,16 +67,17 @@ class GameSettings extends Component {
             'magna aliquyam erat, sed diam voluptua. At vero eos et '}
         />
         {inputIds.map((id, index) => {
+          const name = players[index] ? players[index].name : '';
           return (
             <CustomInput
               key={index}
               id={'player' + id}
               label={'Player ' + (index + 1)}
-              value={gameSettings.players['player' + id].name}
+              value={name}
               style={{flex: 1}}
               onChangeText={(name) =>
                 updatePlayer({
-                  key: 'player' + id,
+                  index: index,
                   name: name,
                 })
               }
@@ -102,7 +103,7 @@ class GameSettings extends Component {
         <CustomButton
           buttonText={'Start Game'}
           disabled={
-            !playerOne.name || !playerTwo.name
+            !players[0].name || !players[1].name
           }
           loading={false}
           onPress={() => {
