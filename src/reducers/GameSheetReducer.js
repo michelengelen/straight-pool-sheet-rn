@@ -83,8 +83,7 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
 
       for (let i = 0; i < state.rounds.length; i++) {
         newState.players[currentPlayerKey].totalScore +=
-          state.rounds[i][currentPlayer].totalScore -
-          state.rounds[i][currentPlayer].fouls;
+          state.rounds[i][currentPlayer].totalScore;
 
         newState.rounds[i][currentPlayer].highestScore = false;
 
@@ -123,8 +122,7 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
 
       newState.rounds[roundIndex][currentPlayer].currentScore =
           buildCurrentScoreText(
-            newState.rounds[roundIndex][currentPlayer].score -
-            newState.rounds[roundIndex][currentPlayer].fouls,
+            newState.rounds[roundIndex][currentPlayer].score,
             newState.rounds[roundIndex][currentPlayer].breaks
           );
       break;
@@ -146,6 +144,7 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
 
     case updateGameSheet.incrementFouls:
       newState.rounds[roundIndex][currentPlayer].fouls++;
+      newState.rounds[roundIndex][currentPlayer].totalScore--;
       break;
 
     default:
