@@ -97,23 +97,21 @@ const SinglePlayer = (props) => {
 };
 
 SinglePlayer.propTypes = {
-  player: PropType.arrayOf(
-    PropType.shape({
-      name: PropType.string,
-      totalScore: PropType.oneOfType([
-        PropType.number,
-        PropType.string,
-      ]),
-      highestScore: PropType.oneOfType([
-        PropType.number,
-        PropType.string,
-      ]),
-      averageScore: PropType.oneOfType([
-        PropType.number,
-        PropType.string,
-      ]),
-    })
-  ),
+  player: PropType.shape({
+    name: PropType.string,
+    totalScore: PropType.oneOfType([
+      PropType.number,
+      PropType.string,
+    ]),
+    highestScore: PropType.oneOfType([
+      PropType.number,
+      PropType.string,
+    ]),
+    averageScore: PropType.oneOfType([
+      PropType.number,
+      PropType.string,
+    ]),
+  }),
   style: PropType.object,
 };
 
