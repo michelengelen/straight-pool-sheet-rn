@@ -97,21 +97,23 @@ const SinglePlayer = (props) => {
 };
 
 SinglePlayer.propTypes = {
-  player: PropType.shape({
-    name: PropType.string,
-    totalScore: PropType.oneOfType([
-      PropType.number,
-      PropType.string,
-    ]),
-    highestScore: PropType.oneOfType([
-      PropType.number,
-      PropType.string,
-    ]),
-    averageScore: PropType.oneOfType([
-      PropType.number,
-      PropType.string,
-    ]),
-  }),
+  player: PropType.arrayOf(
+    PropType.shape({
+      name: PropType.string,
+      totalScore: PropType.oneOfType([
+        PropType.number,
+        PropType.string,
+      ]),
+      highestScore: PropType.oneOfType([
+        PropType.number,
+        PropType.string,
+      ]),
+      averageScore: PropType.oneOfType([
+        PropType.number,
+        PropType.string,
+      ]),
+    })
+  ),
   style: PropType.object,
 };
 
@@ -143,7 +145,7 @@ const PlayerOverview = (props) => {
 };
 
 PlayerOverview.propTypes = {
-  players: PropType.object,
+  players: PropType.arrayOf(PropType.object),
 };
 
 const {colors, sizes} = SPS.variables;

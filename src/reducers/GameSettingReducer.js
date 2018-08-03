@@ -1,19 +1,7 @@
 import {updateSettings} from 'Actions/actionTypes';
+import {INITIAL_STATE} from './initialStates';
 
-const INITIAL_STATE = {
-  players: [
-    {
-      name: '',
-    },
-    {
-      name: '',
-    },
-  ],
-  maxPoints: 100,
-  maxRounds: 25,
-};
-
-const GameSettingReducer = (state = INITIAL_STATE, action) => {
+const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
   const {payload} = action;
   let newState = {...state};
 

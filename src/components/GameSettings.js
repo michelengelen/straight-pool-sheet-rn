@@ -22,15 +22,6 @@ import {getSettings} from 'Reducers/GameSettingReducer';
  */
 class GameSettings extends Component {
   /**
-   * React Lifecycle - componentDidMount()
-   */
-  componentDidMount() {
-    // TODO@Michel: Remove console.log calls
-    /* eslint-disable-next-line */
-    console.log(this.props);
-  }
-
-  /**
    * Asynchronous Action for starting a new Game
    * Is needed for setting the game-params before loading the
    * GameSheet Component

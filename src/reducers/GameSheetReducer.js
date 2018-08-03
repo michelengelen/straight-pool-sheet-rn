@@ -1,56 +1,9 @@
 import {updateGameSheet} from 'Actions/actionTypes';
 
-const roundTemplate = {
-  score: 0,
-  fouls: 0,
-  breaks: [],
-  totalScore: 0,
-  currentScore: 0,
-  remainingBalls: 15,
-  highestScore: false,
-};
+import {buildCurrentScoreText, updateObjectsInArray} from './stateHelpers';
+import {INITIAL_STATE, roundTemplate} from './initialStates';
 
-const INITIAL_STATE = {
-  players: [
-    {
-      name: '',
-      totalScore: 0,
-      highestScore: 0,
-      averageScore: 0,
-    },
-    {
-      name: '',
-      totalScore: 0,
-      highestScore: 0,
-      averageScore: 0.00,
-    },
-  ],
-  rounds: [[
-    {
-      ...roundTemplate,
-    },
-  ]],
-  gameState: {
-    currentRound: 1,
-    currentPlayer: 0,
-    remainingBalls: 15,
-    winner: -1,
-  },
-  maxPoints: 100,
-  maxRounds: 25,
-};
-
-const buildCurrentScoreText = (score, breaks) => {
-  if (breaks.length < 1) return `${score}`;
-
-  let currentScore = '';
-  for (let i = 0; i < breaks.length; i++) {
-    currentScore += breaks[i] + ' / ';
-  }
-  return currentScore + score;
-};
-
-const GameSheetReducer = (state = INITIAL_STATE, action) => {
+const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
   const {payload} = action;
   let newState = {...state};
 
@@ -59,7 +12,6 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
   const roundIndex = currentRound - 1;
   // case: updatePlayerScore
   let averageScoreFloat = 0;
-  let highestScoreIndex = 0;
   // case: SwitchPlayer
   let newRoundSet = {
     ...roundTemplate,
@@ -68,25 +20,24 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     case updateGameSheet.startGame:
-      newState.players[0].name = payload.players[0].name;
-      newState.players[1].name = payload.players[1].name;
-      newState.maxPoints = payload.maxPoints;
-      newState.maxRounds = payload.maxRounds;
-      break;
+      return {
+        ...state,
+        players: updateObjectsInArray(state.players, payload.players),
+        // maxPoints: payload.maxPoints,
+        // maxRounds: payload.maxRounds,
+      };
 
     case updateGameSheet.updatePlayerScore:
-      newState.players[currentPlayer].totalScore = 0;
+      let newTotalScore = 0;
+      let highestScore = 0;
+      let highestScoreIndex = 0;
 
       for (let i = 0; i < state.rounds.length; i++) {
-        newState.players[currentPlayer].totalScore +=
-          state.rounds[i][currentPlayer].totalScore;
-
-        newState.rounds[i][currentPlayer].highestScore = false;
+        newTotalScore += state.rounds[i][currentPlayer].totalScore;
 
         if (state.rounds[i][currentPlayer].totalScore
             > newState.players[currentPlayer].highestScore) {
-          newState.players[currentPlayer].highestScore =
-            state.rounds[i][currentPlayer].totalScore;
+          highestScore = state.rounds[i][currentPlayer].totalScore;
           highestScoreIndex = i;
         }
       }
@@ -117,19 +68,19 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
       }
 
       newState.rounds[roundIndex][currentPlayer].currentScore =
-          buildCurrentScoreText(
-            newState.rounds[roundIndex][currentPlayer].score,
-            newState.rounds[roundIndex][currentPlayer].breaks
-          );
+        buildCurrentScoreText(
+          newState.rounds[roundIndex][currentPlayer].score,
+          newState.rounds[roundIndex][currentPlayer].breaks
+        );
 
-      if (newState.rounds[roundIndex][currentPlayer].score
-          === state.maxPoints) {
+      if (newState.rounds[roundIndex][currentPlayer].totalScore
+          >= state.maxPoints) {
         newState.gameState.winner = currentPlayer;
       }
       break;
 
     case updateGameSheet.switchPlayer:
-      if (currentPlayer === 1 && roundIndex === state.maxRounds) {
+      if (currentPlayer === 1 && currentRound === state.maxRounds) {
         newState.gameState.winner =
           state.players[0].totalScore > state.players[1].totalScore ? 0 : 1;
         break;
@@ -152,6 +103,17 @@ const GameSheetReducer = (state = INITIAL_STATE, action) => {
     case updateGameSheet.incrementFouls:
       newState.rounds[roundIndex][currentPlayer].fouls++;
       newState.rounds[roundIndex][currentPlayer].totalScore--;
+      break;
+
+    case updateGameSheet.clearGame:
+      newState.rounds = [{
+        ...newRoundSet,
+      }];
+      newState.players
+      if (payload) {
+        newState.players[0].name = state.players[1].name;
+        newState.players[1].name = state.players[0].name;
+      }
       break;
 
     default:

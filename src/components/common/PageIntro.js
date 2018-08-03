@@ -36,17 +36,13 @@ PageIntro.propTypes = {
 };
 
 const {colors, sizes} = SPS.variables;
-const {dimensions} = sizes;
-
 const styles = {
   viewStyle: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
     padding: sizes.gutter,
     position: 'relative',
   },
   headlineViewStyle: {
-    width: (dimensions.width - 2 * sizes.gutter),
     borderBottomWidth: 1,
     borderColor: colors.textColor,
     marginBottom: sizes.gutter,

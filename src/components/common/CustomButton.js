@@ -44,6 +44,7 @@ const styles = {
     marginTop: sizes.gutter,
     marginBottom: sizes.gutter,
     width: (sizes.dimensions.width - 2 * sizes.gutter),
+    maxWidth: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -53,9 +54,8 @@ const styles = {
     color: colors.textColor,
   },
   containerStyle: {
-    padding: sizes.gutter,
     flexDirection: 'column',
-    alignItems: 'stretch',
+    alignItems: 'center',
   },
 };
 

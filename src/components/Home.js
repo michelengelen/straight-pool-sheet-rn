@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {View} from 'react-native';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -25,15 +26,17 @@ class Home extends Component {
         scrollable={false}
         style={{alignItems: 'center', justifyContent: 'center'}}
       >
-        <PageIntro
-          headerText={'Straight Pool Sheet'}
-          alignHeadline={'center'}
-        />
-        <CustomButton
-          buttonText="New Game"
-          loading={false}
-          onPress={() => this.props.navigation.navigate('GameSettings')}
-        />
+        <View>
+          <PageIntro
+            headerText={'Straight Pool Sheet'}
+            alignHeadline={'center'}
+          />
+          <CustomButton
+            buttonText="New Game"
+            loading={false}
+            onPress={() => this.props.navigation.navigate('GameSettings')}
+          />
+        </View>
       </PageContainer>
     );
   }
@@ -42,16 +45,6 @@ class Home extends Component {
 Home.propTypes = {
   navigation: PropType.object,
 };
-
-/*
-const mapStateToProps = (state) => {
-  return {
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-});
-*/
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Home);
 export default connect(undefined, undefined)(Home);

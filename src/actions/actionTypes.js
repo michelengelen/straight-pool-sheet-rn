@@ -6,6 +6,7 @@ export const updateSettings = {
 
 export const updateGameSheet = {
   startGame: 'GAMESHEET_start_game',
+  clearGame: 'GAMESHEET_clear_game',
   incrementFouls: 'GAMESHEET_increment_fouls',
   incrementCurrentScore: 'GAMESHEET_increment_current_score',
   switchPlayer: 'GAMESHEET_switch_player',

@@ -32,6 +32,13 @@ const switchPlayer = () => {
   };
 };
 
+const clearGame = (restartingGame) => {
+  return {
+    type: updateGameSheet.clearGame,
+    payload: restartingGame,
+  };
+};
+
 export const updatePlayerScoreAction = (dispatch, payload) => {
   return dispatch(updatePlayerScore(payload));
 };
@@ -50,6 +57,10 @@ export const incrementFoulsAction = (dispatch) => {
 
 export const switchPlayerAction = (dispatch) => {
   return dispatch(switchPlayer());
+};
+
+export const clearGameAction = (dispatch, payload) => {
+  return dispatch(clearGame(payload));
 };
 
 

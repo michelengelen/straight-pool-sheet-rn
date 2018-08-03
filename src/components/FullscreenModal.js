@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropType from 'prop-types';
 import {View, Text} from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 import {
   CustomButton,
@@ -10,6 +11,7 @@ import {
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState} from '../reducers/GameSheetReducer';
 import SPS from 'Common/variables';
+import {gameSheetActions} from '../actions';
 
 /**
  * Gamesettings Component
@@ -17,6 +19,17 @@ import SPS from 'Common/variables';
  * which ultimately set the rules for the game to be played
  */
 class FullscreenModal extends Component {
+  constructor(props) {
+    super(props);
+
+    this.startNewGame = this.startNewGame.bind(this);
+  }
+
+  startNewGame(restart = false, destination = 'Home') {
+    this.props.clearGame(restart);
+    this.props.navigation.navigate(destination);
+  }
+
   /**
    * React render function
    * @return {*}
@@ -36,7 +49,7 @@ class FullscreenModal extends Component {
     } = styles;
 
     const {players} = gameSettings;
-    const {winner} = gameSheet;
+    const {winner} = gameSheet.gameState;
 
     return (
       <View style={wrapperViewStyle}>
@@ -59,12 +72,12 @@ class FullscreenModal extends Component {
             <CustomButton
               buttonText={'New Game'}
               loading={false}
-              onPress={() => this.props.navigation.navigate('GameSettings')}
+              onPress={() => this.startNewGame(true, 'GameSettings')}
             />
             <CustomButton
               buttonText={'Back to Home'}
               loading={false}
-              onPress={() => this.props.navigation.navigate('Home')}
+              onPress={this.startNewGame}
             />
           </View>
         </View>
@@ -76,21 +89,21 @@ class FullscreenModal extends Component {
 const {colors, sizes} = SPS.variables;
 const styles = {
   wrapperViewStyle: {
-    fley: 1,
+    flex: 1,
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    alignitems: 'stretch',
+    alignItems: 'stretch',
     justifyContent: 'space-around',
     backgroundColor: colors.backgroundColors.darkerGrey,
   },
   modalViewStyle: {
-    flex: 1,
-    maxWidth: '80%',
-    maxHeight: '40%',
+    maxWidth: sizes.dimensions.width * .8,
+    margin: sizes.dimensions.width * 0.1,
     padding: sizes.gutter,
+    backgroundColor: colors.backgroundColors.dark,
   },
   modalTextStyle: {
     fontSize: sizes.font_L,
@@ -101,9 +114,7 @@ const styles = {
     color: colors.textColor,
   },
   buttonContainerViewStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
     paddingTop: sizes.gutter / 2,
   },
 };
@@ -112,6 +123,7 @@ FullscreenModal.propTypes = {
   gameSettings: PropType.object,
   gameSheet: PropType.object,
   navigation: PropType.object,
+  clearGame: PropType.func,
 };
 
 const mapStateToProps = (state) => {
@@ -121,4 +133,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, undefined)(FullscreenModal);
+const mapDispatchToProps = (dispatch) => ({
+  clearGame: (restart) =>
+    gameSheetActions.clearGameAction(dispatch, restart),
+});
+
+export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(FullscreenModal));

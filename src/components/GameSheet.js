@@ -70,7 +70,6 @@ class GameSheet extends Component {
     const {players, rounds} = gameSheet;
     return (
       <PageContainer darkMode scrollable={false}>
-        {gameSheet.gameState.winner > -1 && <FullscreenModal/>}
         <PlayerOverview players={players} />
         <ScoreTable rounds={rounds} />
         <ScoreControls
@@ -78,6 +77,7 @@ class GameSheet extends Component {
           incrementCurrentScore={this.handleCurrentScoreIncrement}
           switchPlayer={this.handlePlayerSwitch}
         />
+        {gameSheet.gameState.winner > -1 && <FullscreenModal/>}
       </PageContainer>
     );
   }
