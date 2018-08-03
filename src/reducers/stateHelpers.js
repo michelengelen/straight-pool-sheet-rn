@@ -1,5 +1,5 @@
 /**
- * Helper Function to update Objects in an array.
+ * Helper Function to update objects inside an array.
  * Useful for reducers to maintain immutability of the state
  *
  * @param {array} array   Array to be mapped over
@@ -24,6 +24,27 @@ const updateObjectsInArray = (array, action) => {
   });
 };
 
+/**
+ * Helper Function to update an object inside an array.
+ * Useful for reducers to maintain immutability of the state
+ *
+ * @param {array} array     Array to be mapped over
+ * @param {object} action   Object to update
+ * @return {*}
+ */
+const updateObjectInArray = (array, action) => {
+  return array.map((item, index) => {
+    if (index !== action.index) {
+      return item;
+    }
+
+    return {
+      ...item,
+      ...action.item,
+    };
+  });
+};
+
 // GameSheetReducer specific
 const buildCurrentScoreText = (score, breaks) => {
   if (breaks.length < 1) return `${score}`;
@@ -35,4 +56,4 @@ const buildCurrentScoreText = (score, breaks) => {
   return currentScore + score;
 };
 
-export {updateObjectsInArray, buildCurrentScoreText};
+export {updateObjectsInArray, updateObjectInArray, buildCurrentScoreText};

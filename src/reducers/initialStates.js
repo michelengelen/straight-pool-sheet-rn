@@ -5,7 +5,6 @@ const roundTemplate = {
   totalScore: 0,
   currentScore: 0,
   remainingBalls: 15,
-  highestScore: false,
 };
 
 const INITIAL_STATE = {
@@ -45,7 +44,8 @@ const INITIAL_STATE = {
     ]],
     gameState: {
       currentRound: 1,
-      currentPlayer: 0,
+      currentRoundIndex: 0,
+      currentPlayerIndex: 0,
       remainingBalls: 15,
       winner: -1,
     },
