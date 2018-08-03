@@ -3,7 +3,9 @@ import {updateGameSheet} from 'Actions/actionTypes';
 import {
   buildCurrentScoreText,
   updateObjectsInArray,
-  updateObjectInArray
+  updateObjectInArray,
+  updateNestedArray,
+  insertItem,
 } from './stateHelpers';
 import {INITIAL_STATE, roundTemplate} from './initialStates';
 
@@ -20,6 +22,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
   } = state.gameState;
   const currentPlayer = state.players[currentPlayerIndex];
   const currentRoundSet = rounds[currentRoundIndex][currentPlayerIndex];
+  let winner = -1;
 
   // case: SwitchPlayer
   let newRoundSet = {
@@ -37,6 +40,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
       };
 
     case updateGameSheet.updatePlayerScore:
+      console.log('#### ROUNDS: ', rounds);
       let newTotalScore = 0;
       let newHighestScore = 0;
       let newHighestScoreIndex = 0;
@@ -74,73 +78,135 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
       };
 
     case updateGameSheet.incrementCurrentScore:
-      newState.rounds[currentRoundIndex][currentPlayerIndex].score++;
-      newState.rounds[currentRoundIndex][currentPlayerIndex].totalScore++;
-      newState.rounds[currentRoundIndex][currentPlayerIndex].remainingBalls--;
+      winner = -1;
+      let filledRoundSet = {
+        score: currentRoundSet.score + 1,
+        totalScore: currentRoundSet.totalScore + 1,
+        remainingBalls: currentRoundSet.remainingBalls - 1,
+        breaks: [...currentRoundSet.breaks],
+      };
 
-      if (newState.rounds[currentRoundIndex][currentPlayerIndex].remainingBalls < 2) {
-        newState.rounds[currentRoundIndex][currentPlayerIndex].breaks.push(
-          newState.rounds[currentRoundIndex][currentPlayerIndex].score < 14
-            ? newState.rounds[currentRoundIndex][currentPlayerIndex].score
+      if (filledRoundSet.remainingBalls < 2) {
+        filledRoundSet.breaks.push(
+          currentRoundSet.score <= 14
+            ? filledRoundSet.score
             : '*'
         );
-        newState.rounds[currentRoundIndex][currentPlayerIndex].score = 0;
-        newState.rounds[currentRoundIndex][currentPlayerIndex].remainingBalls = 15;
+        filledRoundSet.score = 0;
+        filledRoundSet.remainingBalls = 15;
       }
 
-      newState.rounds[currentRoundIndex][currentPlayerIndex].currentScore =
-        buildCurrentScoreText(
-          newState.rounds[currentRoundIndex][currentPlayerIndex].score,
-          newState.rounds[currentRoundIndex][currentPlayerIndex].breaks
-        );
+      filledRoundSet.currentScore = buildCurrentScoreText(
+        filledRoundSet.score,
+        filledRoundSet.breaks
+      );
 
-      if (newState.rounds[currentRoundIndex][currentPlayerIndex].totalScore
-          >= state.maxPoints) {
-        newState.gameState.winner = currentPlayerIndex;
+      if (filledRoundSet.totalScore >= state.maxPoints) {
+        winner = currentPlayerIndex;
       }
-      break;
+
+      const updateScoreObject = {
+        index: currentRoundIndex,
+        item: updateObjectInArray(
+          state.rounds[currentRoundIndex],
+          {
+            index: currentPlayerIndex,
+            item: filledRoundSet,
+          }
+        ),
+      };
+
+      return {
+        ...state,
+        rounds: updateNestedArray(rounds, updateScoreObject),
+        gameState: {
+          ...state.gameState,
+          winner: winner,
+        },
+      };
 
     case updateGameSheet.switchPlayer:
       if (currentPlayerIndex === 1 && currentRound === state.maxRounds) {
-        newState.gameState.winner =
+        winner =
           state.players[0].totalScore > state.players[1].totalScore ? 0 : 1;
-        break;
       }
 
+      const remainingBalls =
       newRoundSet.remainingBalls =
-      newState.gameState.remainingBalls =
         rounds[currentRoundIndex][currentPlayerIndex].remainingBalls;
 
       if (currentPlayerIndex === 0) {
-        newState.gameState.currentPlayerIndex++;
-        newState.rounds[currentRoundIndex].push(newRoundSet);
-      } else {
-        newState.gameState.currentPlayerIndex--;
-        newState.gameState.currentRound++;
-        newState.rounds.push([newRoundSet]);
+        const updateSwitchObject = {
+          index: currentRoundIndex,
+          item: insertItem(
+            rounds[currentRoundIndex],
+            {
+              index: currentPlayerIndex + 1,
+              item: newRoundSet,
+            }
+          ),
+        };
+
+        return {
+          ...state,
+          gameState: {
+            ...state.gameState,
+            currentPlayerIndex: 1,
+            remainingBalls: remainingBalls,
+          },
+          rounds: updateNestedArray(rounds, updateSwitchObject),
+        };
       }
-      break;
+
+      return {
+        ...state,
+        gameState: {
+          ...state.gameState,
+          currentPlayerIndex: 0,
+          currentRound: currentRound + 1,
+          currentRoundIndex: currentRoundIndex + 1,
+          remainingBalls: remainingBalls,
+          winner: winner,
+        },
+        rounds: insertItem(
+          rounds,
+          {
+            index: currentRoundIndex + 1,
+            item: [newRoundSet],
+          }
+        ),
+      };
 
     case updateGameSheet.incrementFouls:
-      newState.rounds[currentRoundIndex][currentPlayerIndex].fouls++;
-      newState.rounds[currentRoundIndex][currentPlayerIndex].totalScore--;
-      break;
+      const updateFoulsObject = {
+        index: currentRoundIndex,
+        item: updateObjectInArray(
+          state.rounds[currentRoundIndex],
+          {
+            index: currentPlayerIndex,
+            item: {
+              ...currentRoundSet,
+              fouls: currentRoundSet.fouls + 1,
+              totalScore: currentRoundSet.totalScore - 1,
+            },
+          }
+        ),
+      };
+
+      return {
+        ...state,
+        rounds: updateNestedArray(rounds, updateFoulsObject),
+      };
 
     case updateGameSheet.clearGame:
-      newState.rounds = [{
-        ...newRoundSet,
-      }];
-      if (payload) {
-        newState.players[0].name = state.players[1].name;
-        newState.players[1].name = state.players[0].name;
-      }
-      break;
+      return {
+        ...INITIAL_STATE.GameSheet,
+        players: payload ? state.players.reverse() : INITIAL_STATE.players,
+      };
 
     default:
       return state;
   }
-
-  return newState;
 };
 
 export const getGameState = (state) => ({
