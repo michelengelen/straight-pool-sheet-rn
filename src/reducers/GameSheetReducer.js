@@ -40,7 +40,6 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
       };
 
     case updateGameSheet.updatePlayerScore:
-      console.log('#### ROUNDS: ', rounds);
       let newTotalScore = 0;
       let newHighestScore = 0;
       let newHighestScoreIndex = 0;
@@ -61,6 +60,10 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
           (newTotalScore / currentRound) * 100) / 100
         ).toFixed(2);
 
+      if (newTotalScore >= state.maxPoints) {
+        winner = currentPlayerIndex;
+      }
+
       const playerObject = {
         index: currentPlayerIndex,
         item: {
@@ -75,6 +78,10 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
       return {
         ...state,
         players: updateObjectInArray(state.players, playerObject),
+        gameState: {
+          ...state.gameState,
+          winner: winner,
+        },
       };
 
     case updateGameSheet.incrementCurrentScore:
@@ -100,10 +107,6 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         filledRoundSet.score,
         filledRoundSet.breaks
       );
-
-      if (filledRoundSet.totalScore >= state.maxPoints) {
-        winner = currentPlayerIndex;
-      }
 
       const updateScoreObject = {
         index: currentRoundIndex,
@@ -201,7 +204,6 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
     case updateGameSheet.clearGame:
       return {
         ...INITIAL_STATE.GameSheet,
-        players: payload ? state.players.reverse() : INITIAL_STATE.players,
       };
 
     default:

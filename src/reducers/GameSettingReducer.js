@@ -1,25 +1,59 @@
 import {updateSettings} from 'Actions/actionTypes';
 import {INITIAL_STATE} from './initialStates';
+import {updateObjectInArray, updateObjectsInArray} from './stateHelpers';
 
 const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
   const {payload} = action;
-  let newState = {...state};
 
   switch (action.type) {
     case updateSettings.updatePlayer:
-      newState.players[payload.index].name = payload.name;
-      break;
+      return {
+        ...state,
+        players: updateObjectInArray(
+          state.players,
+          {
+            index: payload.index,
+            item: {
+              ...state.players[payload.index],
+              name: payload.name,
+            },
+          }
+        ),
+      };
+
     case updateSettings.updatePoints:
-      newState.maxPoints = payload;
-      break;
+      return {
+        ...state,
+        maxPoints: payload,
+      };
+
     case updateSettings.updateRounds:
-      newState.maxRounds = payload;
-      break;
+      return {
+        ...state,
+        maxRounds: payload,
+      };
+
+    case updateSettings.preFillPlayers:
+      return {
+        ...state,
+        players: updateObjectsInArray(
+          state.players,
+          [
+            {
+              ...state.players[0],
+              name: payload[1].name,
+            },
+            {
+              ...state.players[1],
+              name: payload[0].name,
+            },
+          ]
+        ),
+      };
+
     default:
       return state;
   }
-
-  return newState;
 };
 
 export const getSettings = (state) => ({

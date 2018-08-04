@@ -21,6 +21,13 @@ const updateRounds = (maxRounds) => {
   };
 };
 
+const preFillPlayers = (players) => {
+  return {
+    type: updateSettings.preFillPlayers,
+    payload: players,
+  };
+};
+
 export const updatePlayerAction = (dispatch, payload) => {
   return dispatch(updatePlayer(payload));
 };
@@ -31,4 +38,8 @@ export const updatePointsAction = (dispatch, payload) => {
 
 export const updateRoundsAction = (dispatch, payload) => {
   return dispatch(updateRounds(payload));
+};
+
+export const preFillPlayersAction = (dispatch, payload) => {
+  return dispatch(preFillPlayers(payload));
 };
