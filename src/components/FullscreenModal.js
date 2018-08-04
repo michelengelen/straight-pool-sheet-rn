@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropType from 'prop-types';
 import {View, Text} from 'react-native';
-import { withNavigation } from 'react-navigation';
+import {withNavigation} from 'react-navigation';
 
 import {
   CustomButton,
@@ -19,12 +19,22 @@ import {gameSheetActions, gameSettingActions} from '../actions';
  * which ultimately set the rules for the game to be played
  */
 class FullscreenModal extends Component {
+  /**
+   * Constructor function
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
 
     this.startNewGame = this.startNewGame.bind(this);
   }
 
+  /**
+   * accumulates all actions that are needed for starting a new game
+   *
+   * @param {boolean} restart
+   * @param {string}  destination
+   */
   startNewGame(restart = false, destination = 'Home') {
     this.props.preFillPlayers(this.props.gameSheet.players);
     this.props.clearGame(restart);
@@ -142,4 +152,6 @@ const mapDispatchToProps = (dispatch) => ({
     gameSheetActions.clearGameAction(dispatch, restart),
 });
 
-export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(FullscreenModal));
+export default withNavigation(
+  connect(mapStateToProps, mapDispatchToProps)(FullscreenModal)
+);

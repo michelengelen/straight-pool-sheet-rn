@@ -107,5 +107,5 @@ export {
   updateNestedArray,
   insertItem,
   removeItem,
-  buildCurrentScoreText
+  buildCurrentScoreText,
 };

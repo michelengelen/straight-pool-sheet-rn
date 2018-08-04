@@ -67,7 +67,6 @@ class GameSheet extends Component {
    */
   render() {
     const {gameSheet} = this.props;
-    console.log(this.props);
     const {players, rounds} = gameSheet;
     return (
       <PageContainer darkMode scrollable={false}>
