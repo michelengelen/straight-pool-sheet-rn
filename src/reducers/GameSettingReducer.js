@@ -1,6 +1,6 @@
 import {updateSettings} from 'Actions/actionTypes';
 import {INITIAL_STATE} from './initialStates';
-import {updateObjectInArray, updateObjectsInArray} from './stateHelpers';
+import {updateObjectInArray} from './stateHelpers';
 
 const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
   const {payload} = action;
@@ -36,19 +36,7 @@ const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
     case updateSettings.preFillPlayers:
       return {
         ...state,
-        players: updateObjectsInArray(
-          state.players,
-          [
-            {
-              ...state.players[0],
-              name: payload[1].name,
-            },
-            {
-              ...state.players[1],
-              name: payload[0].name,
-            },
-          ]
-        ),
+        players: state.players.reverse(),
       };
 
     default:
