@@ -26,6 +26,9 @@ class GameSheet extends Component {
     this.handleCurrentScoreIncrement = this.handleCurrentScoreIncrement.bind(
       this
     );
+    this.handleCompleteBook = this.handleCompleteBook.bind(
+      this
+    );
     this.handleFoulIncrement = this.handleFoulIncrement.bind(
       this
     );
@@ -40,6 +43,15 @@ class GameSheet extends Component {
   handleCurrentScoreIncrement() {
     const {updatePlayerScore, incrementCurrentScore} = this.props;
     incrementCurrentScore();
+    updatePlayerScore();
+  }
+
+  /**
+   * handle competeBook action with ScoreControls component
+   */
+  handleCompleteBook() {
+    const {updatePlayerScore, completeBook} = this.props;
+    completeBook();
     updatePlayerScore();
   }
 
@@ -75,6 +87,7 @@ class GameSheet extends Component {
         <ScoreControls
           incrementFouls={this.handleFoulIncrement}
           incrementCurrentScore={this.handleCurrentScoreIncrement}
+          completeBook={this.handleCompleteBook}
           switchPlayer={this.handlePlayerSwitch}
         />
         {gameSheet.gameState.winner > -1 && <FullscreenModal/>}
@@ -90,6 +103,7 @@ GameSheet.propTypes = {
   updatePlayerScore: PropType.func,
   incrementFouls: PropType.func,
   incrementCurrentScore: PropType.func,
+  completeBook: PropType.func,
 };
 
 const mapStateToProps = (state) => {
@@ -106,6 +120,8 @@ const mapDispatchToProps = (dispatch) => ({
     gameSheetActions.incrementFoulsAction(dispatch, undefined),
   incrementCurrentScore: () =>
     gameSheetActions.incrementCurrentScoreAction(dispatch, undefined),
+  completeBook: () =>
+    gameSheetActions.completeBookAction(dispatch),
   switchPlayer: () =>
     gameSheetActions.switchPlayerAction(dispatch, undefined),
 });

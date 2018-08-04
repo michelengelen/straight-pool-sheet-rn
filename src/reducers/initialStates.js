@@ -49,8 +49,8 @@ const INITIAL_STATE = {
       remainingBalls: 15,
       winner: -1,
     },
-    maxPoints: 10,
-    maxRounds: 5,
+    maxPoints: 100,
+    maxRounds: 25,
   },
 };
 

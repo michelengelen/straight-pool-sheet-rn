@@ -192,7 +192,8 @@ const styles = {
   },
   defaultCellTextStyle: {
     color: colors.textColor,
-    fontSize: sizes.font_S,
+    fontSize: sizes.font_M,
+    fontWeight: 'bold',
     textAlign: 'center',
   },
 };

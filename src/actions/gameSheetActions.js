@@ -20,6 +20,12 @@ const incrementCurrentScore = () => {
   };
 };
 
+const completeBook = () => {
+  return {
+    type: updateGameSheet.completeBook,
+  };
+};
+
 const incrementFouls = () => {
   return {
     type: updateGameSheet.incrementFouls,
@@ -49,6 +55,10 @@ export const startGameAction = (dispatch, payload) => {
 
 export const incrementCurrentScoreAction = (dispatch) => {
   return dispatch(incrementCurrentScore());
+};
+
+export const completeBookAction = (dispatch) => {
+  return dispatch(completeBook());
 };
 
 export const incrementFoulsAction = (dispatch) => {

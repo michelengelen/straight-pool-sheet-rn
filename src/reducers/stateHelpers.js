@@ -96,7 +96,7 @@ const buildCurrentScoreText = (score, breaks) => {
 
   let currentScore = '';
   for (let i = 0; i < breaks.length; i++) {
-    currentScore += breaks[i] + ' / ';
+    currentScore += breaks[i] + '/';
   }
   return currentScore + score;
 };

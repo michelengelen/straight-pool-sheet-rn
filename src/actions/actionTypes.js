@@ -10,6 +10,7 @@ export const updateGameSheet = {
   clearGame: 'GAMESHEET_clear_game',
   incrementFouls: 'GAMESHEET_increment_fouls',
   incrementCurrentScore: 'GAMESHEET_increment_current_score',
+  completeBook: 'GAMESHEET_complete_book',
   switchPlayer: 'GAMESHEET_switch_player',
   updatePlayerScore: 'GAMESHEET_update_player_score',
 };

@@ -34,8 +34,8 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
       return {
         ...state,
         players: updateObjectsInArray(state.players, payload.players),
-        // maxPoints: payload.maxPoints,
-        // maxRounds: payload.maxRounds,
+        maxPoints: payload.maxPoints,
+        maxRounds: payload.maxRounds,
       };
 
     case updateGameSheet.updatePlayerScore:
@@ -85,26 +85,61 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
 
     case updateGameSheet.incrementCurrentScore:
       winner = -1;
-      let filledRoundSet = {
+      let incrementScoreRoundSet = {
         score: currentRoundSet.score + 1,
         totalScore: currentRoundSet.totalScore + 1,
         remainingBalls: currentRoundSet.remainingBalls - 1,
         breaks: [...currentRoundSet.breaks],
       };
 
-      if (filledRoundSet.remainingBalls < 2) {
-        filledRoundSet.breaks.push(
+      if (incrementScoreRoundSet.remainingBalls < 2) {
+        incrementScoreRoundSet.breaks.push(
           currentRoundSet.score <= 14
-            ? filledRoundSet.score
+            ? incrementScoreRoundSet.score
             : '*'
         );
-        filledRoundSet.score = 0;
-        filledRoundSet.remainingBalls = 15;
+        incrementScoreRoundSet.score = 0;
+        incrementScoreRoundSet.remainingBalls = 15;
       }
 
-      filledRoundSet.currentScore = buildCurrentScoreText(
-        filledRoundSet.score,
-        filledRoundSet.breaks
+      incrementScoreRoundSet.currentScore = buildCurrentScoreText(
+        incrementScoreRoundSet.score,
+        incrementScoreRoundSet.breaks
+      );
+
+      const incrementScoreObject = {
+        index: currentRoundIndex,
+        item: updateObjectInArray(
+          state.rounds[currentRoundIndex],
+          {
+            index: currentPlayerIndex,
+            item: incrementScoreRoundSet,
+          }
+        ),
+      };
+
+      return {
+        ...state,
+        rounds: updateNestedArray(rounds, incrementScoreObject),
+        gameState: {
+          ...state.gameState,
+          winner: winner,
+        },
+      };
+
+    case updateGameSheet.completeBook:
+      winner = -1;
+      let completeBookRoundSet = {
+        score: 0,
+        totalScore:
+          currentRoundSet.totalScore + currentRoundSet.remainingBalls - 1,
+        remainingBalls: 15,
+        breaks: [...currentRoundSet.breaks, '*'],
+      };
+
+      completeBookRoundSet.currentScore = buildCurrentScoreText(
+        completeBookRoundSet.score,
+        completeBookRoundSet.breaks
       );
 
       const updateScoreObject = {
@@ -113,7 +148,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
           state.rounds[currentRoundIndex],
           {
             index: currentPlayerIndex,
-            item: filledRoundSet,
+            item: completeBookRoundSet,
           }
         ),
       };

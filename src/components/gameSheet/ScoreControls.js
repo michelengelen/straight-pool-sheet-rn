@@ -49,6 +49,16 @@ const ScoreControls = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={controlViewStyle}
+        onPress={props.completeBook}
+      >
+        <Text style={controlTextStyle}>
+          <FontAwesome>
+            {Icons.asterisk}
+          </FontAwesome>
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={controlViewStyle}
         onPress={props.incrementFouls}
       >
         <Text style={controlTextStyle}>
@@ -65,6 +75,7 @@ ScoreControls.propTypes = {
   switchPlayer: PropType.func.isRequired,
   incrementFouls: PropType.func.isRequired,
   incrementCurrentScore: PropType.func.isRequired,
+  completeBook: PropType.func.isRequired,
 };
 
 const {colors, sizes} = SPS.variables;
