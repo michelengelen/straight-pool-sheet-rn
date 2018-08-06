@@ -94,7 +94,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
 
       if (incrementScoreRoundSet.remainingBalls < 2) {
         incrementScoreRoundSet.breaks.push(
-          currentRoundSet.score <= 14
+          incrementScoreRoundSet.score <= 13
             ? incrementScoreRoundSet.score
             : '*'
         );
@@ -129,12 +129,16 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
 
     case updateGameSheet.completeBook:
       winner = -1;
+      const {remainingBalls, score, totalScore} = currentRoundSet;
+      const scoreAddition = remainingBalls + score -1;
+      const breakAddition =
+        scoreAddition === 14 ? '*' : scoreAddition;
+
       let completeBookRoundSet = {
         score: 0,
-        totalScore:
-          currentRoundSet.totalScore + currentRoundSet.remainingBalls - 1,
+        totalScore: totalScore + remainingBalls - 1,
         remainingBalls: 15,
-        breaks: [...currentRoundSet.breaks, '*'],
+        breaks: [...currentRoundSet.breaks, breakAddition],
       };
 
       completeBookRoundSet.currentScore = buildCurrentScoreText(
@@ -168,7 +172,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
           state.players[0].totalScore > state.players[1].totalScore ? 0 : 1;
       }
 
-      const remainingBalls =
+      const newRemainingBalls =
       newRoundSet.remainingBalls =
         rounds[currentRoundIndex][currentPlayerIndex].remainingBalls;
 
@@ -189,7 +193,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
           gameState: {
             ...state.gameState,
             currentPlayerIndex: 1,
-            remainingBalls: remainingBalls,
+            remainingBalls: newRemainingBalls,
           },
           rounds: updateNestedArray(rounds, updateSwitchObject),
         };

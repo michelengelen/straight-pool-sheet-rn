@@ -2,19 +2,17 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
 import SplashScreen from 'react-native-splash-screen';
 
 // project files
-import {rootReducer} from 'Reducers';
 import {CustomStatusBar} from 'Components/common';
 import GameSettings from 'Components/GameSettings';
 import GameSheet from 'Components/GameSheet';
 import Home from 'Components/Home';
 import SPS from 'Common/variables';
+import {store} from 'Store/configureStore';
 
-const store = createStore(rootReducer, composeWithDevTools());
+
 const RootStack = createStackNavigator(
   {
     Home: Home,
