@@ -21,7 +21,7 @@ class GameSheet extends Component {
    */
   render() {
     const {gameSheet} = this.props;
-    const {players, rounds} = gameSheet;
+    const {players, rounds} = gameSheet.present;
     return (
       <PageContainer darkMode scrollable={false}>
         <PlayerOverview players={players} />
@@ -31,8 +31,9 @@ class GameSheet extends Component {
           incrementScore={this.props.incrementScore}
           completeBook={this.props.completeBook}
           switchPlayer={this.props.switchPlayer}
+          undoScore={this.props.undoScore}
         />
-        {gameSheet.gameState.winner > -1 && <FullscreenModal/>}
+        {gameSheet.present.gameState.winner > -1 && <FullscreenModal/>}
       </PageContainer>
     );
   }
@@ -46,6 +47,7 @@ GameSheet.propTypes = {
   incrementFouls: PropType.func,
   incrementScore: PropType.func,
   completeBook: PropType.func,
+  undoScore: PropType.func,
 };
 
 const mapStateToProps = (state) => {
@@ -57,15 +59,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   updatePlayerScore: () =>
-    gameSheetActions.updatePlayerScoreAction(dispatch, undefined),
+    gameSheetActions.updatePlayerScoreAction(dispatch),
   incrementFouls: () =>
-    gameSheetActions.incrementFoulsAction(dispatch, undefined),
+    gameSheetActions.incrementFoulsAction(dispatch),
   incrementScore: () =>
-    gameSheetActions.incrementScoreAction(dispatch, undefined),
+    gameSheetActions.incrementScoreAction(dispatch),
   completeBook: () =>
     gameSheetActions.completeBookAction(dispatch),
   switchPlayer: () =>
-    gameSheetActions.switchPlayerAction(dispatch, undefined),
+    gameSheetActions.switchPlayerAction(dispatch),
+  undoScore: () =>
+    gameSheetActions.undoAction(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameSheet);

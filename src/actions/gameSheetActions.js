@@ -1,3 +1,4 @@
+import {ActionCreators} from 'redux-undo';
 import {updateGameSheet} from './actionTypes';
 
 const startGame = (gameSettings) => {
@@ -73,6 +74,13 @@ const switchPlayer = () => {
   };
 };
 
+const _HOAundoScore = () => {
+  return (dispatch) => {
+    dispatch(ActionCreators.undo());
+    dispatch(updatePlayerScore());
+  };
+};
+
 export const startGameAction = (dispatch, payload) => {
   return dispatch(startGame(payload));
 };
@@ -85,6 +93,7 @@ export const updatePlayerScoreAction = (dispatch, payload) => {
   return dispatch(updatePlayerScore(payload));
 };
 
+// Higher Order Action Creators
 export const incrementScoreAction = (dispatch) => {
   return dispatch(_HOAincrementScore());
 };
@@ -101,4 +110,6 @@ export const switchPlayerAction = (dispatch) => {
   return dispatch(_HOAswitchPlayer());
 };
 
-
+export const undoAction = (dispatch) => {
+  return dispatch(_HOAundoScore());
+};

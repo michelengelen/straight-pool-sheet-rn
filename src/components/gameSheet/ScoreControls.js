@@ -67,6 +67,16 @@ const ScoreControls = (props) => {
           </FontAwesome>
         </Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={controlViewStyle}
+        onPress={props.undoScore}
+      >
+        <Text style={controlTextStyle}>
+          <FontAwesome>
+            {Icons.arrowLeft}
+          </FontAwesome>
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -76,6 +86,7 @@ ScoreControls.propTypes = {
   incrementFouls: PropType.func.isRequired,
   incrementScore: PropType.func.isRequired,
   completeBook: PropType.func.isRequired,
+  undoScore: PropType.func.isRequired,
 };
 
 const {colors, sizes} = SPS.variables;

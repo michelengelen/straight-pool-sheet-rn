@@ -35,6 +35,7 @@ module.exports = {
     ],
     "no-case-declarations": [
       "off"
-    ]
+    ],
+    "max-len": ["error", { "code": 120, "ignoreUrls": true }]
   }
 };
