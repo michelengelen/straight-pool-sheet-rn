@@ -29,7 +29,7 @@ const ScoreControls = (props) => {
     <View style={wrapperStyle}>
       <TouchableOpacity
         style={controlViewStyle}
-        onPress={props.incrementCurrentScore}
+        onPress={props.incrementScore}
       >
         <Text style={controlTextStyle}>
           <FontAwesome>
@@ -74,7 +74,7 @@ const ScoreControls = (props) => {
 ScoreControls.propTypes = {
   switchPlayer: PropType.func.isRequired,
   incrementFouls: PropType.func.isRequired,
-  incrementCurrentScore: PropType.func.isRequired,
+  incrementScore: PropType.func.isRequired,
   completeBook: PropType.func.isRequired,
 };
 

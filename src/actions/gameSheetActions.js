@@ -7,6 +7,13 @@ const startGame = (gameSettings) => {
   };
 };
 
+const clearGame = (restartingGame) => {
+  return {
+    type: updateGameSheet.clearGame,
+    payload: restartingGame,
+  };
+};
+
 const updatePlayerScore = (playerData) => {
   return {
     type: updateGameSheet.updatePlayerScore,
@@ -14,9 +21,23 @@ const updatePlayerScore = (playerData) => {
   };
 };
 
-const incrementCurrentScore = () => {
+const _HOAincrementScore = () => {
+  return (dispatch) => {
+    dispatch(incrementScore());
+    dispatch(updatePlayerScore());
+  };
+};
+
+const incrementScore = () => {
   return {
     type: updateGameSheet.incrementCurrentScore,
+  };
+};
+
+const _HOAcompleteBook = () => {
+  return (dispatch) => {
+    dispatch(completeBook());
+    dispatch(updatePlayerScore());
   };
 };
 
@@ -26,9 +47,23 @@ const completeBook = () => {
   };
 };
 
+const _HOAincrementFouls = () => {
+  return (dispatch) => {
+    dispatch(incrementFouls());
+    dispatch(updatePlayerScore());
+  };
+};
+
 const incrementFouls = () => {
   return {
     type: updateGameSheet.incrementFouls,
+  };
+};
+
+const _HOAswitchPlayer = () => {
+  return (dispatch) => {
+    dispatch(switchPlayer());
+    dispatch(updatePlayerScore());
   };
 };
 
@@ -38,39 +73,32 @@ const switchPlayer = () => {
   };
 };
 
-const clearGame = (restartingGame) => {
-  return {
-    type: updateGameSheet.clearGame,
-    payload: restartingGame,
-  };
+export const startGameAction = (dispatch, payload) => {
+  return dispatch(startGame(payload));
+};
+
+export const clearGameAction = (dispatch, payload) => {
+  return dispatch(clearGame(payload));
 };
 
 export const updatePlayerScoreAction = (dispatch, payload) => {
   return dispatch(updatePlayerScore(payload));
 };
 
-export const startGameAction = (dispatch, payload) => {
-  return dispatch(startGame(payload));
-};
-
-export const incrementCurrentScoreAction = (dispatch) => {
-  return dispatch(incrementCurrentScore());
+export const incrementScoreAction = (dispatch) => {
+  return dispatch(_HOAincrementScore());
 };
 
 export const completeBookAction = (dispatch) => {
-  return dispatch(completeBook());
+  return dispatch(_HOAcompleteBook());
 };
 
 export const incrementFoulsAction = (dispatch) => {
-  return dispatch(incrementFouls());
+  return dispatch(_HOAincrementFouls());
 };
 
 export const switchPlayerAction = (dispatch) => {
-  return dispatch(switchPlayer());
-};
-
-export const clearGameAction = (dispatch, payload) => {
-  return dispatch(clearGame(payload));
+  return dispatch(_HOAswitchPlayer());
 };
 
 
