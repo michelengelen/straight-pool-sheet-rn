@@ -40,7 +40,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
 
     case updateGameSheet.updatePlayerScore:
       let newTotalScore = 0;
-      let newHighestScore = 0;
+      let newHighestScore = currentPlayer.highestScore;
       let newHighestScoreIndex = 0;
       // calculate the new totalsScore for the player
 
@@ -50,6 +50,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
 
       // check if the current score is higher than the past highestScore
       if (currentRoundSet.totalScore > currentPlayer.highestScore) {
+        newHighestScore = currentRoundSet.totalScore;
         newHighestScoreIndex = currentRoundIndex;
       }
 
