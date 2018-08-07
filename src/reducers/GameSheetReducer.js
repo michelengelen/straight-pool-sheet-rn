@@ -11,8 +11,6 @@ import {INITIAL_STATE, roundTemplate} from './initialStates';
 
 const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
   const {payload} = action;
-  console.log(state);
-  console.log(action);
 
   // Define values that get used later on
   const {rounds} = state;

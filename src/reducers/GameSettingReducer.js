@@ -4,7 +4,6 @@ import {updateObjectInArray} from './stateHelpers';
 
 const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
   const {payload} = action;
-  console.log('##### GameSettings Reducer: ', action);
 
   switch (action.type) {
     case updateSettings.updatePlayer:
