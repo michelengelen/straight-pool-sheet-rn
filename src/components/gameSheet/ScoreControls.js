@@ -13,11 +13,11 @@ import SPS from 'Common/variables';
  * @constructor
  */
 const ScoreControl = (props) => {
-  const {handleOnPress, controlIcon} = props;
+  const {handleOnPress, controlIcon, disabled} = props;
   const {controlViewStyle, controlTextStyle} = styles.Control;
 
   return (
-    <TouchableOpacity style={controlViewStyle} onPress={handleOnPress}>
+    <TouchableOpacity style={controlViewStyle} onPress={handleOnPress} disabled={disabled}>
       <Text style={controlTextStyle}>
         <FontAwesome>{Icons[controlIcon]}</FontAwesome>
       </Text>
@@ -28,6 +28,7 @@ const ScoreControl = (props) => {
 ScoreControl.propTypes = {
   handleOnPress: PropType.func.isRequired,
   controlIcon: PropType.string.isRequired,
+  disabled: PropType.bool,
 };
 
 /**
