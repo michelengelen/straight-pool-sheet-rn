@@ -6,77 +6,57 @@ import FontAwesome, {Icons} from 'react-native-fontawesome';
 import SPS from 'Common/variables';
 
 /**
- * Main Component for the rendering of the ScoreTable
+ * Sub-component rendering a single ScoreControl
  *
- * Components that are needed to render correctly:
- * - ScoreTableRow
- * - ScoreTableRowSet
+ * @param {object} props
+ * @return {*}
+ * @constructor
+ */
+const ScoreControl = (props) => {
+  const {handleOnPress, controlIcon} = props;
+  const {controlViewStyle, controlTextStyle} = styles.Control;
+
+  return (
+    <TouchableOpacity style={controlViewStyle} onPress={handleOnPress}>
+      <Text style={controlTextStyle}>
+        <FontAwesome>{Icons[controlIcon]}</FontAwesome>
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
+ScoreControl.propTypes = {
+  handleOnPress: PropType.func.isRequired,
+  controlIcon: PropType.string.isRequired,
+};
+
+/**
+ * Main-component for the rendering of the ScoreControls
+ *
+ * sub-components:
+ * - ScoreControl
  *
  * @param {object} props
  * @return {*}
  * @constructor
  */
 const ScoreControls = (props) => {
+  const {wrapperStyle} = styles.ScoreControls;
   const {
-    wrapperStyle,
-  } = styles.ScoreControls;
-  const {
-    controlViewStyle,
-    controlTextStyle,
-  } = styles.Control;
+    incrementScore,
+    switchPlayer,
+    completeBook,
+    incrementFouls,
+    undoScore,
+  } = props;
 
   return (
     <View style={wrapperStyle}>
-      <TouchableOpacity
-        style={controlViewStyle}
-        onPress={props.incrementScore}
-      >
-        <Text style={controlTextStyle}>
-          <FontAwesome>
-            {Icons.minusCircle}
-          </FontAwesome>
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={controlViewStyle}
-        onPress={props.switchPlayer}
-      >
-        <Text style={controlTextStyle}>
-          <FontAwesome>
-            {Icons.refresh}
-          </FontAwesome>
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={controlViewStyle}
-        onPress={props.completeBook}
-      >
-        <Text style={controlTextStyle}>
-          <FontAwesome>
-            {Icons.asterisk}
-          </FontAwesome>
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={controlViewStyle}
-        onPress={props.incrementFouls}
-      >
-        <Text style={controlTextStyle}>
-          <FontAwesome>
-            {Icons.timesCircle}
-          </FontAwesome>
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={controlViewStyle}
-        onPress={props.undoScore}
-      >
-        <Text style={controlTextStyle}>
-          <FontAwesome>
-            {Icons.arrowLeft}
-          </FontAwesome>
-        </Text>
-      </TouchableOpacity>
+      <ScoreControl controlIcon={'minusCircle'} handleOnPress={incrementScore} />
+      <ScoreControl controlIcon={'refresh'} handleOnPress={switchPlayer} />
+      <ScoreControl controlIcon={'asterisk'} handleOnPress={completeBook} />
+      <ScoreControl controlIcon={'timesCircle'} handleOnPress={incrementFouls} />
+      <ScoreControl controlIcon={'arrowLeft'} handleOnPress={undoScore} />
     </View>
   );
 };
