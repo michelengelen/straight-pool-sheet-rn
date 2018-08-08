@@ -27,14 +27,14 @@ const INITIAL_STATE = {
         totalScore: 0,
         highestScore: 0,
         highestScoreIndex: -1,
-        averageScore: 0,
+        averageScore: parseFloat(0).toFixed(2),
       },
       {
         name: '',
         totalScore: 0,
         highestScore: 0,
         highestScoreIndex: -1,
-        averageScore: 0.00,
+        averageScore: parseFloat(0).toFixed(2),
       },
     ],
     rounds: [[
