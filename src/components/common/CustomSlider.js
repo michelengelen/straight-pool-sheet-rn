@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropType from 'prop-types';
 import {Slider, View, Text} from 'react-native';
 
-// Constant import
 import SPS from 'Common/variables';
 
 /**

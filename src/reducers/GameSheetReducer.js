@@ -251,7 +251,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
 };
 
 export const getGameState = (state) => ({
-  gameSheet: state.gameSheet,
+  gameSheet: state.gameSheet.present,
 });
 
 export default GameSheetReducer;

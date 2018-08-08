@@ -21,7 +21,7 @@ class GameSheet extends Component {
    */
   render() {
     const {gameSheet} = this.props;
-    const {players, rounds} = gameSheet.present;
+    const {players, rounds} = gameSheet;
     return (
       <PageContainer darkMode scrollable={false}>
         <PlayerOverview players={players} />
@@ -33,7 +33,7 @@ class GameSheet extends Component {
           switchPlayer={this.props.switchPlayer}
           undoScore={this.props.undoScore}
         />
-        {gameSheet.present.gameState.winner > -1 && <FullscreenModal/>}
+        {gameSheet.gameState.winner > -1 && <FullscreenModal/>}
       </PageContainer>
     );
   }
