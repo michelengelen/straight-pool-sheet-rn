@@ -254,4 +254,8 @@ export const getGameState = (state) => ({
   gameSheet: state.gameSheet.present,
 });
 
+export const undoableFromState = (state) => ({
+  scoresUndoable: state.gameSheet.past.length > 0,
+});
+
 export default GameSheetReducer;

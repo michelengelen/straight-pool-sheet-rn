@@ -49,15 +49,16 @@ const ScoreControls = (props) => {
     completeBook,
     incrementFouls,
     undoScore,
+    disabled = false,
   } = props;
 
   return (
     <View style={wrapperStyle}>
-      <ScoreControl controlIcon={'minusCircle'} handleOnPress={incrementScore} />
-      <ScoreControl controlIcon={'refresh'} handleOnPress={switchPlayer} />
-      <ScoreControl controlIcon={'asterisk'} handleOnPress={completeBook} />
-      <ScoreControl controlIcon={'timesCircle'} handleOnPress={incrementFouls} />
-      <ScoreControl controlIcon={'arrowLeft'} handleOnPress={undoScore} />
+      <ScoreControl disabled={disabled} controlIcon={'minusCircle'} handleOnPress={incrementScore} />
+      <ScoreControl disabled={disabled} controlIcon={'refresh'} handleOnPress={switchPlayer} />
+      <ScoreControl disabled={disabled} controlIcon={'asterisk'} handleOnPress={completeBook} />
+      <ScoreControl disabled={disabled} controlIcon={'timesCircle'} handleOnPress={incrementFouls} />
+      <ScoreControl disabled={disabled} controlIcon={'arrowLeft'} handleOnPress={undoScore} />
     </View>
   );
 };
@@ -68,6 +69,7 @@ ScoreControls.propTypes = {
   incrementScore: PropType.func.isRequired,
   completeBook: PropType.func.isRequired,
   undoScore: PropType.func.isRequired,
+  disabled: PropType.bool,
 };
 
 const {colors, sizes} = SPS.variables;

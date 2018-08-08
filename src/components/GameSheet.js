@@ -6,7 +6,7 @@ import {PageContainer} from 'Components/common';
 import {gameSheetActions} from 'Actions';
 import {PlayerOverview, ScoreControls, ScoreTable} from './gameSheet';
 import {getSettings} from 'Reducers/GameSettingReducer';
-import {getGameState} from 'Reducers/GameSheetReducer';
+import {getGameState, undoableFromState} from 'Reducers/GameSheetReducer';
 import FullscreenModal from './FullscreenModal';
 
 /**
@@ -20,9 +20,10 @@ class GameSheet extends Component {
    * @return {*}
    */
   render() {
-    const {gameSheet} = this.props;
+    const {gameSheet, scoresUndoable} = this.props;
     const {players, rounds} = gameSheet;
     const gameOver = gameSheet.gameState.winner > -1;
+
     return (
       <PageContainer darkMode scrollable={false}>
         <PlayerOverview players={players} />
@@ -34,6 +35,7 @@ class GameSheet extends Component {
           switchPlayer={this.props.switchPlayer}
           undoScore={this.props.undoScore}
           disabled={gameOver}
+          undoable={scoresUndoable}
         />
         {gameOver && <FullscreenModal/>}
       </PageContainer>
@@ -50,12 +52,14 @@ GameSheet.propTypes = {
   incrementScore: PropType.func,
   completeBook: PropType.func,
   undoScore: PropType.func,
+  scoresUndoable: PropType.bool,
 };
 
 const mapStateToProps = (state) => {
   return {
     ...getSettings(state),
     ...getGameState(state),
+    ...undoableFromState(state),
   };
 };
 
