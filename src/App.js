@@ -41,7 +41,7 @@ export default class App extends Component {
    * React lifecycle hook: componentDidMount
    */
   componentDidMount() {
-    SplashScreen.hide();
+    //SplashScreen.hide();
   }
 
   /**
