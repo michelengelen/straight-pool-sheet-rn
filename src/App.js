@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import {Provider} from 'react-redux';
-import SplashScreen from 'react-native-splash-screen';
+// import SplashScreen from 'react-native-splash-screen';
 
 // project files
 import {CustomStatusBar} from 'Components/common';
@@ -41,7 +41,7 @@ export default class App extends Component {
    * React lifecycle hook: componentDidMount
    */
   componentDidMount() {
-    //SplashScreen.hide();
+    // SplashScreen.hide();
   }
 
   /**

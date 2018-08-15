@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import PropType from 'prop-types';
 import Image from 'react-native-remote-svg';
 
@@ -20,7 +20,7 @@ const ScoreControl = (props) => {
 
   return (
     <TouchableOpacity style={controlViewStyle} onPress={handleOnPress} disabled={disabled}>
-      <Image source={Icons[controlIcon]} style={{width: 45, height: 45 }}/>
+      <Image source={Icons[controlIcon]} style={{width: 45, height: 45}}/>
     </TouchableOpacity>
   );
 };

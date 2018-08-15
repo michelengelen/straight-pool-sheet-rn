@@ -7,7 +7,6 @@ import Image from 'react-native-remote-svg';
 import {
   PageContainer,
   CustomButton,
-  PageIntro,
 } from 'Components/common';
 
 import Images from 'Assets/images';
