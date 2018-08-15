@@ -1,8 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import PropType from 'prop-types';
-import FontAwesome, {Icons} from 'react-native-fontawesome';
 import SPS from 'Common/variables';
+import Image from 'react-native-remote-svg';
+
+import Images from 'Assets/images';
 
 /**
  * Renders the calculated score for a player
@@ -26,11 +28,7 @@ const CalculatedScore = (props) => {
   return (
     <View style={calculatedScoreWrapper}>
       <View style={iconViewStyle}>
-        <Text style={calculatedScoreTextStyle}>
-          <FontAwesome>
-            {Icons[iconType]}
-          </FontAwesome>
-        </Text>
+        <Image source={Images.Icons[iconType]} style={{maxWidth: '100%'}}/>
       </View>
       <View style={calculatedScoreViewStyle}>
         <Text style={calculatedScoreTextStyle}>
@@ -89,8 +87,8 @@ const SinglePlayer = (props) => {
         <Text style={currentScoreTextStyle}>{totalScore}</Text>
       </View>
       <View style={subContainerStyle}>
-        <CalculatedScore calculatedScore={averageScore} iconType={'ban'}/>
-        <CalculatedScore calculatedScore={highestScore} iconType={'lineChart'}/>
+        <CalculatedScore calculatedScore={averageScore} iconType={'average'}/>
+        <CalculatedScore calculatedScore={highestScore} iconType={'maximum'}/>
       </View>
     </View>
   );
@@ -158,7 +156,7 @@ const styles = {
       borderBottomWidth: 1,
       borderColor: colors.borderColors.darker,
       backgroundColor: colors.backgroundColors.dark,
-      shadowColor: '#000',
+      shadowColor: colors.shadow,
       shadowOffset: {width: 0, height: 3},
       shadowOpacity: 0.3,
       elevation: 2,

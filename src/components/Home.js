@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
+import Image from 'react-native-remote-svg';
 
 import {
   PageContainer,
   CustomButton,
   PageIntro,
 } from 'Components/common';
+
+import Images from 'Assets/images';
 
 /**
  * Gamesettings Component
@@ -27,10 +30,7 @@ class Home extends Component {
         style={{alignItems: 'center', justifyContent: 'center'}}
       >
         <View>
-          <PageIntro
-            headerText={'Straight Pool Sheet'}
-            alignHeadline={'center'}
-          />
+          <Image source={Images.logo} style={{width: 300, height: 200}} />
           <CustomButton
             buttonText="New Game"
             loading={false}

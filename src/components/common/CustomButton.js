@@ -14,13 +14,16 @@ const CustomButton = (props) => {
 
   // Decrease opacity when the button is disabled to make a change more visible
   buttonStyle.opacity = props.disabled ? 0.5 : 1;
+  buttonStyle.borderColor = props.disabled
+    ? colors.textColorDim
+    : colors.backgroundColors.blue;
 
   return (
     <View style={containerStyle}>
       <TouchableOpacity style={buttonStyle} {...other}>
         {loading
           ? <LoadingIndicator size={'medium'} />
-          : <Text style={textStyle}>{buttonText}</Text>
+          : <Text style={textStyle}>{buttonText.toUpperCase()}</Text>
         }
       </TouchableOpacity>
     </View>
@@ -38,19 +41,20 @@ const {colors, sizes} = SPS.variables;
 const styles = {
   buttonStyle: {
     // backgroundColor: colors.backgroundColors.dimm,
-    borderColor: colors.textColor,
-    borderWidth: 2,
+    borderColor: colors.textColorDim,
+    borderWidth: 1,
     padding: (sizes.gutter / 2),
     marginTop: sizes.gutter,
     marginBottom: sizes.gutter,
     width: (sizes.dimensions.width - 2 * sizes.gutter),
-    maxWidth: '100%',
+    maxWidth: '80%',
+    maxHeight: 60,
+    borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
   },
   textStyle: {
-    fontSize: sizes.font_XL,
-    fontWeight: 'bold',
+    fontSize: sizes.font_L,
     color: colors.textColor,
   },
   containerStyle: {

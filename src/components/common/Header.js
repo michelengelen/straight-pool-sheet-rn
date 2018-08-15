@@ -10,7 +10,7 @@ const Header = (props) => {
 
   return (
     <View style={viewStyle}>
-      <Text style={textStyle}>{props.headerText}</Text>
+      <Text style={textStyle}>{props.headerText.toUpperCase()}</Text>
     </View>
   );
 };
@@ -22,18 +22,21 @@ Header.propTypes = {
 const {colors, sizes} = SPS.variables;
 const styles = {
   viewStyle: {
+    backgroundColor: colors.backgroundColors.darkest,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 60,
-    shadowColor: '#000',
+    height: 40,
+    shadowColor: colors.shadow,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.2,
     elevation: 2,
     position: 'relative',
+    borderBottomWidth: 4,
+    borderBottomColor: colors.backgroundColors.blue,
   },
   textStyle: {
     color: colors.textColor,
-    fontSize: sizes.font_XL,
+    fontSize: sizes.font_L,
   },
 };
 

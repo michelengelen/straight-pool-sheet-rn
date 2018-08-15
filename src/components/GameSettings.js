@@ -6,8 +6,8 @@ import {
   CustomInput,
   CustomSlider,
   CustomButton,
+  Header,
   PageContainer,
-  PageIntro,
 } from 'Components/common';
 import {
   gameSettingActions,
@@ -50,13 +50,7 @@ class GameSettings extends Component {
 
     return (
       <PageContainer darkMode scrollable>
-        <PageIntro
-          headerText={'Create new 14/1 game'}
-          introText={
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, ' +
-            'sed diam nonumy eirmod tempor invidunt ut labore et dolore ' +
-            'magna aliquyam erat, sed diam voluptua. At vero eos et '}
-        />
+        <Header headerText={'New Game'}/>
         {inputIds.map((id, index) => {
           const name = players[index] ? players[index].name : '';
           return (

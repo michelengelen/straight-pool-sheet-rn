@@ -29,7 +29,7 @@ const ScoreTableRowSet = (props) => {
 
   let foulCellStyle = {...defaultCellViewStyle};
   if (scoreSet && scoreSet.fouls > 0) {
-    foulCellStyle.backgroundColor = colors.backgroundColors.darkRed;
+    foulCellStyle.backgroundColor = colors.backgroundColors.red;
   }
 
   let parsedScoreSet = {};

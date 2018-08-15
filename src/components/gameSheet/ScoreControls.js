@@ -1,9 +1,10 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import PropType from 'prop-types';
-import FontAwesome, {Icons} from 'react-native-fontawesome';
+import Image from 'react-native-remote-svg';
 
 import SPS from 'Common/variables';
+import Images from 'Assets/images';
 
 /**
  * Sub-component rendering a single ScoreControl
@@ -14,13 +15,12 @@ import SPS from 'Common/variables';
  */
 const ScoreControl = (props) => {
   const {handleOnPress, controlIcon, disabled} = props;
-  const {controlViewStyle, controlTextStyle} = styles.Control;
+  const {controlViewStyle} = styles.Control;
+  const {Icons} = Images;
 
   return (
     <TouchableOpacity style={controlViewStyle} onPress={handleOnPress} disabled={disabled}>
-      <Text style={controlTextStyle}>
-        <FontAwesome>{Icons[controlIcon]}</FontAwesome>
-      </Text>
+      <Image source={Icons[controlIcon]} style={{width: 45, height: 45 }}/>
     </TouchableOpacity>
   );
 };
@@ -54,11 +54,11 @@ const ScoreControls = (props) => {
 
   return (
     <View style={wrapperStyle}>
-      <ScoreControl disabled={disabled} controlIcon={'minusCircle'} handleOnPress={incrementScore} />
-      <ScoreControl disabled={disabled} controlIcon={'refresh'} handleOnPress={switchPlayer} />
-      <ScoreControl disabled={disabled} controlIcon={'asterisk'} handleOnPress={completeBook} />
-      <ScoreControl disabled={disabled} controlIcon={'timesCircle'} handleOnPress={incrementFouls} />
-      <ScoreControl disabled={disabled} controlIcon={'arrowLeft'} handleOnPress={undoScore} />
+      <ScoreControl disabled={disabled} controlIcon={'minus'} handleOnPress={incrementScore} />
+      <ScoreControl disabled={disabled} controlIcon={'book'} handleOnPress={completeBook} />
+      <ScoreControl disabled={disabled} controlIcon={'foul'} handleOnPress={incrementFouls} />
+      <ScoreControl disabled={disabled} controlIcon={'player'} handleOnPress={switchPlayer} />
+      <ScoreControl disabled={disabled} controlIcon={'undo'} handleOnPress={undoScore} />
     </View>
   );
 };
