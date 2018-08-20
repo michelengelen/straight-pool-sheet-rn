@@ -19,7 +19,7 @@ class CustomSlider extends Component {
 
     // Set the state directly. Use props if necessary.
     this.state = {
-      value: this.props.value,
+      currentValue: this.props.value,
     };
   }
 
@@ -39,33 +39,30 @@ class CustomSlider extends Component {
       inputStyle,
       labelStyle,
       containerStyle,
+      sliderContainerStyle,
       valueSelectedStyle,
-      valueRangeStyle,
       valueContainer,
     } = styles;
+    const {currentValue} = this.state;
 
     return (
       <View style={containerStyle}>
         {label && <Text style={labelStyle}>{label}</Text>}
-        <Slider
-          minimumValue={minimumValue}
-          maximumValue={maximumValue}
-          style={inputStyle}
-          value={value}
-          step={5}
-          onSlidingComplete={onSlidingComplete}
-          onValueChange={(value) => this.setState({value})}
-        />
-        <View style={valueContainer}>
-          <Text style={valueRangeStyle}>
-            {minimumValue}
-          </Text>
-          <Text style={valueSelectedStyle}>
-            {this.state.value}
-          </Text>
-          <Text style={valueRangeStyle}>
-            {maximumValue}
-          </Text>
+        <View style={sliderContainerStyle}>
+          <Slider
+            minimumValue={minimumValue}
+            maximumValue={maximumValue}
+            style={inputStyle}
+            value={value}
+            step={5}
+            onSlidingComplete={onSlidingComplete}
+            onValueChange={(value) => this.setState({currentValue: value})}
+          />
+          <View style={valueContainer}>
+            <Text style={valueSelectedStyle}>
+              {currentValue}
+            </Text>
+          </View>
         </View>
       </View>
     );
@@ -81,7 +78,6 @@ CustomSlider.propTypes = {
 };
 
 const {colors, sizes} = SPS.variables;
-const {dimensions} = sizes;
 const styles = {
   containerStyle: {
     padding: sizes.gutter,
@@ -93,18 +89,17 @@ const styles = {
     fontSize: sizes.font_L,
     padding: (sizes.gutter / 4),
   },
+  sliderContainerStyle: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   inputStyle: {
-    width: (dimensions.width - 2 * sizes.gutter),
+    flex: 6,
   },
   valueContainer: {
-    width: (dimensions.width - 2 * sizes.gutter),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  valueRangeStyle: {
-    fontSize: sizes.font_S,
-    color: colors.textColorDim,
-    padding: (sizes.gutter / 4),
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   valueSelectedStyle: {
     color: colors.textColor,
