@@ -7,3 +7,4 @@ export * from './CustomStatusBar';
 export * from './Header';
 export * from './PageContainer';
 export * from './PageIntro';
+export * from './InputContainer';

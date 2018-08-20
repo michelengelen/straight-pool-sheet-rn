@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {TextInput, View, Text} from 'react-native';
+import {TextInput} from 'react-native';
+
+import {InputContainer} from './InputContainer';
 
 // Constant import
 import SPS from 'Common/variables';
@@ -12,11 +14,10 @@ const CustomInput = ({
   placeholder,
   secureTextEntry,
 }) => {
-  const {inputStyle, labelStyle, containerStyle} = styles;
+  const {inputStyle} = styles;
 
   return (
-    <View style={containerStyle}>
-      {label && <Text style={labelStyle}>{label}</Text>}
+    <InputContainer headline={label}>
       <TextInput
         secureTextEntry={secureTextEntry}
         // placeholder={placeholder}
@@ -26,7 +27,7 @@ const CustomInput = ({
         onChangeText={onChangeText}
         placeholderTextColor={colors.textColorDim}
       />
-    </View>
+    </InputContainer>
   );
 };
 
@@ -41,7 +42,7 @@ CustomInput.propTypes = {
 const {colors, sizes} = SPS.variables;
 const styles = {
   inputStyle: {
-    backgroundColor: colors.backgroundColors.dimm,
+    backgroundColor: colors.backgroundColors.dim,
     borderColor: colors.textColorDim,
     borderBottomWidth: 2,
     color: colors.textColor,
@@ -53,11 +54,6 @@ const styles = {
     color: colors.textColor,
     fontSize: sizes.font_L,
     padding: (sizes.gutter / 4),
-  },
-  containerStyle: {
-    padding: sizes.gutter,
-    flexDirection: 'column',
-    alignItems: 'stretch',
   },
 };
 

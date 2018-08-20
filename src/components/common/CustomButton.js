@@ -40,7 +40,7 @@ CustomButton.propTypes = {
 const {colors, sizes} = SPS.variables;
 const styles = {
   buttonStyle: {
-    // backgroundColor: colors.backgroundColors.dimm,
+    // backgroundColor: colors.backgroundColors.dim,
     borderColor: colors.textColorDim,
     borderWidth: 1,
     padding: (sizes.gutter / 2),

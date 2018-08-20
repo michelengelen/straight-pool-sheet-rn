@@ -25,7 +25,8 @@ const styles = {
     backgroundColor: colors.backgroundColors.darkest,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 40,
+    paddingTop: sizes.gutter / 1.5,
+    paddingBottom: sizes.gutter / 1.5,
     shadowColor: colors.shadow,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.2,
@@ -33,6 +34,7 @@ const styles = {
     position: 'relative',
     borderBottomWidth: 4,
     borderBottomColor: colors.backgroundColors.blue,
+    marginBottom: 10,
   },
   textStyle: {
     color: colors.textColor,

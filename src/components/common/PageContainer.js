@@ -58,7 +58,7 @@ const {colors} = SPS.variables;
 const styles = {
   viewStyle: {
     flex: 1,
-    backgroundColor: colors.backgroundColors.darker,
+    backgroundColor: colors.backgroundColors.darkest,
   },
 };
 

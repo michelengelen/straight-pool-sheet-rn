@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropType from 'prop-types';
 import {Slider, View, Text} from 'react-native';
 
+import {InputContainer} from './InputContainer';
 import SPS from 'Common/variables';
 
 /**
@@ -37,8 +38,6 @@ class CustomSlider extends Component {
     } = this.props;
     const {
       inputStyle,
-      labelStyle,
-      containerStyle,
       sliderContainerStyle,
       valueSelectedStyle,
       valueContainer,
@@ -46,12 +45,13 @@ class CustomSlider extends Component {
     const {currentValue} = this.state;
 
     return (
-      <View style={containerStyle}>
-        {label && <Text style={labelStyle}>{label}</Text>}
+      <InputContainer headline={label}>
         <View style={sliderContainerStyle}>
           <Slider
             minimumValue={minimumValue}
             maximumValue={maximumValue}
+            minimumTrackTintColor={colors.backgroundColors.primary}
+            maximumTrackTintColor={colors.backgroundColors.darkest}
             style={inputStyle}
             value={value}
             step={5}
@@ -64,7 +64,7 @@ class CustomSlider extends Component {
             </Text>
           </View>
         </View>
-      </View>
+      </InputContainer>
     );
   }
 }
@@ -79,19 +79,11 @@ CustomSlider.propTypes = {
 
 const {colors, sizes} = SPS.variables;
 const styles = {
-  containerStyle: {
-    padding: sizes.gutter,
-    flexDirection: 'column',
-    alignItems: 'stretch',
-  },
-  labelStyle: {
-    color: colors.textColor,
-    fontSize: sizes.font_L,
-    padding: (sizes.gutter / 4),
-  },
   sliderContainerStyle: {
     flex: 1,
     flexDirection: 'row',
+    paddingTop: sizes.gutter / 4,
+    paddingBottom: sizes.gutter / 4,
   },
   inputStyle: {
     flex: 6,

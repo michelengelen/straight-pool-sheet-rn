@@ -8,6 +8,7 @@ import {PlayerOverview, ScoreControls, ScoreTable} from './gameSheet';
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState, undoableFromState} from 'Reducers/GameSheetReducer';
 import FullscreenModal from './FullscreenModal';
+import {Header} from 'Components/common';
 
 /**
  * Gamesettings Component
@@ -26,6 +27,7 @@ class GameSheet extends Component {
 
     return (
       <PageContainer darkMode scrollable={false}>
+        <Header headerText={'ScoreSheet'}/>
         <PlayerOverview players={players} />
         <ScoreTable rounds={rounds} />
         <ScoreControls

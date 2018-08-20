@@ -182,7 +182,7 @@ const styles = {
     currentScoreTextStyle: {
       fontSize: sizes.font_XXL,
       fontWeight: 'bold',
-      color: colors.textColorDim,
+      color: colors.textColor,
       padding: sizes.gutter / 2,
     },
     playernameViewStyle: {
@@ -223,7 +223,7 @@ const styles = {
     calculatedScoreTextStyle: {
       fontSize: sizes.font_L,
       fontWeight: 'bold',
-      color: colors.textColorDim,
+      color: colors.textColor,
     },
     iconViewStyle: {
       flex: 1,

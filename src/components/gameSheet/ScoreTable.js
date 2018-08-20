@@ -90,9 +90,9 @@ const ScoreTableRow = (props) => {
 
   const containerStyle = {
     flexDirection: 'row',
-    backgroundColor: roundIndex % 2 !== 1
-      ? colors.backgroundColors.dimm
-      : colors.backgroundColors.grey,
+    backgroundColor: roundIndex % 2 !== 0
+      ? colors.backgroundColors.dim
+      : colors.backgroundColors.darker,
   };
 
   return (
@@ -101,7 +101,7 @@ const ScoreTableRow = (props) => {
       <View style={{
         ...defaultCellViewStyle,
         flex: 1,
-        backgroundColor: colors.backgroundColors.darkerGrey,
+        backgroundColor: colors.backgroundColors.grey,
       }}>
         <Text style={defaultCellTextStyle}>
           {header ? '#' : roundIndex}
@@ -151,7 +151,7 @@ const ScoreTable = (props) => {
     <View style={wrapperStyle}>
       <SectionList
         renderItem={({item, index}) => renderItem(item, index)}
-        renderSectionHeader={() => <ScoreTableRow header />}
+        renderSectionHeader={() => <ScoreTableRow header roundIndex={0}/>}
         sections={sections}
         keyExtractor={(item, index) => `ScoreTableRow_${index}`}
         stickySectionHeadersEnabled={true}
@@ -173,7 +173,7 @@ const styles = {
       alignItems: 'stretch',
       paddingBottom: sizes.gutter / 2,
       paddingTop: sizes.gutter / 2,
-      backgroundColor: colors.backgroundColors.darkGrey,
+      backgroundColor: colors.backgroundColors.darker,
     },
   },
   // Styles for the sub-component 'ScoreTableHeader'
@@ -187,7 +187,7 @@ const styles = {
     padding: sizes.gutter / 6,
     alignItems: 'center',
     borderRightWidth: StyleSheet.hairlineWidth,
-    backgroundColor: colors.backgroundColors.dimm,
+    backgroundColor: colors.backgroundColors.dim,
     borderColor: colors.borderColors.dark,
   },
   defaultCellTextStyle: {
