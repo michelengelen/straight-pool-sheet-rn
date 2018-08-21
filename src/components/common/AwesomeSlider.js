@@ -174,11 +174,9 @@ export default class AwesomeSlider extends PureComponent {
     );
   }
 
-  _handleStartShouldSetPanResponder = (
-      e: Object /* gestureState: Object */
-  ): boolean =>
-      // Should we become active when the user presses down on the thumb?
-      this._thumbHitTest(e);
+  _handleStartShouldSetPanResponder = (e: Object /* gestureState: Object */): boolean =>
+    // Should we become active when the user presses down on the thumb?
+    this._thumbHitTest(e);
 
   _handleMoveShouldSetPanResponder(/* e: Object, gestureState: Object */): boolean {
     // Should we become active when the user moves a touch over the thumb?
@@ -199,7 +197,7 @@ export default class AwesomeSlider extends PureComponent {
     this._fireChangeEvent("onValueChange");
   };
 
-  _handlePanResponderRequestEnd(e: Object, gestureState: Object) {
+  _handlePanResponderRequestEnd() {
     // Should we allow another component to take over this pan?
     return false;
   }
