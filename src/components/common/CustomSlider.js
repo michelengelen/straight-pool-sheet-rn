@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types';
-import {Slider, View, Text} from 'react-native';
+// import {Slider, View, Text} from 'react-native';
+import {View, Text} from 'react-native';
 
 import {InputContainer} from './InputContainer';
+import AwesomeSlider from './AwesomeSlider';
 import SPS from 'Common/variables';
 
 /**
@@ -18,10 +20,29 @@ class CustomSlider extends Component {
     // Required step: always call the parent class' constructor
     super(props);
 
+    this.renderThumbComponent = this.renderThumbComponent.bind(this);
+
     // Set the state directly. Use props if necessary.
     this.state = {
       currentValue: this.props.value,
     };
+  }
+
+  /**
+   * Renders the thumb with the current Value inside
+   * (gets passed to the customSlider)
+   *
+   * @return {jsx}
+   */
+  renderThumbComponent() {
+    const {currentValue} = this.state;
+    const {thumbStyle, thumbTextStyle} = styles;
+
+    return (
+      <View style={thumbStyle}>
+        <Text style={thumbTextStyle}>{currentValue}</Text>
+      </View>
+    );
   }
 
   /**
@@ -38,31 +59,27 @@ class CustomSlider extends Component {
     } = this.props;
     const {
       inputStyle,
+      trackStyle,
       sliderContainerStyle,
-      valueSelectedStyle,
-      valueContainer,
     } = styles;
-    const {currentValue} = this.state;
 
     return (
       <InputContainer headline={label}>
         <View style={sliderContainerStyle}>
-          <Slider
+          <AwesomeSlider
             minimumValue={minimumValue}
             maximumValue={maximumValue}
             minimumTrackTintColor={colors.backgroundColors.primary}
             maximumTrackTintColor={colors.backgroundColors.darkest}
+            trackStyle={trackStyle}
+            thumbSize={{width: 40, height: 24}}
             style={inputStyle}
             value={value}
             step={5}
             onSlidingComplete={onSlidingComplete}
+            thumbComponent={this.renderThumbComponent()}
             onValueChange={(value) => this.setState({currentValue: value})}
           />
-          <View style={valueContainer}>
-            <Text style={valueSelectedStyle}>
-              {currentValue}
-            </Text>
-          </View>
         </View>
       </InputContainer>
     );
@@ -82,11 +99,33 @@ const styles = {
   sliderContainerStyle: {
     flex: 1,
     flexDirection: 'row',
-    paddingTop: sizes.gutter / 4,
-    paddingBottom: sizes.gutter / 4,
+    borderWidth: 3,
+    borderRadius: 5,
+    padding: 0,
+    borderColor: colors.backgroundColors.darkest,
+    backgroundColor: colors.backgroundColors.darkest,
   },
   inputStyle: {
-    flex: 6,
+    flex: 1,
+    height: 26,
+  },
+  trackStyle: {
+    height: 24,
+    borderRadius: 3,
+  },
+  thumbStyle: {
+    borderRadius: 3,
+    width: 40,
+    height: 24,
+    backgroundColor: colors.backgroundColors.darker,
+    alignItems: 'stretch',
+    justifyContent: 'space-around',
+  },
+  thumbTextStyle: {
+    textAlign: 'center',
+    color: colors.textColor,
+    fontSize: sizes.font_M,
+    fontWeight: 'bold',
   },
   valueContainer: {
     flex: 1,
