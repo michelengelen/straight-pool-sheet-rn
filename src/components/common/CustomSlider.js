@@ -72,7 +72,7 @@ class CustomSlider extends Component {
             minimumTrackTintColor={colors.backgroundColors.primary}
             maximumTrackTintColor={colors.backgroundColors.darkest}
             trackStyle={trackStyle}
-            thumbSize={{width: 40, height: 24}}
+            thumbSize={{width: 45, height: 24}}
             style={inputStyle}
             value={value}
             step={5}
@@ -110,16 +110,20 @@ const styles = {
     height: 26,
   },
   trackStyle: {
-    height: 24,
+    height: 22,
     borderRadius: 3,
   },
   thumbStyle: {
     borderRadius: 3,
-    width: 40,
+    width: 45,
     height: 24,
     backgroundColor: colors.backgroundColors.darker,
     alignItems: 'stretch',
     justifyContent: 'space-around',
+    shadowColor: colors.shadow,
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: .75,
+    elevation: 2,
   },
   thumbTextStyle: {
     textAlign: 'center',

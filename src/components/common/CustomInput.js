@@ -20,7 +20,6 @@ const CustomInput = ({
     <InputContainer headline={label}>
       <TextInput
         secureTextEntry={secureTextEntry}
-        // placeholder={placeholder}
         autoCorrect={false}
         style={inputStyle}
         value={value}

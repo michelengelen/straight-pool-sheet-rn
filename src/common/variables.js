@@ -16,7 +16,8 @@ SPS.variables = {
       darkGrey: 'rgba(20, 20, 20, 1)',
       darkerGrey: 'rgba(40, 40, 40, 1)',
       // new Colors
-      primary: 'rgba(102, 176, 189, 1)',
+      primary: 'rgba(102, 176, 189, 1)', // blue
+      // primary: 'rgba(172, 44, 64, 1)', // red
     },
     borderColors: {
       dark: 'rgba(33, 33, 33, .2)',

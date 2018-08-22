@@ -33,7 +33,7 @@ const styles = {
     elevation: 2,
     position: 'relative',
     borderBottomWidth: 4,
-    borderBottomColor: colors.backgroundColors.blue,
+    borderBottomColor: colors.backgroundColors.primary,
     marginBottom: 10,
   },
   textStyle: {

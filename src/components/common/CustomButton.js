@@ -16,7 +16,7 @@ const CustomButton = (props) => {
   buttonStyle.opacity = props.disabled ? 0.5 : 1;
   buttonStyle.borderColor = props.disabled
     ? colors.textColorDim
-    : colors.backgroundColors.blue;
+    : colors.backgroundColors.primary;
 
   return (
     <View style={containerStyle}>
