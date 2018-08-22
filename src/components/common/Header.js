@@ -22,7 +22,7 @@ Header.propTypes = {
 const {colors, sizes} = SPS.variables;
 const styles = {
   viewStyle: {
-    backgroundColor: colors.backgroundColors.darkest,
+    backgroundColor: colors.backgroundColors.dark,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: sizes.gutter / 1.5,
@@ -32,9 +32,8 @@ const styles = {
     shadowOpacity: 0.2,
     elevation: 2,
     position: 'relative',
-    borderBottomWidth: 4,
+    borderBottomWidth: 2,
     borderBottomColor: colors.backgroundColors.primary,
-    marginBottom: 10,
   },
   textStyle: {
     color: colors.textColor,

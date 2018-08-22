@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {View} from 'react-native';
 import {connect} from 'react-redux';
 import PropType from 'prop-types';
 
@@ -49,56 +50,58 @@ class GameSettings extends Component {
     const {players} = gameSettings;
 
     return (
-      <PageContainer darkMode scrollable>
+      <View style={{flex: 1}}>
         <Header headerText={'New Game'}/>
-        {inputIds.map((id, index) => {
-          const name = players[index] ? players[index].name : '';
-          return (
-            <CustomInput
-              key={index}
-              id={'player' + id}
-              label={'Player ' + (index + 1)}
-              value={name}
-              style={{flex: 1}}
-              onChangeText={(name) =>
-                updatePlayer({
-                  index: index,
-                  name: name,
-                })
-              }
-              placeholder={'Player ' + id}
-              secureTextEntry={false}
-            />
-          );
-        })}
-        <CustomSlider
-          label={'Maximum Points'}
-          value={gameSettings.maxPoints}
-          minimumValue={50}
-          maximumValue={200}
-          onSlidingComplete={(value) => updatePoints(value)}
-        />
-        <CustomSlider
-          label={'Maximum Rounds'}
-          value={gameSettings.maxRounds}
-          minimumValue={15}
-          maximumValue={50}
-          onSlidingComplete={(value) => updateRounds(value)}
-        />
-        <CustomButton
-          buttonText={'Start Game'}
-          disabled={
-            !players[0].name || !players[1].name
-          }
-          loading={false}
-          onPress={() => {
-            this.startNewGame(gameSettings)
-              .then(function() {
-                navigation.navigate('GameSheet');
-              });
-          }}
-        />
-      </PageContainer>
+        <PageContainer darkMode scrollable>
+          {inputIds.map((id, index) => {
+            const name = players[index] ? players[index].name : '';
+            return (
+              <CustomInput
+                key={index}
+                id={'player' + id}
+                label={'Player ' + (index + 1)}
+                value={name}
+                style={{flex: 1}}
+                onChangeText={(name) =>
+                  updatePlayer({
+                    index: index,
+                    name: name,
+                  })
+                }
+                placeholder={'Player ' + id}
+                secureTextEntry={false}
+              />
+            );
+          })}
+          <CustomSlider
+            label={'Maximum Points'}
+            value={gameSettings.maxPoints}
+            minimumValue={50}
+            maximumValue={200}
+            onSlidingComplete={(value) => updatePoints(value)}
+          />
+          <CustomSlider
+            label={'Maximum Rounds'}
+            value={gameSettings.maxRounds}
+            minimumValue={15}
+            maximumValue={50}
+            onSlidingComplete={(value) => updateRounds(value)}
+          />
+          <CustomButton
+            buttonText={'Start Game'}
+            disabled={
+              !players[0].name || !players[1].name
+            }
+            loading={false}
+            onPress={() => {
+              this.startNewGame(gameSettings)
+                .then(function() {
+                  navigation.navigate('GameSheet');
+                });
+            }}
+          />
+        </PageContainer>
+      </View>
     );
   }
 }

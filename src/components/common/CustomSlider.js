@@ -117,7 +117,7 @@ const styles = {
     borderRadius: 3,
     width: 45,
     height: 24,
-    backgroundColor: colors.backgroundColors.darker,
+    backgroundColor: colors.backgroundColors.dark,
     alignItems: 'stretch',
     justifyContent: 'space-around',
     shadowColor: colors.shadow,

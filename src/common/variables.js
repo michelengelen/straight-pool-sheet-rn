@@ -5,9 +5,9 @@ let SPS = {};
 SPS.variables = {
   colors: {
     backgroundColors: {
-      dark: 'rgba(45, 45, 45, 1)',
-      darker: 'rgba(48, 48, 48, 1)',
-      darkest: 'rgba(28, 28, 28, 1)',
+      dark: 'rgba(39, 51, 63, 1)',
+      darker: 'rgba(30, 39, 46, 1)',
+      darkest: 'rgba(22, 32, 38, 1)',
       green: 'rgba(151, 208, 91, 1)',
       blue: 'rgba(102, 176, 189, 1)',
       red: 'rgba(217, 100, 59, 1)',
