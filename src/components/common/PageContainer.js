@@ -60,7 +60,7 @@ const styles = {
     flex: 1,
     paddingTop: 10,
     paddingBottom: 10,
-    backgroundColor: colors.backgroundColors.darkest,
+    backgroundColor: colors.grey.darkest,
   },
 };
 

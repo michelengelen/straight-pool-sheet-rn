@@ -22,21 +22,21 @@ Header.propTypes = {
 const {colors, sizes} = SPS.variables;
 const styles = {
   viewStyle: {
-    backgroundColor: colors.backgroundColors.dark,
+    backgroundColor: colors.grey.darkest,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: sizes.gutter / 1.5,
     paddingBottom: sizes.gutter / 1.5,
     shadowColor: colors.shadow,
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
+    shadowOffset: {width: 0, height: 6},
+    shadowOpacity: .8,
     elevation: 2,
     position: 'relative',
     borderBottomWidth: 2,
-    borderBottomColor: colors.backgroundColors.primary,
+    borderBottomColor: colors.primary.full,
   },
   textStyle: {
-    color: colors.textColor,
+    color: colors.text.light,
     fontSize: sizes.font_L,
   },
 };

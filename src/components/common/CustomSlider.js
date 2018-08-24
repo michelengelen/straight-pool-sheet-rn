@@ -35,12 +35,11 @@ class CustomSlider extends Component {
    * @return {jsx}
    */
   renderThumbComponent() {
-    const {currentValue} = this.state;
     const {thumbStyle, thumbTextStyle} = styles;
 
     return (
       <View style={thumbStyle}>
-        <Text style={thumbTextStyle}>{currentValue}</Text>
+        <Text style={thumbTextStyle}>{'|||'}</Text>
       </View>
     );
   }
@@ -64,15 +63,15 @@ class CustomSlider extends Component {
     } = styles;
 
     return (
-      <InputContainer headline={label}>
+      <InputContainer headline={label} value={this.state.currentValue}>
         <View style={sliderContainerStyle}>
           <AwesomeSlider
             minimumValue={minimumValue}
             maximumValue={maximumValue}
-            minimumTrackTintColor={colors.backgroundColors.primary}
-            maximumTrackTintColor={colors.backgroundColors.darkest}
+            minimumTrackTintColor={colors.primary.full}
+            maximumTrackTintColor={colors.grey.darkest}
             trackStyle={trackStyle}
-            thumbSize={{width: 45, height: 24}}
+            thumbSize={{width: 24, height: 16}}
             style={inputStyle}
             value={value}
             step={5}
@@ -102,22 +101,22 @@ const styles = {
     borderWidth: 3,
     borderRadius: 5,
     padding: 0,
-    borderColor: colors.backgroundColors.darkest,
-    backgroundColor: colors.backgroundColors.darkest,
+    borderColor: colors.grey.darkest,
+    backgroundColor: colors.grey.darkest,
   },
   inputStyle: {
     flex: 1,
-    height: 26,
+    height: 18,
   },
   trackStyle: {
-    height: 22,
+    height: 14,
     borderRadius: 3,
   },
   thumbStyle: {
     borderRadius: 3,
-    width: 45,
-    height: 24,
-    backgroundColor: colors.backgroundColors.dark,
+    width: 24,
+    height: 16,
+    backgroundColor: colors.grey.dark,
     alignItems: 'stretch',
     justifyContent: 'space-around',
     shadowColor: colors.shadow,
@@ -127,8 +126,8 @@ const styles = {
   },
   thumbTextStyle: {
     textAlign: 'center',
-    color: colors.textColor,
-    fontSize: sizes.font_M,
+    color: colors.text.dark,
+    fontSize: sizes.font_S,
     fontWeight: 'bold',
   },
   valueContainer: {
@@ -137,7 +136,7 @@ const styles = {
     justifyContent: 'space-around',
   },
   valueSelectedStyle: {
-    color: colors.textColor,
+    color: colors.text.light,
     padding: (sizes.gutter / 4),
   },
 };

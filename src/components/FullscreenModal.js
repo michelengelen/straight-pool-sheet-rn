@@ -98,6 +98,7 @@ class FullscreenModal extends Component {
 }
 
 const {colors, sizes} = SPS.variables;
+const {getDimColor} = SPS;
 const styles = {
   wrapperViewStyle: {
     flex: 1,
@@ -108,21 +109,21 @@ const styles = {
     bottom: 0,
     alignItems: 'stretch',
     justifyContent: 'space-around',
-    backgroundColor: colors.backgroundColors.darkerGrey,
+    backgroundColor: getDimColor(colors.grey.dark, .5),
   },
   modalViewStyle: {
     maxWidth: sizes.dimensions.width * .8,
     margin: sizes.dimensions.width * 0.1,
     padding: sizes.gutter,
-    backgroundColor: colors.backgroundColors.dark,
+    backgroundColor: colors.grey.dark,
   },
   modalTextStyle: {
     fontSize: sizes.font_L,
-    color: colors.textColorDim,
+    color: colors.text.mid,
   },
   modalBoldTextStyle: {
     fontWeight: 'bold',
-    color: colors.textColor,
+    color: colors.text.light,
   },
   buttonContainerViewStyle: {
     flexDirection: 'column',

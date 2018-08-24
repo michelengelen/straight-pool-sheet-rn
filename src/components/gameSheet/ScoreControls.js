@@ -83,7 +83,7 @@ const styles = {
       alignItems: 'center',
       justifyContent: 'space-around',
       padding: sizes.gutter / 4,
-      backgroundColor: colors.backgroundColors.dark,
+      backgroundColor: colors.grey.dark,
     },
   },
   Control: {
@@ -91,7 +91,7 @@ const styles = {
       padding: sizes.gutter / 2,
     },
     controlTextStyle: {
-      color: colors.textColor,
+      color: colors.text.light,
       fontSize: sizes.font_XL,
     },
   },

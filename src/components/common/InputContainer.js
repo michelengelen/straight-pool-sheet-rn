@@ -5,6 +5,47 @@ import {View, Text} from 'react-native';
 import SPS from 'Common/variables';
 
 /**
+ * renders the InputContainer header if there is a headline or value input
+ *
+ * @param     {object}  props
+ * @return    {jsx}     React node
+ * @constructor
+ */
+const InputHeader = (props) => {
+  const {headline, value} = props;
+  const {
+    headerContainerStyle,
+    headlineStyle,
+    headlineContainerStyle,
+    valueStyle,
+    valueContainerStyle,
+  } = styles;
+
+  return (
+    <View style={headerContainerStyle}>
+      {headline &&
+        <View style={headlineContainerStyle}>
+          <Text style={headlineStyle}>{headline.toUpperCase()}</Text>
+        </View>
+      }
+      {value &&
+        <View style={valueContainerStyle}>
+          <Text style={valueStyle}>{value}</Text>
+        </View>
+      }
+    </View>
+  );
+};
+
+InputHeader.propTypes = {
+  headline: PropType.string,
+  value: PropType.oneOfType([
+    PropType.string,
+    PropType.number,
+  ]),
+};
+
+/**
  * InputContainer for every available Input component
  *
  * @param   {object}  props
@@ -15,19 +56,17 @@ const InputContainer = (props) => {
   const {
     children,
     headline,
+    value,
   } = props;
-  const {
-    subContainerStyle,
-    headlineStyle,
-    containerStyle,
-  } = styles;
+  const {containerStyle} = styles;
 
   return (
     <View style={containerStyle}>
-      {headline &&
-        <View style={subContainerStyle}>
-          <Text style={headlineStyle}>{headline.toUpperCase()}</Text>
-        </View>
+      {(headline || value) &&
+        <InputHeader
+          headline={headline && headline}
+          value={value && value}
+        />
       }
       <View
         style={{
@@ -42,8 +81,12 @@ const InputContainer = (props) => {
 };
 
 InputContainer.propTypes = {
-  headline: PropType.string,
   children: PropType.node,
+  headline: PropType.string,
+  value: PropType.oneOfType([
+    PropType.string,
+    PropType.number,
+  ]),
 };
 
 const {colors, sizes} = SPS.variables;
@@ -56,20 +99,36 @@ const styles = {
     marginBottom: sizes.gutter / 4,
     flexDirection: 'column',
     alignItems: 'stretch',
-    backgroundColor: colors.backgroundColors.darker,
+    backgroundColor: colors.grey.dark,
     borderRadius: 10,
   },
-  subContainerStyle: {
+  headerContainerStyle: {
+    flex: 1,
+    flexDirection: 'row',
     paddingTop: sizes.gutter / 4,
     paddingBottom: sizes.gutter / 4,
     borderBottomWidth: 1,
     borderColor: colors.borderColorDim,
   },
+  headlineContainerStyle: {
+    flex: 3,
+    alignItems: 'stretch',
+  },
   headlineStyle: {
-    color: colors.textColorDim,
+    color: colors.text.mid,
     fontSize: sizes.font_M,
     padding: (sizes.gutter / 4),
-    textAlign: 'center',
+    textAlign: 'left',
+  },
+  valueContainerStyle: {
+    flex: 1,
+    alignItems: 'stretch',
+  },
+  valueStyle: {
+    color: colors.text.mid,
+    fontSize: sizes.font_M,
+    padding: (sizes.gutter / 4),
+    textAlign: 'right',
   },
 };
 

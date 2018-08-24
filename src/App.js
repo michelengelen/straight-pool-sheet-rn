@@ -53,11 +53,11 @@ export default class App extends Component {
       <Provider store={store}>
         <View style={{
           flex: 1,
-          backgroundColor: colors.backgroundColors.dark,
+          backgroundColor: colors.grey.dark,
         }}>
           <CustomStatusBar
             barStyle={'light-content'}
-            backgroundColor={colors.backgroundColors.darkGrey}
+            backgroundColor={colors.grey.darkGrey}
             darkMode
           />
           <RootStack />

@@ -14,7 +14,7 @@ import {
 import PropType from "prop-types";
 
 const TRACK_SIZE = 4;
-const THUMB_SIZE = 20;
+const THUMB_SIZE = 16;
 
 function Rect(x, y, width, height) {
   this.x = x;
@@ -51,7 +51,7 @@ export default class AwesomeSlider extends PureComponent {
     this.state = {
       containerSize: { width: 0, height: 0 },
       trackSize: { width: 0, height: 0 },
-      thumbSize: { width: 40, height: 20 },
+      thumbSize: { width: 24, height: 16 },
       allMeasured: false,
       value: new Animated.Value(this.props.value)
     };

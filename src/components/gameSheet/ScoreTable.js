@@ -24,12 +24,12 @@ const ScoreTableRowSet = (props) => {
 
   const header = scoreSet === null;
   if (header) {
-    cellViewStyle.backgroundColor = colors.backgroundColors.darkGrey;
+    cellViewStyle.backgroundColor = colors.grey.darkGrey;
   }
 
   let foulCellStyle = {...defaultCellViewStyle};
   if (scoreSet && scoreSet.fouls > 0) {
-    foulCellStyle.backgroundColor = colors.backgroundColors.red;
+    foulCellStyle.backgroundColor = colors.useCase.foul;
   }
 
   let parsedScoreSet = {};
@@ -91,8 +91,8 @@ const ScoreTableRow = (props) => {
   const containerStyle = {
     flexDirection: 'row',
     backgroundColor: roundIndex % 2 !== 0
-      ? colors.backgroundColors.dim
-      : colors.backgroundColors.darker,
+      ? getDimColor(colors.grey.dark, .9)
+      : colors.grey.darker,
   };
 
   return (
@@ -101,7 +101,7 @@ const ScoreTableRow = (props) => {
       <View style={{
         ...defaultCellViewStyle,
         flex: 1,
-        backgroundColor: colors.backgroundColors.grey,
+        backgroundColor: colors.grey.mid,
       }}>
         <Text style={defaultCellTextStyle}>
           {header ? '#' : roundIndex}
@@ -165,6 +165,7 @@ ScoreTable.propTypes = {
 };
 
 const {colors, sizes} = SPS.variables;
+const {getDimColor} = SPS;
 const styles = {
   // Styles for the main-component 'ScoreTable'
   ScoreTable: {
@@ -173,7 +174,7 @@ const styles = {
       alignItems: 'stretch',
       paddingBottom: sizes.gutter / 2,
       paddingTop: sizes.gutter / 2,
-      backgroundColor: colors.backgroundColors.darker,
+      backgroundColor: colors.grey.darker,
     },
   },
   // Styles for the sub-component 'ScoreTableHeader'
@@ -187,11 +188,11 @@ const styles = {
     padding: sizes.gutter / 6,
     alignItems: 'center',
     borderRightWidth: StyleSheet.hairlineWidth,
-    backgroundColor: colors.backgroundColors.dim,
+    backgroundColor: colors.grey.darkest,
     borderColor: colors.borderColors.dark,
   },
   defaultCellTextStyle: {
-    color: colors.textColor,
+    color: colors.text.light,
     fontSize: sizes.font_M,
     fontWeight: 'bold',
     textAlign: 'center',

@@ -4,8 +4,30 @@ let SPS = {};
 
 SPS.variables = {
   colors: {
+    primary: {
+      full: 'rgba(110, 206, 219, 1)', // ice-blue
+      dark: 'rgba()',
+    },
+    secondary: {
+      full: 'rgba(223, 40, 64, 1)', // red
+    },
+    useCase: {
+      foul: 'rgba(217, 100, 59, 1)',
+    },
+    text: {
+      light: 'rgba(244, 244, 244, 1)',
+      mid: 'rgba(179, 179, 179, 1)',
+      dark: 'rgba(112, 112, 112, 1)',
+    },
+    grey: {
+      light: 'rgba(61, 61, 61, 1)',
+      mid: 'rgba(53, 53, 53, 1)',
+      dark: 'rgba(48, 48, 48, 1)',
+      darker: 'rgba(40, 40, 40, 1)',
+      darkest: 'rgba(32, 32, 32, 1)',
+    },
     backgroundColors: {
-      dark: 'rgba(39, 51, 63, 1)',
+      dark: 'rgba(38, 50, 62, 1)',
       darker: 'rgba(30, 39, 46, 1)',
       darkest: 'rgba(22, 32, 38, 1)',
       green: 'rgba(151, 208, 91, 1)',
@@ -16,8 +38,8 @@ SPS.variables = {
       darkGrey: 'rgba(20, 20, 20, 1)',
       darkerGrey: 'rgba(40, 40, 40, 1)',
       // new Colors
-      primary: 'rgba(102, 176, 189, 1)', // blue
-      // primary: 'rgba(172, 44, 64, 1)', // red
+      primary: 'rgba(61, 115, 150, 1)', // blue
+      secondary: 'rgba(17, 55, 84, 1)', // red
     },
     borderColors: {
       dark: 'rgba(33, 33, 33, .2)',
@@ -40,6 +62,28 @@ SPS.variables = {
     font_XXL: 32,
     dimensions: Dimensions.get('window'),
   },
+};
+
+/**
+ * takes a string with rgb color value ('rgb(0, 0, 0)') and creates a rgba color value from it ('rgba(0, 0, 0, 1)')
+ *
+ * @param {string} color
+ * @param {number} opacity
+ * @return {string}
+ */
+SPS.getDimColor = (color, opacity = .5) => {
+  const rgbParts = color
+    .split('(')[1]
+    .replace(')', '')
+    .replace(' ', '')
+    .split(',', 3);
+  let dimmedColor = 'rgba(';
+  for (let i = rgbParts.length - 1; i >= 0; i--) {
+    rgbParts[i] = parseInt(rgbParts[i]);
+    dimmedColor += `${rgbParts[i]}, `;
+  }
+  dimmedColor += `${opacity})`;
+  return dimmedColor;
 };
 
 export default SPS;

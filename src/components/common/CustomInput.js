@@ -24,7 +24,7 @@ const CustomInput = ({
         style={inputStyle}
         value={value}
         onChangeText={onChangeText}
-        placeholderTextColor={colors.textColorDim}
+        placeholderTextColor={colors.text.mid}
       />
     </InputContainer>
   );
@@ -39,18 +39,19 @@ CustomInput.propTypes = {
 };
 
 const {colors, sizes} = SPS.variables;
+const {getDimColor} = SPS;
 const styles = {
   inputStyle: {
-    backgroundColor: colors.backgroundColors.dim,
-    borderColor: colors.textColorDim,
+    backgroundColor: getDimColor(colors.grey.dark, .1),
+    borderColor: colors.text.mid,
     borderBottomWidth: 2,
-    color: colors.textColor,
+    color: colors.text.light,
     padding: (sizes.gutter / 2),
     fontSize: sizes.font_L,
     lineHeight: sizes.gutter,
   },
   labelStyle: {
-    color: colors.textColor,
+    color: colors.text.light,
     fontSize: sizes.font_L,
     padding: (sizes.gutter / 4),
   },

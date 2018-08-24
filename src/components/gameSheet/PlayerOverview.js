@@ -155,7 +155,7 @@ const styles = {
       alignItems: 'stretch',
       borderBottomWidth: 1,
       borderColor: colors.borderColors.darker,
-      backgroundColor: colors.backgroundColors.dark,
+      backgroundColor: colors.grey.dark,
       shadowColor: colors.shadow,
       shadowOffset: {width: 0, height: 3},
       shadowOpacity: 0.3,
@@ -182,21 +182,21 @@ const styles = {
     currentScoreTextStyle: {
       fontSize: sizes.font_XXL,
       fontWeight: 'bold',
-      color: colors.textColor,
+      color: colors.text.light,
       padding: sizes.gutter / 2,
     },
     playernameViewStyle: {
       flex: 1,
       alignItems: 'center',
       padding: sizes.gutter / 4,
-      backgroundColor: colors.backgroundColors.darker,
+      backgroundColor: colors.grey.darker,
       borderBottomWidth: 1,
       borderColor: colors.borderColors.darker,
     },
     playernameTextStyle: {
       fontSize: sizes.font_L,
       fontWeight: 'bold',
-      color: colors.textColorDim,
+      color: colors.text.mid,
     },
     subContainerStyle: {
       flex: 2,
@@ -223,7 +223,7 @@ const styles = {
     calculatedScoreTextStyle: {
       fontSize: sizes.font_L,
       fontWeight: 'bold',
-      color: colors.textColor,
+      color: colors.text.light,
     },
     iconViewStyle: {
       flex: 1,
@@ -231,7 +231,7 @@ const styles = {
       alignItems: 'center',
       justifyContent: 'center',
       padding: sizes.gutter / 4,
-      backgroundColor: colors.backgroundColors.darker,
+      backgroundColor: colors.grey.darker,
     },
   },
 };

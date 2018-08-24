@@ -15,8 +15,8 @@ const CustomButton = (props) => {
   // Decrease opacity when the button is disabled to make a change more visible
   buttonStyle.opacity = props.disabled ? 0.5 : 1;
   buttonStyle.borderColor = props.disabled
-    ? colors.textColorDim
-    : colors.backgroundColors.primary;
+    ? colors.text.mid
+    : colors.primary.full;
 
   return (
     <View style={containerStyle}>
@@ -41,7 +41,7 @@ const {colors, sizes} = SPS.variables;
 const styles = {
   buttonStyle: {
     // backgroundColor: colors.backgroundColors.dim,
-    borderColor: colors.textColorDim,
+    borderColor: colors.text.mid,
     borderWidth: 1,
     padding: (sizes.gutter / 2),
     marginTop: sizes.gutter,
@@ -55,7 +55,7 @@ const styles = {
   },
   textStyle: {
     fontSize: sizes.font_L,
-    color: colors.textColor,
+    color: colors.text.light,
   },
   containerStyle: {
     flexDirection: 'column',
