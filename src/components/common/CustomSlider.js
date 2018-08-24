@@ -109,7 +109,7 @@ const styles = {
     height: 18,
   },
   trackStyle: {
-    height: 14,
+    height: 16,
     borderRadius: 3,
   },
   thumbStyle: {

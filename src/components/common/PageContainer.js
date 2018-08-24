@@ -59,7 +59,6 @@ const styles = {
   viewStyle: {
     flex: 1,
     paddingTop: 10,
-    paddingBottom: 10,
     backgroundColor: colors.grey.darkest,
   },
 };

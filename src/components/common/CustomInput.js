@@ -42,7 +42,8 @@ const {colors, sizes} = SPS.variables;
 const {getDimColor} = SPS;
 const styles = {
   inputStyle: {
-    backgroundColor: getDimColor(colors.grey.dark, .1),
+    backgroundColor: getDimColor(colors.grey.darkest),
+    borderRadius: 3,
     borderColor: colors.text.mid,
     borderBottomWidth: 2,
     color: colors.text.light,
