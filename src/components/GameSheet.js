@@ -2,13 +2,15 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropType from 'prop-types';
 
-import {PageContainer} from 'Components/common';
-import {gameSheetActions} from 'Actions';
+// import custom components
+import FullscreenModal from './FullscreenModal';
 import {PlayerOverview, ScoreControls, ScoreTable} from './gameSheet';
+import {Header, PageContainer} from 'Components/common';
+
+// import reducer/actions
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState, undoableFromState} from 'Reducers/GameSheetReducer';
-import FullscreenModal from './FullscreenModal';
-import {Header} from 'Components/common';
+import {gameSheetActions} from 'Actions';
 
 /**
  * Gamesettings Component
@@ -27,11 +29,13 @@ class GameSheet extends PureComponent {
     this.storeScoreTableRef = this.storeScoreTableRef.bind(this);
   }
 
+  /**
+   * React lifecycle method - componentDidUpdate
+   */
   componentDidUpdate() {
     const {rounds} = this.props.gameSheet;
 
     if (this.scoreTableRef && rounds[rounds.length - 1].length === 1) {
-      console.log('#### test ####');
       this.scoreTableRef.scrollToLocation({
         animated: true,
         sectionIndex: 0,

@@ -4,6 +4,33 @@ import PropType from 'prop-types';
 import SPS from 'Common/variables';
 
 /**
+ * calculate the offset for each item in the SectionList component
+ *
+ * @param   {number[]}  rowHeights
+ * @param   {number}    index
+ * @return  {{itemLength: number, itemOffset: number}}
+ */
+const calculateOffset = (rowHeights, index) => {
+  let itemOffset = 0;
+  for (let i = index; i >= 0; i--) {
+    itemOffset += rowHeights[i];
+  }
+
+  if (isNaN(itemOffset)) {
+    // if offset could not be calculated return default (header) sizes
+    return {
+      itemLength: rowHeights[0],
+      itemOffset: rowHeights[0] * index,
+    };
+  }
+
+  return {
+    itemLength: rowHeights[index],
+    itemOffset,
+  };
+};
+
+/**
  * Displays a ScoreSet for a player
  *
  * Gets implemented by:
@@ -147,31 +174,26 @@ class ScoreTable extends PureComponent {
     this.getItemLayout = this.getItemLayout.bind(this);
   }
 
+  /**
+   * gets passed down to each ScoreTabelRow to gather the heights
+   * that get used in the getItemLayout callback of SectionList component
+   *
+   * @param {object} x
+   */
   getRowHeight(x) {
     this.rowHeights.push(x.nativeEvent.layout.height);
   }
 
-  calculateOffset(rowHeights, index) {
-    let itemOffset = 0;
-    for (let i = index; i >= 0; i--) {
-      itemOffset += rowHeights[i];
-    }
-
-    if (isNaN(itemOffset)) {
-      return {
-        itemLength: rowHeights[0],
-        itemOffset: rowHeights[0] * index,
-      };
-    }
-
-    return {
-      itemLength: rowHeights[index],
-      itemOffset,
-    };
-  }
-
+  /**
+   * callback function for the SectionList component to get offset
+   * and height of each ScoreTableRow
+   *
+   * @param {object[]} data
+   * @param {number} index
+   * @return {{length: number, offset: number, index: number}}
+   */
   getItemLayout(data, index) {
-    const itemData = this.calculateOffset(this.rowHeights, index);
+    const itemData = calculateOffset(this.rowHeights, index);
 
     return {
       length: itemData.itemLength,
@@ -180,6 +202,10 @@ class ScoreTable extends PureComponent {
     };
   }
 
+  /**
+   * React render function
+   * @return {*}
+   */
   render() {
     const {rounds} = this.props;
     const {wrapperStyle} = styles.ScoreTable;
