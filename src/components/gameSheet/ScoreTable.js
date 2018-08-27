@@ -142,6 +142,7 @@ ScoreTableRow.propTypes = {
   header: PropType.bool,
   roundIndex: PropType.number,
   roundScore: PropType.array,
+  onLayout: PropType.func,
 };
 
 const renderItem = (item, index, callback) =>
@@ -165,6 +166,10 @@ const renderItem = (item, index, callback) =>
  * @constructor
  */
 class ScoreTable extends PureComponent {
+  /**
+   * constructor function
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
 

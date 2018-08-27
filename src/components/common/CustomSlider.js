@@ -8,6 +8,22 @@ import AwesomeSlider from './AwesomeSlider';
 import SPS from 'Common/variables';
 
 /**
+ * Renders the thumb with the current Value inside
+ * (gets passed to the customSlider)
+ *
+ * @return {jsx}
+ */
+const renderThumbComponent = () => {
+  const {thumbStyle, thumbTextStyle} = styles;
+
+  return (
+    <View style={thumbStyle}>
+      <Text style={thumbTextStyle}>{'|||'}</Text>
+    </View>
+  );
+};
+
+/**
  * CustomSlider which updates label itself,
  * without using the HOC which implements it
  */
@@ -20,28 +36,10 @@ class CustomSlider extends Component {
     // Required step: always call the parent class' constructor
     super(props);
 
-    this.renderThumbComponent = this.renderThumbComponent.bind(this);
-
     // Set the state directly. Use props if necessary.
     this.state = {
       currentValue: this.props.value,
     };
-  }
-
-  /**
-   * Renders the thumb with the current Value inside
-   * (gets passed to the customSlider)
-   *
-   * @return {jsx}
-   */
-  renderThumbComponent() {
-    const {thumbStyle, thumbTextStyle} = styles;
-
-    return (
-      <View style={thumbStyle}>
-        <Text style={thumbTextStyle}>{'|||'}</Text>
-      </View>
-    );
   }
 
   /**
@@ -76,7 +74,7 @@ class CustomSlider extends Component {
             value={value}
             step={5}
             onSlidingComplete={onSlidingComplete}
-            thumbComponent={this.renderThumbComponent()}
+            thumbComponent={renderThumbComponent()}
             onValueChange={(value) => this.setState({currentValue: value})}
           />
         </View>
