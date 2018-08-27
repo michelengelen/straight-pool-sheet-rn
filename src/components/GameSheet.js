@@ -30,7 +30,7 @@ class GameSheet extends PureComponent {
   componentDidUpdate() {
     const {rounds} = this.props.gameSheet;
 
-    if (this.scoreTableRef && rounds[rounds.length - 1].length === 2) {
+    if (this.scoreTableRef && rounds[rounds.length - 1].length === 1) {
       console.log('#### test ####');
       this.scoreTableRef.scrollToLocation({
         animated: true,
@@ -57,9 +57,6 @@ class GameSheet extends PureComponent {
     const {gameSheet, scoresUndoable} = this.props;
     const {players, rounds} = gameSheet;
     const gameOver = gameSheet.gameState.winner > -1;
-    const scrollIndex = rounds.length;
-
-    console.log('### scrollIndex: ', scrollIndex);
 
     return (
       <PageContainer darkMode scrollable={false}>

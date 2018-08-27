@@ -123,6 +123,7 @@ const renderItem = (item, index, callback) =>
     roundIndex={index + 1}
     roundScore={item}
     onLayout={callback}
+    header={item.length === 0}
   />;
 
 /**
@@ -150,22 +151,34 @@ class ScoreTable extends PureComponent {
     this.rowHeights.push(x.nativeEvent.layout.height);
   }
 
-  calculateOffset(data, index) {
-    let offset = 0;
+  calculateOffset(rowHeights, index) {
+    let itemOffset = 0;
     for (let i = index; i >= 0; i--) {
-      offset += data[i];
+      itemOffset += rowHeights[i];
     }
-    console.log('### Offset: ', offset);
-    return offset;
+
+    if (isNaN(itemOffset)) {
+      return {
+        itemLength: rowHeights[0],
+        itemOffset: rowHeights[0] * index,
+      };
+    }
+
+    return {
+      itemLength: rowHeights[index],
+      itemOffset,
+    };
   }
 
   getItemLayout(data, index) {
+    const itemData = this.calculateOffset(this.rowHeights, index);
+
     return {
-      length: this.rowHeights[index],
-      offset: this.calculateOffset(this.rowHeights, index),
+      length: itemData.itemLength,
+      offset: itemData.itemOffset,
       index,
     };
-  };
+  }
 
   render() {
     const {rounds} = this.props;
@@ -182,7 +195,7 @@ class ScoreTable extends PureComponent {
       <View style={wrapperStyle}>
         <SectionList
           renderItem={({item, index}) => renderItem(item, index, (x) => this.getRowHeight(x))}
-          renderSectionHeader={() => <ScoreTableRow header roundIndex={0} />}
+          renderSectionHeader={() => renderItem([], 0, (x) => this.getRowHeight(x))}
           getItemLayout={this.getItemLayout}
           ref={(ref) => this.props.storeRef(ref)}
           sections={sections}
