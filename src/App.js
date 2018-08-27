@@ -57,7 +57,7 @@ export default class App extends Component {
         }}>
           <CustomStatusBar
             barStyle={'light-content'}
-            backgroundColor={colors.grey.darkGrey}
+            backgroundColor={colors.grey.darkest}
             darkMode
           />
           <RootStack />

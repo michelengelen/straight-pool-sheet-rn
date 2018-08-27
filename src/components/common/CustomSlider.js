@@ -130,15 +130,6 @@ const styles = {
     fontSize: sizes.font_S,
     fontWeight: 'bold',
   },
-  valueContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
-  valueSelectedStyle: {
-    color: colors.text.light,
-    padding: (sizes.gutter / 4),
-  },
 };
 
 export {CustomSlider};

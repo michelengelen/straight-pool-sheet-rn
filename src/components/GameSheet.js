@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropType from 'prop-types';
 
@@ -15,7 +15,40 @@ import {Header} from 'Components/common';
  * This serves as a wrapper component for several inputs
  * which ultimately set the rules for the game to be played
  */
-class GameSheet extends Component {
+class GameSheet extends PureComponent {
+  /**
+   * constructor function
+   * @param {object} props
+   */
+  constructor(props) {
+    super(props);
+    this.scoreTableRef = null;
+
+    this.storeScoreTableRef = this.storeScoreTableRef.bind(this);
+  }
+
+  componentDidUpdate() {
+    const {rounds} = this.props.gameSheet;
+
+    if (this.scoreTableRef && rounds[rounds.length - 1].length === 2) {
+      console.log('#### test ####');
+      this.scoreTableRef.scrollToLocation({
+        animated: true,
+        sectionIndex: 0,
+        itemIndex: rounds.length,
+        viewPosition: 1,
+      });
+    }
+  }
+
+  /**
+   * store the reference to the ScoreTable to this component
+   * @param {object} ref
+   */
+  storeScoreTableRef(ref) {
+    this.scoreTableRef = ref;
+  }
+
   /**
    * React render function
    * @return {*}
@@ -24,12 +57,15 @@ class GameSheet extends Component {
     const {gameSheet, scoresUndoable} = this.props;
     const {players, rounds} = gameSheet;
     const gameOver = gameSheet.gameState.winner > -1;
+    const scrollIndex = rounds.length;
+
+    console.log('### scrollIndex: ', scrollIndex);
 
     return (
       <PageContainer darkMode scrollable={false}>
         <Header headerText={'ScoreSheet'}/>
         <PlayerOverview players={players} />
-        <ScoreTable rounds={rounds} />
+        <ScoreTable rounds={rounds} storeRef={(ref) => this.scoreTableRef = ref} />
         <ScoreControls
           incrementFouls={this.props.incrementFouls}
           incrementScore={this.props.incrementScore}

@@ -231,7 +231,7 @@ const styles = {
       alignItems: 'center',
       justifyContent: 'center',
       padding: sizes.gutter / 4,
-      backgroundColor: colors.grey.darker,
+      backgroundColor: colors.grey.dark,
     },
   },
 };

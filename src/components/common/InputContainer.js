@@ -125,7 +125,7 @@ const styles = {
     alignItems: 'stretch',
   },
   valueStyle: {
-    color: colors.text.mid,
+    color: colors.text.light,
     fontSize: sizes.font_M,
     padding: (sizes.gutter / 4),
     textAlign: 'right',

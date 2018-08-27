@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, SectionList, View, Text} from 'react-native';
+import React, {PureComponent} from 'react';
+import {SectionList, Text, View} from 'react-native';
 import PropType from 'prop-types';
 import SPS from 'Common/variables';
 
@@ -20,12 +20,7 @@ const ScoreTableRowSet = (props) => {
     defaultCellTextStyle,
   } = styles;
 
-  let cellViewStyle = {...defaultCellViewStyle};
-
   const header = scoreSet === null;
-  if (header) {
-    cellViewStyle.backgroundColor = colors.grey.darkGrey;
-  }
 
   let foulCellStyle = {...defaultCellViewStyle};
   if (scoreSet && scoreSet.fouls > 0) {
@@ -90,18 +85,22 @@ const ScoreTableRow = (props) => {
 
   const containerStyle = {
     flexDirection: 'row',
-    backgroundColor: roundIndex % 2 !== 0
-      ? getDimColor(colors.grey.dark, .9)
+    backgroundColor: roundIndex % 2 !== 1
+      ? colors.grey.dark
       : colors.grey.darker,
   };
 
+  if (header) {
+    containerStyle.backgroundColor = colors.grey.darkest;
+  }
+
   return (
-    <View style={containerStyle}>
+    <View style={containerStyle} onLayout={props.onLayout}>
       <ScoreTableRowSet scoreSet={score[0]}/>
       <View style={{
         ...defaultCellViewStyle,
         flex: 1,
-        backgroundColor: colors.grey.mid,
+        backgroundColor: colors.grey.darkest,
       }}>
         <Text style={defaultCellTextStyle}>
           {header ? '#' : roundIndex}
@@ -118,11 +117,12 @@ ScoreTableRow.propTypes = {
   roundScore: PropType.array,
 };
 
-const renderItem = (item, index) =>
+const renderItem = (item, index, callback) =>
   <ScoreTableRow
     key={`ScoreTableRow_${index}`}
     roundIndex={index + 1}
     roundScore={item}
+    onLayout={callback}
   />;
 
 /**
@@ -136,36 +136,70 @@ const renderItem = (item, index) =>
  * @return {*}
  * @constructor
  */
-const ScoreTable = (props) => {
-  const {rounds} = props;
-  const {wrapperStyle} = styles.ScoreTable;
+class ScoreTable extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  const sections = [
-    {
-      title: 'ScoreTable',
-      data: rounds,
-    },
-  ];
+    this.rowHeights = [];
 
-  return (
-    <View style={wrapperStyle}>
-      <SectionList
-        renderItem={({item, index}) => renderItem(item, index)}
-        renderSectionHeader={() => <ScoreTableRow header roundIndex={0}/>}
-        sections={sections}
-        keyExtractor={(item, index) => `ScoreTableRow_${index}`}
-        stickySectionHeadersEnabled={true}
-      />
-    </View>
-  );
-};
+    this.getRowHeight = this.getRowHeight.bind(this);
+    this.getItemLayout = this.getItemLayout.bind(this);
+  }
+
+  getRowHeight(x) {
+    this.rowHeights.push(x.nativeEvent.layout.height);
+  }
+
+  calculateOffset(data, index) {
+    let offset = 0;
+    for (let i = index; i >= 0; i--) {
+      offset += data[i];
+    }
+    console.log('### Offset: ', offset);
+    return offset;
+  }
+
+  getItemLayout(data, index) {
+    return {
+      length: this.rowHeights[index],
+      offset: this.calculateOffset(this.rowHeights, index),
+      index,
+    };
+  };
+
+  render() {
+    const {rounds} = this.props;
+    const {wrapperStyle} = styles.ScoreTable;
+
+    const sections = [
+      {
+        title: 'ScoreTable',
+        data: rounds,
+      },
+    ];
+
+    return (
+      <View style={wrapperStyle}>
+        <SectionList
+          renderItem={({item, index}) => renderItem(item, index, (x) => this.getRowHeight(x))}
+          renderSectionHeader={() => <ScoreTableRow header roundIndex={0} />}
+          getItemLayout={this.getItemLayout}
+          ref={(ref) => this.props.storeRef(ref)}
+          sections={sections}
+          keyExtractor={(item, index) => `ScoreTableRow_${index}`}
+          stickySectionHeadersEnabled={true}
+        />
+      </View>
+    );
+  }
+}
 
 ScoreTable.propTypes = {
   rounds: PropType.array,
+  storeRef: PropType.func,
 };
 
 const {colors, sizes} = SPS.variables;
-const {getDimColor} = SPS;
 const styles = {
   // Styles for the main-component 'ScoreTable'
   ScoreTable: {
@@ -185,11 +219,8 @@ const styles = {
   },
   // Styles every cell in the table have in common
   defaultCellViewStyle: {
-    padding: sizes.gutter / 6,
+    padding: sizes.gutter / 5,
     alignItems: 'center',
-    borderRightWidth: StyleSheet.hairlineWidth,
-    backgroundColor: colors.grey.darkest,
-    borderColor: colors.borderColors.dark,
   },
   defaultCellTextStyle: {
     color: colors.text.light,

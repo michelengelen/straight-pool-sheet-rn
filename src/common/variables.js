@@ -6,7 +6,7 @@ SPS.variables = {
   colors: {
     primary: {
       full: 'rgba(110, 206, 219, 1)', // ice-blue
-      dark: 'rgba()',
+      dark: 'rgba(50, 143, 155, 1)', // darker ice-blue
     },
     secondary: {
       full: 'rgba(223, 40, 64, 1)', // red
