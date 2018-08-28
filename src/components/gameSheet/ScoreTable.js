@@ -25,7 +25,7 @@ const calculateOffset = (rowHeights, index) => {
   }
 
   return {
-    itemLength: rowHeights[index],
+    itemLength: rowHeights[index] - rowHeights[0],
     itemOffset,
   };
 };

@@ -35,11 +35,11 @@ class GameSheet extends PureComponent {
   componentDidUpdate() {
     const {rounds} = this.props.gameSheet;
 
-    if (this.scoreTableRef && rounds[rounds.length - 1].length === 1) {
+    if (this.scoreTableRef) {
       this.scoreTableRef.scrollToLocation({
         animated: true,
         sectionIndex: 0,
-        itemIndex: rounds.length,
+        itemIndex: rounds.length - 1,
         viewPosition: 1,
       });
     }
