@@ -76,7 +76,7 @@ class GameSheet extends PureComponent {
           disabled={gameOver}
           undoable={scoresUndoable}
         />
-        {gameOver && <FullscreenModal/>}
+        {gameOver && <FullscreenModal />}
       </PageContainer>
     );
   }

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
 import Image from 'react-native-remote-svg';
@@ -10,6 +9,7 @@ import {
 } from 'Components/common';
 
 import Images from 'Assets/images';
+import SPS from 'Common/variables';
 
 /**
  * Gamesettings Component
@@ -22,20 +22,20 @@ class Home extends Component {
    * @return {*}
    */
   render() {
+    const {imageStyle} = styles;
     return (
       <PageContainer
         darkMode={true}
         scrollable={false}
-        style={{alignItems: 'center', justifyContent: 'center'}}
+        style={{alignItems: 'stretch', justifyContent: 'center'}}
       >
-        <View>
-          <Image source={Images.logo} style={{width: 300, height: 200}} />
-          <CustomButton
-            buttonText="New Game"
-            loading={false}
-            onPress={() => this.props.navigation.navigate('GameSettings')}
-          />
-        </View>
+        <Image source={Images.logo} style={imageStyle} />
+        <CustomButton
+          margin={{top: 20, bottom: 20}}
+          buttonText="New Game"
+          loading={false}
+          onPress={() => this.props.navigation.navigate('GameSettings')}
+        />
       </PageContainer>
     );
   }
@@ -43,6 +43,20 @@ class Home extends Component {
 
 Home.propTypes = {
   navigation: PropType.object,
+};
+
+const {sizes} = SPS.variables;
+const {dimensions} = sizes;
+
+console.log(SPS);
+
+const styles = {
+  imageStyle: {
+    marginBottom: sizes.gutter,
+    width: dimensions.width - sizes.gutter,
+    height: 120,
+    padding: sizes.gutter / 2,
+  },
 };
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Home);

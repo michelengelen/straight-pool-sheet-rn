@@ -10,20 +10,22 @@ import SPS from 'Common/variables';
 
 const CustomButton = (props) => {
   const {containerStyle, buttonStyle, textStyle} = styles;
-  const {buttonText, loading, ...other} = props;
+  const {buttonText, loading, style, ...other} = props;
+
+  if (props.margin) {
+    containerStyle.marginTop = props.margin.top || 0;
+    containerStyle.marginBottom = props.margin.bottom || 0;
+  }
 
   // Decrease opacity when the button is disabled to make a change more visible
-  buttonStyle.opacity = props.disabled ? 0.5 : 1;
-  buttonStyle.borderColor = props.disabled
-    ? colors.text.mid
-    : colors.primary.full;
+  textStyle.opacity = props.disabled ? 0.5 : 1;
 
   return (
-    <View style={containerStyle}>
+    <View style={{...containerStyle, ...style}}>
       <TouchableOpacity style={buttonStyle} {...other}>
         {loading
           ? <LoadingIndicator size={'medium'} />
-          : <Text style={textStyle}>{buttonText.toUpperCase()}</Text>
+          : <Text style={{...textStyle}}>{buttonText.toUpperCase()}</Text>
         }
       </TouchableOpacity>
     </View>
@@ -31,35 +33,35 @@ const CustomButton = (props) => {
 };
 
 CustomButton.propTypes = {
-  buttonText: PropType.string.isRequired,
   children: PropType.node,
+  style: PropType.object,
   disabled: PropType.bool,
+  margin: PropType.object,
+  buttonText: PropType.string.isRequired,
   loading: PropType.bool.isRequired,
 };
 
 const {colors, sizes} = SPS.variables;
+const {getDimColor} = SPS;
 const styles = {
   buttonStyle: {
-    // backgroundColor: colors.backgroundColors.dim,
-    borderColor: colors.text.mid,
-    borderWidth: 1,
+    backgroundColor: colors.grey.dark,
+    borderColor: getDimColor('rgb(0, 0, 0)', .6),
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
     padding: (sizes.gutter / 2),
-    marginTop: sizes.gutter,
-    marginBottom: sizes.gutter,
-    width: (sizes.dimensions.width - 2 * sizes.gutter),
-    maxWidth: '80%',
     maxHeight: 60,
-    borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
   },
   textStyle: {
     fontSize: sizes.font_L,
-    color: colors.text.light,
+    color: colors.text.mid,
+    fontWeight: 'bold',
   },
   containerStyle: {
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'stretch',
   },
 };
 

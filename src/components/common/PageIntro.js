@@ -18,13 +18,16 @@ const PageIntro = (props) => {
         style={{
           ...headlineViewStyle,
           alignItems: props.alignHeadline || 'flex-start',
+          marginBottom: props.introText ? 20 : 5,
         }}
       >
         <Text style={headlineStyle}>
           {props.headerText}
         </Text>
       </View>
-      <Text style={textStyle}>{props.introText}</Text>
+      {props.introText &&
+        <Text style={textStyle}>{props.introText}</Text>
+      }
     </View>
   );
 };
@@ -39,7 +42,6 @@ const {colors, sizes} = SPS.variables;
 const styles = {
   viewStyle: {
     alignItems: 'stretch',
-    padding: sizes.gutter,
     position: 'relative',
   },
   headlineViewStyle: {

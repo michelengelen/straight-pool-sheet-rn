@@ -51,10 +51,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={{
-          flex: 1,
-          backgroundColor: colors.grey.dark,
-        }}>
+        <View style={{flex: 1}}>
           <CustomStatusBar
             barStyle={'light-content'}
             backgroundColor={colors.grey.darkest}

@@ -46,21 +46,32 @@ class FullscreenModal extends Component {
    * @return {*}
    */
   render() {
-    const {
-      gameSettings,
-      gameSheet,
-    } = this.props;
+    const {gameSheet} = this.props;
 
     const {
       wrapperViewStyle,
       modalViewStyle,
-      modalTextStyle,
+      resultView,
+      playerView,
+      vsView,
+      winnerTextStyle,
+      looserTextStyle,
+      winnerPointStyle,
+      looserPointStyle,
       modalBoldTextStyle,
       buttonContainerViewStyle,
     } = styles;
 
-    const {players} = gameSettings;
+    const {players} = gameSheet;
     const {winner} = gameSheet.gameState;
+
+    if (winner === 0) {
+      winnerTextStyle.textAlign = winnerPointStyle.textAlign = 'right';
+      looserTextStyle.textAlign = looserPointStyle.textAlign = 'left';
+    } else {
+      winnerTextStyle.textAlign = winnerPointStyle.textAlign = 'left';
+      looserTextStyle.textAlign = looserPointStyle.textAlign = 'right';
+    }
 
     return (
       <View style={wrapperViewStyle}>
@@ -69,23 +80,53 @@ class FullscreenModal extends Component {
             headerText={'Game over'}
             alignHeadline={'center'}
           />
-          <Text style={modalTextStyle}>
-            {'The winner of this game is '}
-            <Text style={modalBoldTextStyle}>
-              {players[winner].name}
-            </Text>
-            {' with a score of '}
-            <Text style={modalBoldTextStyle}>
-              {players[winner].totalScore}
-            </Text>
-          </Text>
+          <View style={resultView}>
+            <View style={playerView}>
+              <Text
+                style={winner === 0 ? winnerPointStyle : looserPointStyle}
+              >
+                {players[0].totalScore}
+              </Text>
+            </View>
+            <View style={vsView}>
+              <Text style={{...modalBoldTextStyle, fontSize: sizes.font_XXL}}>:</Text>
+            </View>
+            <View style={playerView}>
+              <Text
+                style={winner === 1 ? winnerPointStyle : looserPointStyle}
+              >
+                {players[1].totalScore}
+              </Text>
+            </View>
+          </View>
+          <View style={resultView}>
+            <View style={playerView}>
+              <Text
+                style={winner === 0 ? winnerTextStyle : looserTextStyle}
+              >
+                {players[0].name}
+              </Text>
+            </View>
+            <View style={vsView}>
+              <Text style={{...modalBoldTextStyle, fontSize: sizes.font_S}}>VS</Text>
+            </View>
+            <View style={playerView}>
+              <Text
+                style={winner === 1 ? winnerTextStyle : looserTextStyle}
+              >
+                {players[1].name}
+              </Text>
+            </View>
+          </View>
           <View style={buttonContainerViewStyle}>
             <CustomButton
+              style={{flex: 1}}
               buttonText={'New Game'}
               loading={false}
               onPress={() => this.startNewGame(true, 'GameSettings')}
             />
             <CustomButton
+              style={{flex: 1}}
               buttonText={'Back to Home'}
               loading={false}
               onPress={this.startNewGame}
@@ -109,7 +150,7 @@ const styles = {
     bottom: 0,
     alignItems: 'stretch',
     justifyContent: 'space-around',
-    backgroundColor: getDimColor(colors.grey.dark, .5),
+    backgroundColor: getDimColor(colors.grey.darkest, .75),
   },
   modalViewStyle: {
     maxWidth: sizes.dimensions.width * .8,
@@ -117,17 +158,50 @@ const styles = {
     padding: sizes.gutter,
     backgroundColor: colors.grey.dark,
   },
-  modalTextStyle: {
-    fontSize: sizes.font_L,
+  resultView: {
+    flexDirection: 'row',
+  },
+  playerView: {
+    flex: 3,
+    justifyContent: 'space-around',
+    alignItems: 'stretch',
+  },
+  vsView: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'stretch',
+  },
+  winnerTextStyle: {
+    fontSize: sizes.font_M,
+    fontWeight: 'bold',
+    color: colors.text.light,
+    padding: 2,
+  },
+  looserTextStyle: {
+    fontSize: sizes.font_M,
     color: colors.text.mid,
+    padding: 2,
+  },
+  winnerPointStyle: {
+    fontSize: sizes.font_XXL,
+    fontWeight: 'bold',
+    color: colors.primary.full,
+    padding: 2,
+  },
+  looserPointStyle: {
+    fontSize: sizes.font_XXL,
+    color: colors.text.mid,
+    padding: 2,
   },
   modalBoldTextStyle: {
     fontWeight: 'bold',
     color: colors.text.light,
+    textAlign: 'center',
+    padding: 2,
   },
   buttonContainerViewStyle: {
     flexDirection: 'column',
-    paddingTop: sizes.gutter / 2,
+    paddingTop: sizes.gutter,
   },
 };
 
