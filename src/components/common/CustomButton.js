@@ -12,11 +12,6 @@ const CustomButton = (props) => {
   const {containerStyle, buttonStyle, textStyle} = styles;
   const {buttonText, loading, style, ...other} = props;
 
-  if (props.margin) {
-    containerStyle.marginTop = props.margin.top || 0;
-    containerStyle.marginBottom = props.margin.bottom || 0;
-  }
-
   // Decrease opacity when the button is disabled to make a change more visible
   textStyle.opacity = props.disabled ? 0.5 : 1;
 
@@ -45,8 +40,8 @@ const {colors, sizes} = SPS.variables;
 const {getDimColor} = SPS;
 const styles = {
   buttonStyle: {
-    backgroundColor: colors.grey.dark,
-    borderColor: getDimColor('rgb(0, 0, 0)', .6),
+    backgroundColor: getDimColor(colors.grey.mid, .5),
+    borderColor: getDimColor(colors.grey.mid, .8),
     borderTopWidth: 1,
     borderBottomWidth: 1,
     padding: (sizes.gutter / 2),

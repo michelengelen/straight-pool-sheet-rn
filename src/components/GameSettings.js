@@ -16,6 +16,9 @@ import {
 } from 'Actions';
 import {getSettings} from 'Reducers/GameSettingReducer';
 
+import SPS from 'Common/variables';
+const {sizes} = SPS.variables;
+
 /**
  * Gamesettings Component
  * This serves as a wrapper component for several inputs
@@ -88,6 +91,7 @@ class GameSettings extends Component {
             onSlidingComplete={(value) => updateRounds(value)}
           />
           <CustomButton
+            style={{marginTop: sizes.gutter / 2}}
             buttonText={'Start Game'}
             disabled={
               !players[0].name || !players[1].name

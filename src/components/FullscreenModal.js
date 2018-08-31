@@ -65,14 +65,6 @@ class FullscreenModal extends Component {
     const {players} = gameSheet;
     const {winner} = gameSheet.gameState;
 
-    if (winner === 0) {
-      winnerTextStyle.textAlign = winnerPointStyle.textAlign = 'right';
-      looserTextStyle.textAlign = looserPointStyle.textAlign = 'left';
-    } else {
-      winnerTextStyle.textAlign = winnerPointStyle.textAlign = 'left';
-      looserTextStyle.textAlign = looserPointStyle.textAlign = 'right';
-    }
-
     return (
       <View style={wrapperViewStyle}>
         <View style={modalViewStyle}>
@@ -81,7 +73,7 @@ class FullscreenModal extends Component {
             alignHeadline={'center'}
           />
           <View style={resultView}>
-            <View style={playerView}>
+            <View style={{...playerView, alignItems: 'flex-end'}}>
               <Text
                 style={winner === 0 ? winnerPointStyle : looserPointStyle}
               >
@@ -89,9 +81,9 @@ class FullscreenModal extends Component {
               </Text>
             </View>
             <View style={vsView}>
-              <Text style={{...modalBoldTextStyle, fontSize: sizes.font_XXL}}>:</Text>
+              <Text style={{...modalBoldTextStyle, fontSize: sizes.font_XXL}}>-</Text>
             </View>
-            <View style={playerView}>
+            <View style={{...playerView, alignItems: 'flex-start'}}>
               <Text
                 style={winner === 1 ? winnerPointStyle : looserPointStyle}
               >
@@ -100,7 +92,7 @@ class FullscreenModal extends Component {
             </View>
           </View>
           <View style={resultView}>
-            <View style={playerView}>
+            <View style={{...playerView, alignItems: 'flex-end'}}>
               <Text
                 style={winner === 0 ? winnerTextStyle : looserTextStyle}
               >
@@ -108,9 +100,9 @@ class FullscreenModal extends Component {
               </Text>
             </View>
             <View style={vsView}>
-              <Text style={{...modalBoldTextStyle, fontSize: sizes.font_S}}>VS</Text>
+              <Text style={{...modalBoldTextStyle, fontSize: sizes.font_S}}>vs</Text>
             </View>
-            <View style={playerView}>
+            <View style={{...playerView, alignItems: 'flex-start'}}>
               <Text
                 style={winner === 1 ? winnerTextStyle : looserTextStyle}
               >
@@ -120,13 +112,11 @@ class FullscreenModal extends Component {
           </View>
           <View style={buttonContainerViewStyle}>
             <CustomButton
-              style={{flex: 1}}
               buttonText={'New Game'}
               loading={false}
               onPress={() => this.startNewGame(true, 'GameSettings')}
             />
             <CustomButton
-              style={{flex: 1}}
               buttonText={'Back to Home'}
               loading={false}
               onPress={this.startNewGame}
@@ -155,15 +145,14 @@ const styles = {
   modalViewStyle: {
     maxWidth: sizes.dimensions.width * .8,
     margin: sizes.dimensions.width * 0.1,
-    padding: sizes.gutter,
-    backgroundColor: colors.grey.dark,
+    backgroundColor: colors.grey.darker,
   },
   resultView: {
     flexDirection: 'row',
   },
   playerView: {
     flex: 3,
-    justifyContent: 'space-around',
+    justifyContent: 'flex-end',
     alignItems: 'stretch',
   },
   vsView: {
@@ -179,12 +168,12 @@ const styles = {
   },
   looserTextStyle: {
     fontSize: sizes.font_M,
+    fontWeight: 'bold',
     color: colors.text.mid,
     padding: 2,
   },
   winnerPointStyle: {
     fontSize: sizes.font_XXL,
-    fontWeight: 'bold',
     color: colors.primary.full,
     padding: 2,
   },
@@ -201,7 +190,8 @@ const styles = {
   },
   buttonContainerViewStyle: {
     flexDirection: 'column',
-    paddingTop: sizes.gutter,
+    paddingTop: sizes.gutter / 2,
+    paddingBottom: sizes.gutter / 2,
   },
 };
 

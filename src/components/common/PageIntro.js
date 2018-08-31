@@ -46,12 +46,13 @@ const styles = {
   },
   headlineViewStyle: {
     borderBottomWidth: 1,
-    borderColor: colors.text.light,
-    marginBottom: sizes.gutter,
+    borderColor: colors.text.dark,
+    marginBottom: sizes.gutter / 2,
   },
   headlineStyle: {
     color: colors.text.light,
     fontSize: sizes.font_XL,
+    paddingTop: sizes.gutter / 2,
     paddingBottom: sizes.gutter / 2,
   },
   textStyle: {
