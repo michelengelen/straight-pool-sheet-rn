@@ -12,7 +12,6 @@ import Home from 'Components/Home';
 import SPS from 'Common/variables';
 import {store} from 'Store/configureStore';
 
-
 const RootStack = createStackNavigator(
   {
     Home: Home,

@@ -1,29 +1,29 @@
-import {updateSettings} from './actionTypes';
+import {settingActions} from './actionTypes';
 
 const updatePlayer = (playerData) => {
   return {
-    type: updateSettings.updatePlayer,
+    type: settingActions.updatePlayer,
     payload: playerData,
   };
 };
 
 const updatePoints = (maxPoints) => {
   return {
-    type: updateSettings.updatePoints,
+    type: settingActions.updatePoints,
     payload: maxPoints,
   };
 };
 
 const updateRounds = (maxRounds) => {
   return {
-    type: updateSettings.updateRounds,
+    type: settingActions.updateRounds,
     payload: maxRounds,
   };
 };
 
 const preFillPlayers = (players) => {
   return {
-    type: updateSettings.preFillPlayers,
+    type: settingActions.preFillPlayers,
     payload: players,
   };
 };

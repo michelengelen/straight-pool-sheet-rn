@@ -1,4 +1,4 @@
-import {updateSettings} from 'Actions/actionTypes';
+import {settingActions} from 'actions/actionTypes';
 import {INITIAL_STATE} from './initialStates';
 import {updateObjectInArray} from './stateHelpers';
 
@@ -6,7 +6,7 @@ const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
   const {payload} = action;
 
   switch (action.type) {
-    case updateSettings.updatePlayer:
+    case settingActions.updatePlayer:
       return {
         ...state,
         players: updateObjectInArray(
@@ -21,19 +21,19 @@ const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
         ),
       };
 
-    case updateSettings.updatePoints:
+    case settingActions.updatePoints:
       return {
         ...state,
         maxPoints: payload,
       };
 
-    case updateSettings.updateRounds:
+    case settingActions.updateRounds:
       return {
         ...state,
         maxRounds: payload,
       };
 
-    case updateSettings.preFillPlayers:
+    case settingActions.preFillPlayers:
       return {
         ...state,
         players: state.players.reverse(),

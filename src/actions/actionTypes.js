@@ -1,21 +1,26 @@
-export const updateSettings = {
-  updatePlayer: 'SETTINGS_update_player',
-  updateRounds: 'SETTINGS_update_rounds',
-  updatePoints: 'SETTINGS_update_points',
-  preFillPlayers: 'SETTINGS_prefill_players',
+export const settingActions = {
+  updatePlayer: 'settings/UPDATE_PLAYER',
+  updateRounds: 'settings/UPDATE_ROUNDS',
+  updatePoints: 'settings/UPDATE_POINTS',
+  preFillPlayers: 'settings/PREFILL_PLAYERS',
 };
 
-export const updateGameSheet = {
-  startGame: 'GAMESHEET_start_game',
-  clearGame: 'GAMESHEET_clear_game',
-  incrementFouls: 'GAMESHEET_increment_fouls',
-  incrementCurrentScore: 'GAMESHEET_increment_current_score',
-  completeBook: 'GAMESHEET_complete_book',
-  switchPlayer: 'GAMESHEET_switch_player',
-  updatePlayerScore: 'GAMESHEET_update_player_score',
+export const gamesheetActions = {
+  startGame: 'gamesheet/START_GAME',
+  clearGame: 'gamesheet/CLEAR_GAME',
+  incrementFouls: 'gamesheet/INCREMENT_FOULS',
+  incrementCurrentScore: 'gamesheet/INCREMENT_CURRENT_SCORE',
+  completeBook: 'gamesheet/COMPLETE_BOOK',
+  switchPlayer: 'gamesheet/SWITCH_PLAYER',
+  updatePlayerScore: 'gamesheet/UPDATE_PLAYER_SCORE',
 };
 
 export const commonActions = {
-  appLoading: 'COMMON_app_loading',
-  appReady: 'COMMON_app_ready',
+  appLoading: 'common/APP_LOADING',
+  appReady: 'common/APP_READY',
+};
+
+export const authActions = {
+  LOGGED_IN: 'auth/LOGGED_IN',
+  LOGGED_OUT: 'auth/LOGGED_OUT',
 };

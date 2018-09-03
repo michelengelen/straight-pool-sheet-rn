@@ -1,4 +1,4 @@
-import {updateGameSheet} from 'Actions/actionTypes';
+import {gamesheetActions} from 'actions/actionTypes';
 
 import {
   buildCurrentScoreText,
@@ -30,7 +30,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
   };
 
   switch (action.type) {
-    case updateGameSheet.startGame:
+    case gamesheetActions.startGame:
       return {
         ...state,
         players: updateObjectsInArray(state.players, payload.players),
@@ -38,7 +38,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         maxRounds: payload.maxRounds,
       };
 
-    case updateGameSheet.updatePlayerScore:
+    case gamesheetActions.updatePlayerScore:
       let newTotalScore = 0;
       let newHighestScore = currentPlayer.highestScore;
       let newHighestScoreIndex = 0;
@@ -84,7 +84,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         },
       };
 
-    case updateGameSheet.incrementCurrentScore:
+    case gamesheetActions.incrementCurrentScore:
       winner = -1;
       let incrementScoreRoundSet = {
         score: currentRoundSet.score + 1,
@@ -128,7 +128,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         },
       };
 
-    case updateGameSheet.completeBook:
+    case gamesheetActions.completeBook:
       winner = -1;
       const {remainingBalls, score, totalScore} = currentRoundSet;
       const scoreAddition = remainingBalls + score -1;
@@ -167,7 +167,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         },
       };
 
-    case updateGameSheet.switchPlayer:
+    case gamesheetActions.switchPlayer:
       if (currentPlayerIndex === 1 && currentRound === state.maxRounds) {
         winner =
           state.players[0].totalScore > state.players[1].totalScore ? 0 : 1;
@@ -219,7 +219,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         ),
       };
 
-    case updateGameSheet.incrementFouls:
+    case gamesheetActions.incrementFouls:
       const updateFoulsObject = {
         index: currentRoundIndex,
         item: updateObjectInArray(
@@ -240,7 +240,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         rounds: updateNestedArray(rounds, updateFoulsObject),
       };
 
-    case updateGameSheet.clearGame:
+    case gamesheetActions.clearGame:
       return {
         ...INITIAL_STATE.GameSheet,
       };

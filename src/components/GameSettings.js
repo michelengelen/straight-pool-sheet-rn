@@ -13,7 +13,7 @@ import {
 import {
   gameSettingActions,
   gameSheetActions,
-} from 'Actions';
+} from 'actions';
 import {getSettings} from 'Reducers/GameSettingReducer';
 
 import SPS from 'Common/variables';

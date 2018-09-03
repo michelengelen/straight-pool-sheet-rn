@@ -1,4 +1,4 @@
-import {commonActions} from 'Actions/actionTypes';
+import {commonActions} from 'actions/actionTypes';
 
 const INITIAL_STATE = {
   loading: false,

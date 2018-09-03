@@ -6,7 +6,7 @@ import GameSettingReducer from './GameSettingReducer';
 import GameSheetReducer from './GameSheetReducer';
 import CommonReducer from './CommonReducer';
 
-import {updateGameSheet} from 'Actions/actionTypes';
+import {gamesheetActions} from 'actions/actionTypes';
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
@@ -15,10 +15,10 @@ const rootReducer = combineReducers({
     GameSheetReducer,
     {
       filter: includeAction([
-        updateGameSheet.incrementFouls,
-        updateGameSheet.incrementCurrentScore,
-        updateGameSheet.switchPlayer,
-        updateGameSheet.completeBook,
+        gamesheetActions.incrementFouls,
+        gamesheetActions.incrementCurrentScore,
+        gamesheetActions.switchPlayer,
+        gamesheetActions.completeBook,
       ]),
     }
   ),

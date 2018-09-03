@@ -1,23 +1,23 @@
 import {ActionCreators} from 'redux-undo';
-import {updateGameSheet} from './actionTypes';
+import {gamesheetActions} from './actionTypes';
 
 const startGame = (gameSettings) => {
   return {
-    type: updateGameSheet.startGame,
+    type: gamesheetActions.startGame,
     payload: gameSettings,
   };
 };
 
 const clearGame = (restartingGame) => {
   return {
-    type: updateGameSheet.clearGame,
+    type: gamesheetActions.clearGame,
     payload: restartingGame,
   };
 };
 
 const updatePlayerScore = (playerData) => {
   return {
-    type: updateGameSheet.updatePlayerScore,
+    type: gamesheetActions.updatePlayerScore,
     payload: playerData,
   };
 };
@@ -31,7 +31,7 @@ const _HOAincrementScore = () => {
 
 const incrementScore = () => {
   return {
-    type: updateGameSheet.incrementCurrentScore,
+    type: gamesheetActions.incrementCurrentScore,
   };
 };
 
@@ -44,7 +44,7 @@ const _HOAcompleteBook = () => {
 
 const completeBook = () => {
   return {
-    type: updateGameSheet.completeBook,
+    type: gamesheetActions.completeBook,
   };
 };
 
@@ -57,7 +57,7 @@ const _HOAincrementFouls = () => {
 
 const incrementFouls = () => {
   return {
-    type: updateGameSheet.incrementFouls,
+    type: gamesheetActions.incrementFouls,
   };
 };
 
@@ -70,7 +70,7 @@ const _HOAswitchPlayer = () => {
 
 const switchPlayer = () => {
   return {
-    type: updateGameSheet.switchPlayer,
+    type: gamesheetActions.switchPlayer,
   };
 };
 

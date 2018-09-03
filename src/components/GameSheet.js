@@ -10,7 +10,7 @@ import {Header, PageContainer} from 'Components/common';
 // import reducer/actions
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState, undoableFromState} from 'Reducers/GameSheetReducer';
-import {gameSheetActions} from 'Actions';
+import {gameSheetActions} from 'actions';
 
 /**
  * Gamesettings Component
