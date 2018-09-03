@@ -9,7 +9,7 @@ import {AuthTextInput} from 'Components/common';
 
 import SPS from 'Common/variables';
 
-class LoginForm extends PureComponent {
+class RegisterForm extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -114,7 +114,7 @@ class LoginForm extends PureComponent {
   }
 }
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
   fields: PropTypes.array,
   showLabel: PropTypes.bool,
   buttonTitle: PropTypes.string,
@@ -124,7 +124,7 @@ LoginForm.propTypes = {
 };
 
 
-LoginForm.defaultProps = {
+RegisterForm.defaultProps = {
   onForgotPassword: null,
 };
 
@@ -176,4 +176,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {LoginForm};
+export {RegisterForm};

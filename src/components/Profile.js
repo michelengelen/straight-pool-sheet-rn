@@ -4,7 +4,8 @@ import {View, Text, Button} from 'react-native';
 import {connect} from 'react-redux';
 
 import {authActions} from 'actions';
-import {LoginForm} from 'Components/common';
+import {LoginForm, RegisterForm} from 'Components/common';
+import UserProfile from 'Components/profile/UserProfile';
 
 import {getAuth} from 'Reducers/AuthReducer';
 
@@ -74,10 +75,17 @@ const fields = {
 };
 
 const error = {
-  general: '',
-  email: '',
-  password: '',
-  confirm_password: '',
+  register: {
+    general: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+  },
+  login: {
+    general: '',
+    email: '',
+    password: '',
+  },
 };
 
 class Profile extends Component {
@@ -88,8 +96,6 @@ class Profile extends Component {
       register: true,
     };
 
-    console.log(props);
-
     this.onSubmit = this.onSubmit.bind(this);
     this.onSuccess = this.onSuccess.bind(this);
     this.onError = this.onError.bind(this);
@@ -98,7 +104,11 @@ class Profile extends Component {
   onSubmit(data) {
     this.setState({error: error}); // clear out error messages
 
-    this.props.register(data, this.onSuccess, this.onError);
+    if (this.state.register) {
+      this.props.register(data, this.onSuccess, this.onError);
+    } else {
+      this.props.login(data, this.onSuccess, this.onError);
+    }
   }
 
   onSuccess(user) {
@@ -106,7 +116,9 @@ class Profile extends Component {
   }
 
   onError(error) {
-    let errObj = this.state.error;
+    let errObj = this.state.register
+      ? {...this.state.error.register}
+      : {...this.state.error.login};
 
     if (error.hasOwnProperty('message')) {
       errObj['general'] = error.message;
@@ -116,36 +128,64 @@ class Profile extends Component {
         errObj[key] = error[key];
       });
     }
-    this.setState({error: errObj});
+
+    if (this.state.register) {
+      this.setState({
+        error: {
+          register: errObj,
+        },
+      });
+    } else {
+      this.setState({
+        error: {
+          login: errObj,
+        },
+      });
+    }
   }
 
   render() {
     const {register} = this.state;
     if (this.props.authState.isLoggedIn) {
+      return <UserProfile user={this.props.authState.user} />;
+    }
+
+    if (this.state.register) {
       return (
-        <ProfilePage
-          user={this.props.authState.user}
-        />
+        <View style={{flex: 1}}>
+          <RegisterForm
+            fields={fields.register}
+            showLabel={false}
+            onSubmit={this.onSubmit}
+            buttonTitle={'SIGN UP'}
+            error={this.state.error.register}
+          />
+          <Text>{'Already have an account?'}</Text>
+          <Button
+            title={'Login to your account'}
+            onPress={() => this.setState({register: !register})}
+          />
+          <Text>.</Text>
+        </View>
       );
     }
 
     return (
       <View style={{flex: 1}}>
         <LoginForm
-          fields={register ? fields.register : fields.login}
+          fields={fields.login}
           showLabel={false}
           onSubmit={this.onSubmit}
-          buttonTitle={register ? 'SIGN UP' : 'SIGN IN'}
-          error={this.state.error}
+          buttonTitle={'SIGN IN'}
+          error={this.state.error.login}
         />
-        <Text>New to the App? </Text>
+        <Text>{'New to the App? '}</Text>
         <Button
           title={'Create account'}
           onPress={() => this.setState({register: !register})}
         />
         <Text>.</Text>
       </View>
-
     );
   }
 }
@@ -153,10 +193,7 @@ class Profile extends Component {
 Profile.propTypes = {
   authState: PropType.shape({
     isLoggedIn: PropType.bool.isRequired,
-    user: PropType.oneOf([
-      PropType.object,
-      PropType.null,
-    ]),
+    user: PropType.oneOf([PropType.object, PropType.null]),
   }),
   register: PropType.func.isRequired,
   login: PropType.func.isRequired,
@@ -169,4 +206,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withNavigation(connect(mapStateToProps, {register, login})(Profile));
+export default withNavigation(
+  connect(mapStateToProps, {register, login})(Profile)
+);
