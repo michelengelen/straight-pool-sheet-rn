@@ -32,9 +32,15 @@ class Home extends Component {
         <Image source={Images.logo} style={imageStyle} />
         <CustomButton
           margin={{top: 20, bottom: 20}}
-          buttonText="New Game"
+          buttonText="Start New Game"
           loading={false}
           onPress={() => this.props.navigation.navigate('GameSettings')}
+        />
+        <CustomButton
+          margin={{top: 20, bottom: 20}}
+          buttonText="Login / Register"
+          loading={false}
+          onPress={() => this.props.navigation.navigate('Profile')}
         />
       </PageContainer>
     );
@@ -47,8 +53,6 @@ Home.propTypes = {
 
 const {sizes} = SPS.variables;
 const {dimensions} = sizes;
-
-console.log(SPS);
 
 const styles = {
   imageStyle: {

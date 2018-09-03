@@ -9,6 +9,8 @@ import {CustomStatusBar} from 'Components/common';
 import GameSettings from 'Components/GameSettings';
 import GameSheet from 'Components/GameSheet';
 import Home from 'Components/Home';
+import Profile from 'Components/Profile';
+
 import SPS from 'Common/variables';
 import {store} from 'Store/configureStore';
 
@@ -17,6 +19,7 @@ const RootStack = createStackNavigator(
     Home: Home,
     GameSettings: GameSettings,
     GameSheet: GameSheet,
+    Profile: Profile,
   },
   {
     initialRouteName: 'Home',

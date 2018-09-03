@@ -1,6 +1,6 @@
 import {authActions} from './actionTypes';
 import {auth} from 'Assets';
-import {authAPI} from 'API';
+import {authAPI} from 'api';
 
 /**
  * register action for redux

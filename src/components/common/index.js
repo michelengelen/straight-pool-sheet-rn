@@ -8,3 +8,5 @@ export * from './Header';
 export * from './PageContainer';
 export * from './PageIntro';
 export * from './InputContainer';
+export * from './AuthTextInput';
+export * from './LoginForm';
