@@ -1,14 +1,20 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-
 import {Text, View, StyleSheet} from 'react-native';
 
-import {isEmpty, validateForm} from 'helpers';
 import {AuthTextInput, CustomButton} from 'Components/common';
 
+import {isEmpty, validateForm} from 'helpers';
 import SPS from 'Common/variables';
 
+/**
+ * LoginForm component
+ */
 class LoginForm extends PureComponent {
+  /**
+   * react constructor function
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
 
@@ -21,6 +27,12 @@ class LoginForm extends PureComponent {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * create the state from the provided params
+   * @param {object[]} fields
+   * @param {object} error
+   * @return {object} state
+   */
   createState(fields, error) {
     // create the state
     const state = {};
@@ -33,16 +45,22 @@ class LoginForm extends PureComponent {
     return state;
   }
 
+  /**
+   * handle the form submit
+   */
   onSubmit() {
     const data = this.state;
     const result = validateForm(data);
-
-    console.log(result);
 
     if (!result.success) this.setState({error: result.error});
     else this.props.onSubmit(this.extractData(data));
   }
 
+  /**
+   * extract the data from the form
+   * @param {object} data
+   * @return {object} retData
+   */
   extractData(data) {
     const retData = {};
 
@@ -56,12 +74,21 @@ class LoginForm extends PureComponent {
     return retData;
   }
 
+  /**
+   * handle the input in a field
+   * @param {string} key
+   * @param {string} text
+   */
   onChange(key, text) {
     const state = this.state;
     state[key]['value'] = text;
     this.setState(state);
   }
 
+  /**
+   * react render fundtion
+   * @return {*}
+   */
   render() {
     const {fields, showLabel, buttonTitle, onForgotPassword} = this.props;
 
