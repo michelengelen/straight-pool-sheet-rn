@@ -31,40 +31,30 @@ class Home extends Component {
    */
   render() {
     const {imageStyle} = styles;
-    const {isLoggedIn, user} = this.props.authState;
+    const {isLoggedIn} = this.props.authState;
 
     return (
-      <View style={{flex: 1}}>
-        <Header
-          leftComponent={{icon: 'menu', color: '#fff'}}
-          centerComponent={{text: 'HOME', style: {color: '#fff'}}}
-          rightComponent={{icon: 'home', color: '#fff'}}
-          outerContainerStyles={{
-            backgroundColor: SPS.variables.colors.grey.dark,
-            height: 55,
-            borderBottomColor: SPS.variables.colors.primary.full,
-          }}
+      <PageContainer
+        home
+        darkMode
+        pageTitle={'STRAIGHT POOL SHEET'}
+        scrollable={false}
+        style={{alignItems: 'stretch', justifyContent: 'center'}}
+      >
+        <Image source={Images.logo} style={imageStyle} />
+        <CustomButton
+          margin={{top: 20, bottom: 20}}
+          buttonText={'Start New Game'}
+          loading={false}
+          onPress={() => this.props.navigation.navigate('GameSettings')}
         />
-        <PageContainer
-          darkMode={true}
-          scrollable={false}
-          style={{alignItems: 'stretch', justifyContent: 'center'}}
-        >
-          <Image source={Images.logo} style={imageStyle} />
-          <CustomButton
-            margin={{top: 20, bottom: 20}}
-            buttonText={'Start New Game'}
-            loading={false}
-            onPress={() => this.props.navigation.navigate('GameSettings')}
-          />
-          <CustomButton
-            margin={{top: 20, bottom: 20}}
-            buttonText={isLoggedIn ? 'View Profile' : 'Login / Register'}
-            loading={false}
-            onPress={() => this.props.navigation.navigate('Profile')}
-          />
-        </PageContainer>
-      </View>
+        <CustomButton
+          margin={{top: 20, bottom: 20}}
+          buttonText={isLoggedIn ? 'View Profile' : 'Login / Register'}
+          loading={false}
+          onPress={() => this.props.navigation.navigate('Profile')}
+        />
+      </PageContainer>
     );
   }
 }

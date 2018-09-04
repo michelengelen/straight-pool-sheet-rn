@@ -4,7 +4,7 @@ import {View, Text, Button} from 'react-native';
 import {connect} from 'react-redux';
 
 import {authActions} from 'actions';
-import {LoginForm, RegisterForm} from 'Components/common';
+import {LoginForm, PageContainer, RegisterForm} from 'Components/common';
 import UserProfile from 'Components/profile/UserProfile';
 
 import {getAuth} from 'Reducers/AuthReducer';
@@ -152,7 +152,7 @@ class Profile extends Component {
 
     if (this.state.register) {
       return (
-        <View style={{flex: 1}}>
+        <PageContainer pageTitle={'REGISTER'} scrollable={false}>
           <RegisterForm
             fields={fields.register}
             showLabel={false}
@@ -166,12 +166,12 @@ class Profile extends Component {
             onPress={() => this.setState({register: !register})}
           />
           <Text>.</Text>
-        </View>
+        </PageContainer>
       );
     }
 
     return (
-      <View style={{flex: 1}}>
+      <PageContainer pageTitle={'LOGIN'} scrollable={false}>
         <LoginForm
           fields={fields.login}
           showLabel={false}
@@ -185,7 +185,7 @@ class Profile extends Component {
           onPress={() => this.setState({register: !register})}
         />
         <Text>.</Text>
-      </View>
+      </PageContainer>
     );
   }
 }

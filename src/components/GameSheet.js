@@ -63,8 +63,7 @@ class GameSheet extends PureComponent {
     const gameOver = gameSheet.gameState.winner > -1;
 
     return (
-      <PageContainer darkMode scrollable={false}>
-        <Header headerText={'ScoreSheet'}/>
+      <PageContainer darkMode scrollable={false} pageTitle={'Scores'}>
         <PlayerOverview players={players} />
         <ScoreTable rounds={rounds} storeRef={(ref) => this.scoreTableRef = ref} />
         <ScoreControls

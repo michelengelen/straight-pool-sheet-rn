@@ -54,8 +54,7 @@ class GameSettings extends Component {
 
     return (
       <View style={{flex: 1}}>
-        <Header headerText={'New Game'}/>
-        <PageContainer darkMode scrollable>
+        <PageContainer darkMode scrollable pageTitle={'Gamesettings'}>
           {inputIds.map((id, index) => {
             const name = players[index] ? players[index].name : '';
             return (

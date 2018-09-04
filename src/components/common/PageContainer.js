@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, ScrollView} from 'react-native';
+import {Header} from 'react-native-elements';
 import PropType from 'prop-types';
 
 import SPS from 'Common/variables';
@@ -36,21 +37,32 @@ ConditionalView.propTypes = {
 };
 
 const PageContainer = (props) => {
-  const {viewStyle} = styles;
+  const {home = false, pageTitle} = props;
+  const {viewStyle, headerStyle} = styles;
 
   return (
-    <ConditionalView
-      style={{...viewStyle, ...props.style}}
-      scrollable={props.scrollable}
-    >
-      {props.children}
-    </ConditionalView>
+    <View style={{flex: 1}}>
+      <Header
+        leftComponent={!home ? {icon: 'arrow-back', color: colors.textColor} : {}}
+        centerComponent={{text: pageTitle.toUpperCase(), style: {color: colors.textColor}}}
+        rightComponent={{icon: 'menu', color: colors.textColor}}
+        outerContainerStyles={headerStyle.outer}
+      />
+      <ConditionalView
+        style={{...viewStyle, ...props.style}}
+        scrollable={props.scrollable}
+      >
+        {props.children}
+      </ConditionalView>
+    </View>
   );
 };
 
 PageContainer.propTypes = {
   children: PropType.node,
   style: PropType.object,
+  home: PropType.bool,
+  pageTitle: PropType.string.isRequired,
   scrollable: PropType.bool.isRequired,
 };
 
@@ -60,6 +72,14 @@ const styles = {
     flex: 1,
     paddingTop: 10,
     backgroundColor: colors.grey.darkest,
+  },
+  headerStyle: {
+    inner: {},
+    outer: {
+      backgroundColor: colors.grey.dark,
+      borderBottomColor: colors.primary.full,
+      height: 55,
+    },
   },
 };
 

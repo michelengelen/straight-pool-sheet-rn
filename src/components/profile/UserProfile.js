@@ -13,12 +13,14 @@ class UserProfile extends Component {
   }
 
   render() {
+    const {user} = this.props.authState;
     return (
       <PageContainer
         darkMode
         scrollable={false}
+        pageTitle={'Profile Page'}
       >
-        <Text style={{color: 'white'}}>{`Hello ${this.props.authState.user.username}`}</Text>
+        <Text style={{color: 'white'}}>{`Hello ${user.username}`}</Text>
       </PageContainer>
     );
   }
