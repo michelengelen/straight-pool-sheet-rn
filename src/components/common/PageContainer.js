@@ -2,6 +2,7 @@ import React from 'react';
 import {View, ScrollView} from 'react-native';
 import {Header} from 'react-native-elements';
 import PropType from 'prop-types';
+import {withNavigation} from 'react-navigation';
 
 import SPS from 'common/variables';
 
@@ -43,8 +44,20 @@ const PageContainer = (props) => {
   return (
     <View style={{flex: 1}}>
       <Header
-        leftComponent={!home ? {icon: 'arrow-back', color: colors.textColor} : {}}
-        centerComponent={{text: pageTitle.toUpperCase(), style: {color: colors.textColor}}}
+        leftComponent={
+          !home
+            ? {
+              icon: 'arrow-back',
+              color: colors.textColor,
+              underlayColor: 'transparent',
+              onPress: () => props.navigation.goBack(),
+            }
+            : {}
+        }
+        centerComponent={{
+          text: pageTitle.toUpperCase(),
+          style: {color: colors.textColor},
+        }}
         rightComponent={{icon: 'menu', color: colors.textColor}}
         outerContainerStyles={headerStyle.outer}
       />
@@ -62,6 +75,7 @@ PageContainer.propTypes = {
   children: PropType.node,
   style: PropType.object,
   home: PropType.bool,
+  navigation: PropType.object,
   pageTitle: PropType.string.isRequired,
   scrollable: PropType.bool.isRequired,
 };
@@ -83,4 +97,6 @@ const styles = {
   },
 };
 
-export {PageContainer};
+const PageContainerWithNav = withNavigation(PageContainer);
+
+export {PageContainerWithNav as PageContainer};
