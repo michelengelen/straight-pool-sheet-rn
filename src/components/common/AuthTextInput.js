@@ -23,7 +23,7 @@ class AuthTextInput extends PureComponent {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View styles={styles.wrapperContainer}>
         {
           (showLabel) &&
             <FormLabel>{this.props.label}</FormLabel>
@@ -79,12 +79,13 @@ AuthTextInput.defaultProps = {
 const {colors, sizes} = SPS.variables;
 const {getDimColor} = SPS;
 const styles = {
-  container: {
-    backgroundColor: colors.grey.dark,
-    padding: (sizes.gutter / 2),
+  containerStyle: {
+    alignItems: 'stretch',
+    borderBottomWidth: 0,
+    marginVertical: sizes.gutter / 2,
   },
   inputContainer: {
-    backgroundColor: getDimColor(colors.grey.darkest),
+    backgroundColor: getDimColor(colors.grey.dark),
     borderRadius: 3,
     borderColor: colors.text.mid,
     borderBottomWidth: 2,
@@ -92,6 +93,7 @@ const styles = {
     padding: (sizes.gutter / 2),
     fontSize: sizes.font_L,
     lineHeight: sizes.gutter,
+    width: 'auto',
   },
   labelStyle: {
     color: colors.text.light,

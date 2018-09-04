@@ -31,7 +31,6 @@ CustomButton.propTypes = {
   children: PropType.node,
   style: PropType.object,
   disabled: PropType.bool,
-  margin: PropType.object,
   buttonText: PropType.string.isRequired,
   loading: PropType.bool.isRequired,
 };

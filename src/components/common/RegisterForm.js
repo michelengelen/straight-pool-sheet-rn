@@ -2,10 +2,9 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 import {Text, View, StyleSheet} from 'react-native';
-import {Button} from 'react-native-elements';
 
 import {isEmpty, validateForm} from 'helpers';
-import {AuthTextInput} from 'Components/common';
+import {AuthTextInput, CustomButton} from 'Components/common';
 
 import SPS from 'Common/variables';
 
@@ -67,48 +66,48 @@ class RegisterForm extends PureComponent {
     const {fields, showLabel, buttonTitle, onForgotPassword} = this.props;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.wrapper}>
-          {
-            (!isEmpty(this.state.error['general'])) &&
-              <Text style={styles.errorText}>{this.state.error['general']}</Text>
-          }
+      <View style={{flex: 1, paddingVertical: sizes.gutter / 2}}>
+        {!isEmpty(this.state.error['general']) && (
+          <Text style={styles.errorText}>{this.state.error['general']}</Text>
+        )}
 
-          {
-            fields.map((data, idx) => {
-              let {key, label, placeholder, autoFocus, secureTextEntry, keyboardType} = data;
-              return (
-                <AuthTextInput
-                  key={key}
-                  label={label}
-                  showLabel={showLabel}
-                  placeholder={placeholder}
-                  autoFocus={autoFocus}
-                  onChangeText={(text) => this.onChange(key, text)}
-                  secureTextEntry={secureTextEntry}
-                  keyboardType={keyboardType}
-                  value={this.state[key]['value']}
-                  error={this.state.error[key]}
-                />
-              );
-            })
-          }
+        {fields.map((data, idx) => {
+          let {
+            key,
+            label,
+            placeholder,
+            autoFocus,
+            secureTextEntry,
+            keyboardType,
+          } = data;
+          return (
+            <AuthTextInput
+              key={key}
+              label={label}
+              showLabel={showLabel}
+              placeholder={placeholder}
+              autoFocus={autoFocus}
+              onChangeText={(text) => this.onChange(key, text)}
+              secureTextEntry={secureTextEntry}
+              keyboardType={keyboardType}
+              value={this.state[key]['value']}
+              error={this.state.error[key]}
+            />
+          );
+        })}
 
-          <Button
-            raised
-            title={buttonTitle}
-            borderRadius={0}
-            containerViewStyle={styles.containerView}
-            buttonStyle={styles.button}
-            textStyle={styles.buttonText}
-            onPress={this.onSubmit}/>
-          {
-            this.props.onForgotPassword !== null &&
-              <Text style={styles.forgotText} onPress={onForgotPassword}>
-                Forgot password?</Text>
-          }
+        <CustomButton
+          style={{marginVertical: sizes.gutter / 2}}
+          buttonText={buttonTitle}
+          loading={false}
+          onPress={this.onSubmit}
+        />
 
-        </View>
+        {this.props.onForgotPassword !== null && (
+          <Text style={styles.forgotText} onPress={onForgotPassword}>
+            Forgot password?
+          </Text>
+        )}
       </View>
     );
   }
@@ -123,7 +122,6 @@ RegisterForm.propTypes = {
   error: PropTypes.object,
 };
 
-
 RegisterForm.defaultProps = {
   onForgotPassword: null,
 };
@@ -131,46 +129,27 @@ RegisterForm.defaultProps = {
 const {colors, sizes} = SPS.variables;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.grey.light,
-  },
-
-  wrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
   errorText: {
     color: colors.useCase.foul,
-    width: (sizes.dimensions.width - 45),
+    width: sizes.dimensions.width - 45,
     marginTop: 20,
   },
-
   containerView: {
     marginVertical: sizes.gutter,
     width: sizes.dimensions.width - 40,
   },
-
   socialButton: {
     height: 55,
     borderRadius: 4,
     marginTop: 0,
     marginBottom: 0,
   },
-
-  button: {
-    backgroundColor: '#FF553F',
-    height: 55,
-  },
-
   buttonText: {
     fontSize: sizes.font_M + 2,
   },
-
   forgotText: {
     textAlign: 'center',
-    color: colors.grey.darkest,
+    color: colors.textColorDim,
     marginBottom: sizes.gutter,
     fontSize: sizes.font_S,
   },

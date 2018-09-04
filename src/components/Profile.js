@@ -4,7 +4,7 @@ import {Text, Button} from 'react-native';
 import {connect} from 'react-redux';
 
 import {authActions} from 'actions';
-import {LoginForm, PageContainer, RegisterForm} from 'Components/common';
+import {CustomButton, LoginForm, PageContainer, RegisterForm} from 'Components/common';
 import UserProfile from 'Components/profile/UserProfile';
 
 import {getAuth} from 'Reducers/AuthReducer';
@@ -152,7 +152,11 @@ class Profile extends Component {
 
     if (this.state.register) {
       return (
-        <PageContainer pageTitle={'REGISTER'} scrollable={false}>
+        <PageContainer
+          pageTitle={'REGISTER'}
+          scrollable={false}
+          style={{alignItems: 'stretch', justifyContent: 'center'}}
+        >
           <RegisterForm
             fields={fields.register}
             showLabel={false}
@@ -161,8 +165,9 @@ class Profile extends Component {
             error={this.state.error.register}
           />
           <Text>{'Already have an account?'}</Text>
-          <Button
-            title={'Login to your account'}
+          <CustomButton
+            loading={false}
+            buttonText={'Login to your account'}
             onPress={() => this.setState({register: !register})}
           />
           <Text>.</Text>
@@ -171,7 +176,11 @@ class Profile extends Component {
     }
 
     return (
-      <PageContainer pageTitle={'LOGIN'} scrollable={false}>
+      <PageContainer
+        pageTitle={'LOGIN'}
+        scrollable={false}
+        style={{alignItems: 'stretch', justifyContent: 'center'}}
+      >
         <LoginForm
           fields={fields.login}
           showLabel={false}
@@ -180,8 +189,9 @@ class Profile extends Component {
           error={this.state.error.login}
         />
         <Text>{'New to the App? '}</Text>
-        <Button
-          title={'Create account'}
+        <CustomButton
+          loading={false}
+          buttonText={'Create account'}
           onPress={() => this.setState({register: !register})}
         />
         <Text>.</Text>

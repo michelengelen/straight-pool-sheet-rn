@@ -41,13 +41,11 @@ class Home extends Component {
       >
         <Image source={Images.logo} style={imageStyle} />
         <CustomButton
-          margin={{top: 20, bottom: 20}}
           buttonText={'Start New Game'}
           loading={false}
           onPress={() => this.props.navigation.navigate('GameSettings')}
         />
         <CustomButton
-          margin={{top: 20, bottom: 20}}
           buttonText={isLoggedIn ? 'View Profile' : 'Login / Register'}
           loading={false}
           onPress={() => this.props.navigation.navigate('Profile')}
