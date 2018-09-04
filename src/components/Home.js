@@ -5,8 +5,8 @@ import Image from 'react-native-remote-svg';
 
 import {PageContainer, CustomButton} from 'Components/common';
 
-import Images from 'Assets/images';
-import SPS from 'Common/variables';
+import Images from 'assets/images';
+import SPS from 'common/variables';
 import {getAuth} from '../reducers/AuthReducer';
 
 /**

@@ -3,7 +3,7 @@ import {View, ScrollView} from 'react-native';
 import {Header} from 'react-native-elements';
 import PropType from 'prop-types';
 
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 const ConditionalView = (props) => {
   const {scrollable, style, ...other} = props;

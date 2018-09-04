@@ -5,7 +5,7 @@ import {View} from 'react-native';
 
 import {FormLabel, FormInput, FormValidationMessage} from 'react-native-elements';
 import {isEmpty} from 'helpers';
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 /**
  * creates a TextInput for the LoginForm

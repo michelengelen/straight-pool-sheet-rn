@@ -1,4 +1,5 @@
-import {auth, database, provider} from 'Assets';
+import {auth, database, provider} from 'assets';
+import * as firebase from 'firebase';
 
 /**
  * Register the user using email and password
@@ -95,9 +96,13 @@ function signOut(callback) {
  * @param {function} callback
  */
 function signInWithFacebook(fbToken, callback) {
-  const credential = provider.credential(fbToken);
+  const credential = firebase.auth.FacebookAuthProvider.credential(fbToken);
+  console.log('### credential: ', credential);
   auth.signInWithCredential(credential)
-    .then((user) => getUser(user, callback))
+    .then((user) => {
+      console.log('### #### #### ##### ##### #####');
+      console.log(getUser(user, callback));
+    })
     .catch((error) => callback(false, null, error));
 }
 

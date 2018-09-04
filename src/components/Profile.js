@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types';
-import {Text, Button} from 'react-native';
+import {Text} from 'react-native';
 import {connect} from 'react-redux';
+import {withNavigation} from 'react-navigation';
 
-import {authActions} from 'actions';
-import {CustomButton, LoginForm, PageContainer, RegisterForm} from 'Components/common';
+import {
+  CustomButton,
+  LoginForm,
+  PageContainer,
+  RegisterForm
+} from 'Components/common';
 import UserProfile from 'Components/profile/UserProfile';
 
 import {getAuth} from 'Reducers/AuthReducer';
+import SPS from 'common/variables';
 
-import {withNavigation} from 'react-navigation';
-
+import {authActions} from 'actions';
 const {register, login} = authActions;
 
 const fields = {
@@ -88,12 +93,15 @@ const error = {
   },
 };
 
+/**
+ * Profile component which renders either a Login-/Register-Form or the UserProfile
+ */
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       error: error,
-      register: true,
+      register: false,
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -146,6 +154,8 @@ class Profile extends Component {
 
   render() {
     const {register} = this.state;
+    const {ctaTextStyle} = styles;
+
     if (this.props.authState.isLoggedIn) {
       return <UserProfile user={this.props.authState.user} />;
     }
@@ -164,13 +174,12 @@ class Profile extends Component {
             buttonTitle={'SIGN UP'}
             error={this.state.error.register}
           />
-          <Text>{'Already have an account?'}</Text>
+          <Text style={ctaTextStyle}>{'Already have an account?'}</Text>
           <CustomButton
             loading={false}
             buttonText={'Login to your account'}
             onPress={() => this.setState({register: !register})}
           />
-          <Text>.</Text>
         </PageContainer>
       );
     }
@@ -188,13 +197,12 @@ class Profile extends Component {
           buttonTitle={'SIGN IN'}
           error={this.state.error.login}
         />
-        <Text>{'New to the App? '}</Text>
+        <Text style={ctaTextStyle}>{'New to the App? '}</Text>
         <CustomButton
           loading={false}
           buttonText={'Create account'}
           onPress={() => this.setState({register: !register})}
         />
-        <Text>.</Text>
       </PageContainer>
     );
   }
@@ -208,6 +216,16 @@ Profile.propTypes = {
   register: PropType.func.isRequired,
   login: PropType.func.isRequired,
   navigation: PropType.object,
+};
+
+const {colors, sizes} = SPS.variables;
+const styles = {
+  ctaTextStyle: {
+    fontSize: sizes.font_M,
+    textAlign: 'center',
+    color: colors.textColorDim,
+    marginVertical: sizes.gutter / 4,
+  },
 };
 
 const mapStateToProps = (state) => {

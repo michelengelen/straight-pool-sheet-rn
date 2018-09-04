@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import PropType from 'prop-types';
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 import Image from 'react-native-remote-svg';
 
-import Images from 'Assets/images';
+import Images from 'assets/images';
 
 /**
  * Renders the calculated score for a player

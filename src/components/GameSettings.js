@@ -15,7 +15,7 @@ import {
 } from 'actions';
 import {getSettings} from 'Reducers/GameSettingReducer';
 
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 const {sizes} = SPS.variables;
 
 /**

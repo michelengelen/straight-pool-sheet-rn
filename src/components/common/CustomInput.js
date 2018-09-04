@@ -5,7 +5,7 @@ import {TextInput} from 'react-native';
 import {InputContainer} from './InputContainer';
 
 // Constant import
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 const CustomInput = ({
   label,

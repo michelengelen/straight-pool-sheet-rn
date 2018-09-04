@@ -1,5 +1,5 @@
 import {authActions} from './actionTypes';
-import {auth} from 'Assets';
+import {auth} from 'assets';
 import {authAPI} from 'api';
 
 /**
@@ -127,14 +127,14 @@ export function checkLoginStatus(callback) {
 /**
  * sign a user in with facebook action for redux
  *
- * @param  {string} facebookToken
+ * @param  {string}   fbToken
  * @param  {function} successCB
  * @param  {function} errorCB
  * @return {function}
  */
-export function signInWithFacebook(facebookToken, successCB, errorCB) {
+export function signInWithFacebook(fbToken, successCB, errorCB) {
   return (dispatch) => {
-    authAPI.signInWithFacebook(facebookToken, function(success, data, error) {
+    authAPI.signInWithFacebook(fbToken, function(success, data, error) {
       if (success) {
         if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
         successCB(data);

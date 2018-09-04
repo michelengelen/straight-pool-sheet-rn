@@ -6,7 +6,7 @@ import {View, TouchableOpacity, Text} from 'react-native';
 import {LoadingIndicator} from 'Components/common';
 
 // Constant imports
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 const CustomButton = (props) => {
   const {containerStyle, buttonStyle, textStyle} = styles;

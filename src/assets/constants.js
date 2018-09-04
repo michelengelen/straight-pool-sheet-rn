@@ -7,8 +7,8 @@ const constants = {
     FIREBASE_STORAGE_BUCKET: 'straight-pool-sheet.appspot.com',
     FIREBASE_MESSAGING_SENDER_ID: '606764946846',
   },
+  NAME: 'auth',
   FACEBOOK_APP_ID: '273836016784078',
-  FACEBOOK_APP_SECRET: '27696abf372df21122d87c03c9d2a88c',
 };
 
 export {constants};

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {SectionList, Text, View} from 'react-native';
 import PropType from 'prop-types';
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 /**
  * calculate the offset for each item in the SectionList component

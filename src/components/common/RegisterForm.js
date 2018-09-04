@@ -6,7 +6,7 @@ import {Text, View, StyleSheet} from 'react-native';
 import {isEmpty, validateForm} from 'helpers';
 import {AuthTextInput, CustomButton} from 'Components/common';
 
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 class RegisterForm extends PureComponent {
   constructor(props) {
@@ -66,7 +66,7 @@ class RegisterForm extends PureComponent {
     const {fields, showLabel, buttonTitle, onForgotPassword} = this.props;
 
     return (
-      <View style={{flex: 1, paddingVertical: sizes.gutter / 2}}>
+      <View style={{flex: 1}}>
         {!isEmpty(this.state.error['general']) && (
           <Text style={styles.errorText}>{this.state.error['general']}</Text>
         )}

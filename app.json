@@ -1,4 +1,10 @@
 {
   "name": "straightPoolSheet",
-  "displayName": "straightPoolSheet"
+  "displayName": "straightPoolSheet",
+  "expo": {
+    "name": "straightPoolSheet",
+    "slug": "straightPoolSheet",
+    "sdkVersion": "UNVERSIONED",
+    "privacy": "public"
+  }
 }

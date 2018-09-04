@@ -1,11 +1,15 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Text, View, StyleSheet} from 'react-native';
+import {SocialIcon, Divider} from 'react-native-elements';
+import {LoginManager, AccessToken} from 'react-native-fbsdk';
+import {connect} from 'react-redux';
 
+import {authActions} from 'actions';
 import {AuthTextInput, CustomButton} from 'Components/common';
 
 import {isEmpty, validateForm} from 'helpers';
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 /**
  * LoginForm component
@@ -25,6 +29,39 @@ class LoginForm extends PureComponent {
     // bind functions
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onSignInWithFacebook = this.onSignInWithFacebook.bind(this);
+  }
+
+  /**
+   * get users permission authorization (ret: facebook token)
+   */
+  onSignInWithFacebook() {
+    const options = ['public_profile', 'email'];
+    LoginManager.logInWithReadPermissions(options).then(
+      (result) => {
+        if (result.isCancelled) {
+          console.log('Login was cancelled');
+        } else {
+          AccessToken.getCurrentAccessToken().then(
+            (data) => {
+              console.log('### Data from Accesstoken: ', data);
+              this.props.signInWithFacebook(data.accessToken, this.onSuccess, this.onError);
+            }
+          );
+        }
+      },
+      (error) => {
+        console.log('Login failed with error: ' + error);
+      }
+    );
+  }
+
+  onSuccess() {
+    console.log('### logged in succesfully ###');
+  }
+
+  onError(error) {
+    console.log('### error while logging in ###', error);
   }
 
   /**
@@ -91,11 +128,22 @@ class LoginForm extends PureComponent {
    */
   render() {
     const {fields, showLabel, buttonTitle, onForgotPassword} = this.props;
+    const {
+      socialButtonContainer,
+      errorText,
+      orContainer,
+      orText,
+      divider,
+      containerView,
+      socialButton,
+      buttonText,
+      forgotText,
+    } = styles;
 
     return (
       <View style={{flex: 1, paddingVertical: sizes.gutter / 2}}>
         {!isEmpty(this.state.error['general']) && (
-          <Text style={styles.errorText}>{this.state.error['general']}</Text>
+          <Text style={errorText}>{this.state.error['general']}</Text>
         )}
 
         {fields.map((data, idx) => {
@@ -124,15 +172,33 @@ class LoginForm extends PureComponent {
         })}
 
         <CustomButton
-          style={{marginVertical: sizes.gutter / 2}}
+          style={{marginVertical: sizes.gutter}}
           buttonText={buttonTitle}
           loading={false}
           onPress={this.onSubmit}
         />
 
+        <View style={orContainer}>
+          <Divider style={divider} />
+          <Text style={orText}>OR</Text>
+        </View>
+
+        <View style={socialButtonContainer}>
+          <SocialIcon
+            raised
+            button
+            type="facebook"
+            title="Login with facebook"
+            iconSize={sizes.font_L}
+            style={[containerView, socialButton]}
+            fontStyle={buttonText}
+            onPress={this.onSignInWithFacebook}
+          />
+        </View>
+
         {this.props.onForgotPassword !== null && (
-          <Text style={styles.forgotText} onPress={onForgotPassword}>
-              Forgot password?
+          <Text style={forgotText} onPress={onForgotPassword}>
+            Forgot password?
           </Text>
         )}
       </View>
@@ -146,6 +212,7 @@ LoginForm.propTypes = {
   buttonTitle: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
   onForgotPassword: PropTypes.func.isRequired,
+  signInWithFacebook: PropTypes.func.isRequired,
   error: PropTypes.object,
 };
 
@@ -154,6 +221,7 @@ LoginForm.defaultProps = {
 };
 
 const {colors, sizes} = SPS.variables;
+const {getDimColor} = SPS;
 
 const styles = StyleSheet.create({
   errorText: {
@@ -161,16 +229,25 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   containerView: {
-    marginVertical: sizes.gutter,
+    margin: 0,
   },
   socialButton: {
-    height: 55,
-    borderRadius: 4,
     marginTop: 0,
     marginBottom: 0,
+    borderColor: getDimColor(colors.grey.mid, .8),
+    borderRadius: 0,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    padding: (sizes.gutter / 2),
+    maxHeight: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  socialButtonContainer: {
+    marginVertical: sizes.gutter,
   },
   buttonText: {
-    fontSize: sizes.font_M + 2,
+    fontSize: sizes.font_M,
   },
   forgotText: {
     textAlign: 'center',
@@ -178,6 +255,31 @@ const styles = StyleSheet.create({
     marginBottom: sizes.gutter,
     fontSize: sizes.font_S,
   },
+
+  orContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    width: sizes.dimensions.width,
+  },
+
+  divider: {
+    backgroundColor: colors.textColorDim,
+    position: 'absolute',
+    top: 19,
+    left: 20,
+    right: 20,
+  },
+
+  orText: {
+    backgroundColor: colors.grey.darkest,
+    fontSize: sizes.font_M,
+    color: colors.textColor,
+    paddingHorizontal: sizes.gutter / 2,
+  },
 });
 
-export {LoginForm};
+const {signInWithFacebook} = authActions;
+const connectedLoginForm = connect(null, {signInWithFacebook})(LoginForm);
+
+export {connectedLoginForm as LoginForm};

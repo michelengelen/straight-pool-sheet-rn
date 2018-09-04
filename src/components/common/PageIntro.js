@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import PropType from 'prop-types';
 
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 const PageIntro = (props) => {
   const {

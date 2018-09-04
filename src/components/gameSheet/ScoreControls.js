@@ -3,8 +3,8 @@ import {TouchableOpacity, View} from 'react-native';
 import PropType from 'prop-types';
 import Image from 'react-native-remote-svg';
 
-import SPS from 'Common/variables';
-import Images from 'Assets/images';
+import SPS from 'common/variables';
+import Images from 'assets/images';
 
 /**
  * Sub-component rendering a single ScoreControl

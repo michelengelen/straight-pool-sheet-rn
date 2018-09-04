@@ -10,7 +10,7 @@ import {
 } from 'Components/common';
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState} from '../reducers/GameSheetReducer';
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 import {gameSheetActions, gameSettingActions} from '../actions';
 
 /**

@@ -2,7 +2,7 @@ import React from 'react';
 import {StatusBar, View} from 'react-native';
 import PropType from 'prop-types';
 
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 const CustomStatusBar = (props) => {
   let {viewStyle} = styles;

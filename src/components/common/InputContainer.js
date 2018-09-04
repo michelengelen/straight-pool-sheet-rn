@@ -2,7 +2,7 @@ import React from 'react';
 import PropType from 'prop-types';
 import {View, Text} from 'react-native';
 
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 /**
  * renders the InputContainer header if there is a headline or value input

@@ -5,7 +5,7 @@ import {View, Text} from 'react-native';
 
 import {InputContainer} from './InputContainer';
 import AwesomeSlider from './AwesomeSlider';
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 
 /**
  * Renders the thumb with the current Value inside

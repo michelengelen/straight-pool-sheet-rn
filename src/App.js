@@ -11,7 +11,7 @@ import GameSheet from 'Components/GameSheet';
 import Home from 'Components/Home';
 import Profile from 'Components/Profile';
 
-import SPS from 'Common/variables';
+import SPS from 'common/variables';
 import {store} from 'Store/configureStore';
 
 const RootStack = createStackNavigator(

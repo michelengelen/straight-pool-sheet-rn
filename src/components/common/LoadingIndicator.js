@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import Image from 'react-native-remote-svg';
 import PropTypes from 'prop-types';
 
-import Images from 'Assets/images';
+import Images from 'assets/images';
 
 const LoadingIndicator = ({size}) => {
   const {containerStyle} = styles;
