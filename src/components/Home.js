@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
-import {Header} from 'react-native-elements';
 import Image from 'react-native-remote-svg';
 
 import {PageContainer, CustomButton} from 'Components/common';

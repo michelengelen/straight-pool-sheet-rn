@@ -5,7 +5,7 @@ import PropType from 'prop-types';
 // import custom components
 import FullscreenModal from './FullscreenModal';
 import {PlayerOverview, ScoreControls, ScoreTable} from './gameSheet';
-import {Header, PageContainer} from 'Components/common';
+import {PageContainer} from 'Components/common';
 
 // import reducer/actions
 import {getSettings} from 'Reducers/GameSettingReducer';

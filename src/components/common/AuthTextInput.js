@@ -80,7 +80,6 @@ const {colors, sizes} = SPS.variables;
 const {getDimColor} = SPS;
 const styles = {
   container: {
-    width: '100%',
     backgroundColor: colors.grey.dark,
     padding: (sizes.gutter / 2),
   },

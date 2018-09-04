@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types';
-import {View, Text, Button} from 'react-native';
+import {Text, Button} from 'react-native';
 import {connect} from 'react-redux';
 
 import {authActions} from 'actions';

@@ -7,7 +7,6 @@ import {
   CustomInput,
   CustomSlider,
   CustomButton,
-  Header,
   PageContainer,
 } from 'Components/common';
 import {
