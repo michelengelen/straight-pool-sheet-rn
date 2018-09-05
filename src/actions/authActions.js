@@ -88,14 +88,16 @@ export function signOut(successCB, errorCB) {
     authAPI.signOut(function(success, data, error) {
       if (success) {
         dispatch({type: authActions.LOGGED_OUT});
-        successCB();
-      } else if (error) errorCB(error);
+        if (successCB) successCB();
+      } else if (error) {
+        if (errorCB) errorCB(error);
+      }
     });
   };
 }
 
 /**
- * check if a user is logged in with redux
+ * check if a user is logged in with firebase and updates the redux-store
  *
  * @param  {function} callback
  * @return {function}
@@ -108,8 +110,10 @@ export function checkLoginStatus(callback) {
       if (isLoggedIn) {
         authAPI.getUser(user, function(success, {exists, user}, error) {
           if (success) {
-            if (exists) dispatch({type: authActions.LOGGED_IN, data: user});
-            callback(exists, isLoggedIn);
+            dispatch({type: authActions.LOGGED_IN, data: user});
+            // TODO: Show a completeProfile Scene to new users ... use the code below for shifting
+            // if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
+            // callback(exists, isLoggedIn);
           } else if (error) {
             // unable to get user
             dispatch({type: authActions.LOGGED_OUT});
@@ -118,7 +122,7 @@ export function checkLoginStatus(callback) {
         });
       } else {
         dispatch({type: authActions.LOGGED_OUT});
-        callback(false, isLoggedIn);
+        if (callback) callback(false, isLoggedIn);
       }
     });
   };
@@ -136,8 +140,10 @@ export function signInWithFacebook(fbToken, successCB, errorCB) {
   return (dispatch) => {
     authAPI.signInWithFacebook(fbToken, function(success, data, error) {
       if (success) {
-        if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
-        successCB(data);
+        dispatch({type: authActions.LOGGED_IN, data: data.user});
+        // TODO: Show a completeProfile Scene to new users ... use the code below for shifting
+        // if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
+        // successCB(data);
       } else if (error) errorCB(error);
     });
   };

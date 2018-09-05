@@ -1,4 +1,4 @@
-import {auth, database, provider} from 'assets';
+import {auth, database} from 'assets';
 import * as firebase from 'firebase';
 
 /**
@@ -56,6 +56,7 @@ function getUser(user, callback) {
       if (exists) user = snapshot.val();
 
       const data = {exists, user};
+      console.log('### getUser: ', data);
       callback(true, data, null);
     })
     .catch((error) => callback(false, null, error));
@@ -97,11 +98,9 @@ function signOut(callback) {
  */
 function signInWithFacebook(fbToken, callback) {
   const credential = firebase.auth.FacebookAuthProvider.credential(fbToken);
-  console.log('### credential: ', credential);
   auth.signInWithCredential(credential)
     .then((user) => {
-      console.log('### #### #### ##### ##### #####');
-      console.log(getUser(user, callback));
+      getUser(user, callback);
     })
     .catch((error) => callback(false, null, error));
 }

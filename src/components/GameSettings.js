@@ -8,7 +8,7 @@ import {
   CustomSlider,
   CustomButton,
   PageContainer,
-} from 'Components/common';
+} from 'components/common';
 import {
   gameSettingActions,
   gameSheetActions,

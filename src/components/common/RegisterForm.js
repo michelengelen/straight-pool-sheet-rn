@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {Text, View, StyleSheet} from 'react-native';
 
 import {isEmpty, validateForm} from 'helpers';
-import {AuthTextInput, CustomButton} from 'Components/common';
+import {AuthTextInput, CustomButton} from 'components/common';
 
 import SPS from 'common/variables';
 

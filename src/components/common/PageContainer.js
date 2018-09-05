@@ -5,6 +5,7 @@ import PropType from 'prop-types';
 import {withNavigation} from 'react-navigation';
 
 import SPS from 'common/variables';
+import {sceneNames} from 'common';
 
 const ConditionalView = (props) => {
   const {scrollable, style, ...other} = props;
@@ -38,7 +39,7 @@ ConditionalView.propTypes = {
 };
 
 const PageContainer = (props) => {
-  const {home = false, pageTitle} = props;
+  const {home = false} = props;
   const {viewStyle, headerStyle} = styles;
 
   return (
@@ -55,7 +56,7 @@ const PageContainer = (props) => {
             : {}
         }
         centerComponent={{
-          text: pageTitle.toUpperCase(),
+          text: sceneNames[props.navigation.state.routeName].toUpperCase(),
           style: {color: colors.textColor},
         }}
         rightComponent={{icon: 'menu', color: colors.textColor}}

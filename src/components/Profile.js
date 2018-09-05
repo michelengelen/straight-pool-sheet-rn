@@ -8,9 +8,9 @@ import {
   CustomButton,
   LoginForm,
   PageContainer,
-  RegisterForm
-} from 'Components/common';
-import UserProfile from 'Components/profile/UserProfile';
+  RegisterForm,
+} from 'components/common';
+import UserProfile from 'components/profile/UserProfile';
 
 import {getAuth} from 'Reducers/AuthReducer';
 import SPS from 'common/variables';
@@ -18,6 +18,7 @@ import SPS from 'common/variables';
 import {authActions} from 'actions';
 const {register, login} = authActions;
 
+// TODO: move this to helper function or constants
 const fields = {
   register: [
     {
@@ -97,6 +98,10 @@ const error = {
  * Profile component which renders either a Login-/Register-Form or the UserProfile
  */
 class Profile extends Component {
+  /**
+   * react constructor call
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -109,20 +114,32 @@ class Profile extends Component {
     this.onError = this.onError.bind(this);
   }
 
-  onSubmit(data) {
+  /**
+   * handle the submit of the register-/login-form
+   * @param {object} formData
+   */
+  onSubmit(formData) {
     this.setState({error: error}); // clear out error messages
 
     if (this.state.register) {
-      this.props.register(data, this.onSuccess, this.onError);
+      this.props.register(formData, this.onSuccess, this.onError);
     } else {
-      this.props.login(data, this.onSuccess, this.onError);
+      this.props.login(formData, this.onSuccess, this.onError);
     }
   }
 
+  /**
+   * succes callback for the onSubmit function
+   * @param {object} user
+   */
   onSuccess(user) {
     this.props.navigation.navigate('Home');
   }
 
+  /**
+   * error callback for the onSubmit function
+   * @param {object} error
+   */
   onError(error) {
     let errObj = this.state.register
       ? {...this.state.error.register}
@@ -132,7 +149,7 @@ class Profile extends Component {
       errObj['general'] = error.message;
     } else {
       let keys = Object.keys(error);
-      keys.map((key, index) => {
+      keys.map((key) => {
         errObj[key] = error[key];
       });
     }
@@ -152,12 +169,16 @@ class Profile extends Component {
     }
   }
 
+  /**
+   * React render function
+   * @return {*}
+   */
   render() {
     const {register} = this.state;
     const {ctaTextStyle} = styles;
 
     if (this.props.authState.isLoggedIn) {
-      return <UserProfile user={this.props.authState.user} />;
+      return <UserProfile />;
     }
 
     if (this.state.register) {
@@ -211,7 +232,7 @@ class Profile extends Component {
 Profile.propTypes = {
   authState: PropType.shape({
     isLoggedIn: PropType.bool.isRequired,
-    user: PropType.oneOf([PropType.object, PropType.null]),
+    user: PropType.object,
   }),
   register: PropType.func.isRequired,
   login: PropType.func.isRequired,

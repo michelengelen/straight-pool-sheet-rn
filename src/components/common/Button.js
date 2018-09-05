@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Text, TouchableOpacity} from 'react-native';
-import {LoadingIndicator} from 'Components/common/LoadingIndicator';
+import {LoadingIndicator} from 'components/common/LoadingIndicator';
 
 const Button = ({onPress, loading, buttonText}) => {
   const {buttonStyle, textStyle} = styles;

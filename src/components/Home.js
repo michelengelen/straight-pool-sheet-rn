@@ -3,16 +3,18 @@ import PropType from 'prop-types';
 import {connect} from 'react-redux';
 import Image from 'react-native-remote-svg';
 
-import {PageContainer, CustomButton} from 'Components/common';
+import {PageContainer, CustomButton} from 'components/common';
 
 import Images from 'assets/images';
 import SPS from 'common/variables';
 import {getAuth} from '../reducers/AuthReducer';
 
+import {authActions} from 'actions';
+const {checkLoginStatus, signOut} = authActions;
+
 /**
- * Gamesettings Component
- * This serves as a wrapper component for several inputs
- * which ultimately set the rules for the game to be played
+ * Home Component
+ * The starting point for the App with Login/Register/View-Profile Buttons depending on the login-state
  */
 class Home extends Component {
   /**
@@ -21,6 +23,23 @@ class Home extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.onSignOut = this.onSignOut.bind(this);
+  }
+
+  /**
+   * React lifecycle hook - componentDidMount
+   */
+  componentDidMount() {
+    this.props.checkLoginStatus();
+  }
+
+  /**
+   * handle the signOut of the current user
+   */
+  onSignOut() {
+    console.log('### signOut', this.props);
+    this.props.signOut();
   }
 
   /**
@@ -50,6 +69,13 @@ class Home extends Component {
           loading={false}
           onPress={() => this.props.navigation.navigate('Profile')}
         />
+        {isLoggedIn &&
+          <CustomButton
+            buttonText={'Log out'}
+            loading={false}
+            onPress={this.onSignOut}
+          />
+        }
       </PageContainer>
     );
   }
@@ -58,6 +84,8 @@ class Home extends Component {
 Home.propTypes = {
   navigation: PropType.object,
   authState: PropType.object,
+  signOut: PropType.func.isRequired,
+  checkLoginStatus: PropType.func.isRequired,
 };
 
 const {sizes} = SPS.variables;
@@ -78,4 +106,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, undefined)(Home);
+export default connect(mapStateToProps, {checkLoginStatus, signOut})(Home);

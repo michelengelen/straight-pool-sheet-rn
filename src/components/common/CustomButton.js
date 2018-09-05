@@ -3,7 +3,7 @@ import PropType from 'prop-types';
 import {View, TouchableOpacity, Text} from 'react-native';
 
 // Custom Component imports
-import {LoadingIndicator} from 'Components/common';
+import {LoadingIndicator} from 'components/common';
 
 // Constant imports
 import SPS from 'common/variables';

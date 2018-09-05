@@ -5,11 +5,11 @@ import {Provider} from 'react-redux';
 // import SplashScreen from 'react-native-splash-screen';
 
 // project files
-import {CustomStatusBar} from 'Components/common';
-import GameSettings from 'Components/GameSettings';
-import GameSheet from 'Components/GameSheet';
-import Home from 'Components/Home';
-import Profile from 'Components/Profile';
+import {CustomStatusBar} from 'components/common';
+import GameSettings from 'components/GameSettings';
+import GameSheet from 'components/GameSheet';
+import Home from 'components/Home';
+import Profile from 'components/Profile';
 
 import SPS from 'common/variables';
 import {store} from 'Store/configureStore';

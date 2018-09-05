@@ -7,7 +7,7 @@ import {withNavigation} from 'react-navigation';
 import {
   CustomButton,
   PageIntro,
-} from 'Components/common';
+} from 'components/common';
 import {getSettings} from 'Reducers/GameSettingReducer';
 import {getGameState} from '../reducers/GameSheetReducer';
 import SPS from 'common/variables';

@@ -6,7 +6,7 @@ import {LoginManager, AccessToken} from 'react-native-fbsdk';
 import {connect} from 'react-redux';
 
 import {authActions} from 'actions';
-import {AuthTextInput, CustomButton} from 'Components/common';
+import {AuthTextInput, CustomButton} from 'components/common';
 
 import {isEmpty, validateForm} from 'helpers';
 import SPS from 'common/variables';
