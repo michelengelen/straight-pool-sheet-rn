@@ -1,4 +1,4 @@
-import {authActions} from './actionTypes';
+import {authActions, commonActions} from './actionTypes';
 import {auth} from 'assets';
 import {authAPI} from 'api';
 
@@ -111,17 +111,23 @@ export function checkLoginStatus(callback) {
         authAPI.getUser(user, function(success, {exists, user}, error) {
           if (success) {
             dispatch({type: authActions.LOGGED_IN, data: user});
+            dispatch({type: commonActions.appReady});
+
             // TODO: Show a completeProfile Scene to new users ... use the code below for shifting
             // if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
             // callback(exists, isLoggedIn);
           } else if (error) {
             // unable to get user
             dispatch({type: authActions.LOGGED_OUT});
+            dispatch({type: commonActions.appReady});
+
             callback(false, false);
           }
         });
       } else {
         dispatch({type: authActions.LOGGED_OUT});
+        dispatch({type: commonActions.appReady});
+
         if (callback) callback(false, isLoggedIn);
       }
     });

@@ -10,3 +10,4 @@ export * from './InputContainer';
 export * from './AuthTextInput';
 export * from './LoginForm';
 export * from './RegisterForm';
+export * from './Fade';

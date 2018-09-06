@@ -10,7 +10,6 @@ import SPS from 'common/variables';
 import {getAuth} from '../reducers/AuthReducer';
 
 import {authActions} from 'actions';
-const {checkLoginStatus, signOut} = authActions;
 
 /**
  * Home Component
@@ -68,13 +67,13 @@ class Home extends Component {
           loading={false}
           onPress={() => this.props.navigation.navigate('Profile')}
         />
-        {isLoggedIn &&
+        {isLoggedIn && (
           <CustomButton
             buttonText={'Log out'}
             loading={false}
             onPress={this.onSignOut}
           />
-        }
+        )}
       </PageContainer>
     );
   }
@@ -105,4 +104,5 @@ const mapStateToProps = (state) => {
   };
 };
 
+const {checkLoginStatus, signOut} = authActions;
 export default connect(mapStateToProps, {checkLoginStatus, signOut})(Home);

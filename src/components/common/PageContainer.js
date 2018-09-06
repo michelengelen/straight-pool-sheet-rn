@@ -1,11 +1,14 @@
 import React from 'react';
 import {View, ScrollView} from 'react-native';
+import {connect} from 'react-redux';
 import {Header} from 'react-native-elements';
 import PropType from 'prop-types';
 import {withNavigation} from 'react-navigation';
 
+import {getAppState} from 'reducers/CommonReducer';
 import SPS from 'common/variables';
 import {sceneNames} from 'common';
+import {LoadingIndicator} from './LoadingIndicator';
 
 const ConditionalView = (props) => {
   const {scrollable, style, ...other} = props;
@@ -39,11 +42,14 @@ ConditionalView.propTypes = {
 };
 
 const PageContainer = (props) => {
-  const {home = false} = props;
+  const {home = false, appState} = props;
   const {viewStyle, headerStyle} = styles;
+
+  console.log('render', appState.loading);
 
   return (
     <View style={{flex: 1}}>
+      <LoadingIndicator size={'full-size'} visible={appState.loading} />
       <Header
         leftComponent={
           !home
@@ -76,6 +82,7 @@ PageContainer.propTypes = {
   children: PropType.node,
   style: PropType.object,
   home: PropType.bool,
+  appState: PropType.object,
   navigation: PropType.object,
   pageTitle: PropType.string.isRequired,
   scrollable: PropType.bool.isRequired,
@@ -98,6 +105,13 @@ const styles = {
   },
 };
 
-const PageContainerWithNav = withNavigation(PageContainer);
+const mapStateToProps = (state) => {
+  return {
+    ...getAppState(state),
+  };
+};
 
+const PageContainerWithNav = connect(mapStateToProps, null)(
+  withNavigation(PageContainer)
+);
 export {PageContainerWithNav as PageContainer};
