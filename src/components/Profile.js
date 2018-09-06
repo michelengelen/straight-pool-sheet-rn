@@ -12,7 +12,7 @@ import {
 } from 'components/common';
 import UserProfile from 'components/profile/UserProfile';
 
-import {getAuth} from 'Reducers/AuthReducer';
+import {getAuth} from 'reducers/AuthReducer';
 import SPS from 'common/variables';
 
 import {authActions} from 'actions';

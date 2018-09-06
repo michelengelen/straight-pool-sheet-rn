@@ -8,7 +8,7 @@ import {
   CustomButton,
   PageIntro,
 } from 'components/common';
-import {getSettings} from 'Reducers/GameSettingReducer';
+import {getSettings} from 'reducers/GameSettingReducer';
 import {getGameState} from '../reducers/GameSheetReducer';
 import SPS from 'common/variables';
 import {gameSheetActions, gameSettingActions} from '../actions';

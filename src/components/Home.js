@@ -38,7 +38,6 @@ class Home extends Component {
    * handle the signOut of the current user
    */
   onSignOut() {
-    console.log('### signOut', this.props);
     this.props.signOut();
   }
 

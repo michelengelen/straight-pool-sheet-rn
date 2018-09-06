@@ -40,32 +40,44 @@ class LoginForm extends PureComponent {
     LoginManager.logInWithReadPermissions(options).then(
       (result) => {
         if (result.isCancelled) {
-          console.log('Login was cancelled');
+          this.onError({message: 'User cancelled the authentication via facebook'});
         } else {
           AccessToken.getCurrentAccessToken().then(
             (data) => {
-              console.log('### Data from Accesstoken: ', data);
               this.props.signInWithFacebook(data.accessToken, this.onSuccess, this.onError);
             }
           );
         }
       },
       (error) => {
+        /* eslint-disable-next-line */
         console.log('Login failed with error: ' + error);
       }
     );
   }
 
+  /**
+   * success callback for the login via facebook
+   */
   onSuccess() {
+    /* eslint-disable-next-line */
     console.log('### logged in succesfully ###');
   }
 
+  /**
+   * error callback for the login via facebook
+   *
+   * @param {object} error
+   * @param {string} error.message
+   */
   onError(error) {
+    /* eslint-disable-next-line */
     console.log('### error while logging in ###', error);
   }
 
   /**
    * create the state from the provided params
+   *
    * @param {object[]} fields
    * @param {object} error
    * @return {object} state
@@ -94,8 +106,9 @@ class LoginForm extends PureComponent {
   }
 
   /**
-   * extract the data from the form
-   * @param {object} data
+   * extract the data from the login form
+   *
+   * @param  {object} data
    * @return {object} retData
    */
   extractData(data) {
@@ -113,6 +126,7 @@ class LoginForm extends PureComponent {
 
   /**
    * handle the input in a field
+   *
    * @param {string} key
    * @param {string} text
    */
@@ -146,7 +160,7 @@ class LoginForm extends PureComponent {
           <Text style={errorText}>{this.state.error['general']}</Text>
         )}
 
-        {fields.map((data, idx) => {
+        {fields.map((data) => {
           let {
             key,
             label,

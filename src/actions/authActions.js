@@ -68,7 +68,7 @@ export function login(data, successCB, errorCB) {
  * @return {function}
  */
 export function resetPassword(data, successCB, errorCB) {
-  return (dispatch) => {
+  return () => {
     authAPI.resetPassword(data, function(success, data, error) {
       if (success) successCB();
       else if (error) errorCB(error);

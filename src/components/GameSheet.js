@@ -8,8 +8,8 @@ import {PlayerOverview, ScoreControls, ScoreTable} from './gameSheet';
 import {PageContainer} from 'components/common';
 
 // import reducer/actions
-import {getSettings} from 'Reducers/GameSettingReducer';
-import {getGameState, undoableFromState} from 'Reducers/GameSheetReducer';
+import {getSettings} from 'reducers/GameSettingReducer';
+import {getGameState, undoableFromState} from 'reducers/GameSheetReducer';
 import {gameSheetActions} from 'actions';
 
 /**

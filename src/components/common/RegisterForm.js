@@ -8,7 +8,14 @@ import {AuthTextInput, CustomButton} from 'components/common';
 
 import SPS from 'common/variables';
 
+/**
+ * RegisterForm component
+ */
 class RegisterForm extends PureComponent {
+  /**
+   * react constructor function
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
 
@@ -21,6 +28,13 @@ class RegisterForm extends PureComponent {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * create the state from the given fields and errors
+   *
+   * @param   {object[]} fields
+   * @param   {object}   error
+   * @return  {object}   state
+   */
   createState(fields, error) {
     // create the state
     const state = {};
@@ -33,16 +47,23 @@ class RegisterForm extends PureComponent {
     return state;
   }
 
+  /**
+   * handle the form submit
+   */
   onSubmit() {
     const data = this.state;
     const result = validateForm(data);
-
-    console.log(result);
 
     if (!result.success) this.setState({error: result.error});
     else this.props.onSubmit(this.extractData(data));
   }
 
+  /**
+   * extract the necessary data from the register form
+   *
+   * @param  {object} data
+   * @return {object} retData
+   */
   extractData(data) {
     const retData = {};
 
@@ -56,12 +77,22 @@ class RegisterForm extends PureComponent {
     return retData;
   }
 
+  /**
+   * handle any change made to the input fields and update the state accordingly
+   *
+   * @param {string} key
+   * @param {string} text
+   */
   onChange(key, text) {
     const state = this.state;
     state[key]['value'] = text;
     this.setState(state);
   }
 
+  /**
+   * react render fundtion
+   * @return {*}
+   */
   render() {
     const {fields, showLabel, buttonTitle, onForgotPassword} = this.props;
 
@@ -71,7 +102,7 @@ class RegisterForm extends PureComponent {
           <Text style={styles.errorText}>{this.state.error['general']}</Text>
         )}
 
-        {fields.map((data, idx) => {
+        {fields.map((data) => {
           let {
             key,
             label,

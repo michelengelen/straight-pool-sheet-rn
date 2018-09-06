@@ -15,7 +15,7 @@
 
 'use strict';
 
-/* eslint-disable no-console */
+/* eslint-disable */
 
 const AdmZip = require('adm-zip');
 const ProgressBar = require('progress');
@@ -50,22 +50,22 @@ function downloadFbSdk (next) {
     fs.mkdirSync(frameworkDir);
   }
 
-  var bar = null;
-  var download = got.stream(frameworkUrl)
-    .on('data', chunk => {
-      bar.tick(chunk.length);
-    })
-    .on('response', res => {
-      const len = parseInt(res.headers['content-length'], 10);
-      bar = new ProgressBar(progressBarPattern, {
-        complete: '=',
-        incomplete: ' ',
-        width: 20,
-        total: len,
-      });
+  let bar = null;
+  const download = got.stream(frameworkUrl)
+  .on('data', chunk => {
+    bar.tick(chunk.length);
+  })
+  .on('response', res => {
+    const len = parseInt(res.headers['content-length'], 10);
+    bar = new ProgressBar(progressBarPattern, {
+      complete: '=',
+      incomplete: ' ',
+      width: 20,
+      total: len,
     });
+  });
 
-  var writeToFile = fs.createWriteStream(zipFilePath);
+  const writeToFile = fs.createWriteStream(zipFilePath);
   pump(download, writeToFile, next);
 }
 
@@ -94,7 +94,9 @@ function correctSearchPaths (next) {
 
 function updateFBSDKFrameworks (next) {
   const files = fs.readdirSync('./ios/');
-  var myProjName = files.filter((f) => { return f.substr(-10) === '.xcodeproj'; })[0];
+  let myProjName = files.filter((f) => {
+    return f.substr(-10) === '.xcodeproj';
+  })[0];
   const myProjPath = path.join('./ios/', myProjName, '/project.pbxproj');
   myProjName = myProjName.replace('.xcodeproj', '');
   console.log('Updating target:' + myProjName + ' at ' + myProjPath + ' ...');
@@ -123,7 +125,7 @@ function updateFBSDKFrameworks (next) {
 
 function updatePlist (files, next) {
   console.dir(files);
-  var plistDirPath = '';
+  let plistDirPath = '';
   files.map(function (file) {
     return path.join('./ios/', file);
   }).filter(function (file) {

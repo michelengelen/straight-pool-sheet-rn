@@ -6,15 +6,27 @@ import {connect} from 'react-redux';
 import {withNavigation} from 'react-navigation';
 
 import {PageContainer} from 'components/common';
-import {getAuth} from 'Reducers/AuthReducer';
+import {getAuth} from 'reducers/AuthReducer';
 
 import SPS from 'common/variables';
 
+/**
+ * UserProfile component
+ * renders all information regarding the currently logged in user
+ */
 class UserProfile extends Component {
+  /**
+   * react constructor call
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
   }
 
+  /**
+   * React render function
+   * @return {*}
+   */
   render() {
     const {user} = this.props.authState;
     return (
@@ -22,26 +34,24 @@ class UserProfile extends Component {
         <View
           style={{
             flex: 1,
-            flexDirection: 'row',
             alignitems: 'stretch',
-            justifyContent: 'space-around',
           }}
         >
-          <View style={{flex: 2}}>
+          <View style={{alignItems: 'center', paddingVertical: sizes.gutter}}>
             <Avatar
-              large
+              xlarge
               rounded
               style={{borderWidth: 3, borderColor: colors.primary.full}}
               source={{
-                uri: user.photoURL,
+                uri: user.avatar,
               }}
+              /* eslint-disable-next-line */
               onPress={() => console.log('Works!')}
               activeOpacity={0.7}
             />
           </View>
-          <View style={{flex: 5}}>
-            <Text style={{color: 'white'}}>{`Hello ${user.username ||
-              user.displayName}`}</Text>
+          <View style={{alignItems: 'center'}}>
+            <Text style={{color: 'white'}}>{user.username || user.fullname}</Text>
           </View>
         </View>
       </PageContainer>
@@ -57,7 +67,7 @@ UserProfile.propTypes = {
   navigation: PropType.object,
 };
 
-const {colors} = SPS.variables;
+const {colors, sizes} = SPS.variables;
 
 const mapStateToProps = (state) => {
   return {

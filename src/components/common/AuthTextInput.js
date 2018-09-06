@@ -11,6 +11,10 @@ import SPS from 'common/variables';
  * creates a TextInput for the LoginForm
  */
 class AuthTextInput extends PureComponent {
+  /**
+   * react render fundtion
+   * @return {*}
+   */
   render() {
     const {
       showLabel,
@@ -23,7 +27,7 @@ class AuthTextInput extends PureComponent {
     } = this.props;
 
     return (
-      <View styles={styles.wrapperContainer}>
+      <View>
         {
           (showLabel) &&
             <FormLabel>{this.props.label}</FormLabel>

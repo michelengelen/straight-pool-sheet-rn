@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from "react";
 
 import {
@@ -116,6 +117,7 @@ export default class AwesomeSlider extends PureComponent {
       valueVisibleStyle.opacity = 0;
     }
 
+    // noinspection JSUnresolvedFunction
     const minimumTrackStyle = {
       position: "absolute",
       width: Animated.add(minimumTrackWidth, thumbSize.width / 2),
@@ -178,6 +180,7 @@ export default class AwesomeSlider extends PureComponent {
     // Should we become active when the user presses down on the thumb?
     this._thumbHitTest(e);
 
+  // noinspection JSMethodCanBeStatic
   _handleMoveShouldSetPanResponder(/* e: Object, gestureState: Object */): boolean {
     // Should we become active when the user moves a touch over the thumb?
     return false;

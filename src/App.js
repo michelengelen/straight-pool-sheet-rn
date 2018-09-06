@@ -12,7 +12,7 @@ import Home from 'components/Home';
 import Profile from 'components/Profile';
 
 import SPS from 'common/variables';
-import {store} from 'Store/configureStore';
+import {store} from 'store/configureStore';
 
 const RootStack = createStackNavigator(
   {

@@ -13,7 +13,7 @@ import {
   gameSettingActions,
   gameSheetActions,
 } from 'actions';
-import {getSettings} from 'Reducers/GameSettingReducer';
+import {getSettings} from 'reducers/GameSettingReducer';
 
 import SPS from 'common/variables';
 const {sizes} = SPS.variables;

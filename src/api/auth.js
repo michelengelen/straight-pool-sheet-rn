@@ -15,6 +15,19 @@ function register(data, callback) {
 }
 
 /**
+ * Sign the user in with their email and password
+ *
+ * @param {object} data
+ * @param {function} callback
+ */
+function login(data, callback) {
+  const {email, password} = data;
+  auth.signInWithEmailAndPassword(email, password)
+    .then((resp) => getUser(resp.user, callback))
+    .catch((error) => callback(false, null, error));
+}
+
+/**
  * Create the user object in realtime database
  *
  * @param {object} user
@@ -29,16 +42,18 @@ function createUser(user, callback) {
 }
 
 /**
- * Sign the user in with their email and password
+ * extract necessary data from the facebook user object
  *
- * @param {object} data
- * @param {function} callback
+ * @param   {object} fbUser
+ * @return  {object} user
  */
-function login(data, callback) {
-  const {email, password} = data;
-  auth.signInWithEmailAndPassword(email, password)
-    .then((resp) => getUser(resp.user, callback))
-    .catch((error) => callback(false, null, error));
+function extractDataFromFacebbokUser(fbUser) {
+  return {
+    fullname: fbUser.displayName,
+    email: fbUser.email,
+    uid: fbUser.uid,
+    avatar: fbUser.photoURL,
+  };
 }
 
 /**
@@ -52,12 +67,19 @@ function getUser(user, callback) {
     .then(function(snapshot) {
       const exists = (snapshot.val() !== null);
 
-      // if the user exist in the DB, replace the user variable with the returned snapshot
-      if (exists) user = snapshot.val();
+      if (exists) {
+        // if the user exist in the DB, replace the user variable with the returned snapshot
+        user = snapshot.val();
+        const data = {exists, user};
 
-      const data = {exists, user};
-      console.log('### getUser: ', data);
-      callback(true, data, null);
+        callback(true, data, null);
+      } else {
+        // TODO: simplify callback!
+        // if no user is found with the given uid create a new one
+        createUser({...extractDataFromFacebbokUser(user)}, (success, user, error) => {
+          callback(success, {exists: success, user}, error);
+        });
+      }
     })
     .catch((error) => callback(false, null, error));
 }
@@ -71,7 +93,7 @@ function getUser(user, callback) {
 function resetPassword(data, callback) {
   const {email} = data;
   auth.sendPasswordResetEmail(email)
-    .then((user) => callback(true, null, null))
+    .then(() => callback(true, null, null))
     .catch((error) => callback(false, null, error));
 }
 
