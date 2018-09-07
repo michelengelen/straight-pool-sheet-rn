@@ -53,10 +53,9 @@ class UserProfile extends Component {
             <Avatar
               xlarge
               rounded
-              style={{borderWidth: 3, borderColor: colors.primary.full}}
-              source={{
-                uri: user.avatar,
-              }}
+              avatarStyle={{transform: [{scale: .91}]}}
+              containerStyle={{borderWidth: 3, borderColor: colors.primary.full}}
+              source={{uri: user.avatar + '?type=large'}}
               /* eslint-disable-next-line */
               onPress={() => console.log('Works!')}
               activeOpacity={0.7}
