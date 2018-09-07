@@ -22,8 +22,6 @@ class Home extends Component {
    */
   constructor(props) {
     super(props);
-
-    this.onSignOut = this.onSignOut.bind(this);
   }
 
   /**
@@ -31,13 +29,6 @@ class Home extends Component {
    */
   componentDidMount() {
     this.props.checkLoginStatus();
-  }
-
-  /**
-   * handle the signOut of the current user
-   */
-  onSignOut() {
-    this.props.signOut();
   }
 
   /**
@@ -67,13 +58,6 @@ class Home extends Component {
           loading={false}
           onPress={() => this.props.navigation.navigate('Profile')}
         />
-        {isLoggedIn && (
-          <CustomButton
-            buttonText={'Log out'}
-            loading={false}
-            onPress={this.onSignOut}
-          />
-        )}
       </PageContainer>
     );
   }
@@ -82,7 +66,6 @@ class Home extends Component {
 Home.propTypes = {
   navigation: PropType.object,
   authState: PropType.object,
-  signOut: PropType.func.isRequired,
   checkLoginStatus: PropType.func.isRequired,
 };
 
@@ -104,5 +87,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-const {checkLoginStatus, signOut} = authActions;
-export default connect(mapStateToProps, {checkLoginStatus, signOut})(Home);
+const {checkLoginStatus} = authActions;
+export default connect(mapStateToProps, {checkLoginStatus})(Home);

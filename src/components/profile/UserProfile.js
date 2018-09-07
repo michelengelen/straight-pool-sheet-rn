@@ -5,10 +5,13 @@ import {Avatar} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {withNavigation} from 'react-navigation';
 
-import {PageContainer} from 'components/common';
+import {CustomButton, PageContainer} from 'components/common';
 import {getAuth} from 'reducers/AuthReducer';
 
 import SPS from 'common/variables';
+const {colors, sizes} = SPS.variables;
+
+import {authActions} from 'actions';
 
 /**
  * UserProfile component
@@ -21,6 +24,15 @@ class UserProfile extends Component {
    */
   constructor(props) {
     super(props);
+
+    this.onSignOut = this.onSignOut.bind(this);
+  }
+
+  /**
+   * handle the signOut of the current user
+   */
+  onSignOut() {
+    this.props.signOut();
   }
 
   /**
@@ -53,6 +65,13 @@ class UserProfile extends Component {
           <View style={{alignItems: 'center'}}>
             <Text style={{color: 'white'}}>{user.username || user.fullname}</Text>
           </View>
+          <CustomButton
+            style={{backgroundColor: colors.useCase.error}}
+            iconLeft={'md-power'}
+            buttonText={'Log out'}
+            loading={false}
+            onPress={this.onSignOut}
+          />
         </View>
       </PageContainer>
     );
@@ -65,9 +84,8 @@ UserProfile.propTypes = {
     user: PropType.object.isRequired,
   }),
   navigation: PropType.object,
+  signOut: PropType.func.isRequired,
 };
-
-const {colors, sizes} = SPS.variables;
 
 const mapStateToProps = (state) => {
   return {
@@ -75,4 +93,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withNavigation(connect(mapStateToProps, null)(UserProfile));
+const {signOut} = authActions;
+export default withNavigation(connect(mapStateToProps, {signOut})(UserProfile));

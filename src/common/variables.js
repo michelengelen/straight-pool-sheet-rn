@@ -12,6 +12,7 @@ SPS.variables = {
       full: 'rgba(223, 40, 64, 1)', // red
     },
     useCase: {
+      error: 'rgba(175, 0, 0, 1)',
       foul: 'rgba(217, 100, 59, 1)',
     },
     text: {
