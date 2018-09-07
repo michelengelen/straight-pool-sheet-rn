@@ -12,11 +12,15 @@ import {authAPI} from 'api';
  */
 export function register(data, successCB, errorCB) {
   return (dispatch) => {
+    dispatch({type: commonActions.appLoading});
     authAPI.register(data, function(success, data, error) {
       if (success) {
         dispatch({type: authActions.LOGGED_IN, data});
         successCB(data);
-      } else if (error) errorCB(error);
+      } else if (error) {
+        dispatch({type: commonActions.appReady});
+        errorCB(error);
+      }
     });
   };
 }
@@ -31,11 +35,16 @@ export function register(data, successCB, errorCB) {
  */
 export function createUser(user, successCB, errorCB) {
   return (dispatch) => {
+    dispatch({type: commonActions.appLoading});
     authAPI.createUser(user, function(success, data, error) {
       if (success) {
         dispatch({type: authActions.LOGGED_IN, data: user});
+        dispatch({type: commonActions.appReady});
         successCB();
-      } else if (error) errorCB(error);
+      } else if (error) {
+        dispatch({type: commonActions.appReady});
+        errorCB(error);
+      }
     });
   };
 }
@@ -54,7 +63,9 @@ export function login(data, successCB, errorCB) {
       if (success) {
         if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
         successCB(data);
-      } else if (error) errorCB(error);
+      } else if (error) {
+        errorCB(error);
+      }
     });
   };
 }
@@ -144,13 +155,18 @@ export function checkLoginStatus(callback) {
  */
 export function signInWithFacebook(fbToken, successCB, errorCB) {
   return (dispatch) => {
+    dispatch({type: commonActions.appLoading});
     authAPI.signInWithFacebook(fbToken, function(success, data, error) {
       if (success) {
         dispatch({type: authActions.LOGGED_IN, data: data.user});
         // TODO: Show a completeProfile Scene to new users ... use the code below for shifting
         // if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
         // successCB(data);
-      } else if (error) errorCB(error);
+      } else if (error) {
+        errorCB(error);
+      }
+    }).then(() => {
+      dispatch({type: commonActions.appReady});
     });
   };
 }

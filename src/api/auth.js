@@ -117,10 +117,11 @@ function signOut(callback) {
  *
  * @param {string} fbToken
  * @param {function} callback
+ * @return {Promise<T | never>}
  */
 function signInWithFacebook(fbToken, callback) {
   const credential = firebase.auth.FacebookAuthProvider.credential(fbToken);
-  auth.signInWithCredential(credential)
+  return auth.signInWithCredential(credential)
     .then((user) => {
       getUser(user, callback);
     })

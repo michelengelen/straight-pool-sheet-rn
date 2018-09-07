@@ -16,14 +16,14 @@ const LoadingIndicator = ({visible, size}) => {
       return (
         <Fade visible={visible} style={fadeStyle}>
           <View style={containerStyle}>
-            <Image source={loader} style={{width: 120, height: 30}} />
+            <Image source={loader} style={{width: 80, height: 20}} />
           </View>
         </Fade>
       );
     case 'medium':
-      return <Image source={loader} style={{width: 80, height: 20}} />;
+      return <Image source={loader} style={{width: 60, height: 15}} />;
     default:
-      return <Image source={loader} style={{width: 40, height: 10}} />;
+      return <Image source={loader} style={{width: 20, height: 5}} />;
   }
 };
 
