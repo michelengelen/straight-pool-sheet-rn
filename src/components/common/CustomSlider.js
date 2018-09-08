@@ -93,7 +93,7 @@ CustomSlider.propTypes = {
 
 const {colors, sizes} = SPS.variables;
 const styles = {
-  switchContainerStyle: {
+  sliderContainerStyle: {
     flex: 1,
     flexDirection: 'row',
     borderWidth: 3,
