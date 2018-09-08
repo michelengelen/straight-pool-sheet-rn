@@ -170,3 +170,12 @@ export function signInWithFacebook(fbToken, successCB, errorCB) {
     });
   };
 }
+
+/**
+ * use the logged in user as player in a new game (triggered by switch in GameSettings)
+ *
+ * @param {function} dispatch
+ */
+export function useAccount(dispatch) {
+  dispatch({type: authActions.USE_ACCOUNT});
+}

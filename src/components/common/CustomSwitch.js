@@ -25,7 +25,7 @@ class CustomSwitch extends Component {
     };
 
     this.thumbPosition = new Animated.Value(
-      this.props.value ? this.props.switchWidth : 0
+      this.props.value ? (this.props.switchWidth / 2) : 0
     );
 
     this.handleSwitch = this.handleSwitch.bind(this);
@@ -33,14 +33,16 @@ class CustomSwitch extends Component {
 
   /**
    * handle pressing the switch
+   * @param {function} callback
    */
-  handleSwitch() {
+  handleSwitch(callback) {
     const {currentValue} = this.state;
 
     Animated.timing(this.thumbPosition, {
       toValue: !currentValue ? (this.props.switchWidth / 2) : 0,
       duration: 300,
     }).start(() => {
+      callback && callback(!currentValue);
       this.setState({currentValue: !currentValue});
     });
   }
@@ -50,7 +52,7 @@ class CustomSwitch extends Component {
    * @return {*}
    */
   render() {
-    const {label} = this.props;
+    const {label, onChange, switchWidth} = this.props;
     const {
       switchContainerStyle,
       thumbStyle,
@@ -73,8 +75,8 @@ class CustomSwitch extends Component {
     return (
       <InputContainer headline={label}>
         <TouchableOpacity
-          onPress={() => this.handleSwitch()}
-          style={switchContainerStyle}
+          onPress={() => this.handleSwitch(onChange)}
+          style={{...switchContainerStyle, width: switchWidth}}
           activeOpacity={1}
         >
           <View style={iconContainerStyle}>
@@ -104,8 +106,7 @@ CustomSwitch.propTypes = {
   label: PropType.string,
   value: PropType.bool.isRequired,
   switchWidth: PropType.number.isRequired,
-  onTrueHandler: PropType.func,
-  onFalseHandler: PropType.func,
+  onChange: PropType.func,
 };
 
 const {colors, sizes} = SPS.variables;

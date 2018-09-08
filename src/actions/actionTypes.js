@@ -23,4 +23,5 @@ export const commonActions = {
 export const authActions = {
   LOGGED_IN: 'auth/LOGGED_IN',
   LOGGED_OUT: 'auth/LOGGED_OUT',
+  USE_ACCOUNT: 'auth/USE_ACCOUNT',
 };

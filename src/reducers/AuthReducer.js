@@ -17,13 +17,30 @@ const AuthReducer =(state = initialState, action) => {
         ['user', JSON.stringify(user)],
       ]);
 
-      return {...state, isLoggedIn: true, user: user};
+      return {
+        ...state,
+        isLoggedIn: true,
+        useAccount: true,
+        user: user,
+      };
 
     case authActions.LOGGED_OUT:
       let keys = ['user'];
       AsyncStorage.multiRemove(keys);
 
-      return {...state, isLoggedIn: false, user: null};
+      return {
+        ...state,
+        isLoggedIn: false,
+        useAccount: false,
+        user: null,
+      };
+
+    case authActions.USE_ACCOUNT:
+      console.log('reducer');
+      return {
+        ...state,
+        useAccount: !state.useAccount,
+      };
 
     default:
       return state;

@@ -18,6 +18,7 @@ import {getAuth} from 'reducers/AuthReducer';
 
 import SPS from 'common/variables';
 import {CustomSwitch} from './common/CustomSwitch';
+import {authActions} from 'actions';
 const {sizes} = SPS.variables;
 
 /**
@@ -26,6 +27,23 @@ const {sizes} = SPS.variables;
  * which ultimately set the rules for the game to be played
  */
 class GameSettings extends PureComponent {
+  /**
+   * react constructor call
+   * @param {object} props
+   */
+  constructor(props) {
+    super(props);
+
+    this.useLoggedInUser = this.useLoggedInUser.bind(this);
+  }
+
+  /**
+   * callback for the switch when user wants to play as logged in user
+   */
+  useLoggedInUser() {
+    this.props.useAccount();
+  }
+
   /**
    * Asynchronous Action for starting a new Game
    * Is needed for setting the game-params before loading the
@@ -83,7 +101,14 @@ class GameSettings extends PureComponent {
               />
             );
           })}
-          <CustomSwitch value={false} label={'SwitchTest'} switchWidth={58} />
+          {isLoggedIn &&
+            <CustomSwitch
+              value={isLoggedIn && useAccount}
+              label={'SwitchTest'}
+              switchWidth={58}
+              onChange={this.useLoggedInUser}
+            />
+          }
           <CustomSlider
             label={'Maximum Points'}
             value={gameSettings.maxPoints}
@@ -119,11 +144,13 @@ class GameSettings extends PureComponent {
 }
 
 GameSettings.propTypes = {
+  authState: PropType.object,
   gameSettings: PropType.object,
   updatePlayer: PropType.func,
   updatePoints: PropType.func,
   updateRounds: PropType.func,
   startGame: PropType.func,
+  useAccount: PropType.func,
   navigation: PropType.object,
 };
 
@@ -143,6 +170,8 @@ const mapDispatchToProps = (dispatch) => ({
     gameSettingActions.updateRoundsAction(dispatch, maxRounds),
   startGame: (settings) =>
     gameSheetActions.startGameAction(dispatch, settings),
+  useAccount: (user) =>
+    authActions.useAccount(dispatch, user),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameSettings);
