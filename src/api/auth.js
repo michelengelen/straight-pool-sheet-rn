@@ -50,6 +50,8 @@ function createUser(user, callback) {
 function extractDataFromFacebbokUser(fbUser) {
   return {
     fullname: fbUser.displayName,
+    firstname: fbUser.displayName.split(' ')[0],
+    lastname: fbUser.displayName.split(' ')[1],
     email: fbUser.email,
     uid: fbUser.uid,
     avatar: fbUser.photoURL,

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {View} from 'react-native';
 import {connect} from 'react-redux';
 import PropType from 'prop-types';
@@ -14,8 +14,10 @@ import {
   gameSheetActions,
 } from 'actions';
 import {getSettings} from 'reducers/GameSettingReducer';
+import {getAuth} from 'reducers/AuthReducer';
 
 import SPS from 'common/variables';
+import {CustomSwitch} from './common/CustomSwitch';
 const {sizes} = SPS.variables;
 
 /**
@@ -23,7 +25,7 @@ const {sizes} = SPS.variables;
  * This serves as a wrapper component for several inputs
  * which ultimately set the rules for the game to be played
  */
-class GameSettings extends Component {
+class GameSettings extends PureComponent {
   /**
    * Asynchronous Action for starting a new Game
    * Is needed for setting the game-params before loading the
@@ -43,12 +45,14 @@ class GameSettings extends Component {
   render() {
     const inputIds = ['One', 'Two'];
     const {
+      authState,
       gameSettings,
       updatePoints,
       updatePlayer,
       updateRounds,
       navigation,
     } = this.props;
+    const {useAccount, isLoggedIn, user} = authState;
     const {players} = gameSettings;
 
     return (
@@ -61,7 +65,11 @@ class GameSettings extends Component {
                 key={index}
                 id={'player' + id}
                 label={'Player ' + (index + 1)}
-                value={name}
+                value={
+                  useAccount && isLoggedIn && index === 0
+                    ? user.username
+                    : name
+                }
                 style={{flex: 1}}
                 onChangeText={(name) =>
                   updatePlayer({
@@ -69,11 +77,13 @@ class GameSettings extends Component {
                     name: name,
                   })
                 }
+                disabled={isLoggedIn && index === 0}
                 placeholder={'Player ' + id}
                 secureTextEntry={false}
               />
             );
           })}
+          <CustomSwitch value={false} label={'SwitchTest'} switchWidth={58} />
           <CustomSlider
             label={'Maximum Points'}
             value={gameSettings.maxPoints}
@@ -120,6 +130,7 @@ GameSettings.propTypes = {
 const mapStateToProps = (state) => {
   return {
     ...getSettings(state),
+    ...getAuth(state),
   };
 };
 
