@@ -36,7 +36,6 @@ const AuthReducer =(state = initialState, action) => {
       };
 
     case authActions.USE_ACCOUNT:
-      console.log('reducer');
       return {
         ...state,
         useAccount: !state.useAccount,

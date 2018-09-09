@@ -21,9 +21,9 @@ const updateRounds = (maxRounds) => {
   };
 };
 
-const preFillPlayers = (players) => {
+const swapPlayers = (players) => {
   return {
-    type: settingActions.preFillPlayers,
+    type: settingActions.swapPlayers,
     payload: players,
   };
 };
@@ -40,6 +40,6 @@ export const updateRoundsAction = (dispatch, payload) => {
   return dispatch(updateRounds(payload));
 };
 
-export const preFillPlayersAction = (dispatch, payload) => {
-  return dispatch(preFillPlayers(payload));
+export const swapPlayersAction = (dispatch, payload) => {
+  return dispatch(swapPlayers(payload));
 };

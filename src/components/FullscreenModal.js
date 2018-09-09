@@ -211,8 +211,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  preFillPlayers: (players) =>
-    gameSettingActions.preFillPlayersAction(dispatch, players),
+  swapPlayers: (players) =>
+    gameSettingActions.swapPlayersAction(dispatch, players),
   clearGame: (restart) =>
     gameSheetActions.clearGameAction(dispatch, restart),
 });

@@ -16,6 +16,8 @@ const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
             item: {
               ...state.players[payload.index],
               name: payload.name,
+              avatar: payload.avatar || null,
+              useAccount: payload.useAccount,
             },
           }
         ),
@@ -33,7 +35,7 @@ const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
         maxRounds: payload,
       };
 
-    case settingActions.preFillPlayers:
+    case settingActions.swapPlayers:
       return {
         ...state,
         players: state.players.reverse(),

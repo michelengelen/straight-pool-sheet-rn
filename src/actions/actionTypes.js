@@ -2,7 +2,7 @@ export const settingActions = {
   updatePlayer: 'settings/UPDATE_PLAYER',
   updateRounds: 'settings/UPDATE_ROUNDS',
   updatePoints: 'settings/UPDATE_POINTS',
-  preFillPlayers: 'settings/PREFILL_PLAYERS',
+  swapPlayers: 'settings/SWAP_PLAYERS',
 };
 
 export const gamesheetActions = {

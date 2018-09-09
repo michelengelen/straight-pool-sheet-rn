@@ -45,8 +45,6 @@ const PageContainer = (props) => {
   const {home = false, appState} = props;
   const {viewStyle, headerStyle} = styles;
 
-  console.log('render', appState.loading);
-
   return (
     <View style={{flex: 1}}>
       <LoadingIndicator size={'full-size'} visible={appState.loading} />
