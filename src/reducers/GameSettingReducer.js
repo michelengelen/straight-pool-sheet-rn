@@ -17,7 +17,7 @@ const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
               ...state.players[payload.index],
               name: payload.name,
               avatar: payload.avatar || null,
-              useAccount: payload.useAccount,
+              useAccount: payload.useAccount || false,
             },
           }
         ),

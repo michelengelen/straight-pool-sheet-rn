@@ -52,7 +52,7 @@ class CustomSwitch extends Component {
    * @return {*}
    */
   render() {
-    const {label, onChange, switchWidth} = this.props;
+    const {description, label, onChange, switchWidth} = this.props;
     const {
       switchContainerStyle,
       thumbStyle,
@@ -73,7 +73,7 @@ class CustomSwitch extends Component {
     };
 
     return (
-      <InputContainer headline={label}>
+      <InputContainer headline={label} description={description}>
         <TouchableOpacity
           onPress={() => this.handleSwitch(onChange)}
           style={{...switchContainerStyle, width: switchWidth}}
@@ -104,6 +104,7 @@ class CustomSwitch extends Component {
 
 CustomSwitch.propTypes = {
   label: PropType.string,
+  description: PropType.string,
   value: PropType.bool.isRequired,
   switchWidth: PropType.number.isRequired,
   onChange: PropType.func,

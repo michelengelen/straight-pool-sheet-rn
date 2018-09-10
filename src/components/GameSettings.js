@@ -59,12 +59,17 @@ class GameSettings extends PureComponent {
     const {players} = this.props.gameSettings;
     const {useAccount, user} = this.props.authState;
 
+    // switch value for useAccount on authState object
+    this.props.useAccount();
+
+    // check which player object needs an update
     let useAccountIndex = 0;
     for (let i = 0; i < 2; i++) {
       if (players[i].useAccount) useAccountIndex = i;
     }
 
-    this.props.useAccount();
+    // when there is already a name typed in for player one update player 2 instead
+    if (players[0].name !== '' && !players[0].useAccount) useAccountIndex = 1;
 
     this.props.updatePlayer({
       index: useAccountIndex,
@@ -83,6 +88,7 @@ class GameSettings extends PureComponent {
    * @return {Promise<void>}
    */
   async startNewGame(gameSettings) {
+    // start the game (pass settings to the new scene, then show it)
     await this.props.startGame(gameSettings);
   }
 
@@ -109,7 +115,6 @@ class GameSettings extends PureComponent {
           updatePlayer({
             index: index,
             name: name,
-            useAccount: false,
           })
         }
         disabled={useAccount}
@@ -124,9 +129,10 @@ class GameSettings extends PureComponent {
    *
    * @param  {string} avatar
    * @param  {string} title
+   * @param  {number} index
    * @return {jsx}
    */
-  renderAvatar(avatar, title) {
+  renderAvatar(avatar, title, index) {
     let initials;
     if (title && typeof title === 'string') {
       const parts = title.split(' ');
@@ -135,12 +141,13 @@ class GameSettings extends PureComponent {
       initials = initials.toUpperCase();
     }
 
+    const playerColor = colors.useCase[`player${index + 1}`];
+
     return (
       <Avatar
         large
-        rounded
-        avatarStyle={{transform: [{scale: .91}]}}
-        containerStyle={{borderWidth: 3, borderColor: colors.useCase.error}}
+        avatarStyle={{transform: [{scale: .87}], borderRadius: 4}}
+        containerStyle={{borderWidth: 3, borderColor: playerColor, borderRadius: 8}}
         source={avatar ? {uri: avatar + '?type=large'} : null}
         title={title ? initials : null}
         /* eslint-disable-next-line */
@@ -179,13 +186,13 @@ class GameSettings extends PureComponent {
           <InputContainer headline={'Players'}>
             <View style={{flex: 1, flexDirection: 'row', alignItems: 'stretch'}}>
               <View style={{flex: 5, alignItems: 'center', paddingBottom: 10}}>
-                {this.renderAvatar(players[0].avatar, players[0].name)}
+                {this.renderAvatar(players[0].avatar, players[0].name, 0)}
               </View>
               <View style={{flex: 2, alignItems: 'center', justifyContent: 'space-around'}}>
                 <Text style={vsStyle}>VS</Text>
               </View>
               <View style={{flex: 5, alignItems: 'center', paddingBottom: 10}}>
-                {this.renderAvatar(players[1].avatar, players[1].name)}
+                {this.renderAvatar(players[1].avatar, players[1].name, 1)}
               </View>
             </View>
 
@@ -210,9 +217,11 @@ class GameSettings extends PureComponent {
           {isLoggedIn &&
             <CustomSwitch
               value={isLoggedIn && useAccount}
-              label={'SwitchTest'}
+              label={'Play with your account'}
               switchWidth={58}
               onChange={this.useLoggedInUser}
+              description={'When you play with your account all scores get stored on our servers. Playerstatistics' +
+              ' can only be calculated when you play as yourself.'}
             />
           }
           <CustomSlider

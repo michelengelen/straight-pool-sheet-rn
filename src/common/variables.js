@@ -15,8 +15,8 @@ SPS.variables = {
       error: 'rgba(175, 0, 0, 1)',
       success: 'rgba(151, 208, 91, 1)',
       foul: 'rgba(217, 100, 59, 1)',
-      player1: 'rgba(219, 0, 0, 1)',
-      player2: 'rgba(0, 0, 219, 1)',
+      player1: 'rgba(244, 58, 81, 1)',
+      player2: 'rgba(37, 106, 113, 1)',
     },
     text: {
       light: 'rgba(244, 244, 244, 1)',

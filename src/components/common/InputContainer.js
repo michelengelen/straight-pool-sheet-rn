@@ -56,9 +56,15 @@ const InputContainer = (props) => {
   const {
     children,
     headline,
+    description,
     value,
   } = props;
-  const {containerStyle} = styles;
+
+  const {
+    containerStyle,
+    descriptionContainer,
+    descriptionText,
+  } = styles;
 
   return (
     <View style={containerStyle}>
@@ -76,6 +82,11 @@ const InputContainer = (props) => {
       >
         {children}
       </View>
+      {description &&
+        <View style={descriptionContainer}>
+          <Text style={descriptionText}>{description}</Text>
+        </View>
+      }
     </View>
   );
 };
@@ -83,6 +94,7 @@ const InputContainer = (props) => {
 InputContainer.propTypes = {
   children: PropType.node,
   headline: PropType.string,
+  description: PropType.string,
   value: PropType.oneOfType([
     PropType.string,
     PropType.number,
@@ -129,6 +141,15 @@ const styles = {
     fontSize: sizes.font_M,
     padding: (sizes.gutter / 4),
     textAlign: 'right',
+  },
+  descriptionContainer: {
+    borderTopWidth: 1,
+    borderColor: colors.text.mid,
+  },
+  descriptionText: {
+    fontSize: sizes.font_M,
+    paddingVertical: sizes.gutter / 2,
+    color: colors.text.mid,
   },
 };
 
