@@ -5,29 +5,40 @@ class Fade extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      visible: props.visible,
+      zIndex: this.props.visible ? 10 : -1,
     };
-  }
 
-  componentWillMount() {
     this._visibility = new Animated.Value(this.props.visible ? 1 : 0);
+
+    this.animationCallback = this.animationCallback.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.visible) {
-      this.setState({visible: true});
+  componentDidUpdate(prevProps) {
+    if (prevProps.visible !== this.props.visible) {
+      this._visibility.setValue(
+        this.props.visible ? 0 : 1,
+      );
+
+      Animated.timing(this._visibility, {
+        toValue: this.props.visible ? 1 : 0,
+        duration: 1000,
+        useNativeDriver: true,
+      }).start(() => {
+        this.setState({
+          zIndex: this.props.visible ? 10 : -1,
+        });
+      });
     }
-    Animated.timing(this._visibility, {
-      toValue: nextProps.visible ? 1 : 0,
-      duration: 600,
-    }).start(() => {
-      this.setState({visible: nextProps.visible});
+  }
+
+  animationCallback() {
+    this.setState({
+      zIndex: this.props.visible ? 10 : -1,
     });
   }
 
   render() {
     const {style, children, ...rest} = this.props;
-    const {visible} = this.state;
 
     const containerStyle = {
       opacity: this._visibility.interpolate({
@@ -48,16 +59,16 @@ class Fade extends PureComponent {
       left: 0,
       right: 0,
       bottom: 0,
-      zIndex: visible ? 10 : 0,
+      zIndex: this.state.zIndex,
     };
 
     const combinedStyle = [containerStyle, style];
+
+    console.log('state: ', this.state.zIndex);
+    console.log('style: ', containerStyle.zIndex);
     return (
-      <Animated.View
-        style={visible ? combinedStyle : containerStyle}
-        {...rest}
-      >
-        {visible ? children : null}
+      <Animated.View style={combinedStyle} {...rest}>
+        {children}
       </Animated.View>
     );
   }

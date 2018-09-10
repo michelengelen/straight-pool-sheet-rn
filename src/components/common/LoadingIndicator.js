@@ -40,7 +40,6 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    zIndex: 10,
     alignItems: 'center',
     justifyContent: 'space-around',
     width: sizes.dimensions.width,
