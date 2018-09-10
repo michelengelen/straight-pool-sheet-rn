@@ -1,44 +1,76 @@
 import React, {PureComponent} from 'react';
 import {Animated} from 'react-native';
 
+/**
+ * Wrapper class for full-screen Loading-Indicator
+ */
 class Fade extends PureComponent {
+  /**
+   * react constructor call
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
+
     this.state = {
-      zIndex: this.props.visible ? 10 : -1,
+      visible: props.visible,
     };
 
-    this._visibility = new Animated.Value(this.props.visible ? 1 : 0);
-
-    this.animationCallback = this.animationCallback.bind(this);
+    // create the Value for the animation
+    this._visibility = new Animated.Value(props.visible ? 1 : 0);
   }
 
+  /**
+   * react lifecycle method
+   *
+   * @param {object} props
+   * @param {object} state
+   * @return {*}
+   */
+  static getDerivedStateFromProps(props, state) {
+    // only return new state when previous state is false
+    if (props.visible && !state.visible) {
+      return {
+        visible: props.visible,
+      };
+    }
+
+    return null;
+  }
+
+  /**
+   * react lifecycle method
+   *
+   * @param {object} prevProps
+   */
   componentDidUpdate(prevProps) {
+    // only render the animation when previous props are unequal to the current
     if (prevProps.visible !== this.props.visible) {
+      // set new Value based on prop
       this._visibility.setValue(
         this.props.visible ? 0 : 1,
       );
 
+      // start the animation
       Animated.timing(this._visibility, {
         toValue: this.props.visible ? 1 : 0,
-        duration: 1000,
-        useNativeDriver: true,
+        duration: 800,
       }).start(() => {
+        // when the animation is finished call setState
         this.setState({
-          zIndex: this.props.visible ? 10 : -1,
+          visible: this.props.visible,
         });
       });
     }
   }
 
-  animationCallback() {
-    this.setState({
-      zIndex: this.props.visible ? 10 : -1,
-    });
-  }
-
+  /**
+   * react render function
+   * @return {jsx}
+   */
   render() {
     const {style, children, ...rest} = this.props;
+    const {visible} = this.state;
 
     const containerStyle = {
       opacity: this._visibility.interpolate({
@@ -59,16 +91,15 @@ class Fade extends PureComponent {
       left: 0,
       right: 0,
       bottom: 0,
-      zIndex: this.state.zIndex,
+      zIndex: visible ? 10 : -1,
     };
 
-    const combinedStyle = [containerStyle, style];
+    // containerStyles have higher precedence
+    const combinedStyle = [style, containerStyle];
 
-    console.log('state: ', this.state.zIndex);
-    console.log('style: ', containerStyle.zIndex);
     return (
       <Animated.View style={combinedStyle} {...rest}>
-        {children}
+        {visible ? children : null}
       </Animated.View>
     );
   }
