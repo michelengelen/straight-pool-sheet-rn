@@ -1,6 +1,9 @@
 import React, {PureComponent} from 'react';
 import {Animated} from 'react-native';
 
+import SPS from 'common/variables';
+const {sizes} = SPS.variables;
+
 /**
  * Wrapper class for full-screen Loading-Indicator
  */
@@ -87,6 +90,10 @@ class Fade extends PureComponent {
       ],
       flex: 1,
       position: 'absolute',
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      width: sizes.dimensions.width,
+      height: sizes.dimensions.height,
       top: 0,
       left: 0,
       right: 0,
