@@ -7,7 +7,7 @@ let initialState = {
   user: null,
 };
 
-const AuthReducer =(state = initialState, action) => {
+const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case authActions.LOGGED_IN:
       const user = action.data;

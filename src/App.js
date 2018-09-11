@@ -1,32 +1,103 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import {createStackNavigator} from 'react-navigation';
+import {createDrawerNavigator} from 'react-navigation';
 import {Provider} from 'react-redux';
 // import SplashScreen from 'react-native-splash-screen';
 
 // project files
-import {CustomStatusBar} from 'components/common';
+import {CustomStatusBar, CustomNavigationDrawer} from 'components/common';
 import GameSettings from 'components/GameSettings';
 import GameSheet from 'components/GameSheet';
 import Home from 'components/Home';
 import Profile from 'components/Profile';
+import LoginRegister from 'components/LoginRegister';
 
 import SPS from 'common/variables';
 import {store} from 'store/configureStore';
 
-const RootStack = createStackNavigator(
-  {
-    Home: Home,
-    GameSettings: GameSettings,
-    GameSheet: GameSheet,
-    Profile: Profile,
+const DrawerNavigatorConfig = {
+  initialRouteName: 'Home',
+  drawerPosition: 'right',
+  navigationOptions: {
+    header: null,
   },
+  contentComponent: (props) => (
+    <CustomNavigationDrawer {...props} />
+  ),
+};
+
+const RootStack = createDrawerNavigator(
   {
-    initialRouteName: 'Home',
-    navigationOptions: {
-      header: null,
+    Home: {
+      screen: Home,
+      navigationOptions: ({navigation}) => {
+        const {params} = navigation.state;
+        if (!params) {
+          navigation.setParams({
+            icon: 'md-home',
+            showWhenLoggedIn: true,
+            alwaysShow: true,
+          });
+        }
+        return {
+          drawerLabel: 'Home TEST',
+        };
+      },
+    },
+    GameSettings: {
+      screen: GameSettings,
+      navigationOptions: ({navigation}) => {
+        const {params} = navigation.state;
+        if (!params) {
+          navigation.setParams({
+            icon: 'md-home',
+            showWhenLoggedIn: true,
+            alwaysShow: false,
+          });
+        }
+      },
+    },
+    GameSheet: {
+      screen: GameSheet,
+      navigationOptions: ({navigation}) => {
+        const {params} = navigation.state;
+        if (!params) {
+          navigation.setParams({
+            icon: 'md-home',
+            showWhenLoggedIn: true,
+            alwaysShow: true,
+          });
+        }
+      },
+    },
+    Profile: {
+      screen: Profile,
+      navigationOptions: ({navigation}) => {
+        const {params} = navigation.state;
+        if (!params) {
+          navigation.setParams({
+            icon: 'md-home',
+            showWhenLoggedIn: true,
+            alwaysShow: true,
+          });
+        }
+      },
+    },
+    LoginRegister: {
+      screen: LoginRegister,
+      navigationOptions: ({navigation}) => {
+        const {params} = navigation.state;
+        if (!params) {
+          navigation.setParams({
+            icon: 'md-home',
+            showWhenLoggedIn: true,
+            alwaysShow: true,
+          });
+        }
+      },
     },
   },
+  DrawerNavigatorConfig,
 );
 
 const {colors} = SPS.variables;

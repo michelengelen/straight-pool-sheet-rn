@@ -122,6 +122,9 @@ export function checkLoginStatus(callback) {
         authAPI.getUser(user, function(success, {exists, user}, error) {
           if (success) {
             dispatch({type: authActions.LOGGED_IN, data: user});
+
+            if (callback) callback(true);
+
             dispatch({type: commonActions.appReady});
 
             // TODO: Show a completeProfile Scene to new users ... use the code below for shifting
@@ -132,14 +135,14 @@ export function checkLoginStatus(callback) {
             dispatch({type: authActions.LOGGED_OUT});
             dispatch({type: commonActions.appReady});
 
-            callback(false, false);
+            if (callback) callback(false);
           }
         });
       } else {
         dispatch({type: authActions.LOGGED_OUT});
         dispatch({type: commonActions.appReady});
 
-        if (callback) callback(false, isLoggedIn);
+        if (callback) callback(false);
       }
     });
   };

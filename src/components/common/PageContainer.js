@@ -63,7 +63,13 @@ const PageContainer = (props) => {
           text: sceneNames[props.navigation.state.routeName].toUpperCase(),
           style: {color: colors.textColor},
         }}
-        rightComponent={{icon: 'menu', color: colors.textColor}}
+        rightComponent={{
+          icon: 'menu',
+          color: colors.textColor,
+          onPress: () => {
+            props.navigation.toggleDrawer();
+          },
+        }}
         outerContainerStyles={headerStyle.outer}
       />
       <ConditionalView

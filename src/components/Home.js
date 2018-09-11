@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
 import Image from 'react-native-remote-svg';
+import {Icon} from 'react-native-elements';
 
 import {PageContainer, CustomButton} from 'components/common';
 
@@ -23,6 +24,12 @@ class Home extends Component {
   constructor(props) {
     super(props);
   }
+
+  static navigationOptions = {
+    params: {
+      test: true,
+    },
+  };
 
   /**
    * React lifecycle hook - componentDidMount
@@ -56,7 +63,13 @@ class Home extends Component {
         <CustomButton
           buttonText={isLoggedIn ? 'View Profile' : 'Login / Register'}
           loading={false}
-          onPress={() => this.props.navigation.navigate('Profile')}
+          onPress={() => {
+            if (isLoggedIn) {
+              this.props.navigation.navigate('Profile');
+            } else {
+              this.props.navigation.navigate('LoginRegister');
+            }
+          }}
         />
       </PageContainer>
     );
@@ -66,10 +79,20 @@ class Home extends Component {
 Home.propTypes = {
   navigation: PropType.object,
   authState: PropType.object,
+  tintColor: PropType.string,
   checkLoginStatus: PropType.func.isRequired,
 };
 
-const {sizes} = SPS.variables;
+Home.navigationOptions = {
+  drawerLabel: 'Home',
+  drawerIcon: ({tintColor}) => {
+    return (
+      <Icon type={'ionicon'} name={'md-home'} color={colors.primary.full} />
+    );
+  },
+};
+
+const {colors, sizes} = SPS.variables;
 const {dimensions} = sizes;
 
 const styles = {
