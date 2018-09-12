@@ -3,27 +3,22 @@ import {sceneNames} from './labels';
 const filterVariables = {
   Home: {
     showWhenLoggedIn: true,
-    showOnGameRunning: true,
     iconName: 'md-home',
   },
   GameSettings: {
-    showWhenLoggedIn: false,
-    showOnGameRunning: false,
+    showWhenGameRunning: false,
     iconName: 'md-options',
   },
   GameSheet: {
-    showWhenLoggedIn: true,
-    showOnGameRunning: true,
+    showWhenGameRunning: true,
     iconName: 'md-play',
   },
   Profile: {
     showWhenLoggedIn: true,
-    showOnGameRunning: true,
     iconName: 'md-person',
   },
   LoginRegister: {
     showWhenLoggedIn: false,
-    showOnGameRunning: true,
     iconName: 'md-log-in',
   },
 };
@@ -36,7 +31,11 @@ const filterDrawerItems = (items, isLoggedIn, gameRunning) => {
     return item;
   }).filter((item) => {
     const itemValues = filterVariables[item.key];
-    return itemValues.showWhenLoggedIn === isLoggedIn || itemValues.showOnGameRunning === gameRunning;
+
+    const shouldShowWhenLoggedIn = itemValues.showWhenLoggedIn === isLoggedIn;
+    const shouldShowWhenWhenGameRunning = itemValues.showWhenGameRunning === gameRunning;
+
+    return shouldShowWhenLoggedIn ||shouldShowWhenWhenGameRunning;
   });
 };
 

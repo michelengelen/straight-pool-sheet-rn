@@ -49,7 +49,6 @@ class CustomNavigationItem extends PureComponent {
 
 CustomNavigationItem.propTypes = {
   icon: PropType.string,
-  key: PropType.string,
   label: PropType.string,
   navigate: PropType.func,
 };

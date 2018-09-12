@@ -10,6 +10,7 @@ import SPS from 'common/variables';
 import {filterDrawerItems} from 'common';
 
 import {getAuth} from 'reducers/AuthReducer';
+import {getAppState} from 'reducers/CommonReducer';
 const {colors} = SPS.variables;
 
 /**
@@ -37,9 +38,9 @@ class CustomNavigationDrawer extends PureComponent {
    * @return {{filteredItems: *}}
    */
   static getDerivedStateFromProps(props, state) {
-    const {authState, items} = props;
+    const {authState, appState, items} = props;
     return {
-      filteredItems: filterDrawerItems(items, authState.isLoggedIn, false),
+      filteredItems: filterDrawerItems(items, authState.isLoggedIn, appState.gameRunning),
     };
   }
 
@@ -77,6 +78,7 @@ CustomNavigationDrawer.propTypes = {
     isLoggedIn: PropType.bool.isRequired,
     user: PropType.object,
   }),
+  appState: PropType.object,
   items: PropType.array,
   navigation: PropType.object,
 };
@@ -100,6 +102,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     ...getAuth(state),
+    ...getAppState(state),
   };
 };
 

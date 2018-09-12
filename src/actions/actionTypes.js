@@ -18,6 +18,7 @@ export const gamesheetActions = {
 export const commonActions = {
   appLoading: 'common/APP_LOADING',
   appReady: 'common/APP_READY',
+  setRunningGame: 'common/SET_RUNNING_GAME',
 };
 
 export const authActions = {

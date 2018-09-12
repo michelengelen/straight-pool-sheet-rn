@@ -19,3 +19,14 @@ export function appReadyAction() {
     dispatch({type: commonActions.appReady});
   };
 }
+
+
+/**
+ * set a value for the case a game is currently running
+ * @return {function(*): *}
+ */
+export function setRunningGame() {
+  return (dispatch) => {
+    dispatch({type: commonActions.setRunningGame});
+  };
+}

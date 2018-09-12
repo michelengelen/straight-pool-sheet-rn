@@ -44,6 +44,8 @@
 		35E7358E213EA2CA00C5ED37 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35E73589213EA2C900C5ED37 /* FBSDKLoginKit.framework */; };
 		35E7358F213EA2CA00C5ED37 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35E7358A213EA2C900C5ED37 /* FBSDKShareKit.framework */; };
 		35E73590213EA2CA00C5ED37 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35E7358A213EA2C900C5ED37 /* FBSDKShareKit.framework */; };
+		35FB81D1214950F200169232 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35FB81A7214950F200169232 /* GoogleService-Info.plist */; };
+		35FB81D2214950F200169232 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35FB81A7214950F200169232 /* GoogleService-Info.plist */; };
 		3717C4BB8A3240FDA660D94C /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D31DCC3669F43CD9F77BA1D /* libRCTFBSDK.a */; };
 		39ACD173C6CF40C2AA2788AA /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94978B7F7DEF481DA59BC459 /* EvilIcons.ttf */; };
 		423F6463DC074D50BC0B7C61 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F5424836CAA4F5E8DE644EC /* Ionicons.ttf */; };
@@ -403,6 +405,7 @@
 		35E73588213EA2C900C5ED37 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		35E73589213EA2C900C5ED37 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		35E7358A213EA2C900C5ED37 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		35FB81A7214950F200169232 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D31DCC3669F43CD9F77BA1D /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		528A17B8ECE24CB5AC0270E4 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		5CE41FF5DD6E4032B77ACCB8 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
@@ -585,6 +588,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				35FB81A7214950F200169232 /* GoogleService-Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -1260,6 +1264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35FB81D2214950F200169232 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1278,6 +1283,7 @@
 				A124692638FD4A6FA65716A5 /* FontAwesome5_Regular.ttf in Resources */,
 				E2327B7FD9E944258F48E23E /* FontAwesome5_Solid.ttf in Resources */,
 				5C1407AD41754AC0819FFB9B /* Foundation.ttf in Resources */,
+				35FB81D1214950F200169232 /* GoogleService-Info.plist in Resources */,
 				423F6463DC074D50BC0B7C61 /* Ionicons.ttf in Resources */,
 				B0F311D315A34F6F97C7FCF0 /* MaterialCommunityIcons.ttf in Resources */,
 				35E29C7A15684770988A28EA /* MaterialIcons.ttf in Resources */,

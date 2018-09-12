@@ -2,6 +2,7 @@ import {commonActions} from 'actions/actionTypes';
 
 const INITIAL_STATE = {
   loading: true,
+  gameRunning: false,
 };
 
 const CommonReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +17,12 @@ const CommonReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
+      };
+
+    case commonActions.setRunningGame:
+      return {
+        ...state,
+        gameRunning: !state.gameRunning,
       };
 
     default:
