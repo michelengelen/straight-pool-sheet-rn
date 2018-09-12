@@ -24,12 +24,14 @@ class CustomNavigationItem extends PureComponent {
    * @return {jsx}
    */
   render() {
-    const {icon, label, navigate} = this.props;
+    const {icon, label, navigate, active} = this.props;
     const {wrapperStyle, iconView, labelStyle} = styles;
+
+    const combinedWrapperStyle = [wrapperStyle, {backgroundColor: colors.grey.mid}];
 
     return (
       <TouchableOpacity
-        style={wrapperStyle}
+        style={active ? combinedWrapperStyle : wrapperStyle}
         onPress={navigate}
       >
         {icon &&
@@ -50,6 +52,7 @@ class CustomNavigationItem extends PureComponent {
 CustomNavigationItem.propTypes = {
   icon: PropType.string,
   label: PropType.string,
+  active: PropType.bool,
   navigate: PropType.func,
 };
 

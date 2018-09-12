@@ -61,6 +61,7 @@ class CustomNavigationDrawer extends PureComponent {
                   key={item.key}
                   label={item.drawerTitle}
                   icon={item.iconName}
+                  active={navigation.isFocused(item.key)}
                   navigate={() => navigation.navigate(item.key)}
                 />
               );

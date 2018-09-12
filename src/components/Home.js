@@ -8,7 +8,8 @@ import {PageContainer, CustomButton} from 'components/common';
 
 import Images from 'assets/images';
 import SPS from 'common/variables';
-import {getAuth} from '../reducers/AuthReducer';
+import {getAuth} from 'reducers/AuthReducer';
+import {getAppState} from 'reducers/CommonReducer';
 
 import {authActions} from 'actions';
 
@@ -45,6 +46,7 @@ class Home extends Component {
   render() {
     const {imageStyle} = styles;
     const {isLoggedIn} = this.props.authState;
+    const {gameRunning} = this.props.appState;
 
     return (
       <PageContainer
@@ -56,9 +58,15 @@ class Home extends Component {
       >
         <Image source={Images.logo} style={imageStyle} />
         <CustomButton
-          buttonText={'Start New Game'}
+          buttonText={gameRunning ? 'Return to your game' : 'Start New Game'}
           loading={false}
-          onPress={() => this.props.navigation.navigate('GameSettings')}
+          onPress={() => {
+            if (gameRunning) {
+              this.props.navigation.navigate('GameSheet');
+            } else {
+              this.props.navigation.navigate('GameSettings');
+            }
+          }}
         />
         <CustomButton
           buttonText={isLoggedIn ? 'View Profile' : 'Login / Register'}
@@ -107,6 +115,7 @@ const styles = {
 const mapStateToProps = (state) => {
   return {
     ...getAuth(state),
+    ...getAppState(state),
   };
 };
 
