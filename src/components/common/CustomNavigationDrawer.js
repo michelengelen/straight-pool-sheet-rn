@@ -11,6 +11,7 @@ import {filterDrawerItems} from 'common';
 
 import {getAuth} from 'reducers/AuthReducer';
 import {getAppState} from 'reducers/CommonReducer';
+import * as gameSheetActions from 'actions/gameSheetActions';
 const {colors} = SPS.variables;
 
 /**
@@ -44,12 +45,16 @@ class CustomNavigationDrawer extends PureComponent {
     };
   }
 
+  cancelGame() {
+    this.props.cancelGame(true).then(() => this.props.navigation.navigate('Home'));
+  }
+
   /**
    * react render function
    * @return {jsx}
    */
   render() {
-    const {navigation} = this.props;
+    const {navigation, appState} = this.props;
     const {wrapper, container, itemWrapper} = styles;
     return (
       <ScrollView style={wrapper}>
@@ -66,6 +71,15 @@ class CustomNavigationDrawer extends PureComponent {
                 />
               );
             })}
+            {appState.gameRunning &&
+              <CustomNavigationItem
+                label={'Cancel current game'}
+                icon={'md-close'}
+                active={false}
+                backgroundColor={colors.useCase.error}
+                navigate={() => this.cancelGame()}
+              />
+            }
           </View>
         </SafeAreaView>
       </ScrollView>
@@ -82,6 +96,7 @@ CustomNavigationDrawer.propTypes = {
   appState: PropType.object,
   items: PropType.array,
   navigation: PropType.object,
+  cancelGame: PropType.func,
 };
 
 const styles = StyleSheet.create({
@@ -107,6 +122,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-const connectedCustomNavigationDrawer = connect(mapStateToProps, null)(CustomNavigationDrawer);
+
+const mapDispatchToProps = (dispatch) => ({
+  cancelGame: async (restart) =>
+    await gameSheetActions.clearGameAction(dispatch, restart),
+});
+
+const connectedCustomNavigationDrawer = connect(mapStateToProps, mapDispatchToProps)(CustomNavigationDrawer);
 
 export {connectedCustomNavigationDrawer as CustomNavigationDrawer};

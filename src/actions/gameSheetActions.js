@@ -94,7 +94,10 @@ export const startGameAction = (dispatch, payload) => {
 };
 
 export const clearGameAction = (dispatch, payload) => {
-  return dispatch(clearGame(payload));
+  return (dispatch) => {
+    dispatch(clearGame(payload));
+    dispatch(commonActions.setRunningGame());
+  };
 };
 
 export const updatePlayerScoreAction = (dispatch, payload) => {
