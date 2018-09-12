@@ -2,6 +2,7 @@ import {sceneNames} from './labels';
 
 const filterVariables = {
   Home: {
+    showAlways: true,
     showWhenLoggedIn: true,
     iconName: 'md-home',
   },
@@ -35,7 +36,7 @@ const filterDrawerItems = (items, isLoggedIn, gameRunning) => {
     const shouldShowWhenLoggedIn = itemValues.showWhenLoggedIn === isLoggedIn;
     const shouldShowWhenWhenGameRunning = itemValues.showWhenGameRunning === gameRunning;
 
-    return shouldShowWhenLoggedIn ||shouldShowWhenWhenGameRunning;
+    return itemValues.showAlways || shouldShowWhenLoggedIn ||shouldShowWhenWhenGameRunning;
   });
 };
 
