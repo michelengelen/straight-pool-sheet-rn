@@ -28,74 +28,11 @@ const DrawerNavigatorConfig = {
 
 const RootStack = createDrawerNavigator(
   {
-    Home: {
-      screen: Home,
-      navigationOptions: ({navigation}) => {
-        const {params} = navigation.state;
-        if (!params) {
-          navigation.setParams({
-            icon: 'md-home',
-            showWhenLoggedIn: true,
-            alwaysShow: true,
-          });
-        }
-        return {
-          drawerLabel: 'Home TEST',
-        };
-      },
-    },
-    GameSettings: {
-      screen: GameSettings,
-      navigationOptions: ({navigation}) => {
-        const {params} = navigation.state;
-        if (!params) {
-          navigation.setParams({
-            icon: 'md-home',
-            showWhenLoggedIn: true,
-            alwaysShow: false,
-          });
-        }
-      },
-    },
-    GameSheet: {
-      screen: GameSheet,
-      navigationOptions: ({navigation}) => {
-        const {params} = navigation.state;
-        if (!params) {
-          navigation.setParams({
-            icon: 'md-home',
-            showWhenLoggedIn: true,
-            alwaysShow: true,
-          });
-        }
-      },
-    },
-    Profile: {
-      screen: Profile,
-      navigationOptions: ({navigation}) => {
-        const {params} = navigation.state;
-        if (!params) {
-          navigation.setParams({
-            icon: 'md-home',
-            showWhenLoggedIn: true,
-            alwaysShow: true,
-          });
-        }
-      },
-    },
-    LoginRegister: {
-      screen: LoginRegister,
-      navigationOptions: ({navigation}) => {
-        const {params} = navigation.state;
-        if (!params) {
-          navigation.setParams({
-            icon: 'md-home',
-            showWhenLoggedIn: true,
-            alwaysShow: true,
-          });
-        }
-      },
-    },
+    Home: Home,
+    GameSettings: GameSettings,
+    GameSheet: GameSheet,
+    Profile: Profile,
+    LoginRegister: LoginRegister,
   },
   DrawerNavigatorConfig,
 );

@@ -1,10 +1,10 @@
 import React, {PureComponent} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 import PropType from 'prop-types';
 import {Icon} from 'react-native-elements';
 
 import SPS from 'common/variables';
-const {colors} = SPS.variables;
+const {colors, sizes} = SPS.variables;
 
 /**
  * class for rendering the navigation drawer
@@ -24,41 +24,59 @@ class CustomNavigationItem extends PureComponent {
    * @return {jsx}
    */
   render() {
-    const {icon, label} = this.props;
-    const {wrapperStyle} = styles;
+    const {icon, label, navigate} = this.props;
+    const {wrapperStyle, iconView, labelStyle} = styles;
 
     return (
-      <View style={wrapperStyle}>
+      <TouchableOpacity
+        style={wrapperStyle}
+        onPress={navigate}
+      >
         {icon &&
-          <Icon
-            type={'ionicon'}
-            name={icon}
-          />
+          <View style={iconView}>
+            <Icon
+              type={'ionicon'}
+              name={icon}
+              color={colors.primary.full}
+            />
+          </View>
         }
-        <Text>{label}</Text>
-      </View>
+        <Text style={labelStyle}>{label}</Text>
+      </TouchableOpacity>
     );
   }
 }
 
 CustomNavigationItem.propTypes = {
   icon: PropType.string,
+  key: PropType.string,
   label: PropType.string,
+  navigate: PropType.func,
 };
 
-CustomNavigationItem.displayName = 'Custom Navigation Drawer';
+CustomNavigationItem.displayName = 'Custom Navigation Drawer Item';
 
 const styles = StyleSheet.create({
   wrapperStyle: {
     width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     backgroundColor: colors.grey.darkest,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.grey.mid,
   },
   // DrawerStyles
-  iconStyle: {
-    color: colors.primary.full,
-  },
   labelStyle: {
+    flex: 8,
+    paddingVertical: sizes.gutter * .75,
+    fontSize: sizes.font_L,
     color: colors.text.mid,
+  },
+  iconView: {
+    flex: 1,
+    padding: sizes.gutter * .75,
+    aspectRatio: 1,
   },
 });
 

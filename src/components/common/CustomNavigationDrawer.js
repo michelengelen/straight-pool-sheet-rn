@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-navigation';
 import {connect} from 'react-redux';
 import PropType from 'prop-types';
@@ -7,7 +7,7 @@ import PropType from 'prop-types';
 import {CustomNavigationItem} from 'components/common';
 
 import SPS from 'common/variables';
-import {sceneNames} from 'common';
+import {filterDrawerItems} from 'common';
 
 import {getAuth} from 'reducers/AuthReducer';
 const {colors} = SPS.variables;
@@ -23,6 +23,24 @@ class CustomNavigationDrawer extends PureComponent {
    */
   constructor(props) {
     super(props);
+
+    this.state = {
+      filteredItems: [],
+    };
+  }
+
+  /**
+   * update the filteredItems inside the state
+   *
+   * @param {object} props
+   * @param {object} state
+   * @return {{filteredItems: *}}
+   */
+  static getDerivedStateFromProps(props, state) {
+    const {authState, items} = props;
+    return {
+      filteredItems: filterDrawerItems(items, authState.isLoggedIn, false),
+    };
   }
 
   /**
@@ -30,11 +48,23 @@ class CustomNavigationDrawer extends PureComponent {
    * @return {jsx}
    */
   render() {
-    const {items} = this.props;
-
+    const {navigation} = this.props;
+    const {wrapper, container, itemWrapper} = styles;
     return (
-      <ScrollView style={styles.wrapper}>
-        <SafeAreaView style={styles.container} forceInset={{top: 'always', horizontal: 'never'}}>
+      <ScrollView style={wrapper}>
+        <SafeAreaView style={container} forceInset={{top: 'always', horizontal: 'never'}}>
+          <View style={itemWrapper}>
+            {this.state.filteredItems.map((item) => {
+              return (
+                <CustomNavigationItem
+                  key={item.key}
+                  label={item.drawerTitle}
+                  icon={item.iconName}
+                  navigate={() => navigation.navigate(item.key)}
+                />
+              );
+            })}
+          </View>
         </SafeAreaView>
       </ScrollView>
     );
@@ -47,6 +77,7 @@ CustomNavigationDrawer.propTypes = {
     isLoggedIn: PropType.bool.isRequired,
     user: PropType.object,
   }),
+  items: PropType.array,
   navigation: PropType.object,
 };
 
@@ -57,10 +88,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    paddingVertical: 55,
   },
-  // DrawerStyles
-  labelStyle: {
-    color: colors.text.mid,
+  itemWrapper: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.grey.mid,
   },
 });
 

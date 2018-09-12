@@ -42,8 +42,9 @@ ConditionalView.propTypes = {
 };
 
 const PageContainer = (props) => {
-  const {home = false, appState} = props;
+  const {home = false, appState, navigation} = props;
   const {viewStyle, headerStyle} = styles;
+  const {routeName} = navigation.state;
 
   return (
     <View style={{flex: 1}}>
@@ -55,19 +56,19 @@ const PageContainer = (props) => {
               icon: 'arrow-back',
               color: colors.textColor,
               underlayColor: 'transparent',
-              onPress: () => props.navigation.goBack(),
+              onPress: () => navigation.goBack(),
             }
             : {}
         }
         centerComponent={{
-          text: sceneNames[props.navigation.state.routeName].toUpperCase(),
+          text: sceneNames[routeName].sceneName.toUpperCase(),
           style: {color: colors.textColor},
         }}
         rightComponent={{
           icon: 'menu',
           color: colors.textColor,
           onPress: () => {
-            props.navigation.toggleDrawer();
+            navigation.toggleDrawer();
           },
         }}
         outerContainerStyles={headerStyle.outer}
