@@ -27,6 +27,7 @@
     "react-navigation": "^2.9.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "redux-undo": "1.0.0-beta9-9-7",
     "xcode": "^1.0.0"

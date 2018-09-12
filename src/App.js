@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import {createDrawerNavigator} from 'react-navigation';
+import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 // import SplashScreen from 'react-native-splash-screen';
 
@@ -13,7 +14,7 @@ import Profile from 'components/Profile';
 import LoginRegister from 'components/LoginRegister';
 
 import SPS from 'common/variables';
-import {store} from 'store/configureStore';
+import {store, persistor} from 'store/configureStore';
 
 const DrawerNavigatorConfig = {
   initialRouteName: 'Home',
@@ -61,14 +62,16 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={{flex: 1}}>
-          <CustomStatusBar
-            barStyle={'light-content'}
-            backgroundColor={colors.grey.darkest}
-            darkMode
-          />
-          <RootStack />
-        </View>
+        <PersistGate loading={null} persistor={persistor}>
+          <View style={{flex: 1}}>
+            <CustomStatusBar
+              barStyle={'light-content'}
+              backgroundColor={colors.grey.darkest}
+              darkMode
+            />
+            <RootStack />
+          </View>
+        </PersistGate>
       </Provider>
     );
   }
