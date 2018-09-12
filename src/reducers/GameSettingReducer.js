@@ -41,13 +41,24 @@ const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
         players: state.players.reverse(),
       };
 
+    case settingActions.setRunningGame:
+      return {
+        ...state,
+        gameRunning: true,
+      };
+
+    case settingActions.setCancelGame:
+      return {
+        ...state,
+        gameRunning: false,
+      };
+
     default:
       return state;
   }
 };
 
-export const getSettings = (state) => ({
-  gameSettings: state.gameSettings,
-});
+export const getSettings = (state) => ({gameSettings: state.gameSettings});
+export const isGameRunning = (state) => ({gameRunning: state.gameSettings.gameRunning});
 
 export default GameSettingReducer;

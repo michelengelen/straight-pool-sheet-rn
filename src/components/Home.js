@@ -9,9 +9,9 @@ import {PageContainer, CustomButton} from 'components/common';
 import Images from 'assets/images';
 import SPS from 'common/variables';
 import {getAuth} from 'reducers/AuthReducer';
-import {getAppState} from 'reducers/CommonReducer';
 
 import {authActions} from 'actions';
+import {isGameRunning} from 'reducers/GameSettingReducer';
 
 /**
  * Home Component
@@ -46,7 +46,7 @@ class Home extends Component {
   render() {
     const {imageStyle} = styles;
     const {isLoggedIn} = this.props.authState;
-    const {gameRunning} = this.props.appState;
+    const {gameRunning} = this.props;
 
     return (
       <PageContainer
@@ -115,7 +115,7 @@ const styles = {
 const mapStateToProps = (state) => {
   return {
     ...getAuth(state),
-    ...getAppState(state),
+    ...isGameRunning(state),
   };
 };
 

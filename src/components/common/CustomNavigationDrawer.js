@@ -10,8 +10,8 @@ import SPS from 'common/variables';
 import {filterDrawerItems} from 'common';
 
 import {getAuth} from 'reducers/AuthReducer';
-import {getAppState} from 'reducers/CommonReducer';
-import * as gameSheetActions from 'actions/gameSheetActions';
+import {isGameRunning} from 'reducers/GameSettingReducer';
+import {gameSheetActions} from 'actions';
 const {colors} = SPS.variables;
 
 /**
@@ -39,14 +39,17 @@ class CustomNavigationDrawer extends PureComponent {
    * @return {{filteredItems: *}}
    */
   static getDerivedStateFromProps(props, state) {
-    const {authState, appState, items} = props;
+    const {authState, gameRunning, items} = props;
     return {
-      filteredItems: filterDrawerItems(items, authState.isLoggedIn, appState.gameRunning),
+      filteredItems: filterDrawerItems(items, authState.isLoggedIn, gameRunning),
     };
   }
 
   cancelGame() {
-    this.props.cancelGame(true).then(() => this.props.navigation.navigate('Home'));
+    this.props.cancelGame(true).then(() => {
+      this.props.navigation.navigate('Home');
+      this.props.navigation.closeDrawer();
+    });
   }
 
   /**
@@ -54,7 +57,7 @@ class CustomNavigationDrawer extends PureComponent {
    * @return {jsx}
    */
   render() {
-    const {navigation, appState} = this.props;
+    const {navigation, gameRunning} = this.props;
     const {wrapper, container, itemWrapper} = styles;
     return (
       <ScrollView style={wrapper}>
@@ -71,7 +74,7 @@ class CustomNavigationDrawer extends PureComponent {
                 />
               );
             })}
-            {appState.gameRunning &&
+            {gameRunning &&
               <CustomNavigationItem
                 label={'Cancel current game'}
                 icon={'md-close'}
@@ -93,7 +96,7 @@ CustomNavigationDrawer.propTypes = {
     isLoggedIn: PropType.bool.isRequired,
     user: PropType.object,
   }),
-  appState: PropType.object,
+  gameRunning: PropType.bool,
   items: PropType.array,
   navigation: PropType.object,
   cancelGame: PropType.func,
@@ -118,7 +121,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     ...getAuth(state),
-    ...getAppState(state),
+    ...isGameRunning(state),
   };
 };
 

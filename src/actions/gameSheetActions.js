@@ -1,5 +1,5 @@
 import {ActionCreators} from 'redux-undo';
-import {commonActions} from 'actions';
+import {setRunningGame, setCancelGame} from './gameSettingActions';
 import {gamesheetActions} from './actionTypes';
 
 const startGame = (gameSettings) => {
@@ -84,7 +84,7 @@ const _HOAundoScore = () => {
 
 const _HOAstartGame = (payload) => {
   return (dispatch) => {
-    dispatch(commonActions.setRunningGame());
+    dispatch(setRunningGame());
     dispatch(startGame(payload));
   };
 };
@@ -93,11 +93,15 @@ export const startGameAction = (dispatch, payload) => {
   return dispatch(_HOAstartGame(payload));
 };
 
-export const clearGameAction = (dispatch, payload) => {
+const _HOAcancelGame = (payload) => {
   return (dispatch) => {
+    dispatch(setCancelGame());
     dispatch(clearGame(payload));
-    dispatch(commonActions.setRunningGame());
   };
+};
+
+export const clearGameAction = (dispatch, payload) => {
+  return dispatch(_HOAcancelGame(payload));
 };
 
 export const updatePlayerScoreAction = (dispatch, payload) => {

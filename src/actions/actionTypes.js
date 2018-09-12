@@ -3,6 +3,8 @@ export const settingActions = {
   updateRounds: 'settings/UPDATE_ROUNDS',
   updatePoints: 'settings/UPDATE_POINTS',
   swapPlayers: 'settings/SWAP_PLAYERS',
+  setRunningGame: 'settings/SET_RUNNING_GAME',
+  setCancelGame: 'settings/SET_CANCEL_GAME',
 };
 
 export const gamesheetActions = {
@@ -18,7 +20,6 @@ export const gamesheetActions = {
 export const commonActions = {
   appLoading: 'common/APP_LOADING',
   appReady: 'common/APP_READY',
-  setRunningGame: 'common/SET_RUNNING_GAME',
 };
 
 export const authActions = {

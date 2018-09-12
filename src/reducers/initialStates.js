@@ -9,6 +9,7 @@ const roundTemplate = {
 
 const INITIAL_STATE = {
   GameSettings: {
+    gameRunning: false,
     players: [
       {
         name: '',

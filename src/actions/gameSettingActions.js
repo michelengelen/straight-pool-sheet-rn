@@ -43,3 +43,22 @@ export const updateRoundsAction = (dispatch, payload) => {
 export const swapPlayersAction = (dispatch, payload) => {
   return dispatch(swapPlayers(payload));
 };
+
+/**
+ * set a value for the case a game is currently running
+ *
+ * @return {function(*): *}
+ */
+export const setRunningGame = () => {
+  return {type: settingActions.setRunningGame};
+};
+
+/**
+ * set a value for the case no game is running
+ *
+ * @return {function(*): *}
+ */
+export const setCancelGame = () => {
+  console.log('action 2');
+  return {type: settingActions.setCancelGame};
+};
