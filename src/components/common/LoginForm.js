@@ -2,10 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Text, View, StyleSheet} from 'react-native';
 import {SocialIcon, Divider} from 'react-native-elements';
-import {LoginManager, AccessToken} from 'react-native-fbsdk';
-import {connect} from 'react-redux';
 
-import {authActions} from 'actions';
 import {AuthTextInput, CustomButton} from 'components/common';
 
 import {isEmpty, validateForm} from 'helpers';
@@ -181,7 +178,8 @@ LoginForm.propTypes = {
   showLabel: PropTypes.bool,
   buttonTitle: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
-  onForgotPassword: PropTypes.func.isRequired,
+  // TODO: add forgotPassword functionality
+  onForgotPassword: PropTypes.func,
   signInWithFacebook: PropTypes.func.isRequired,
   error: PropTypes.object,
 };

@@ -152,7 +152,7 @@ export function checkLoginStatus(callback) {
  * sign a user in with facebook action for redux
  *
  * @param  {string}   fbToken
- * @param  {function} successCB
+ * @param  {function} successCB  returns a promise
  * @param  {function} errorCB
  * @return {function}
  */
