@@ -246,7 +246,7 @@ class GameSettings extends PureComponent {
             }
             loading={false}
             onPress={() => {
-              this.startNewGame(gameSettings)
+              this.startNewGame(gameSettings, authState.uid || null)
                 .then(function() {
                   navigation.navigate('GameSheet');
                 });
@@ -286,8 +286,8 @@ const mapDispatchToProps = (dispatch) => ({
     gameSettingActions.updateRoundsAction(dispatch, maxRounds),
   swapPlayers: () =>
     gameSettingActions.swapPlayersAction(dispatch),
-  startGame: (settings) =>
-    gameSheetActions.startGameAction(dispatch, settings),
+  startGame: (settings, userId) =>
+    gameSheetActions.startGameAction(dispatch, settings, userId),
   useAccount: (user) =>
     authActions.useAccount(dispatch, user),
 });

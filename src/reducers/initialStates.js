@@ -52,6 +52,7 @@ const INITIAL_STATE = {
     },
     maxPoints: 100,
     maxRounds: 25,
+    gameKey: '',
   },
 };
 

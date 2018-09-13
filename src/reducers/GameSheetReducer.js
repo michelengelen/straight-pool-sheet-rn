@@ -36,6 +36,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         players: updateObjectsInArray(state.players, payload.players),
         maxPoints: payload.maxPoints,
         maxRounds: payload.maxRounds,
+        gameKey: payload.gameKey,
       };
 
     case gamesheetActions.updatePlayerScore:
