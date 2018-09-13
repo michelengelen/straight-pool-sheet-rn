@@ -164,12 +164,12 @@ export function signInWithFacebook(fbToken, successCB, errorCB) {
         dispatch({type: authActions.LOGGED_IN, data: data.user});
         // TODO: Show a completeProfile Scene to new users ... use the code below for shifting
         // if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
-        // successCB(data);
+        successCB('Profile').then(
+          dispatch({type: commonActions.appReady})
+        );
       } else if (error) {
         errorCB(error);
       }
-    }).then(() => {
-      dispatch({type: commonActions.appReady});
     });
   };
 }

@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
-// import Image from 'react-native-remote-svg';
 import {Image} from 'react-native';
-import {Icon} from 'react-native-elements';
 
 import {PageContainer, CustomButton} from 'components/common';
 
@@ -26,12 +24,6 @@ class Home extends Component {
   constructor(props) {
     super(props);
   }
-
-  static navigationOptions = {
-    params: {
-      test: true,
-    },
-  };
 
   /**
    * React lifecycle hook - componentDidMount
@@ -57,7 +49,7 @@ class Home extends Component {
         scrollable={false}
         style={{alignItems: 'stretch', justifyContent: 'center'}}
       >
-        <Image source={{uri: 'logo'}} style={imageStyle} />
+        <Image source={Images.logo} style={imageStyle} />
         <CustomButton
           buttonText={gameRunning ? 'Return to your game' : 'Start New Game'}
           loading={false}
@@ -89,27 +81,18 @@ Home.propTypes = {
   navigation: PropType.object,
   authState: PropType.object,
   tintColor: PropType.string,
+  gameRunning: PropType.bool,
   checkLoginStatus: PropType.func.isRequired,
 };
 
-Home.navigationOptions = {
-  drawerLabel: 'Home',
-  drawerIcon: ({tintColor}) => {
-    return (
-      <Icon type={'ionicon'} name={'md-home'} color={colors.primary.full} />
-    );
-  },
-};
-
-const {colors, sizes} = SPS.variables;
-const {dimensions} = sizes;
+const {sizes} = SPS.variables;
 
 const styles = {
   imageStyle: {
     width: '90%',
     height: 80,
     alignSelf: 'center',
-    marginBottom: sizes.gutter,
+    marginBottom: sizes.gutter * 3,
     resizeMode: 'contain',
     padding: sizes.gutter / 2,
   },

@@ -33,6 +33,7 @@ class UserProfile extends Component {
    */
   onSignOut() {
     this.props.signOut();
+    this.props.navigation.navigate('Home');
   }
 
   /**
@@ -55,7 +56,7 @@ class UserProfile extends Component {
               rounded
               avatarStyle={{transform: [{scale: .91}]}}
               containerStyle={{borderWidth: 3, borderColor: colors.primary.full}}
-              source={{uri: user.avatar + '?type=large'}}
+              source={{uri: user ? user.avatar + '?type=large' : null}}
               /* eslint-disable-next-line */
               onPress={() => console.log('Works!')}
               activeOpacity={0.7}

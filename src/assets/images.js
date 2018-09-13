@@ -1,6 +1,6 @@
 // TODO: make use of reac-native-svg and port all svgs for better performance
 const loader = require('./dots.svg');
-const logo = require('./icons/logo.svg');
+const logo = {uri: 'logo'};
 
 const Icons = {
   average: require('./icons/average.svg'),

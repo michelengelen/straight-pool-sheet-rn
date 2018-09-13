@@ -48,7 +48,6 @@ const PageContainer = (props) => {
 
   return (
     <View style={{flex: 1}}>
-      <LoadingIndicator size={'full-size'} visible={appState.loading} />
       <Header
         leftComponent={
           !home

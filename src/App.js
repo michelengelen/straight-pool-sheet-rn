@@ -3,10 +3,9 @@ import {View} from 'react-native';
 import {createDrawerNavigator} from 'react-navigation';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
-// import SplashScreen from 'react-native-splash-screen';
 
 // project files
-import {CustomStatusBar, CustomNavigationDrawer} from 'components/common';
+import {CustomStatusBar, CustomNavigationDrawer, LoadingIndicator} from 'components/common';
 import GameSettings from 'components/GameSettings';
 import GameSheet from 'components/GameSheet';
 import Home from 'components/Home';
@@ -49,13 +48,6 @@ console.disableYellowBox = true;
  */
 export default class App extends Component {
   /**
-   * React lifecycle hook: componentDidMount
-   */
-  componentDidMount() {
-    // SplashScreen.hide();
-  }
-
-  /**
    * React-Native render function
    * @return {*}
    */
@@ -64,6 +56,7 @@ export default class App extends Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <View style={{flex: 1}}>
+            <LoadingIndicator size={'full-size'} />
             <CustomStatusBar
               barStyle={'light-content'}
               backgroundColor={colors.grey.darkest}

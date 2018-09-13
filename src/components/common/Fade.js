@@ -58,6 +58,7 @@ class Fade extends PureComponent {
       Animated.timing(this._visibility, {
         toValue: this.props.visible ? 1 : 0,
         duration: 800,
+        useNativeDriver: true,
       }).start(() => {
         // when the animation is finished call setState
         this.setState({

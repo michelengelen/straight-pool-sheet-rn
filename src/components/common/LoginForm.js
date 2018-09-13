@@ -29,50 +29,6 @@ class LoginForm extends PureComponent {
     // bind functions
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onSignInWithFacebook = this.onSignInWithFacebook.bind(this);
-  }
-
-  /**
-   * get users permission authorization (ret: facebook token)
-   */
-  onSignInWithFacebook() {
-    const options = ['public_profile', 'email'];
-    LoginManager.logInWithReadPermissions(options).then(
-      (result) => {
-        if (result.isCancelled) {
-          this.onError({message: 'User cancelled the authentication via facebook'});
-        } else {
-          AccessToken.getCurrentAccessToken().then(
-            (data) => {
-              this.props.signInWithFacebook(data.accessToken, this.onSuccess, this.onError);
-            }
-          );
-        }
-      },
-      (error) => {
-        /* eslint-disable-next-line */
-        console.log('Login failed with error: ' + error);
-      }
-    );
-  }
-
-  /**
-   * success callback for the login via facebook
-   */
-  onSuccess() {
-    /* eslint-disable-next-line */
-    console.log('### logged in succesfully ###');
-  }
-
-  /**
-   * error callback for the login via facebook
-   *
-   * @param {object} error
-   * @param {string} error.message
-   */
-  onError(error) {
-    /* eslint-disable-next-line */
-    console.log('### error while logging in ###', error);
   }
 
   /**
@@ -206,7 +162,7 @@ class LoginForm extends PureComponent {
             iconSize={sizes.font_L}
             style={[containerView, socialButton]}
             fontStyle={buttonText}
-            onPress={this.onSignInWithFacebook}
+            onPress={this.props.signInWithFacebook}
           />
         </View>
 
@@ -293,7 +249,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const {signInWithFacebook} = authActions;
-const connectedLoginForm = connect(null, {signInWithFacebook})(LoginForm);
-
-export {connectedLoginForm as LoginForm};
+export {LoginForm};

@@ -16,6 +16,7 @@ import {getAuth} from 'reducers/AuthReducer';
 import SPS from 'common/variables';
 
 import {authActions} from 'actions';
+import {AccessToken, LoginManager} from 'react-native-fbsdk';
 const {register, login} = authActions;
 
 // TODO: move this to helper function or constants
@@ -112,6 +113,31 @@ class LoginRegister extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onSuccess = this.onSuccess.bind(this);
     this.onError = this.onError.bind(this);
+    this.onSignInWithFacebook = this.onSignInWithFacebook.bind(this);
+  }
+
+  /**
+   * get users permission authorization (ret: facebook token)
+   */
+  onSignInWithFacebook() {
+    const options = ['public_profile', 'email'];
+    LoginManager.logInWithReadPermissions(options).then(
+      (result) => {
+        if (result.isCancelled) {
+          this.onError({message: 'User cancelled the authentication via facebook'});
+        } else {
+          AccessToken.getCurrentAccessToken().then(
+            (data) => {
+              this.props.signInWithFacebook(data.accessToken, this.onSuccess, this.onError);
+            }
+          );
+        }
+      },
+      (error) => {
+        /* eslint-disable-next-line */
+          console.log('Login failed with error: ' + error);
+      }
+    );
   }
 
   /**
@@ -122,18 +148,18 @@ class LoginRegister extends Component {
     this.setState({error: error}); // clear out error messages
 
     if (this.state.register) {
-      this.props.register(formData, this.onSuccess, this.onError);
+      this.props.registerUser(formData, this.onSuccess, this.onError);
     } else {
-      this.props.login(formData, this.onSuccess, this.onError);
+      this.props.loginUser(formData, this.onSuccess, this.onError);
     }
   }
 
   /**
    * succes callback for the onSubmit function
-   * @param {object} user
+   * @param {string} target
    */
-  onSuccess(user) {
-    this.props.navigation.navigate('Home');
+  async onSuccess(target) {
+    await this.props.navigation.navigate(target);
   }
 
   /**
@@ -213,6 +239,7 @@ class LoginRegister extends Component {
           onSubmit={this.onSubmit}
           buttonTitle={'SIGN IN'}
           error={this.state.error.login}
+          signInWithFacebook={() => this.onSignInWithFacebook()}
         />
         <Text style={ctaTextStyle}>{'New to the App? '}</Text>
         <CustomButton
@@ -230,8 +257,9 @@ LoginRegister.propTypes = {
     isLoggedIn: PropType.bool.isRequired,
     user: PropType.object,
   }),
-  register: PropType.func.isRequired,
-  login: PropType.func.isRequired,
+  registerUser: PropType.func.isRequired,
+  loginUser: PropType.func.isRequired,
+  signInWithFacebook: PropType.func.isRequired,
   navigation: PropType.object,
 };
 
@@ -255,6 +283,15 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  registerUser: () =>
+    dispatch(authActions.register()),
+  loginUser: () =>
+    dispatch(authActions.login()),
+  signInWithFacebook: async (fbToken, successCB, errorCB) =>
+    await dispatch(authActions.signInWithFacebook(fbToken, successCB, errorCB)),
+});
+
 export default withNavigation(
-  connect(mapStateToProps, {register, login})(LoginRegister)
+  connect(mapStateToProps, mapDispatchToProps)(LoginRegister)
 );

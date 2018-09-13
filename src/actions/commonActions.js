@@ -2,7 +2,8 @@ import {commonActions} from './actionTypes';
 
 /**
  * show the full-size LoadingIndicator
- * @return {function(*): *}
+ *
+ * @return  {function(*): *}
  */
 export function appLoadingAction() {
   return (dispatch) => {
@@ -12,10 +13,12 @@ export function appLoadingAction() {
 
 /**
  * hide the full-size LoadingIndicator
- * @return {function(*): *}
+ *
+ * @param   {string} target
+ * @return  {function(*): *}
  */
-export function appReadyAction() {
+export function appReadyAction(target) {
   return (dispatch) => {
-    dispatch({type: commonActions.appReady});
+    dispatch({type: commonActions.appReady, target});
   };
 }
