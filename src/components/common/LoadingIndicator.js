@@ -33,10 +33,7 @@ class LoadingIndicator extends PureComponent {
     switch (size) {
       case 'full-size':
         return (
-          <Fade
-            visible={appState.loading}
-            style={fadeStyle}
-          >
+          <Fade visible={appState.loading} style={fadeStyle}>
             <View style={containerStyle}>
               <Image source={loader} style={{width: 80, height: 20}} />
             </View>
