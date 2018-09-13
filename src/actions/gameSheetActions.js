@@ -84,8 +84,9 @@ const _HOAundoScore = () => {
 };
 
 const _HOAstartGame = (gameSettings, userId) => {
+  console.log('--- userId: ', userId);
   if (userId) {
-    createNewGame(gameSettings).then((gameKey) => {
+    createNewGame(gameSettings, userId).then((gameKey) => {
       gameSettings.gameKey = gameKey;
       gameSettings.userId = userId;
     });

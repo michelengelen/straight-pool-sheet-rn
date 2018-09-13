@@ -87,9 +87,9 @@ class GameSettings extends PureComponent {
    * @param  {object} gameSettings
    * @return {Promise<void>}
    */
-  async startNewGame(gameSettings) {
+  async startNewGame(gameSettings, userId) {
     // start the game (pass settings to the new scene, then show it)
-    await this.props.startGame(gameSettings);
+    await this.props.startGame(gameSettings, userId);
   }
 
   /**
@@ -246,7 +246,7 @@ class GameSettings extends PureComponent {
             }
             loading={false}
             onPress={() => {
-              this.startNewGame(gameSettings, authState.uid || null)
+              this.startNewGame(gameSettings, authState.user.uid || null)
                 .then(function() {
                   navigation.navigate('GameSheet');
                 });
