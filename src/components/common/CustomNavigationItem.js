@@ -27,15 +27,18 @@ class CustomNavigationItem extends PureComponent {
     const {icon, label, navigate, active} = this.props;
     const {wrapperStyle, iconView, labelStyle} = styles;
 
-    let combinedWrapperStyle = [wrapperStyle, {backgroundColor: colors.grey.mid}];
-
+    const backgroundStyle = {};
     if (this.props.backgroundColor) {
-      wrapperStyle.backgroundColor = this.props.backgroundColor;
+      backgroundStyle.backgroundColor = this.props.backgroundColor;
+    } else if (active) {
+      backgroundStyle.backgroundColor = colors.grey.mid;
     }
+
+    let combinedWrapperStyle = [wrapperStyle, backgroundStyle];
 
     return (
       <TouchableOpacity
-        style={active ? combinedWrapperStyle : wrapperStyle}
+        style={combinedWrapperStyle}
         onPress={navigate}
       >
         {icon &&

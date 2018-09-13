@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
-import Image from 'react-native-remote-svg';
+// import Image from 'react-native-remote-svg';
+import {Image} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 import {PageContainer, CustomButton} from 'components/common';
@@ -56,7 +57,7 @@ class Home extends Component {
         scrollable={false}
         style={{alignItems: 'stretch', justifyContent: 'center'}}
       >
-        <Image source={Images.logo} style={imageStyle} />
+        <Image source={{uri: 'logo'}} style={imageStyle} />
         <CustomButton
           buttonText={gameRunning ? 'Return to your game' : 'Start New Game'}
           loading={false}
@@ -105,9 +106,11 @@ const {dimensions} = sizes;
 
 const styles = {
   imageStyle: {
+    width: '90%',
+    height: 80,
+    alignSelf: 'center',
     marginBottom: sizes.gutter,
-    width: dimensions.width - sizes.gutter,
-    height: 120,
+    resizeMode: 'contain',
     padding: sizes.gutter / 2,
   },
 };
