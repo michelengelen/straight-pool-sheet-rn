@@ -30,7 +30,7 @@ class CustomNavigationItem extends PureComponent {
     let combinedWrapperStyle = [wrapperStyle, {backgroundColor: colors.grey.mid}];
 
     if (this.props.backgroundColor) {
-      combinedWrapperStyle = [wrapperStyle, {backgroundColor: this.props.backgroundColor}];
+      wrapperStyle.backgroundColor = this.props.backgroundColor;
     }
 
     return (
