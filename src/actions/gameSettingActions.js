@@ -59,6 +59,5 @@ export const setRunningGame = () => {
  * @return {function(*): *}
  */
 export const setCancelGame = () => {
-  console.log('action 2');
   return {type: settingActions.setCancelGame};
 };
