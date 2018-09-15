@@ -50,10 +50,8 @@ class CustomNavigationDrawer extends PureComponent {
    * handle cancel game button press
    */
   cancelGame() {
-    const {gameSheet} = this.props;
-
-    this.props.cancelGame(true);
-    updateRunningGame(gameSheet, gameSheet.gameKey).then(() => {
+    const {gameKey} = this.props.gameSheet;
+    this.props.cancelGame(gameKey).then(() => {
       this.props.clearGame(false);
       this.props.navigation.navigate('Home');
       this.props.navigation.closeDrawer();
@@ -138,8 +136,8 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  cancelGame: () =>
-    gameSheetActions.cancelGameAction(dispatch),
+  cancelGame: async (gameKey) =>
+    await gameSheetActions.cancelGameAction(dispatch, gameKey),
   clearGame: () =>
     gameSheetActions.clearGameAction(dispatch, false),
 });

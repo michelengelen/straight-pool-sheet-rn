@@ -37,8 +37,6 @@ class GameSheet extends PureComponent {
     const {gameSheet, gameSettings} = this.props;
     const {rounds, gameKey} = gameSheet;
 
-    console.log('### gameSheet: ', gameSheet.gameState.finished);
-
     if (gameSettings.gameRunning && gameSheet.gameKey !== '') {
       updateRunningGame(gameSheet, gameKey).then(() => {
         if (this.scoreTableRef) {

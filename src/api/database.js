@@ -1,4 +1,4 @@
-import {database} from 'assets';
+import {database} from 'assets/index';
 import {roundTemplate} from 'reducers/initialStates';
 
 /**
@@ -22,7 +22,9 @@ const createNewGame = (initialGameData, userId) => {
 
   // sync down from server
   let list = [];
-  playedGamesRef.on('value', function(snap) { list = snap.val(); });
+  playedGamesRef.on('value', function(snap) {
+    list = snap.val();
+  });
 
   // push the new gameKey to the gamesPlayed array
   list.push(gameKey);
@@ -41,8 +43,17 @@ const updateRunningGame = (updatedGameData, gameKey) => {
   return database.ref('games/' + gameKey).set(updatedGameData);
 };
 
+/**
+ * cancel the current game in the database
+ * @param   {string} gameKey
+ * @return  {Promise}
+ */
+const cancelRunningGame = (gameKey) => {
+  return database.ref('games/' + gameKey + '/gameState/cancelled').set(true);
+};
+
 const removeGame = (gameKey) => {
 
 };
 
-export {createNewGame, updateRunningGame};
+export {createNewGame, updateRunningGame, cancelRunningGame};
