@@ -25,7 +25,7 @@ SPS.variables = {
     },
     grey: {
       light: 'rgba(61, 61, 61, 1)',
-      mid: 'rgba(53, 53, 53, 1)',
+      mid: 'rgba(51, 51, 51, 1)',
       dark: 'rgba(48, 48, 48, 1)',
       darker: 'rgba(40, 40, 40, 1)',
       darkest: 'rgba(32, 32, 32, 1)',

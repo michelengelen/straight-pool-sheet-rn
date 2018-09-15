@@ -9,7 +9,7 @@ import {
   PageIntro,
 } from 'components/common';
 import {getSettings} from 'reducers/GameSettingReducer';
-import {getGameState} from '../reducers/GameSheetReducer';
+import {getGameSheet} from '../reducers/GameSheetReducer';
 import SPS from 'common/variables';
 import {gameSheetActions, gameSettingActions} from '../actions';
 
@@ -36,7 +36,8 @@ class FullscreenModal extends Component {
    * @param {string}  destination
    */
   startNewGame(restart = false, destination = 'Home') {
-    this.props.preFillPlayers(this.props.gameSheet.players);
+    this.props.finishGame();
+    if (restart) this.props.swapPlayers(this.props.gameSheet.players);
     this.props.clearGame(restart);
     this.props.navigation.navigate(destination);
   }
@@ -200,13 +201,14 @@ FullscreenModal.propTypes = {
   gameSheet: PropType.object,
   navigation: PropType.object,
   clearGame: PropType.func,
-  preFillPlayers: PropType.func,
+  swapPlayers: PropType.func,
+  finishGame: PropType.func,
 };
 
 const mapStateToProps = (state) => {
   return {
     ...getSettings(state),
-    ...getGameState(state),
+    ...getGameSheet(state),
   };
 };
 
@@ -215,6 +217,8 @@ const mapDispatchToProps = (dispatch) => ({
     gameSettingActions.swapPlayersAction(dispatch, players),
   clearGame: (restart) =>
     gameSheetActions.clearGameAction(dispatch, restart),
+  finishGame: () =>
+    gameSheetActions.finishGameAction(dispatch),
 });
 
 export default withNavigation(

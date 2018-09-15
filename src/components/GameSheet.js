@@ -9,8 +9,9 @@ import {PageContainer} from 'components/common';
 
 // import reducer/actions
 import {getSettings} from 'reducers/GameSettingReducer';
-import {getGameState, undoableFromState} from 'reducers/GameSheetReducer';
+import {getGameSheet, undoableFromState} from 'reducers/GameSheetReducer';
 import {gameSheetActions} from 'actions';
+import {updateRunningGame} from '../common';
 
 /**
  * Gamesettings Component
@@ -33,14 +34,21 @@ class GameSheet extends PureComponent {
    * React lifecycle method - componentDidUpdate
    */
   componentDidUpdate() {
-    const {rounds} = this.props.gameSheet;
+    const {gameSheet, gameSettings} = this.props;
+    const {rounds, gameKey} = gameSheet;
 
-    if (this.scoreTableRef) {
-      this.scoreTableRef.scrollToLocation({
-        animated: true,
-        sectionIndex: 0,
-        itemIndex: rounds.length - 1,
-        viewPosition: 1,
+    console.log('### gameSheet: ', gameSheet.gameState.finished);
+
+    if (gameSettings.gameRunning && gameSheet.gameKey !== '') {
+      updateRunningGame(gameSheet, gameKey).then(() => {
+        if (this.scoreTableRef) {
+          this.scoreTableRef.scrollToLocation({
+            animated: true,
+            sectionIndex: 0,
+            itemIndex: rounds.length - 1,
+            viewPosition: 1,
+          });
+        }
       });
     }
   }
@@ -96,7 +104,7 @@ GameSheet.propTypes = {
 const mapStateToProps = (state) => {
   return {
     ...getSettings(state),
-    ...getGameState(state),
+    ...getGameSheet(state),
     ...undoableFromState(state),
   };
 };

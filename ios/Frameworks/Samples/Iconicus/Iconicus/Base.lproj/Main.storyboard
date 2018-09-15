@@ -128,7 +128,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="startGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OED-j8-Yd3"/>
+                                            <action selector="onStartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OED-j8-Yd3"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -41,13 +41,13 @@ const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
         players: state.players.reverse(),
       };
 
-    case settingActions.setRunningGame:
+    case settingActions.onStartGame:
       return {
         ...state,
         gameRunning: true,
       };
 
-    case settingActions.setCancelGame:
+    case settingActions.onStopGame:
       return {
         ...state,
         gameRunning: false,

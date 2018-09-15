@@ -3,13 +3,15 @@ export const settingActions = {
   updateRounds: 'settings/UPDATE_ROUNDS',
   updatePoints: 'settings/UPDATE_POINTS',
   swapPlayers: 'settings/SWAP_PLAYERS',
-  setRunningGame: 'settings/SET_RUNNING_GAME',
-  setCancelGame: 'settings/SET_CANCEL_GAME',
+  onStartGame: 'settings/ON_START_GAME',
+  onStopGame: 'settings/ON_STOP_GAME',
 };
 
 export const gamesheetActions = {
   startGame: 'gamesheet/START_GAME',
   clearGame: 'gamesheet/CLEAR_GAME',
+  cancelGame: 'gamesheet/CANCEL_GAME',
+  finishGame: 'gamesheet/FINISH_GAME',
   incrementFouls: 'gamesheet/INCREMENT_FOULS',
   incrementCurrentScore: 'gamesheet/INCREMENT_CURRENT_SCORE',
   completeBook: 'gamesheet/COMPLETE_BOOK',

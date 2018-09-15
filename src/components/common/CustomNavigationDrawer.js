@@ -7,11 +7,12 @@ import PropType from 'prop-types';
 import {CustomNavigationItem} from 'components/common';
 
 import SPS from 'common/variables';
-import {filterDrawerItems} from 'common';
+import {filterDrawerItems, updateRunningGame} from 'common';
 
 import {getAuth} from 'reducers/AuthReducer';
 import {isGameRunning} from 'reducers/GameSettingReducer';
 import {gameSheetActions} from 'actions';
+import {getGameSheet} from '../../reducers/GameSheetReducer';
 const {colors} = SPS.variables;
 
 /**
@@ -45,8 +46,15 @@ class CustomNavigationDrawer extends PureComponent {
     };
   }
 
+  /**
+   * handle cancel game button press
+   */
   cancelGame() {
-    this.props.cancelGame(true).then(() => {
+    const {gameSheet} = this.props;
+
+    this.props.cancelGame(true);
+    updateRunningGame(gameSheet, gameSheet.gameKey).then(() => {
+      this.props.clearGame(false);
       this.props.navigation.navigate('Home');
       this.props.navigation.closeDrawer();
     });
@@ -97,9 +105,11 @@ CustomNavigationDrawer.propTypes = {
     user: PropType.object,
   }),
   gameRunning: PropType.bool,
+  gameSheet: PropType.object,
   items: PropType.array,
   navigation: PropType.object,
   cancelGame: PropType.func,
+  clearGame: PropType.func,
 };
 
 const styles = StyleSheet.create({
@@ -121,14 +131,17 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     ...getAuth(state),
+    ...getGameSheet(state),
     ...isGameRunning(state),
   };
 };
 
 
 const mapDispatchToProps = (dispatch) => ({
-  cancelGame: async (restart) =>
-    await gameSheetActions.clearGameAction(dispatch, restart),
+  cancelGame: () =>
+    gameSheetActions.cancelGameAction(dispatch),
+  clearGame: () =>
+    gameSheetActions.clearGameAction(dispatch, false),
 });
 
 const connectedCustomNavigationDrawer = connect(mapStateToProps, mapDispatchToProps)(CustomNavigationDrawer);

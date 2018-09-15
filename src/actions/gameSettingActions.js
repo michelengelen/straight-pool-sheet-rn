@@ -49,8 +49,8 @@ export const swapPlayersAction = (dispatch, payload) => {
  *
  * @return {function(*): *}
  */
-export const setRunningGame = () => {
-  return {type: settingActions.setRunningGame};
+export const onStartGame = () => {
+  return {type: settingActions.onStartGame};
 };
 
 /**
@@ -58,6 +58,6 @@ export const setRunningGame = () => {
  *
  * @return {function(*): *}
  */
-export const setCancelGame = () => {
-  return {type: settingActions.setCancelGame};
+export const onStopGame = () => {
+  return {type: settingActions.onStopGame};
 };

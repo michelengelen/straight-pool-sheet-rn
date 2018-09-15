@@ -1,10 +1,48 @@
 import {database} from 'assets';
+import {roundTemplate} from 'reducers/initialStates';
 
+/**
+ *
+ * @param   {object} initialGameData
+ * @param   {string} userId
+ * @return  {Promise<string>}
+ */
 const createNewGame = (initialGameData, userId) => {
   const gameKey = database.ref().child('posts').push().key;
-  console.log('--- userId: ', userId);
-  database.ref('users/' + userId + '/gamesPlayed').push(gameKey);
+
+  initialGameData.timeStarted = new Date().toString();
+  initialGameData.rounds = [[
+    {
+      ...roundTemplate,
+    },
+  ]];
+
+  // perform database actions
+  const playedGamesRef = database.ref('users/' + userId + '/playedGames');
+
+  // sync down from server
+  let list = [];
+  playedGamesRef.on('value', function(snap) { list = snap.val(); });
+
+  // push the new gameKey to the gamesPlayed array
+  list.push(gameKey);
+  playedGamesRef.set(list);
+
   return database.ref('games/' + gameKey).set(initialGameData).then(() => gameKey);
 };
 
-export {createNewGame};
+/**
+ * update the current game in the database
+ * @param   {object} updatedGameData
+ * @param   {string} gameKey
+ * @return  {Promise}
+ */
+const updateRunningGame = (updatedGameData, gameKey) => {
+  return database.ref('games/' + gameKey).set(updatedGameData);
+};
+
+const removeGame = (gameKey) => {
+
+};
+
+export {createNewGame, updateRunningGame};

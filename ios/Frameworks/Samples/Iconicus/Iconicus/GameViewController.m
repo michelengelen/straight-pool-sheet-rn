@@ -95,7 +95,7 @@
   [self _updateGameController:_gameController];
 }
 
-- (IBAction)startGame:(id)sender
+- (IBAction)onStartGame:(id)sender
 {
   [self _updateGameController:[GameController generate]];
 }

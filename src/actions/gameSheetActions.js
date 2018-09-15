@@ -1,5 +1,5 @@
 import {ActionCreators} from 'redux-undo';
-import {setRunningGame, setCancelGame} from './gameSettingActions';
+import {onStartGame, onStopGame} from './gameSettingActions';
 import {gamesheetActions} from './actionTypes';
 import {createNewGame} from 'common';
 
@@ -7,13 +7,25 @@ const startGame = (gameSettings) => {
   return {
     type: gamesheetActions.startGame,
     payload: gameSettings,
-  }
+  };
 };
 
 const clearGame = (restartingGame) => {
   return {
     type: gamesheetActions.clearGame,
     payload: restartingGame,
+  };
+};
+
+const finishGame = () => {
+  return {
+    type: gamesheetActions.finishGame,
+  };
+};
+
+const cancelGame = () => {
+  return {
+    type: gamesheetActions.cancelGame,
   };
 };
 
@@ -84,39 +96,56 @@ const _HOAundoScore = () => {
 };
 
 const _HOAstartGame = (gameSettings, userId) => {
-  console.log('--- userId: ', userId);
-  if (userId) {
-    createNewGame(gameSettings, userId).then((gameKey) => {
-      gameSettings.gameKey = gameKey;
-      gameSettings.userId = userId;
-    });
-  }
   return (dispatch) => {
-    dispatch(setRunningGame());
-    dispatch(startGame(gameSettings));
+    if (userId) {
+      createNewGame(gameSettings, userId).then((gameKey) => {
+        gameSettings.gameKey = gameKey;
+        gameSettings.userId = userId;
+
+        dispatch(onStartGame());
+        dispatch(startGame(gameSettings));
+      });
+    } else {
+      dispatch(onStartGame());
+      dispatch(startGame(gameSettings));
+    }
   };
 };
 
+const _HOAfinishGame = () => {
+  return (dispatch) => {
+    dispatch(finishGame());
+    dispatch(onStopGame());
+  };
+};
+
+const _HOAcancelGame = () => {
+  return (dispatch) => {
+    dispatch(cancelGame());
+    dispatch(onStopGame());
+  };
+};
+
+// Higher Order Action Creators
 export const startGameAction = (dispatch, settings, userId) => {
   return dispatch(_HOAstartGame(settings, userId));
 };
-
-const _HOAcancelGame = (payload) => {
-  return (dispatch) => {
-    dispatch(setCancelGame());
-    dispatch(clearGame(payload));
-  };
+export const finishGameAction = (dispatch) => {
+  return dispatch(_HOAfinishGame());
 };
 
 export const clearGameAction = (dispatch, payload) => {
-  return dispatch(_HOAcancelGame(payload));
+  return dispatch(clearGame(payload));
+};
+
+export const cancelGameAction = (dispatch) => {
+  return dispatch(_HOAcancelGame());
 };
 
 export const updatePlayerScoreAction = (dispatch, payload) => {
   return dispatch(updatePlayerScore(payload));
 };
 
-// Higher Order Action Creators
 export const incrementScoreAction = (dispatch) => {
   return dispatch(_HOAincrementScore());
 };

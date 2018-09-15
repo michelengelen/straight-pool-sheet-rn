@@ -208,7 +208,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
           currentPlayerIndex: 0,
           currentRound: currentRound + 1,
           currentRoundIndex: currentRoundIndex + 1,
-          remainingBalls: remainingBalls,
+          remainingBalls: newRemainingBalls,
           winner: winner,
         },
         rounds: insertItem(
@@ -241,6 +241,24 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         rounds: updateNestedArray(rounds, updateFoulsObject),
       };
 
+    case gamesheetActions.finishGame:
+      return {
+        ...state,
+        gameState: {
+          ...state.gameState,
+          finished: true,
+        },
+      };
+
+    case gamesheetActions.cancelGame:
+      return {
+        ...state,
+        gameState: {
+          ...state.gameState,
+          cancelled: true,
+        },
+      };
+
     case gamesheetActions.clearGame:
       return {
         ...INITIAL_STATE.GameSheet,
@@ -251,7 +269,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
   }
 };
 
-export const getGameState = (state) => ({
+export const getGameSheet = (state) => ({
   gameSheet: state.gameSheet.present,
 });
 
