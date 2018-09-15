@@ -10,14 +10,12 @@ import {
   PageContainer,
   RegisterForm,
 } from 'components/common';
-import UserProfile from 'components/profile/UserProfile';
 
 import {getAuth} from 'reducers/AuthReducer';
 import SPS from 'common/variables';
 
 import {authActions} from 'actions';
 import {AccessToken, LoginManager} from 'react-native-fbsdk';
-const {register, login} = authActions;
 
 // TODO: move this to helper function or constants
 const fields = {

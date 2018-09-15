@@ -53,7 +53,7 @@ const cancelRunningGame = (gameKey) => {
 };
 
 const removeGame = (gameKey) => {
-
+  return database.ref('games/' + gameKey + '/gameState/cancelled').set(true);
 };
 
 export {createNewGame, updateRunningGame, cancelRunningGame};

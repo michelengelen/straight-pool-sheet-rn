@@ -14,10 +14,10 @@ const {colors, sizes} = SPS.variables;
 import {authActions} from 'actions';
 
 /**
- * UserProfile component
+ * GamesList component
  * renders all information regarding the currently logged in user
  */
-class UserProfile extends Component {
+class GamesList extends Component {
   /**
    * react constructor call
    * @param {object} props
@@ -78,7 +78,7 @@ class UserProfile extends Component {
   }
 }
 
-UserProfile.propTypes = {
+GamesList.propTypes = {
   authState: PropType.shape({
     isLoggedIn: PropType.bool.isRequired,
     user: PropType.object.isRequired,
@@ -94,4 +94,4 @@ const mapStateToProps = (state) => {
 };
 
 const {signOut} = authActions;
-export default withNavigation(connect(mapStateToProps, {signOut})(UserProfile));
+export default withNavigation(connect(mapStateToProps, {signOut})(GamesList));
