@@ -88,7 +88,10 @@ class GamesList extends Component {
             alignitems: 'stretch',
           }}
         >
-          <Fade visible={this.state.loading} style={{position: 'relative', alignItems: 'center', justifyContent: 'space-around'}}>
+          <Fade
+            visible={this.state.loading}
+            style={{position: 'relative', alignItems: 'center', justifyContent: 'space-around'}}
+          >
             <LoadingIndicator size={'medium'} />
           </Fade>
           {this.state.gameData.length > 0 &&
