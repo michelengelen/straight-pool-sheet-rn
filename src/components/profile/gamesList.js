@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types';
-import {View, Text} from 'react-native';
-import {Avatar} from 'react-native-elements';
+import {View, Text, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import {withNavigation} from 'react-navigation';
 
-import {CustomButton, PageContainer} from 'components/common';
+import {PageContainer} from 'components/common';
+import {Fade} from 'components/common';
+import {LoadingIndicator} from 'components/common/LoadingIndicator';
 import {getAuth} from 'reducers/AuthReducer';
+import {auth, database} from 'assets';
 
 import SPS from 'common/variables';
 const {colors, sizes} = SPS.variables;
-
-import {authActions} from 'actions';
 
 /**
  * GamesList component
@@ -25,15 +25,54 @@ class GamesList extends Component {
   constructor(props) {
     super(props);
 
-    this.onSignOut = this.onSignOut.bind(this);
+    this.state = {
+      loading: true,
+      gameData: [],
+    };
+
+    const uid = auth.currentUser.uid;
+    database.ref('users/' + uid + '/playedGames').once('value').then(
+      (snap) => {
+        const gameKeys = snap.val();
+        Promise.all(gameKeys.map((gameKey) => {
+          const reference = `games/${gameKey}`;
+          return database.ref(reference).once('value').then((snap) => snap.val());
+        })).then((data) => {
+          this.setState({
+            loading: false,
+            gameData: data,
+          });
+        });
+      }
+    );
   }
 
-  /**
-   * handle the signOut of the current user
-   */
-  onSignOut() {
-    this.props.signOut();
-    this.props.navigation.navigate('Home');
+  renderItem(item, index) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          height: 50,
+          backgroundColor: colors.grey.dark,
+          borderBottomWidth: 1,
+          borderColor: colors.text.dark,
+        }}
+      >
+        <View style={{flex: 1, alignItems: 'flex-start', justifyContent: 'space-around'}}>
+          <Text style={{color: colors.text.light}}>{`# ${index}`}</Text>
+        </View>
+        <View style={{flex: 4, alignItems: 'flex-start', justifyContent: 'space-around'}}>
+          <Text style={{color: colors.text.light}}>{item.players[0].name}</Text>
+        </View>
+        <View style={{flex: 2, alignItems: 'center', justifyContent: 'space-around'}}>
+          <Text style={{color: colors.text.light}}>VS</Text>
+        </View>
+        <View style={{flex: 4, alignItems: 'flex-end', justifyContent: 'space-around'}}>
+          <Text style={{color: colors.text.light}}>{item.players[1].name}</Text>
+        </View>
+      </View>
+    );
   }
 
   /**
@@ -41,37 +80,25 @@ class GamesList extends Component {
    * @return {*}
    */
   render() {
-    const {user} = this.props.authState;
     return (
-      <PageContainer darkMode scrollable={false} pageTitle={'Profile Page'}>
+      <PageContainer darkMode scrollable={false} pageTitle={'My games'}>
         <View
           style={{
             flex: 1,
             alignitems: 'stretch',
           }}
         >
-          <View style={{alignItems: 'center', paddingVertical: sizes.gutter}}>
-            <Avatar
-              xlarge
-              rounded
-              avatarStyle={{transform: [{scale: .91}]}}
-              containerStyle={{borderWidth: 3, borderColor: colors.primary.full}}
-              source={{uri: user ? user.avatar + '?type=large' : null}}
-              /* eslint-disable-next-line */
-              onPress={() => console.log('Works!')}
-              activeOpacity={0.7}
+          <Fade visible={this.state.loading} style={{position: 'relative', alignItems: 'center', justifyContent: 'space-around'}}>
+            <LoadingIndicator size={'medium'} />
+          </Fade>
+          {this.state.gameData.length > 0 &&
+            <FlatList
+              data={this.state.gameData}
+              disableVirtualization={false}
+              renderItem={({item, index}) => this.renderItem(item, index)}
+              keyExtractor={(item) => `GamesList_${item.gameKey}`}
             />
-          </View>
-          <View style={{alignItems: 'center'}}>
-            <Text style={{color: 'white'}}>{user.username || user.fullname}</Text>
-          </View>
-          <CustomButton
-            style={{backgroundColor: colors.useCase.error}}
-            iconLeft={'md-power'}
-            buttonText={'Log out'}
-            loading={false}
-            onPress={this.onSignOut}
-          />
+          }
         </View>
       </PageContainer>
     );
@@ -84,7 +111,6 @@ GamesList.propTypes = {
     user: PropType.object.isRequired,
   }),
   navigation: PropType.object,
-  signOut: PropType.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -93,5 +119,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const {signOut} = authActions;
-export default withNavigation(connect(mapStateToProps, {signOut})(GamesList));
+export default withNavigation(connect(mapStateToProps, null)(GamesList));
