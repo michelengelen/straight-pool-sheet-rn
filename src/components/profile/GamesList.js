@@ -47,7 +47,14 @@ class GamesList extends Component {
     );
   }
 
-  renderItem(item, index) {
+  /**
+   * renders an item in the GamesList
+   *
+   * @param   {object} item
+   * @param   {number} index
+   * @return  {jsx}
+   */
+  static renderItem(item, index) {
     return (
       <View
         style={{

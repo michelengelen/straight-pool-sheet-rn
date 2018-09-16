@@ -145,15 +145,6 @@ ScoreTableRow.propTypes = {
   onLayout: PropType.func,
 };
 
-const renderItem = (item, index, callback) =>
-  <ScoreTableRow
-    key={`ScoreTableRow_${index}`}
-    roundIndex={index + 1}
-    roundScore={item}
-    onLayout={callback}
-    header={item.length === 0}
-  />;
-
 /**
  * Main Component for the rendering of the ScoreTable
  *
@@ -208,6 +199,26 @@ class ScoreTable extends PureComponent {
   }
 
   /**
+   * renders one item in the SectionList
+   *
+   * @param   {object}    item
+   * @param   {number}    index
+   * @param   {function}  callback
+   * @return  {jsx}
+   */
+  static renderItem(item, index, callback) {
+    return (
+      <ScoreTableRow
+        key={`ScoreTableRow_${index}`}
+        roundIndex={index + 1}
+        roundScore={item}
+        onLayout={callback}
+        header={item.length === 0}
+      />
+    );
+  }
+
+  /**
    * React render function
    * @return {*}
    */
@@ -225,8 +236,8 @@ class ScoreTable extends PureComponent {
     return (
       <View style={wrapperStyle}>
         <SectionList
-          renderItem={({item, index}) => renderItem(item, index, (x) => this.getRowHeight(x))}
-          renderSectionHeader={() => renderItem([], 0, (x) => this.getRowHeight(x))}
+          renderItem={({item, index}) => this.renderItem(item, index, (x) => this.getRowHeight(x))}
+          renderSectionHeader={() => this.renderItem([], 0, (x) => this.getRowHeight(x))}
           getItemLayout={this.getItemLayout}
           ref={(ref) => this.props.storeRef(ref)}
           sections={sections}
