@@ -14,10 +14,10 @@ const {colors, sizes} = SPS.variables;
 import {authActions} from 'actions';
 
 /**
- * UserProfile component
+ * Profile component
  * renders all information regarding the currently logged in user
  */
-class UserProfile extends Component {
+class Profile extends Component {
   /**
    * react constructor call
    * @param {object} props
@@ -62,9 +62,25 @@ class UserProfile extends Component {
               activeOpacity={0.7}
             />
           </View>
-          <View style={{alignItems: 'center'}}>
+          <View style={{alignItems: 'center', marginBottom: 30}}>
             <Text style={{color: 'white'}}>{user.username || user.fullname}</Text>
           </View>
+          <CustomButton
+            iconLeft={'md-trophy'}
+            buttonText={'Games played'}
+            loading={false}
+            onPress={() => this.props.navigation.navigate('GamesList')}
+          />
+          <CustomButton
+            disabled
+            iconLeft={'md-stats'}
+            buttonText={'Statistics (coming soon)'}
+            loading={false}
+            onPress={() => {
+              // eslint-disable-next-line
+              console.log('shoudl not work!');
+            }}
+          />
           <CustomButton
             style={{backgroundColor: colors.useCase.error}}
             iconLeft={'md-power'}
@@ -78,7 +94,7 @@ class UserProfile extends Component {
   }
 }
 
-UserProfile.propTypes = {
+Profile.propTypes = {
   authState: PropType.shape({
     isLoggedIn: PropType.bool.isRequired,
     user: PropType.object.isRequired,
@@ -94,4 +110,4 @@ const mapStateToProps = (state) => {
 };
 
 const {signOut} = authActions;
-export default withNavigation(connect(mapStateToProps, {signOut})(UserProfile));
+export default withNavigation(connect(mapStateToProps, {signOut})(Profile));

@@ -1,37 +1,37 @@
 import {ActionCreators} from 'redux-undo';
 import {onStartGame, onStopGame} from './gameSettingActions';
-import {gamesheetActions} from './actionTypes';
+import {gamesheetActionTypes} from './actionTypes';
 import {createNewGame, cancelRunningGame} from 'common';
 
 const startGame = (gameSettings) => {
   return {
-    type: gamesheetActions.startGame,
+    type: gamesheetActionTypes.startGame,
     payload: gameSettings,
   };
 };
 
 const clearGame = (restartingGame) => {
   return {
-    type: gamesheetActions.clearGame,
+    type: gamesheetActionTypes.clearGame,
     payload: restartingGame,
   };
 };
 
 const finishGame = () => {
   return {
-    type: gamesheetActions.finishGame,
+    type: gamesheetActionTypes.finishGame,
   };
 };
 
 const cancelGame = () => {
   return {
-    type: gamesheetActions.cancelGame,
+    type: gamesheetActionTypes.cancelGame,
   };
 };
 
 const updatePlayerScore = (playerData) => {
   return {
-    type: gamesheetActions.updatePlayerScore,
+    type: gamesheetActionTypes.updatePlayerScore,
     payload: playerData,
   };
 };
@@ -45,7 +45,7 @@ const _HOAincrementScore = () => {
 
 const incrementScore = () => {
   return {
-    type: gamesheetActions.incrementCurrentScore,
+    type: gamesheetActionTypes.incrementCurrentScore,
   };
 };
 
@@ -58,7 +58,7 @@ const _HOAcompleteBook = () => {
 
 const completeBook = () => {
   return {
-    type: gamesheetActions.completeBook,
+    type: gamesheetActionTypes.completeBook,
   };
 };
 
@@ -71,7 +71,7 @@ const _HOAincrementFouls = () => {
 
 const incrementFouls = () => {
   return {
-    type: gamesheetActions.incrementFouls,
+    type: gamesheetActionTypes.incrementFouls,
   };
 };
 
@@ -84,7 +84,7 @@ const _HOAswitchPlayer = () => {
 
 const switchPlayer = () => {
   return {
-    type: gamesheetActions.switchPlayer,
+    type: gamesheetActionTypes.switchPlayer,
   };
 };
 

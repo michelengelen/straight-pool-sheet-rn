@@ -1,4 +1,4 @@
-export const settingActions = {
+export const settingActionTypes = {
   updatePlayer: 'settings/UPDATE_PLAYER',
   updateRounds: 'settings/UPDATE_ROUNDS',
   updatePoints: 'settings/UPDATE_POINTS',
@@ -7,7 +7,7 @@ export const settingActions = {
   onStopGame: 'settings/ON_STOP_GAME',
 };
 
-export const gamesheetActions = {
+export const gamesheetActionTypes = {
   startGame: 'gamesheet/START_GAME',
   clearGame: 'gamesheet/CLEAR_GAME',
   cancelGame: 'gamesheet/CANCEL_GAME',
@@ -19,13 +19,17 @@ export const gamesheetActions = {
   updatePlayerScore: 'gamesheet/UPDATE_PLAYER_SCORE',
 };
 
-export const commonActions = {
+export const commonActionTypes = {
   appLoading: 'common/APP_LOADING',
   appReady: 'common/APP_READY',
 };
 
-export const authActions = {
+export const authActionTypes = {
   LOGGED_IN: 'auth/LOGGED_IN',
   LOGGED_OUT: 'auth/LOGGED_OUT',
   USE_ACCOUNT: 'auth/USE_ACCOUNT',
+};
+
+export const profileActionTypes = {
+  getGamesList: 'profile/GET_GAMESLIST',
 };

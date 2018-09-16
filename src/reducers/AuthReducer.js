@@ -1,5 +1,5 @@
 import {AsyncStorage} from 'react-native';
-import {authActions} from 'actions/actionTypes';
+import {authActionTypes} from 'actions/actionTypes';
 
 let initialState = {
   useAccount: false,
@@ -9,7 +9,7 @@ let initialState = {
 
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
-    case authActions.LOGGED_IN:
+    case authActionTypes.LOGGED_IN:
       const user = action.data;
 
       // Save token and data to Asyncstorage
@@ -24,7 +24,7 @@ const AuthReducer = (state = initialState, action) => {
         user: user,
       };
 
-    case authActions.LOGGED_OUT:
+    case authActionTypes.LOGGED_OUT:
       let keys = ['user'];
       AsyncStorage.multiRemove(keys);
 
@@ -35,7 +35,7 @@ const AuthReducer = (state = initialState, action) => {
         user: null,
       };
 
-    case authActions.USE_ACCOUNT:
+    case authActionTypes.USE_ACCOUNT:
       return {
         ...state,
         useAccount: !state.useAccount,

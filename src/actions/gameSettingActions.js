@@ -1,29 +1,29 @@
-import {settingActions} from './actionTypes';
+import {settingActionTypes} from './actionTypes';
 
 const updatePlayer = (playerData) => {
   return {
-    type: settingActions.updatePlayer,
+    type: settingActionTypes.updatePlayer,
     payload: playerData,
   };
 };
 
 const updatePoints = (maxPoints) => {
   return {
-    type: settingActions.updatePoints,
+    type: settingActionTypes.updatePoints,
     payload: maxPoints,
   };
 };
 
 const updateRounds = (maxRounds) => {
   return {
-    type: settingActions.updateRounds,
+    type: settingActionTypes.updateRounds,
     payload: maxRounds,
   };
 };
 
 const swapPlayers = (players) => {
   return {
-    type: settingActions.swapPlayers,
+    type: settingActionTypes.swapPlayers,
     payload: players,
   };
 };
@@ -50,7 +50,7 @@ export const swapPlayersAction = (dispatch, payload) => {
  * @return {function(*): *}
  */
 export const onStartGame = () => {
-  return {type: settingActions.onStartGame};
+  return {type: settingActionTypes.onStartGame};
 };
 
 /**
@@ -59,5 +59,5 @@ export const onStartGame = () => {
  * @return {function(*): *}
  */
 export const onStopGame = () => {
-  return {type: settingActions.onStopGame};
+  return {type: settingActionTypes.onStopGame};
 };

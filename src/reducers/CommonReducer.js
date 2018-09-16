@@ -1,4 +1,4 @@
-import {commonActions} from 'actions/actionTypes';
+import {commonActionTypes} from 'actions/actionTypes';
 
 const INITIAL_STATE = {
   loading: true,
@@ -6,13 +6,13 @@ const INITIAL_STATE = {
 
 const CommonReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case commonActions.appLoading:
+    case commonActionTypes.appLoading:
       return {
         ...state,
         loading: true,
       };
 
-    case commonActions.appReady:
+    case commonActionTypes.appReady:
       return {
         ...state,
         loading: false,

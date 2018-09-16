@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {Animated} from 'react-native';
 
 import SPS from 'common/variables';
-const {sizes} = SPS.variables;
+const {colors, sizes} = SPS.variables;
 
 /**
  * Wrapper class for full-screen Loading-Indicator
@@ -95,11 +95,13 @@ class Fade extends PureComponent {
       justifyContent: 'space-around',
       width: sizes.dimensions.width,
       height: sizes.dimensions.height,
+      backgroundColor: colors.grey.darkest,
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
-      zIndex: visible ? 10 : -1,
+      zIndex: 10,
+      display: visible ? 'flex' : 'none',
     };
 
     // containerStyles have higher precedence

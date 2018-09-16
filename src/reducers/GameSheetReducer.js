@@ -1,4 +1,4 @@
-import {gamesheetActions} from 'actions/actionTypes';
+import {gamesheetActionTypes} from 'actions/actionTypes';
 
 import {
   buildCurrentScoreText,
@@ -30,7 +30,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
   };
 
   switch (action.type) {
-    case gamesheetActions.startGame:
+    case gamesheetActionTypes.startGame:
       return {
         ...state,
         players: updateObjectsInArray(state.players, payload.players),
@@ -39,7 +39,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         gameKey: payload.gameKey,
       };
 
-    case gamesheetActions.updatePlayerScore:
+    case gamesheetActionTypes.updatePlayerScore:
       let newTotalScore = 0;
       let newHighestScore = currentPlayer.highestScore;
       let newHighestScoreIndex = 0;
@@ -85,7 +85,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         },
       };
 
-    case gamesheetActions.incrementCurrentScore:
+    case gamesheetActionTypes.incrementCurrentScore:
       winner = -1;
       let incrementScoreRoundSet = {
         score: currentRoundSet.score + 1,
@@ -129,7 +129,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         },
       };
 
-    case gamesheetActions.completeBook:
+    case gamesheetActionTypes.completeBook:
       winner = -1;
       const {remainingBalls, score, totalScore} = currentRoundSet;
       const scoreAddition = remainingBalls + score -1;
@@ -168,7 +168,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         },
       };
 
-    case gamesheetActions.switchPlayer:
+    case gamesheetActionTypes.switchPlayer:
       if (currentPlayerIndex === 1 && currentRound === state.maxRounds) {
         winner =
           state.players[0].totalScore > state.players[1].totalScore ? 0 : 1;
@@ -220,7 +220,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         ),
       };
 
-    case gamesheetActions.incrementFouls:
+    case gamesheetActionTypes.incrementFouls:
       const updateFoulsObject = {
         index: currentRoundIndex,
         item: updateObjectInArray(
@@ -241,7 +241,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         rounds: updateNestedArray(rounds, updateFoulsObject),
       };
 
-    case gamesheetActions.finishGame:
+    case gamesheetActionTypes.finishGame:
       return {
         ...state,
         gameState: {
@@ -250,7 +250,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         },
       };
 
-    case gamesheetActions.cancelGame:
+    case gamesheetActionTypes.cancelGame:
       return {
         ...state,
         gameState: {
@@ -259,7 +259,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         },
       };
 
-    case gamesheetActions.clearGame:
+    case gamesheetActionTypes.clearGame:
       return {
         ...INITIAL_STATE.GameSheet,
       };

@@ -1,4 +1,4 @@
-import {authActions, commonActions} from './actionTypes';
+import {authActionTypes, commonActionTypes} from './actionTypes';
 import {auth} from 'assets';
 import {authAPI} from 'api';
 
@@ -12,13 +12,13 @@ import {authAPI} from 'api';
  */
 export function register(data, successCB, errorCB) {
   return (dispatch) => {
-    dispatch({type: commonActions.appLoading});
+    dispatch({type: commonActionTypes.appLoading});
     authAPI.register(data, function(success, data, error) {
       if (success) {
-        dispatch({type: authActions.LOGGED_IN, data});
+        dispatch({type: authActionTypes.LOGGED_IN, data});
         successCB(data);
       } else if (error) {
-        dispatch({type: commonActions.appReady});
+        dispatch({type: commonActionTypes.appReady});
         errorCB(error);
       }
     });
@@ -35,14 +35,14 @@ export function register(data, successCB, errorCB) {
  */
 export function createUser(user, successCB, errorCB) {
   return (dispatch) => {
-    dispatch({type: commonActions.appLoading});
+    dispatch({type: commonActionTypes.appLoading});
     authAPI.createUser(user, function(success, data, error) {
       if (success) {
-        dispatch({type: authActions.LOGGED_IN, data: user});
-        dispatch({type: commonActions.appReady});
+        dispatch({type: authActionTypes.LOGGED_IN, data: user});
+        dispatch({type: commonActionTypes.appReady});
         successCB();
       } else if (error) {
-        dispatch({type: commonActions.appReady});
+        dispatch({type: commonActionTypes.appReady});
         errorCB(error);
       }
     });
@@ -61,7 +61,7 @@ export function login(data, successCB, errorCB) {
   return (dispatch) => {
     authAPI.login(data, function(success, data, error) {
       if (success) {
-        if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
+        if (data.exists) dispatch({type: authActionTypes.LOGGED_IN, data: data.user});
         successCB(data);
       } else if (error) {
         errorCB(error);
@@ -98,7 +98,7 @@ export function signOut(successCB, errorCB) {
   return (dispatch) => {
     authAPI.signOut(function(success, data, error) {
       if (success) {
-        dispatch({type: authActions.LOGGED_OUT});
+        dispatch({type: authActionTypes.LOGGED_OUT});
         if (successCB) successCB();
       } else if (error) {
         if (errorCB) errorCB(error);
@@ -121,26 +121,26 @@ export function checkLoginStatus(callback) {
       if (isLoggedIn) {
         authAPI.getUser(user, function(success, {exists, user}, error) {
           if (success) {
-            dispatch({type: authActions.LOGGED_IN, data: user});
+            dispatch({type: authActionTypes.LOGGED_IN, data: user});
 
             if (callback) callback(true);
 
-            dispatch({type: commonActions.appReady});
+            dispatch({type: commonActionTypes.appReady});
 
             // TODO: Show a completeProfile Scene to new users ... use the code below for shifting
-            // if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
+            // if (data.exists) dispatch({type: authActionTypes.LOGGED_IN, data: data.user});
             // callback(exists, isLoggedIn);
           } else if (error) {
             // unable to get user
-            dispatch({type: authActions.LOGGED_OUT});
-            dispatch({type: commonActions.appReady});
+            dispatch({type: authActionTypes.LOGGED_OUT});
+            dispatch({type: commonActionTypes.appReady});
 
             if (callback) callback(false);
           }
         });
       } else {
-        dispatch({type: authActions.LOGGED_OUT});
-        dispatch({type: commonActions.appReady});
+        dispatch({type: authActionTypes.LOGGED_OUT});
+        dispatch({type: commonActionTypes.appReady});
 
         if (callback) callback(false);
       }
@@ -158,14 +158,14 @@ export function checkLoginStatus(callback) {
  */
 export function signInWithFacebook(fbToken, successCB, errorCB) {
   return (dispatch) => {
-    dispatch({type: commonActions.appLoading});
+    dispatch({type: commonActionTypes.appLoading});
     authAPI.signInWithFacebook(fbToken, function(success, data, error) {
       if (success) {
-        dispatch({type: authActions.LOGGED_IN, data: data.user});
+        dispatch({type: authActionTypes.LOGGED_IN, data: data.user});
         // TODO: Show a completeProfile Scene to new users ... use the code below for shifting
-        // if (data.exists) dispatch({type: authActions.LOGGED_IN, data: data.user});
+        // if (data.exists) dispatch({type: authActionTypes.LOGGED_IN, data: data.user});
         successCB('Profile').then(
-          dispatch({type: commonActions.appReady})
+          dispatch({type: commonActionTypes.appReady})
         );
       } else if (error) {
         errorCB(error);
@@ -180,5 +180,5 @@ export function signInWithFacebook(fbToken, successCB, errorCB) {
  * @param {function} dispatch
  */
 export function useAccount(dispatch) {
-  dispatch({type: authActions.USE_ACCOUNT});
+  dispatch({type: authActionTypes.USE_ACCOUNT});
 }

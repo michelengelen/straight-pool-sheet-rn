@@ -1,5 +1,6 @@
 import {database} from 'assets/index';
 import {roundTemplate} from 'reducers/initialStates';
+import {addGamesListener} from '../actions/profileActions';
 
 /**
  *
@@ -29,6 +30,8 @@ const createNewGame = (initialGameData, userId) => {
   // push the new gameKey to the gamesPlayed array
   list.push(gameKey);
   playedGamesRef.set(list);
+
+  // addGamesListener(gameKey);
 
   return database.ref('games/' + gameKey).set(initialGameData).then(() => gameKey);
 };

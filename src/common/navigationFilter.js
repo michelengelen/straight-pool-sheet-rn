@@ -2,7 +2,7 @@ import {sceneNames} from './labels';
 
 const filterVariables = {
   Home: {
-    showAlways: true,
+    alwaysShow: true,
     showWhenLoggedIn: true,
     iconName: 'md-home',
   },
@@ -12,6 +12,10 @@ const filterVariables = {
   },
   GameSheet: {
     showWhenGameRunning: true,
+    iconName: 'md-play',
+  },
+  GamesList: {
+    neverShow: true,
     iconName: 'md-play',
   },
   Profile: {
@@ -36,7 +40,7 @@ const filterDrawerItems = (items, isLoggedIn, gameRunning) => {
     const shouldShowWhenLoggedIn = itemValues.showWhenLoggedIn === isLoggedIn;
     const shouldShowWhenWhenGameRunning = itemValues.showWhenGameRunning === gameRunning;
 
-    return itemValues.showAlways || shouldShowWhenLoggedIn ||shouldShowWhenWhenGameRunning;
+    return !itemValues.neverShow && (itemValues.alwaysShow || shouldShowWhenLoggedIn || shouldShowWhenWhenGameRunning);
   });
 };
 

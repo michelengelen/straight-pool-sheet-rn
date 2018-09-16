@@ -1,5 +1,3 @@
-import LoginRegister from '../components/LoginRegister';
-
 const sceneNames = {
   Home: {
     sceneName: 'Home',
@@ -12,6 +10,10 @@ const sceneNames = {
   GameSheet: {
     sceneName: 'Scores',
     drawerTitle: 'Running Game',
+  },
+  GamesList: {
+    sceneName: 'Played games',
+    drawerTitle: 'Played games',
   },
   Profile: {
     sceneName: 'Profile Page',

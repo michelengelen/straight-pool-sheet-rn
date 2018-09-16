@@ -11,6 +11,7 @@ import GameSheet from 'components/GameSheet';
 import Home from 'components/Home';
 import Profile from 'components/Profile';
 import LoginRegister from 'components/LoginRegister';
+import GamesList from 'components/profile/GamesList';
 
 import SPS from 'common/variables';
 import {store, persistor} from 'store/configureStore';
@@ -32,6 +33,7 @@ const RootStack = createDrawerNavigator(
     GameSettings: GameSettings,
     GameSheet: GameSheet,
     Profile: Profile,
+    GamesList: GamesList,
     LoginRegister: LoginRegister,
   },
   DrawerNavigatorConfig,
