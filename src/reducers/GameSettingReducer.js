@@ -1,6 +1,6 @@
 import {settingActionTypes} from 'actions/actionTypes';
 import {INITIAL_STATE} from './initialStates';
-import {updateObjectInArray} from './stateHelpers';
+import {updateObjectInArray} from '../helpers/helpers';
 
 const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
   const {payload} = action;

@@ -1,4 +1,4 @@
-import {sceneNames} from './labels';
+import {sceneNames} from '../common/labels';
 
 const filterVariables = {
   Home: {

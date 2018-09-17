@@ -10,7 +10,6 @@ export function getGamesList() {
   return (dispatch) => {
     dispatch({
       type: profileActionTypes.getGamesList,
-      payload: gamesList,
     });
   };
 }

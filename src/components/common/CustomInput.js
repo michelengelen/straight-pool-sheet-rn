@@ -41,7 +41,6 @@ CustomInput.propTypes = {
 };
 
 const {colors, sizes} = SPS.variables;
-const {getDimColor} = SPS;
 const styles = {
   inputStyle: {
     flex: 1,

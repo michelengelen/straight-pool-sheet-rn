@@ -1,6 +1,6 @@
-import {database} from 'assets/index';
+import {auth, database} from 'assets';
+import {removeItem} from 'helpers';
 import {roundTemplate} from 'reducers/initialStates';
-import {addGamesListener} from '../actions/profileActions';
 
 /**
  *
@@ -22,14 +22,18 @@ const createNewGame = (initialGameData, userId) => {
   const playedGamesRef = database.ref('users/' + userId + '/playedGames');
 
   // sync down from server
-  let list = [];
-  playedGamesRef.on('value', function(snap) {
-    list = snap.val();
-  });
+  playedGamesRef.once('value').then((snap) => {
+    let list = [];
+    const gamesList = snap.val();
 
-  // push the new gameKey to the gamesPlayed array
-  list.push(gameKey);
-  playedGamesRef.set(list);
+    if (Array.isArray(gamesList)) {
+      list = gamesList;
+    }
+
+    // push the new gameKey to the gamesPlayed array
+    list.push(gameKey);
+    playedGamesRef.set(list);
+  });
 
   // addGamesListener(gameKey);
 
@@ -55,8 +59,37 @@ const cancelRunningGame = (gameKey) => {
   return database.ref('games/' + gameKey + '/gameState/cancelled').set(true);
 };
 
+/**
+ * remove a game from the database
+ * @param   {string} gameKey
+ * @return  {Promise}
+ */
 const removeGame = (gameKey) => {
-  return database.ref('games/' + gameKey + '/gameState/cancelled').set(true);
+  // store user ref
+  const uid = auth.currentUser.uid;
+  const playedGamesRef = database.ref('users/' + uid + '/playedGames');
+
+  // sync down from server
+  playedGamesRef.once('value').then((snap) => {
+    let list = [];
+    const gamesList = snap.val();
+
+    // if no array is returned cancel the operation
+    if (Array.isArray(gamesList)) {
+      const gameIndex = gamesList.indexOf(gameKey);
+
+      if (gameIndex) {
+        // remove the gameKey from the array
+        list = removeItem(gamesList, gameIndex);
+
+        // set the new list to the user
+        playedGamesRef.set(list);
+      }
+    }
+  });
+
+  // finally remove the game from the database
+  return database.ref('games/' + gameKey).remove();
 };
 
 export {createNewGame, updateRunningGame, cancelRunningGame};

@@ -6,7 +6,7 @@ import {
   updateObjectInArray,
   updateNestedArray,
   insertItem,
-} from './stateHelpers';
+} from '../helpers/helpers';
 import {INITIAL_STATE, roundTemplate} from './initialStates';
 
 const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {

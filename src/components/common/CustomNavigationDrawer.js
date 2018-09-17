@@ -7,7 +7,7 @@ import PropType from 'prop-types';
 import {CustomNavigationItem} from 'components/common';
 
 import SPS from 'common/variables';
-import {filterDrawerItems, updateRunningGame} from 'common';
+import {filterDrawerItems} from 'common';
 
 import {getAuth} from 'reducers/AuthReducer';
 import {isGameRunning} from 'reducers/GameSettingReducer';

@@ -11,7 +11,7 @@ import {getAuth} from 'reducers/AuthReducer';
 import {auth, database} from 'assets';
 
 import SPS from 'common/variables';
-const {colors, sizes} = SPS.variables;
+const {colors} = SPS.variables;
 
 /**
  * GamesList component
@@ -105,7 +105,7 @@ class GamesList extends Component {
             <FlatList
               data={this.state.gameData}
               disableVirtualization={false}
-              renderItem={({item, index}) => this.renderItem(item, index)}
+              renderItem={({item, index}) => GamesList.renderItem(item, index)}
               keyExtractor={(item) => `GamesList_${item.gameKey}`}
             />
           }

@@ -85,6 +85,7 @@ class GameSettings extends PureComponent {
    * GameSheet Component
    *
    * @param  {object} gameSettings
+   * @param  {number} userId
    * @return {Promise<void>}
    */
   async startNewGame(gameSettings, userId) {

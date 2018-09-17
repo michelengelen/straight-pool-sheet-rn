@@ -16,15 +16,15 @@ import GamesList from 'components/profile/GamesList';
 import SPS from 'common/variables';
 import {store, persistor} from 'store/configureStore';
 
+const renderNavigationDrawer = (props) => (<CustomNavigationDrawer {...props} />);
+
 const DrawerNavigatorConfig = {
   initialRouteName: 'Home',
   drawerPosition: 'right',
   navigationOptions: {
     header: null,
   },
-  contentComponent: (props) => (
-    <CustomNavigationDrawer {...props} />
-  ),
+  contentComponent: (props) => renderNavigationDrawer(props),
 };
 
 const RootStack = createDrawerNavigator(

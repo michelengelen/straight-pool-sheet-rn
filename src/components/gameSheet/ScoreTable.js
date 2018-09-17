@@ -236,8 +236,8 @@ class ScoreTable extends PureComponent {
     return (
       <View style={wrapperStyle}>
         <SectionList
-          renderItem={({item, index}) => this.renderItem(item, index, (x) => this.getRowHeight(x))}
-          renderSectionHeader={() => this.renderItem([], 0, (x) => this.getRowHeight(x))}
+          renderItem={({item, index}) => ScoreTable.renderItem(item, index, (x) => this.getRowHeight(x))}
+          renderSectionHeader={() => ScoreTable.renderItem([], 0, (x) => this.getRowHeight(x))}
           getItemLayout={this.getItemLayout}
           ref={(ref) => this.props.storeRef(ref)}
           sections={sections}
