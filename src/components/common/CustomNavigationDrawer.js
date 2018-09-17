@@ -72,6 +72,7 @@ class CustomNavigationDrawer extends PureComponent {
             {this.state.filteredItems.map((item) => {
               return (
                 <CustomNavigationItem
+                  navigateButton
                   key={item.key}
                   label={item.drawerTitle}
                   icon={item.iconName}

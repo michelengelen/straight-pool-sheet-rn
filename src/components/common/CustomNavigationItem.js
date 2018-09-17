@@ -24,7 +24,7 @@ class CustomNavigationItem extends PureComponent {
    * @return {jsx}
    */
   render() {
-    const {icon, label, navigate, active} = this.props;
+    const {icon, label, navigate, navigateButton, active} = this.props;
     const {wrapperStyle, iconView, labelStyle} = styles;
 
     const backgroundStyle = {};
@@ -51,6 +51,15 @@ class CustomNavigationItem extends PureComponent {
           </View>
         }
         <Text style={labelStyle}>{label}</Text>
+        {navigateButton &&
+          <View style={{...iconView, position: 'absolute', right: sizes.gutter * .7}}>
+            <Icon
+              type={'ionicon'}
+              name={'md-arrow-dropright'}
+              color={colors.text.dark}
+            />
+          </View>
+        }
       </TouchableOpacity>
     );
   }
@@ -61,6 +70,7 @@ CustomNavigationItem.propTypes = {
   label: PropType.string,
   backgroundColor: PropType.string,
   active: PropType.bool,
+  navigateButton: PropType.bool,
   navigate: PropType.func,
 };
 
@@ -82,6 +92,7 @@ const styles = StyleSheet.create({
     paddingVertical: sizes.gutter * .75,
     fontSize: sizes.font_L,
     color: colors.text.mid,
+    fontWeight: 'bold',
   },
   iconView: {
     flex: 1,

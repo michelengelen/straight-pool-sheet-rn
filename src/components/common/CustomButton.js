@@ -19,15 +19,26 @@ const CustomButton = (props) => {
   const renderIcon = (position, name) => {
     if (typeof name !== 'string') return null;
     const marginKey = position === 'left' ? 'marginRight' : 'marginLeft';
+    const alignSelf = position === 'left' ? 'flex-start' : 'flex-end';
+    const iconSize = position === 'left' ? textStyle.fontSize : textStyle.fontSize * 1.3;
+    const iconColor = position === 'left' ? colors.primary.dark : colors.text.dark;
+
+    const viewStyle = {};
+    if (position === 'right') {
+      viewStyle.position = 'absolute';
+      viewStyle.right = sizes.gutter;
+    }
 
     return (
-      <Icon
-        type={'ionicon'}
-        name={name}
-        color={textStyle.color}
-        size={textStyle.fontSize}
-        iconStyle={{[marginKey]: sizes.gutter * .4}}
-      />
+      <View style={viewStyle}>
+        <Icon
+          type={'ionicon'}
+          name={name}
+          color={iconColor}
+          size={iconSize}
+          iconStyle={{[marginKey]: sizes.gutter, alignSelf}}
+        />
+      </View>
     );
   };
 
@@ -40,12 +51,15 @@ const CustomButton = (props) => {
             <View
               style={{
                 flexDirection: 'row',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
+                alignSelf: 'stretch',
+                padding: sizes.gutter * .5,
+                minHeight: 50,
               }}
             >
               {iconLeft && renderIcon('left', iconLeft)}
-              <Text style={{...textStyle}}>{buttonText.toUpperCase()}</Text>
+              <Text style={{...textStyle}}>{buttonText}</Text>
               {iconRight && renderIcon('right', iconRight)}
             </View>
           )

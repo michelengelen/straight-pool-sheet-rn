@@ -7,6 +7,8 @@ import {SceneContainer, CustomButton} from 'components/common';
 
 import Images from 'assets/images';
 import SPS from 'common/variables';
+const {colors, sizes} = SPS.variables;
+
 import {getAuth} from 'reducers/AuthReducer';
 
 import {authActions} from 'actions';
@@ -53,6 +55,8 @@ class Home extends Component {
         <CustomButton
           buttonText={gameRunning ? 'Return to your game' : 'Start New Game'}
           loading={false}
+          iconLeft={gameRunning ? 'md-play' : 'md-add'}
+          iconRight={'md-arrow-dropright'}
           onPress={() => {
             if (gameRunning) {
               this.props.navigation.navigate('GameSheet');
@@ -64,6 +68,8 @@ class Home extends Component {
         <CustomButton
           buttonText={isLoggedIn ? 'View Profile' : 'Login / Register'}
           loading={false}
+          iconLeft={isLoggedIn ? 'md-person' : 'md-log-in'}
+          iconRight={'md-arrow-dropright'}
           onPress={() => {
             if (isLoggedIn) {
               this.props.navigation.navigate('Profile');
@@ -84,8 +90,6 @@ Home.propTypes = {
   gameRunning: PropType.bool,
   checkLoginStatus: PropType.func.isRequired,
 };
-
-const {sizes} = SPS.variables;
 
 const styles = {
   imageStyle: {

@@ -1,9 +1,10 @@
 export * from './LoadingIndicator';
-export * from './Button';
 export * from './CustomInput';
 export * from './CustomButton';
 export * from './CustomSlider';
 export * from './CustomStatusBar';
+export * from './CustomNavigationDrawer';
+export * from './CustomNavigationItem';
 export * from './SceneContainer';
 export * from './PageIntro';
 export * from './InputContainer';
@@ -11,5 +12,3 @@ export * from './AuthTextInput';
 export * from './LoginForm';
 export * from './RegisterForm';
 export * from './Fade';
-export * from './CustomNavigationDrawer';
-export * from './CustomNavigationItem';
