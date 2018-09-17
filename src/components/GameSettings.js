@@ -8,7 +8,7 @@ import {
   CustomInput,
   CustomSlider,
   CustomButton,
-  PageContainer,
+  SceneContainer,
   InputContainer,
 } from 'components/common';
 import {
@@ -183,7 +183,7 @@ class GameSettings extends PureComponent {
 
     return (
       <View style={{flex: 1}}>
-        <PageContainer darkMode scrollable pageTitle={'Gamesettings'}>
+        <SceneContainer darkMode scrollable pageTitle={'Gamesettings'}>
           <InputContainer headline={'Players'}>
             <View style={{flex: 1, flexDirection: 'row', alignItems: 'stretch'}}>
               <View style={{flex: 5, alignItems: 'center', paddingBottom: 10}}>
@@ -253,7 +253,7 @@ class GameSettings extends PureComponent {
                 });
             }}
           />
-        </PageContainer>
+        </SceneContainer>
       </View>
     );
   }

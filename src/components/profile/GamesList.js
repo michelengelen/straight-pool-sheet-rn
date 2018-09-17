@@ -4,7 +4,7 @@ import {View, Text, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import {withNavigation} from 'react-navigation';
 
-import {PageContainer} from 'components/common';
+import {SceneContainer} from 'components/common';
 import {Fade} from 'components/common';
 import {LoadingIndicator} from 'components/common/LoadingIndicator';
 import {getAuth} from 'reducers/AuthReducer';
@@ -88,7 +88,7 @@ class GamesList extends Component {
    */
   render() {
     return (
-      <PageContainer darkMode scrollable={false} pageTitle={'My games'}>
+      <SceneContainer darkMode scrollable={false} pageTitle={'My games'}>
         <View
           style={{
             flex: 1,
@@ -110,7 +110,7 @@ class GamesList extends Component {
             />
           }
         </View>
-      </PageContainer>
+      </SceneContainer>
     );
   }
 }

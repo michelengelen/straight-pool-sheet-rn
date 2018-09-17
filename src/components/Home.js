@@ -3,7 +3,7 @@ import PropType from 'prop-types';
 import {connect} from 'react-redux';
 import {Image} from 'react-native';
 
-import {PageContainer, CustomButton} from 'components/common';
+import {SceneContainer, CustomButton} from 'components/common';
 
 import Images from 'assets/images';
 import SPS from 'common/variables';
@@ -42,7 +42,7 @@ class Home extends Component {
     const {gameRunning} = this.props;
 
     return (
-      <PageContainer
+      <SceneContainer
         home
         darkMode
         pageTitle={'STRAIGHT POOL SHEET'}
@@ -72,7 +72,7 @@ class Home extends Component {
             }
           }}
         />
-      </PageContainer>
+      </SceneContainer>
     );
   }
 }

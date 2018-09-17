@@ -38,7 +38,7 @@ ConditionalView.propTypes = {
   scrollable: PropType.bool.isRequired,
 };
 
-const PageContainer = (props) => {
+const SceneContainer = (props) => {
   const {home = false, navigation} = props;
   const {viewStyle, headerStyle} = styles;
   const {routeName} = navigation.state;
@@ -79,7 +79,7 @@ const PageContainer = (props) => {
   );
 };
 
-PageContainer.propTypes = {
+SceneContainer.propTypes = {
   children: PropType.node,
   style: PropType.object,
   home: PropType.bool,
@@ -105,5 +105,5 @@ const styles = {
   },
 };
 
-const PageContainerWithNav = withNavigation(PageContainer);
-export {PageContainerWithNav as PageContainer};
+const SceneContainerWithNav = withNavigation(SceneContainer);
+export {SceneContainerWithNav as SceneContainer};

@@ -5,7 +5,7 @@ import {Avatar} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {withNavigation} from 'react-navigation';
 
-import {CustomButton, PageContainer} from 'components/common';
+import {CustomButton, SceneContainer} from 'components/common';
 import {getAuth} from 'reducers/AuthReducer';
 
 import SPS from 'common/variables';
@@ -43,7 +43,7 @@ class Profile extends Component {
   render() {
     const {user} = this.props.authState;
     return (
-      <PageContainer darkMode scrollable={false} pageTitle={'Profile Page'}>
+      <SceneContainer darkMode scrollable={false} pageTitle={'Profile Page'}>
         <View
           style={{
             flex: 1,
@@ -89,7 +89,7 @@ class Profile extends Component {
             onPress={this.onSignOut}
           />
         </View>
-      </PageContainer>
+      </SceneContainer>
     );
   }
 }

@@ -64,6 +64,8 @@ const cancelRunningGame = (gameKey) => {
  * @param   {string} gameKey
  * @return  {Promise}
  */
+// TODO: implement remove game functionality in GamesList component
+// eslint-disable-next-line
 const removeGame = (gameKey) => {
   // store user ref
   const uid = auth.currentUser.uid;

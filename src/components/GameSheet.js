@@ -5,7 +5,7 @@ import PropType from 'prop-types';
 // import custom components
 import FullscreenModal from './FullscreenModal';
 import {PlayerOverview, ScoreControls, ScoreTable} from './gameSheet';
-import {PageContainer} from 'components/common';
+import {SceneContainer} from 'components/common';
 
 // import reducer/actions
 import {getSettings} from 'reducers/GameSettingReducer';
@@ -69,7 +69,7 @@ class GameSheet extends PureComponent {
     const gameOver = gameSheet.gameState.winner > -1;
 
     return (
-      <PageContainer darkMode scrollable={false} pageTitle={'Scores'}>
+      <SceneContainer darkMode scrollable={false} pageTitle={'Scores'}>
         <PlayerOverview players={players} />
         <ScoreTable rounds={rounds} storeRef={(ref) => this.scoreTableRef = ref} />
         <ScoreControls
@@ -82,7 +82,7 @@ class GameSheet extends PureComponent {
           undoable={scoresUndoable}
         />
         {gameOver && <FullscreenModal />}
-      </PageContainer>
+      </SceneContainer>
     );
   }
 }

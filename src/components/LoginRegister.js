@@ -7,7 +7,7 @@ import {withNavigation} from 'react-navigation';
 import {
   CustomButton,
   LoginForm,
-  PageContainer,
+  SceneContainer,
   RegisterForm,
 } from 'components/common';
 
@@ -203,7 +203,7 @@ class LoginRegister extends Component {
 
     if (this.state.register) {
       return (
-        <PageContainer
+        <SceneContainer
           pageTitle={'REGISTER'}
           scrollable={false}
           style={{alignItems: 'stretch', justifyContent: 'center'}}
@@ -221,12 +221,12 @@ class LoginRegister extends Component {
             buttonText={'Login to your account'}
             onPress={() => this.setState({register: !register})}
           />
-        </PageContainer>
+        </SceneContainer>
       );
     }
 
     return (
-      <PageContainer
+      <SceneContainer
         pageTitle={'LOGIN'}
         scrollable={false}
         style={{alignItems: 'stretch', justifyContent: 'center'}}
@@ -245,7 +245,7 @@ class LoginRegister extends Component {
           buttonText={'Create account'}
           onPress={() => this.setState({register: !register})}
         />
-      </PageContainer>
+      </SceneContainer>
     );
   }
 }

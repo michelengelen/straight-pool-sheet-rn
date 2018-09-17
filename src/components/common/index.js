@@ -4,7 +4,7 @@ export * from './CustomInput';
 export * from './CustomButton';
 export * from './CustomSlider';
 export * from './CustomStatusBar';
-export * from './PageContainer';
+export * from './SceneContainer';
 export * from './PageIntro';
 export * from './InputContainer';
 export * from './AuthTextInput';

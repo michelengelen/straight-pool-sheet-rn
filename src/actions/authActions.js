@@ -1,4 +1,4 @@
-import {authActionTypes, commonActionTypes} from './actionTypes';
+import {authActionTypes} from './actionTypes';
 import {commonActions} from 'actions';
 import {auth} from 'assets';
 import {authAPI} from 'api';
