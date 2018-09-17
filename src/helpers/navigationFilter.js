@@ -1,5 +1,15 @@
 import {sceneNames} from '../common/labels';
 
+/**
+ * config for the Navigation Items (Scenes)
+ *
+ * possible config values:
+ * - alwaysShow: boolean
+ * - neverShow: boolean
+ * - showWhenGameRunning: boolean
+ * - showWhenLoggedIn: boolean
+ * - iconName: string
+ */
 const filterVariables = {
   Home: {
     alwaysShow: true,
@@ -28,6 +38,13 @@ const filterVariables = {
   },
 };
 
+/**
+ * filter the defined items by the config here
+ * @param   {object}  items
+ * @param   {boolean} isLoggedIn
+ * @param   {boolean} gameRunning
+ * @return  {object[]}
+ */
 const filterDrawerItems = (items, isLoggedIn, gameRunning) => {
   return items.map((item) => {
     const itemValues = filterVariables[item.key];
