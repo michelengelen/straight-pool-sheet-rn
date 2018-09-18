@@ -1,27 +1,29 @@
+import {i18n} from 'assets';
+
 const sceneNames = {
   Home: {
-    sceneName: 'Home',
-    drawerTitle: 'Home',
+    sceneName: i18n.t('scenes.home'),
+    drawerTitle: i18n.t('scenes.home'),
   },
   GameSettings: {
-    sceneName: 'Game Settings',
-    drawerTitle: 'Start New Game',
+    sceneName: i18n.t('scenes.gameSettings'),
+    drawerTitle: i18n.t('scenes.gameSettings'),
   },
   GameSheet: {
-    sceneName: 'Scores',
-    drawerTitle: 'Running Game',
+    sceneName: i18n.t('scenes.gameSheet'),
+    drawerTitle: i18n.t('scenes.gameSheet'),
   },
   GamesList: {
-    sceneName: 'Played games',
-    drawerTitle: 'Played games',
+    sceneName: i18n.t('scenes.gamesPlayed'),
+    drawerTitle: i18n.t('scenes.gamesPlayed'),
   },
   Profile: {
-    sceneName: 'Profile Page',
-    drawerTitle: 'Profile',
+    sceneName: i18n.t('scenes.profile'),
+    drawerTitle: i18n.t('scenes.profile'),
   },
   LoginRegister: {
-    sceneName: 'Login / Register',
-    drawerTitle: 'Login / Register',
+    sceneName: i18n.t('scenes.loginRegister'),
+    drawerTitle: i18n.t('scenes.loginRegister'),
   },
 };
 

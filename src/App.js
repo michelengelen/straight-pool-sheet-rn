@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import {createDrawerNavigator} from 'react-navigation';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
+import RNLanguages from 'react-native-languages';
 
 // project files
 import {CustomStatusBar, CustomNavigationDrawer, LoadingIndicator} from 'components/common';
@@ -15,6 +16,7 @@ import GamesList from 'components/profile/GamesList';
 
 import SPS from 'common/variables';
 import {store, persistor} from 'store/configureStore';
+import {i18n} from 'assets';
 
 const renderNavigationDrawer = (props) => (<CustomNavigationDrawer {...props} />);
 
@@ -49,6 +51,22 @@ console.disableYellowBox = true;
  * This is the main class that renders the complete App
  */
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this._onLanguagesChange = this._onLanguagesChange.bind(this);
+    RNLanguages.addEventListener('change', this._onLanguagesChange);
+    console.log('### i18n: ', i18n);
+  }
+
+  componentWillUnmount() {
+    RNLanguages.removeEventListener('change', this._onLanguagesChange);
+  }
+
+  _onLanguagesChange({language}) {
+    i18n.locale = language;
+  }
+
   /**
    * React-Native render function
    * @return {*}

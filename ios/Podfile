@@ -9,6 +9,10 @@ target 'straightPoolSheet' do
   pod 'Firebase/Core'
 
 
+  pod 'RNLanguages', :path => '../node_modules/react-native-languages'
+  pod 'React', :path => '../node_modules/react-native'
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
   target 'straightPoolSheetTests' do
     inherit! :search_paths
     # Pods for testing
