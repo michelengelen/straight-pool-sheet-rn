@@ -20,7 +20,7 @@ const CustomButton = (props) => {
     if (typeof name !== 'string') return null;
     const marginKey = position === 'left' ? 'marginRight' : 'marginLeft';
     const alignSelf = position === 'left' ? 'flex-start' : 'flex-end';
-    const iconSize = position === 'left' ? textStyle.fontSize : textStyle.fontSize * 1.3;
+    const iconSize = position === 'left' ? textStyle.fontSize * 1.2 : textStyle.fontSize * 1.3;
     const iconColor = position === 'left' ? colors.primary.dark : colors.text.dark;
 
     const viewStyle = {};

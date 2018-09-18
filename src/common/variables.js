@@ -59,11 +59,11 @@ SPS.variables = {
   },
   sizes: {
     gutter: 20,
-    font_S: 11,
-    font_M: 13,
-    font_L: 16,
+    font_S: 12,
+    font_M: 14,
+    font_L: 18,
     font_XL: 24,
-    font_XXL: 32,
+    font_XXL: 28,
     dimensions: Dimensions.get('window'),
   },
 };

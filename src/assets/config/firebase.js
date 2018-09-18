@@ -9,6 +9,7 @@ const config = {
   projectId: constants.firebase.FIREBASE_PROJECT_ID,
   storageBucket: constants.firebase.FIREBASE_STORAGE_BUCKET,
   messagingSenderId: constants.firebase.FIREBASE_MESSAGING_SENDER_ID,
+  persistence: true,
 };
 
 if (!firebase.apps.length) {

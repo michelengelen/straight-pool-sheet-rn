@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {NetInfo, View} from 'react-native';
 import {createDrawerNavigator} from 'react-navigation';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
@@ -15,8 +15,10 @@ import LoginRegister from 'components/LoginRegister';
 import GamesList from 'components/profile/GamesList';
 
 import SPS from 'common/variables';
+const {colors} = SPS.variables;
 import {store, persistor} from 'store/configureStore';
 import {i18n} from 'assets';
+import {commonActions} from 'actions';
 
 const renderNavigationDrawer = (props) => (<CustomNavigationDrawer {...props} />);
 
@@ -41,8 +43,6 @@ const RootStack = createDrawerNavigator(
   DrawerNavigatorConfig,
 );
 
-const {colors} = SPS.variables;
-
 // TODO@Michel: Remove when yellow warning-boxes are needed.
 // eslint-disable-next-line
 console.disableYellowBox = true;
@@ -51,19 +51,50 @@ console.disableYellowBox = true;
  * This is the main class that renders the complete App
  */
 export default class App extends Component {
+  /**
+   * react constructor call
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
 
-    this._onLanguagesChange = this._onLanguagesChange.bind(this);
-    RNLanguages.addEventListener('change', this._onLanguagesChange);
-    console.log('### i18n: ', i18n);
+    RNLanguages.addEventListener('change', App._onLanguagesChange);
   }
 
+  /**
+   * React lifecycle hook - componentWillUnmount
+   */
+  componentDidMount() {
+    RNLanguages.removeEventListener('change', App._onLanguagesChange);
+
+    NetInfo.isConnected.addEventListener(
+      'connectionChange',
+      (isConnected) => App._handleConnectivityChange(isConnected)
+    );
+  }
+
+  /**
+   * React lifecycle hook - componentWillUnmount
+   */
   componentWillUnmount() {
-    RNLanguages.removeEventListener('change', this._onLanguagesChange);
+    RNLanguages.removeEventListener('change', App._onLanguagesChange);
   }
 
-  _onLanguagesChange({language}) {
+  /**
+   * event callback
+   * @param {boolean} isConnected
+   * @private
+   */
+  static _handleConnectivityChange(isConnected) {
+    store.dispatch(commonActions.appNetworkStatus(isConnected));
+  }
+
+  /**
+   * handle language change on android devices
+   * @param {string} language
+   * @private
+   */
+  static _onLanguagesChange({language}) {
     i18n.locale = language;
   }
 
@@ -75,7 +106,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <View style={{flex: 1}}>
+          <View style={{flex: 1, backgroundColor: colors.grey.darkest}}>
             <LoadingIndicator size={'full-size'} />
             <CustomStatusBar
               barStyle={'light-content'}

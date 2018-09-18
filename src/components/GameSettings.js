@@ -183,7 +183,7 @@ class GameSettings extends PureComponent {
 
     return (
       <View style={{flex: 1}}>
-        <SceneContainer darkMode scrollable pageTitle={'Gamesettings'}>
+        <SceneContainer darkMode scrollable>
           <InputContainer headline={'Players'}>
             <View style={{flex: 1, flexDirection: 'row', alignItems: 'stretch'}}>
               <View style={{flex: 5, alignItems: 'center', paddingBottom: 10}}>

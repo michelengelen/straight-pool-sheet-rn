@@ -22,6 +22,7 @@ export const gamesheetActionTypes = {
 export const commonActionTypes = {
   appLoading: 'common/APP_LOADING',
   appReady: 'common/APP_READY',
+  appNetworkStatus: 'common/APP_NETWORK_STATUS',
 };
 
 export const authActionTypes = {

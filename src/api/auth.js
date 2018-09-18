@@ -47,7 +47,7 @@ function createUser(user, callback) {
  * @param   {object} fbUser
  * @return  {object} user
  */
-function extractDataFromFacebbokUser(fbUser) {
+function extractDataFromFacebookUser(fbUser) {
   return {
     fullname: fbUser.displayName,
     firstname: fbUser.displayName.split(' ')[0],
@@ -78,7 +78,7 @@ function getUser(user, callback) {
       } else {
         // TODO: simplify callback!
         // if no user is found with the given uid create a new one
-        createUser({...extractDataFromFacebbokUser(user)}, (success, user, error) => {
+        createUser({...extractDataFromFacebookUser(user)}, (success, user, error) => {
           callback(success, {exists: success, user}, error);
         });
       }

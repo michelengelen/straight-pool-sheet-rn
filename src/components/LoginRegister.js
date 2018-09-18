@@ -204,7 +204,6 @@ class LoginRegister extends Component {
     if (this.state.register) {
       return (
         <SceneContainer
-          pageTitle={'REGISTER'}
           scrollable={false}
           style={{alignItems: 'stretch', justifyContent: 'center'}}
         >
@@ -227,7 +226,6 @@ class LoginRegister extends Component {
 
     return (
       <SceneContainer
-        pageTitle={'LOGIN'}
         scrollable={false}
         style={{alignItems: 'stretch', justifyContent: 'center'}}
       >

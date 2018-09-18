@@ -6,6 +6,7 @@ import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {rootReducer} from 'reducers';
+import SplashScreen from 'react-native-splash-screen';
 
 const persistConfig = {
   key: 'root',
@@ -21,6 +22,6 @@ const store = createStore(
     applyMiddleware(thunk)
   )
 );
-const persistor = persistStore(store);
+const persistor = persistStore(store, null, () => setTimeout(SplashScreen.hide, 700));
 
 export {store, persistor};

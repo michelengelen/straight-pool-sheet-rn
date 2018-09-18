@@ -1,4 +1,4 @@
-import {sceneNames} from '../common/labels';
+import {scenes} from '../common/labels';
 
 /**
  * config for the Navigation Items (Scenes)
@@ -48,7 +48,7 @@ const filterVariables = {
 const filterDrawerItems = (items, isLoggedIn, gameRunning) => {
   return items.map((item) => {
     const itemValues = filterVariables[item.key];
-    item.drawerTitle = sceneNames[item.key].drawerTitle;
+    item.drawerTitle = scenes[item.key].drawerTitle;
     item.iconName = itemValues.iconName;
     return item;
   }).filter((item) => {

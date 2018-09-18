@@ -2,6 +2,7 @@ import {commonActionTypes} from 'actions/actionTypes';
 
 const INITIAL_STATE = {
   loading: true,
+  online: false,
 };
 
 const CommonReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +17,12 @@ const CommonReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
+      };
+
+    case commonActionTypes.appNetworkStatus:
+      return {
+        ...state,
+        online: action.online,
       };
 
     default:

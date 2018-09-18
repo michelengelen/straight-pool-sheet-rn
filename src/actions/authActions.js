@@ -116,12 +116,16 @@ export function signOut(successCB, errorCB) {
  */
 export function checkLoginStatus(callback) {
   return (dispatch) => {
+    console.log('### TEST 0 ###');
     auth.onAuthStateChanged((user) => {
       let isLoggedIn = (user !== null);
+      console.log('### TEST 0.5 ###', user);
 
       if (isLoggedIn) {
         authAPI.getUser(user, function(success, {exists, user}, error) {
+          console.log('### TEST 1 ###');
           if (success) {
+          console.log('### TEST 2 ###');
             dispatch({type: authActionTypes.LOGGED_IN, data: user});
 
             if (callback) callback(true);
@@ -132,6 +136,7 @@ export function checkLoginStatus(callback) {
             // if (data.exists) dispatch({type: authActionTypes.LOGGED_IN, data: data.user});
             // callback(exists, isLoggedIn);
           } else if (error) {
+          console.log('### TEST 3 ###');
             // unable to get user
             dispatch({type: authActionTypes.LOGGED_OUT});
             dispatch(commonActions.appReadyAction());
@@ -140,6 +145,7 @@ export function checkLoginStatus(callback) {
           }
         });
       } else {
+          console.log('### TEST 4 ###');
         dispatch({type: authActionTypes.LOGGED_OUT});
         dispatch(commonActions.appReadyAction());
 

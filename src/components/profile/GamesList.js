@@ -88,7 +88,7 @@ class GamesList extends Component {
    */
   render() {
     return (
-      <SceneContainer darkMode scrollable={false} pageTitle={'My games'}>
+      <SceneContainer darkMode scrollable={false}>
         <View
           style={{
             flex: 1,

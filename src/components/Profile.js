@@ -43,7 +43,7 @@ class Profile extends Component {
   render() {
     const {user} = this.props.authState;
     return (
-      <SceneContainer darkMode scrollable={false} pageTitle={'Profile Page'}>
+      <SceneContainer darkMode scrollable={false}>
         <View
           style={{
             flex: 1,

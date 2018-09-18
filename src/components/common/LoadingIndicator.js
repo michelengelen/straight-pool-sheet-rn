@@ -7,20 +7,12 @@ import PropTypes from 'prop-types';
 import {Fade} from 'components/common';
 import Images from 'assets/images';
 import SPS from 'common/variables';
-import SplashScreen from 'react-native-splash-screen';
-import {getAppState} from '../../reducers/CommonReducer';
+import {getAppState} from 'reducers/CommonReducer';
 
 /**
  * rendering a LoadingIndicator depending on the size given in props
  */
 class LoadingIndicator extends PureComponent {
-  /**
-   * React lifecycle hook - componentDidMount
-   */
-  componentDidMount() {
-    SplashScreen.hide();
-  }
-
   /**
    * React-Native render function
    * @return {*}

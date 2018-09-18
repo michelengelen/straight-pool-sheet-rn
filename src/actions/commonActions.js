@@ -22,3 +22,15 @@ export function appReadyAction(target) {
     dispatch({type: commonActionTypes.appReady, target});
   };
 }
+
+/**
+ * set statur for app on-/offline
+ *
+ * @param   {bool} online
+ * @return  {function(*): *}
+ */
+export function appNetworkStatus(online) {
+  return (dispatch) => {
+    dispatch({type: commonActionTypes.appNetworkStatus, online});
+  };
+}

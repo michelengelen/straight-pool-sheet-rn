@@ -6,12 +6,13 @@ import {Image} from 'react-native';
 import {SceneContainer, CustomButton} from 'components/common';
 
 import Images from 'assets/images';
+import {i18n} from 'assets';
 import SPS from 'common/variables';
-const {colors, sizes} = SPS.variables;
+const {sizes} = SPS.variables;
 
 import {getAuth} from 'reducers/AuthReducer';
 
-import {authActions} from 'actions';
+import {authActions, commonActions} from 'actions';
 import {isGameRunning} from 'reducers/GameSettingReducer';
 
 /**
@@ -43,19 +44,28 @@ class Home extends Component {
     const {isLoggedIn} = this.props.authState;
     const {gameRunning} = this.props;
 
+    const playButton = {
+      label: gameRunning ? 'currentGame' : 'newGame',
+      icon: gameRunning ? 'md-play' : 'md-add',
+    };
+
+    const loginButton = {
+      label: isLoggedIn ? 'profile' : 'loginRegister',
+      icon: isLoggedIn ? 'md-person' : 'md-log-in',
+    };
+
     return (
       <SceneContainer
         home
         darkMode
-        pageTitle={'STRAIGHT POOL SHEET'}
         scrollable={false}
         style={{alignItems: 'stretch', justifyContent: 'center'}}
       >
         <Image source={Images.logo} style={imageStyle} />
         <CustomButton
-          buttonText={gameRunning ? 'Return to your game' : 'Start New Game'}
+          buttonText={i18n.t(`home.buttons.${playButton.label}`)}
           loading={false}
-          iconLeft={gameRunning ? 'md-play' : 'md-add'}
+          iconLeft={playButton.icon}
           iconRight={'md-arrow-dropright'}
           onPress={() => {
             if (gameRunning) {
@@ -66,9 +76,9 @@ class Home extends Component {
           }}
         />
         <CustomButton
-          buttonText={isLoggedIn ? 'View Profile' : 'Login / Register'}
+          buttonText={i18n.t(`home.buttons.${loginButton.label}`)}
           loading={false}
-          iconLeft={isLoggedIn ? 'md-person' : 'md-log-in'}
+          iconLeft={loginButton.icon}
           iconRight={'md-arrow-dropright'}
           onPress={() => {
             if (isLoggedIn) {
