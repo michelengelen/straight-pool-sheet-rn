@@ -42,7 +42,9 @@ class GameSettings extends PureComponent {
     this.renderPlayerInput = this.renderPlayerInput.bind(this);
 
     const {isLoggedIn, useAccount, user} = props.authState;
-    if (isLoggedIn && useAccount) {
+    const {players} = props.gameSettings;
+
+    if (isLoggedIn && useAccount && !(players[0].useAccount || players[1].useAccount)) {
       props.updatePlayer({
         index: 0,
         name: user.username,
