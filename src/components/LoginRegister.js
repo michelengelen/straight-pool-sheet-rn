@@ -236,10 +236,10 @@ class LoginRegister extends Component {
             buttonTitle={'SIGN UP'}
             error={this.state.error.register}
           />
-          <Text style={ctaTextStyle}>{'Already have an account?'}</Text>
+          <Text style={ctaTextStyle}>{i18n.t('messages.haveAccount')}</Text>
           <CustomButton
             loading={false}
-            buttonText={'Login to your account'}
+            buttonText={i18n.t('buttons.haveAccount')}
             onPress={() => this.setState({register: !register})}
           />
         </SceneContainer>
@@ -259,10 +259,10 @@ class LoginRegister extends Component {
           error={this.state.error.login}
           signInWithFacebook={() => this.onSignInWithFacebook()}
         />
-        <Text style={ctaTextStyle}>{'New to the App? '}</Text>
+        <Text style={ctaTextStyle}>{i18n.t('messages.createAccount')}</Text>
         <CustomButton
           loading={false}
-          buttonText={'Create account'}
+          buttonText={i18n.t('buttons.createAccount')}
           onPress={() => this.setState({register: !register})}
         />
       </SceneContainer>

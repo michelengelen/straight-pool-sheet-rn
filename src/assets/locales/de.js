@@ -39,6 +39,11 @@ const de = {
     login: 'Anmelden',
     facebook: 'Mit facebook anmelden',
   },
+  messages: {
+    notOnline: 'Keine Internetverbindung!',
+    createAccount: 'Sie haben noch kein Profil?',
+    haveAccount: 'Sie haben schon ein Profil?',
+  },
 };
 
 export default de;

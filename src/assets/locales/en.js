@@ -38,6 +38,13 @@ const en = {
     logout: 'Log out',
     login: 'Log in',
     facebook: 'Log in with facebook',
+    createAccount: 'Create account',
+    haveAccount: 'Login to your account',
+  },
+  messages: {
+    notOnline: 'No internet connection!',
+    createAccount: 'No account just yet?',
+    haveAccount: 'Already have an account?',
   },
 };
 
