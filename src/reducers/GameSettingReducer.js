@@ -53,6 +53,11 @@ const GameSettingReducer = (state = INITIAL_STATE.GameSettings, action) => {
         gameRunning: false,
       };
 
+    case settingActionTypes.clearGameSettings:
+      return {
+        ...INITIAL_STATE.GameSettings,
+      };
+
     default:
       return state;
   }

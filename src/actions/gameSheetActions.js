@@ -1,5 +1,6 @@
 import {ActionCreators} from 'redux-undo';
-import {onStartGame, onStopGame} from './gameSettingActions';
+import {clearGameSettings, onStartGame, onStopGame, swapPlayers} from './gameSettingActions';
+import {storeGame} from './storageActions';
 import {gamesheetActionTypes} from './actionTypes';
 import {createNewGame, cancelRunningGame} from 'common';
 
@@ -10,10 +11,9 @@ const startGame = (gameSettings) => {
   };
 };
 
-const clearGame = (restartingGame) => {
+const clearGame = () => {
   return {
     type: gamesheetActionTypes.clearGame,
-    payload: restartingGame,
   };
 };
 
@@ -112,19 +112,45 @@ const _HOAstartGame = (gameSettings, userId) => {
   };
 };
 
-const _HOAfinishGame = () => {
+const _HOAfinishGame = (gameData) => {
   return (dispatch) => {
     dispatch(finishGame());
+    dispatch(storeGame(gameData));
     dispatch(onStopGame());
   };
 };
 
-const _HOAcancelGame = (gameKey) => {
+const _HOAcancelGame = (gameData) => {
   return (dispatch) => {
-    cancelRunningGame(gameKey).then(() => {
+    const {gameKey} = gameData;
+    if (gameKey && gameKey !== '') {
+      cancelRunningGame(gameKey).then(() => {
+        dispatch(cancelGame());
+        dispatch(storeGame(gameData));
+        dispatch(clearGame());
+        dispatch(ActionCreators.clearHistory());
+        dispatch(onStopGame());
+      });
+    } else {
       dispatch(cancelGame());
+      dispatch(storeGame(gameData));
+      dispatch(clearGame());
+      dispatch(ActionCreators.clearHistory());
       dispatch(onStopGame());
-    });
+    }
+  };
+};
+
+const _HOAclearGame = (restart) => {
+  return (dispatch) => {
+    if (restart) {
+      dispatch(swapPlayers());
+    } else {
+      dispatch(clearGameSettings());
+    }
+    dispatch(clearGame());
+    dispatch(ActionCreators.clearHistory());
+    dispatch(onStopGame());
   };
 };
 
@@ -132,16 +158,16 @@ const _HOAcancelGame = (gameKey) => {
 export const startGameAction = (dispatch, settings, userId) => {
   return dispatch(_HOAstartGame(settings, userId));
 };
-export const finishGameAction = (dispatch) => {
-  return dispatch(_HOAfinishGame());
+export const finishGameAction = (dispatch, gameData) => {
+  return dispatch(_HOAfinishGame(gameData));
 };
 
-export const clearGameAction = (dispatch, payload) => {
-  return dispatch(clearGame(payload));
+export const clearGameAction = (dispatch, restart) => {
+  return dispatch(_HOAclearGame(restart));
 };
 
-export const cancelGameAction = (dispatch, gameKey) => {
-  return dispatch(_HOAcancelGame(gameKey));
+export const cancelGameAction = (dispatch, gameData) => {
+  return dispatch(_HOAcancelGame(gameData));
 };
 
 export const updatePlayerScoreAction = (dispatch, payload) => {

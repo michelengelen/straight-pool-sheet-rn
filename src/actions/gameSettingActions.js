@@ -21,7 +21,7 @@ const updateRounds = (maxRounds) => {
   };
 };
 
-const swapPlayers = (players) => {
+export const swapPlayers = (players) => {
   return {
     type: settingActionTypes.swapPlayers,
     payload: players,
@@ -40,8 +40,12 @@ export const updateRoundsAction = (dispatch, payload) => {
   return dispatch(updateRounds(payload));
 };
 
-export const swapPlayersAction = (dispatch, payload) => {
-  return dispatch(swapPlayers(payload));
+export const swapPlayersAction = (dispatch) => {
+  return dispatch(swapPlayers());
+};
+
+export const clearGameSettings = () => {
+  return {type: settingActionTypes.clearGameSettings};
 };
 
 /**

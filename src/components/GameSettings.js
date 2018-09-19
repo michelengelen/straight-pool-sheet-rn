@@ -247,7 +247,7 @@ class GameSettings extends PureComponent {
             }
             loading={false}
             onPress={() => {
-              this.startNewGame(gameSettings, authState.user.uid || null)
+              this.startNewGame(gameSettings, authState.user ? authState.user.uid : null)
                 .then(function() {
                   navigation.navigate('GameSheet');
                 });

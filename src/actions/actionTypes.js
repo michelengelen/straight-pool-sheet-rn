@@ -5,6 +5,7 @@ export const settingActionTypes = {
   swapPlayers: 'settings/SWAP_PLAYERS',
   onStartGame: 'settings/ON_START_GAME',
   onStopGame: 'settings/ON_STOP_GAME',
+  clearGameSettings: 'settings/CLEAR_GAME_SETTINGS',
 };
 
 export const gamesheetActionTypes = {
@@ -33,4 +34,9 @@ export const authActionTypes = {
 
 export const profileActionTypes = {
   getGamesList: 'profile/GET_GAMESLIST',
+};
+
+export const storageActionTypes = {
+  storeGame: 'storage/STORE_GAME',
+  removeGame: 'storage/REMOVE_GAME',
 };

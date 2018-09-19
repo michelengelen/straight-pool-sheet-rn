@@ -5,6 +5,7 @@ import AuthReducer from './AuthReducer';
 import GameSettingReducer from './GameSettingReducer';
 import GameSheetReducer from './GameSheetReducer';
 import CommonReducer from './CommonReducer';
+import StorageReducer from './StorageReducer';
 
 import {gamesheetActionTypes} from 'actions/actionTypes';
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
       ]),
     }
   ),
+  storage: StorageReducer,
   appState: CommonReducer,
 });
 

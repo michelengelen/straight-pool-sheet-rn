@@ -27,18 +27,31 @@ class FullscreenModal extends Component {
     super(props);
 
     this.startNewGame = this.startNewGame.bind(this);
+    this.finishGame = this.finishGame.bind(this);
   }
 
   /**
    * accumulates all actions that are needed for starting a new game
    *
+   * @param {object}  gameData
    * @param {boolean} restart
    * @param {string}  destination
    */
-  startNewGame(restart = false, destination = 'Home') {
-    this.props.finishGame();
-    if (restart) this.props.swapPlayers(this.props.gameSheet.players);
+  startNewGame(gameData, restart = false, destination = 'Home') {
+    this.props.finishGame(gameData);
     this.props.clearGame(restart);
+    this.props.navigation.navigate(destination);
+  }
+
+  /**
+   * accumulates all actions that are needed for finishing a new game
+   *
+   * @param {object}  gameData
+   * @param {string}  destination
+   */
+  finishGame(gameData, destination) {
+    this.props.finishGame(gameData);
+    this.props.clearGame(false);
     this.props.navigation.navigate(destination);
   }
 
@@ -115,12 +128,12 @@ class FullscreenModal extends Component {
             <CustomButton
               buttonText={'New Game'}
               loading={false}
-              onPress={() => this.startNewGame(true, 'GameSettings')}
+              onPress={() => this.startNewGame(gameSheet, true, 'GameSettings')}
             />
             <CustomButton
               buttonText={'Back to Home'}
               loading={false}
-              onPress={this.startNewGame}
+              onPress={() => this.finishGame(gameSheet, 'Home')}
             />
           </View>
         </View>
@@ -217,8 +230,8 @@ const mapDispatchToProps = (dispatch) => ({
     gameSettingActions.swapPlayersAction(dispatch, players),
   clearGame: (restart) =>
     gameSheetActions.clearGameAction(dispatch, restart),
-  finishGame: () =>
-    gameSheetActions.finishGameAction(dispatch),
+  finishGame: (gameData) =>
+    gameSheetActions.finishGameAction(dispatch, gameData),
 });
 
 export default withNavigation(

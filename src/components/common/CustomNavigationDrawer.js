@@ -63,7 +63,7 @@ class CustomNavigationDrawer extends PureComponent {
    * @return {jsx}
    */
   render() {
-    const {navigation, gameRunning} = this.props;
+    const {navigation, gameRunning, gameSheet} = this.props;
     const {wrapper, container, itemWrapper} = styles;
     return (
       <ScrollView style={wrapper}>
@@ -87,7 +87,7 @@ class CustomNavigationDrawer extends PureComponent {
                 icon={'md-close'}
                 active={false}
                 backgroundColor={colors.useCase.error}
-                navigate={() => this.cancelGame()}
+                navigate={() => this.cancelGame(gameSheet)}
               />
             }
           </View>
@@ -137,8 +137,8 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  cancelGame: async (gameKey) =>
-    await gameSheetActions.cancelGameAction(dispatch, gameKey),
+  cancelGame: async (gameData) =>
+    await gameSheetActions.cancelGameAction(dispatch, gameData),
   clearGame: () =>
     gameSheetActions.clearGameAction(dispatch, false),
 });
