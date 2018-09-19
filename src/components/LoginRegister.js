@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropType from 'prop-types';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {withNavigation} from 'react-navigation';
 
@@ -12,7 +12,9 @@ import {
 } from 'components/common';
 
 import {getAuth} from 'reducers/AuthReducer';
+import {getAppState} from 'reducers/CommonReducer';
 import SPS from 'common/variables';
+import {i18n} from 'assets';
 
 import {authActions} from 'actions';
 import {AccessToken, LoginManager} from 'react-native-fbsdk';
@@ -198,8 +200,28 @@ class LoginRegister extends Component {
    * @return {*}
    */
   render() {
+    const {appState} = this.props;
     const {register} = this.state;
-    const {ctaTextStyle} = styles;
+    const {ctaTextStyle, infoTextStyle} = styles;
+
+    if (!appState.online) {
+      return (
+        <SceneContainer
+          scrollable={false}
+          style={{alignItems: 'stretch', justifyContent: 'center'}}
+        >
+          <View>
+            <Text style={infoTextStyle}>{i18n.t('loginRegister.notOnline')}</Text>
+            <CustomButton
+              loading={false}
+              iconLeft={'md-arrow-back'}
+              buttonText={i18n.t('buttons.back')}
+              onPress={() => this.props.navigation.goBack()}
+            />
+          </View>
+        </SceneContainer>
+      );
+    }
 
     if (this.state.register) {
       return (
@@ -253,6 +275,7 @@ LoginRegister.propTypes = {
     isLoggedIn: PropType.bool.isRequired,
     user: PropType.object,
   }),
+  appState: PropType.object,
   registerUser: PropType.func.isRequired,
   loginUser: PropType.func.isRequired,
   signInWithFacebook: PropType.func.isRequired,
@@ -271,11 +294,18 @@ const styles = {
     color: colors.textColorDim,
     marginVertical: sizes.gutter / 4,
   },
+  infoTextStyle: {
+    fontSize: sizes.font_M,
+    color: colors.textColorDim,
+    padding: sizes.gutter,
+    marginVertical: sizes.gutter / 4,
+  },
 };
 
 const mapStateToProps = (state) => {
   return {
     ...getAuth(state),
+    ...getAppState(state),
   };
 };
 

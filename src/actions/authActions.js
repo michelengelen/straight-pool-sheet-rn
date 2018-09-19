@@ -111,45 +111,40 @@ export function signOut(successCB, errorCB) {
 /**
  * check if a user is logged in with firebase and updates the redux-store
  *
- * @param  {function} callback
+ * @param  {boolean} isConnected
  * @return {function}
  */
-export function checkLoginStatus(callback) {
+export function checkLoginStatus(isConnected) {
   return (dispatch) => {
-    console.log('### TEST 0 ###');
     auth.onAuthStateChanged((user) => {
       let isLoggedIn = (user !== null);
-      console.log('### TEST 0.5 ###', user);
 
-      if (isLoggedIn) {
+      console.log('### user: ', user);
+      console.log('### isConnected: ', isConnected);
+      console.log('### isLoggedIn: ', isLoggedIn);
+
+      if (isLoggedIn && isConnected) {
         authAPI.getUser(user, function(success, {exists, user}, error) {
-          console.log('### TEST 1 ###');
           if (success) {
-          console.log('### TEST 2 ###');
             dispatch({type: authActionTypes.LOGGED_IN, data: user});
-
-            if (callback) callback(true);
-
             dispatch(commonActions.appReadyAction());
 
             // TODO: Show a completeProfile Scene to new users ... use the code below for shifting
             // if (data.exists) dispatch({type: authActionTypes.LOGGED_IN, data: data.user});
             // callback(exists, isLoggedIn);
           } else if (error) {
-          console.log('### TEST 3 ###');
             // unable to get user
             dispatch({type: authActionTypes.LOGGED_OUT});
             dispatch(commonActions.appReadyAction());
-
-            if (callback) callback(false);
           }
         });
+      } else if (isLoggedIn && !isConnected) {
+        // TODO: add showGeneralMessage function here (TBD)
+        dispatch({type: authActionTypes.LOGGED_IN, data: user});
+        dispatch(commonActions.appReadyAction());
       } else {
-          console.log('### TEST 4 ###');
         dispatch({type: authActionTypes.LOGGED_OUT});
         dispatch(commonActions.appReadyAction());
-
-        if (callback) callback(false);
       }
     });
   };

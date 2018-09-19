@@ -28,6 +28,16 @@ const de = {
   loginRegister: {
     title: 'Einloggen / Registrieren',
     drawerTitle: 'Einloggen / Registrieren',
+    notOnline: 'Solange keine Internetverbindung besteht können Sie sich leider nicht anmelden oder registrieren. In' +
+        ' der Zwischenzeit ist es jedoch möglich offline zu spielen. Die gespielten Spiele werden dann bei der' +
+        ' nächsten Verbindung mit unseren Servern und Ihrem Account synchronisiert.',
+  },
+  buttons: {
+    back: 'Zurück',
+    cancelGame: 'Spiel abbrechen',
+    logout: 'Abmelden',
+    login: 'Anmelden',
+    facebook: 'Mit facebook anmelden',
   },
 };
 

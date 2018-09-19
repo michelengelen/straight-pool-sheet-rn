@@ -9,6 +9,7 @@ import {SceneContainer} from 'components/common';
 
 // import reducer/actions
 import {getSettings} from 'reducers/GameSettingReducer';
+import {getAppState} from 'reducers/CommonReducer';
 import {getGameSheet, undoableFromState} from 'reducers/GameSheetReducer';
 import {gameSheetActions} from 'actions';
 import {updateRunningGame} from '../common';
@@ -34,10 +35,10 @@ class GameSheet extends PureComponent {
    * React lifecycle method - componentDidUpdate
    */
   componentDidUpdate() {
-    const {gameSheet, gameSettings} = this.props;
+    const {gameSheet, gameSettings, appState} = this.props;
     const {rounds, gameKey} = gameSheet;
 
-    if (gameSettings.gameRunning && gameSheet.gameKey !== '') {
+    if (appState.online && gameSettings.gameRunning && gameSheet.gameKey !== '') {
       updateRunningGame(gameSheet, gameKey).then(() => {
         if (this.scoreTableRef) {
           this.scoreTableRef.scrollToLocation({
@@ -90,6 +91,7 @@ class GameSheet extends PureComponent {
 GameSheet.propTypes = {
   gameSettings: PropType.object,
   gameSheet: PropType.object,
+  appState: PropType.object,
   switchPlayer: PropType.func,
   updatePlayerScore: PropType.func,
   incrementFouls: PropType.func,
@@ -103,6 +105,7 @@ const mapStateToProps = (state) => {
   return {
     ...getSettings(state),
     ...getGameSheet(state),
+    ...getAppState(state),
     ...undoableFromState(state),
   };
 };

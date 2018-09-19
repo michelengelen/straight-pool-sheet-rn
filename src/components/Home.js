@@ -11,8 +11,9 @@ import SPS from 'common/variables';
 const {sizes} = SPS.variables;
 
 import {getAuth} from 'reducers/AuthReducer';
+import {getAppState} from 'reducers/CommonReducer';
 
-import {authActions, commonActions} from 'actions';
+import {authActions} from 'actions';
 import {isGameRunning} from 'reducers/GameSettingReducer';
 
 /**
@@ -32,7 +33,7 @@ class Home extends Component {
    * React lifecycle hook - componentDidMount
    */
   componentDidMount() {
-    this.props.checkLoginStatus();
+    this.props.checkLoginStatus(this.props.appState.online);
   }
 
   /**
@@ -96,6 +97,7 @@ class Home extends Component {
 Home.propTypes = {
   navigation: PropType.object,
   authState: PropType.object,
+  appState: PropType.object,
   tintColor: PropType.string,
   gameRunning: PropType.bool,
   checkLoginStatus: PropType.func.isRequired,
@@ -115,6 +117,7 @@ const styles = {
 const mapStateToProps = (state) => {
   return {
     ...getAuth(state),
+    ...getAppState(state),
     ...isGameRunning(state),
   };
 };

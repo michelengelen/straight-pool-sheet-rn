@@ -28,6 +28,16 @@ const en = {
   loginRegister: {
     title: 'Login / Register',
     drawerTitle: 'Login / Register',
+    notOnline: 'While your phone is disconnected from the internet it is not possible to login/register. Please' +
+        ' activate your internet connection or play offline. Your played games will get stored to your device and' +
+        ' synced with ous database the next time you go online.',
+  },
+  buttons: {
+    back: 'Go back',
+    cancelGame: 'Cancel current game',
+    logout: 'Log out',
+    login: 'Log in',
+    facebook: 'Log in with facebook',
   },
 };
 
