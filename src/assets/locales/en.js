@@ -37,6 +37,7 @@ const en = {
     cancelGame: 'Cancel current game',
     logout: 'Log out',
     login: 'Log in',
+    signup: 'Sign up',
     facebook: 'Log in with facebook',
     createAccount: 'Create account',
     haveAccount: 'Login to your account',

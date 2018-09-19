@@ -232,9 +232,9 @@ class LoginRegister extends Component {
           <RegisterForm
             fields={fields.register}
             showLabel={false}
-            onSubmit={this.onSubmit}
-            buttonTitle={'SIGN UP'}
+            buttonTitle={i18n.t('buttons.signup')}
             error={this.state.error.register}
+            onSubmit={this.onSubmit}
           />
           <Text style={ctaTextStyle}>{i18n.t('messages.haveAccount')}</Text>
           <CustomButton
@@ -254,10 +254,10 @@ class LoginRegister extends Component {
         <LoginForm
           fields={fields.login}
           showLabel={false}
-          onSubmit={this.onSubmit}
-          buttonTitle={'SIGN IN'}
+          buttonTitle={i18n.t('buttons.login')}
           error={this.state.error.login}
-          signInWithFacebook={() => this.onSignInWithFacebook()}
+          onSubmit={this.onSubmit}
+          signInWithFacebook={this.onSignInWithFacebook}
         />
         <Text style={ctaTextStyle}>{i18n.t('messages.createAccount')}</Text>
         <CustomButton

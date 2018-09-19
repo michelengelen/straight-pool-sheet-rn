@@ -37,6 +37,7 @@ const de = {
     cancelGame: 'Spiel abbrechen',
     logout: 'Abmelden',
     login: 'Anmelden',
+    signup: 'Registrieren',
     facebook: 'Mit facebook anmelden',
   },
   messages: {
