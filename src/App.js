@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {NetInfo, View} from 'react-native';
-import {createDrawerNavigator} from 'react-navigation';
+import {createDrawerNavigator, createStackNavigator} from 'react-navigation';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import RNLanguages from 'react-native-languages';
@@ -25,25 +25,46 @@ const renderNavigationDrawer = (props) => (<CustomNavigationDrawer {...props} />
 const DrawerNavigatorConfig = {
   initialRouteName: 'Home',
   drawerPosition: 'right',
+  mode: 'card',
   navigationOptions: {
     header: null,
   },
   contentComponent: (props) => renderNavigationDrawer(props),
 };
 
-const RootStack = createDrawerNavigator(
+const navigationScenes = {
+  Home,
+  GameSettings,
+  GameSheet,
+  Profile,
+  GamesList,
+  LoginRegister,
+};
+
+const StackNavigator = createStackNavigator(
+  navigationScenes,
   {
-    Home: Home,
-    GameSettings: GameSettings,
-    GameSheet: GameSheet,
-    Profile: Profile,
-    GamesList: GamesList,
-    LoginRegister: LoginRegister,
+    navigationOptions: {
+      header: null,
+    },
   },
+);
+
+const buildDrawerNavigation = (scenes) => {
+  const drawerNavigation = {};
+  for (const scene in scenes) {
+    if (Object.prototype.hasOwnProperty.call(scenes, scene)) {
+      drawerNavigation[scene] = StackNavigator;
+    }
+  }
+  return drawerNavigation;
+};
+
+const RootStack = createDrawerNavigator(
+  buildDrawerNavigation(navigationScenes),
   DrawerNavigatorConfig,
 );
 
-// TODO@Michel: Remove when yellow warning-boxes are needed.
 // eslint-disable-next-line
 console.disableYellowBox = true;
 

@@ -114,6 +114,7 @@ const _HOAstartGame = (gameSettings, userId) => {
 
 const _HOAfinishGame = (gameData) => {
   return (dispatch) => {
+    gameData.gameState.finished = true;
     dispatch(finishGame());
     dispatch(storeGame(gameData));
     dispatch(onStopGame());
@@ -123,6 +124,8 @@ const _HOAfinishGame = (gameData) => {
 const _HOAcancelGame = (gameData) => {
   return (dispatch) => {
     const {gameKey} = gameData;
+    gameData.gameState.cancelled = true;
+
     if (gameKey && gameKey !== '') {
       cancelRunningGame(gameKey).then(() => {
         dispatch(cancelGame());
