@@ -39,7 +39,6 @@ class GameSheet extends PureComponent {
     const {rounds, gameKey} = gameSheet;
 
     if (appState.online && gameSettings.gameRunning && (gameKey && gameKey !== '')) {
-      console.log('### HERE!');
       updateRunningGame(gameSheet, gameKey).then(() => {
         if (this.scoreTableRef) {
           this.scoreTableRef.scrollToLocation({

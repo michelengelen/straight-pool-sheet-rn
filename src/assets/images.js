@@ -3,13 +3,13 @@ const loader = require('./dots.svg');
 const logo = {uri: 'logo'};
 
 const Icons = {
-  average: require('./icons/average.svg'),
-  book: require('./icons/book.svg'),
-  foul: require('./icons/foul.svg'),
-  maximum: require('./icons/maximum.svg'),
-  minus: require('./icons/minus.svg'),
-  player: require('./icons/player.svg'),
-  undo: require('./icons/undo.svg'),
+  average: 'average',
+  book: 'book',
+  foul: 'foul',
+  maximum: 'maximum',
+  minus: 'minus',
+  player: 'player',
+  undo: 'undo',
 };
 
 const Images = {

@@ -206,6 +206,7 @@ const styles = {
     },
     playernameViewStyle: {
       flex: 1,
+      minHeight: sizes.gutter,
       alignItems: 'center',
       padding: sizes.gutter / 4,
       backgroundColor: colors.grey.darker,
