@@ -18,7 +18,7 @@ import SPS from 'common/variables';
 const {colors} = SPS.variables;
 import {store, persistor} from 'store/configureStore';
 import {i18n} from 'assets';
-import {commonActions} from 'actions';
+import {commonActions, authActions} from 'actions';
 
 const renderNavigationDrawer = (props) => (<CustomNavigationDrawer {...props} />);
 
@@ -80,18 +80,18 @@ export default class App extends Component {
     super(props);
 
     RNLanguages.addEventListener('change', App._onLanguagesChange);
-  }
-
-  /**
-   * React lifecycle hook - componentWillUnmount
-   */
-  componentDidMount() {
-    RNLanguages.removeEventListener('change', App._onLanguagesChange);
 
     NetInfo.isConnected.addEventListener(
       'connectionChange',
       (isConnected) => App._handleConnectivityChange(isConnected)
     );
+  }
+
+  /**
+   * React lifecycle hook - componentDidMount
+   */
+  componentDidMount() {
+    RNLanguages.removeEventListener('change', App._onLanguagesChange);
   }
 
   /**
@@ -108,6 +108,7 @@ export default class App extends Component {
    */
   static _handleConnectivityChange(isConnected) {
     store.dispatch(commonActions.appNetworkStatus(isConnected));
+    store.dispatch(authActions.checkLoginStatus(isConnected));
   }
 
   /**

@@ -138,4 +138,5 @@ export const authAPI = {
   resetPassword,
   signOut,
   signInWithFacebook,
+  extractDataFromFacebookUser,
 };

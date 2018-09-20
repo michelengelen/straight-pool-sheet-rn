@@ -119,10 +119,6 @@ export function checkLoginStatus(isConnected) {
     auth.onAuthStateChanged((user) => {
       let isLoggedIn = (user !== null);
 
-      console.log('### user: ', user);
-      console.log('### isConnected: ', isConnected);
-      console.log('### isLoggedIn: ', isLoggedIn);
-
       if (isLoggedIn && isConnected) {
         authAPI.getUser(user, function(success, {exists, user}, error) {
           if (success) {
@@ -139,8 +135,12 @@ export function checkLoginStatus(isConnected) {
           }
         });
       } else if (isLoggedIn && !isConnected) {
+        let handledUser = user;
+        if (user.providerData[0].providerId.includes('facebook')) {
+          handledUser = authAPI.extractDataFromFacebookUser(user)
+        }
         // TODO: add showGeneralMessage function here (TBD)
-        dispatch({type: authActionTypes.LOGGED_IN, data: user});
+        dispatch({type: authActionTypes.LOGGED_IN, data: handledUser});
         dispatch(commonActions.appReadyAction());
       } else {
         dispatch({type: authActionTypes.LOGGED_OUT});

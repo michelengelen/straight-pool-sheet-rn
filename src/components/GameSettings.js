@@ -45,9 +45,9 @@ class GameSettings extends PureComponent {
     const {isLoggedIn, useAccount, user} = props.authState;
     const {players} = props.gameSettings;
 
-    if (isLoggedIn && useAccount && !(players[0].useAccount || players[1].useAccount)) {
+    if (isLoggedIn && useAccount) {
       props.updatePlayer({
-        index: 0,
+        index: players[1].useAccount ? 1 : 0,
         name: user.username,
         avatar: user.avatar,
         useAccount: true,
@@ -63,22 +63,25 @@ class GameSettings extends PureComponent {
     const {useAccount, user} = this.props.authState;
 
     // switch value for useAccount on authState object
-    this.props.useAccount();
+    this.props.useAccount().then(() => {
+      // check which player object needs an update
+      let useAccountIndex = 0;
+      for (let i = 0; i < 2; i++) {
+        if (players[i].useAccount) {
+          useAccountIndex = i;
+          break;
+        }
+      }
 
-    // check which player object needs an update
-    let useAccountIndex = 0;
-    for (let i = 0; i < 2; i++) {
-      if (players[i].useAccount) useAccountIndex = i;
-    }
+      // when there is already a name typed in for player one update player 2 instead
+      if (players[0].name !== '' && !players[0].useAccount) useAccountIndex = 1;
 
-    // when there is already a name typed in for player one update player 2 instead
-    if (players[0].name !== '' && !players[0].useAccount) useAccountIndex = 1;
-
-    this.props.updatePlayer({
-      index: useAccountIndex,
-      name: !useAccount ? user.username : '',
-      avatar: !useAccount ? user.avatar : null,
-      useAccount: !useAccount,
+      this.props.updatePlayer({
+        index: useAccountIndex,
+        name: !useAccount ? user.username || user.firstname : '',
+        avatar: !useAccount ? user.avatar : null,
+        useAccount: !useAccount,
+      });
     });
   }
 
@@ -292,8 +295,8 @@ const mapDispatchToProps = (dispatch) => ({
     gameSettingActions.swapPlayersAction(dispatch),
   startGame: (settings, userId) =>
     gameSheetActions.startGameAction(dispatch, settings, userId),
-  useAccount: (user) =>
-    authActions.useAccount(dispatch, user),
+  useAccount: async () =>
+    await authActions.useAccount(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameSettings);
