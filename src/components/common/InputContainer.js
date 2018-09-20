@@ -12,7 +12,7 @@ import SPS from 'common/variables';
  * @constructor
  */
 const InputHeader = (props) => {
-  const {headline, value} = props;
+  const {headline, value, component} = props;
   const {
     headerContainerStyle,
     headlineStyle,
@@ -28,11 +28,12 @@ const InputHeader = (props) => {
           <Text style={headlineStyle}>{headline.toUpperCase()}</Text>
         </View>
       }
-      {value &&
+      {(value && !component) &&
         <View style={valueContainerStyle}>
           <Text style={valueStyle}>{value}</Text>
         </View>
       }
+      {component && component}
     </View>
   );
 };
@@ -43,6 +44,7 @@ InputHeader.propTypes = {
     PropType.string,
     PropType.number,
   ]),
+  component: PropType.node,
 };
 
 /**
@@ -58,6 +60,7 @@ const InputContainer = (props) => {
     headline,
     description,
     value,
+    component,
   } = props;
 
   const {
@@ -72,16 +75,19 @@ const InputContainer = (props) => {
         <InputHeader
           headline={headline && headline}
           value={value && value}
+          component={component && component}
         />
       }
-      <View
-        style={{
-          paddingTop: sizes.gutter / 2,
-          paddingBottom: sizes.gutter / 2,
-        }}
-      >
-        {children}
-      </View>
+      {children &&
+        <View
+          style={{
+            paddingTop: sizes.gutter / 2,
+            paddingBottom: sizes.gutter / 2,
+          }}
+        >
+          {children}
+        </View>
+      }
       {description &&
         <View style={descriptionContainer}>
           <Text style={descriptionText}>{description}</Text>
@@ -99,6 +105,7 @@ InputContainer.propTypes = {
     PropType.string,
     PropType.number,
   ]),
+  component: PropType.node,
 };
 
 const {colors, sizes} = SPS.variables;

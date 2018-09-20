@@ -48,11 +48,11 @@ class CustomSwitch extends Component {
   }
 
   /**
-   * Render Function for the CustomSwitch component
-   * @return {*}
+   * renders the Switch
+   * @return {jsx}
    */
-  render() {
-    const {description, label, onChange, switchWidth} = this.props;
+  renderSwitch() {
+    const {onChange, switchWidth} = this.props;
     const {
       switchContainerStyle,
       thumbStyle,
@@ -73,31 +73,45 @@ class CustomSwitch extends Component {
     };
 
     return (
-      <InputContainer headline={label} description={description}>
-        <TouchableOpacity
-          onPress={() => this.handleSwitch(onChange)}
-          style={{...switchContainerStyle, width: switchWidth}}
-          activeOpacity={1}
-        >
-          <View style={iconContainerStyle}>
-            <Icon
-              type={'ionicon'}
-              name={'md-checkmark'}
-              color={'green'}
-              iconStyle={iconStyle}
-            />
-            <Icon
-              type={'ionicon'}
-              name={'md-close'}
-              color={'red'}
-              iconStyle={iconStyle}
-            />
-          </View>
-          <Animated.View style={{...thumbStyle, ...combinedThumbStyle}}>
-            <Text style={thumbTextStyle}>{'|||'}</Text>
-          </Animated.View>
-        </TouchableOpacity>
-      </InputContainer>
+      <TouchableOpacity
+        onPress={() => this.handleSwitch(onChange)}
+        style={{...switchContainerStyle, width: switchWidth}}
+        activeOpacity={1}
+      >
+        <View style={iconContainerStyle}>
+          <Icon
+            type={'ionicon'}
+            name={'md-checkmark'}
+            color={'green'}
+            iconStyle={iconStyle}
+          />
+          <Icon
+            type={'ionicon'}
+            name={'md-close'}
+            color={'red'}
+            iconStyle={iconStyle}
+          />
+        </View>
+        <Animated.View style={{...thumbStyle, ...combinedThumbStyle}}>
+          <Text style={thumbTextStyle}>{'|||'}</Text>
+        </Animated.View>
+      </TouchableOpacity>
+    );
+  }
+
+  /**
+   * Render Function for the CustomSwitch component
+   * @return {*}
+   */
+  render() {
+    const {description, label} = this.props;
+
+    return (
+      <InputContainer
+        headline={label}
+        description={description}
+        component={this.renderSwitch()}
+      />
     );
   }
 }
@@ -113,7 +127,6 @@ CustomSwitch.propTypes = {
 const {colors, sizes} = SPS.variables;
 const styles = {
   switchContainerStyle: {
-    flex: 1,
     flexDirection: 'row',
     borderWidth: 3,
     borderRadius: 5,
