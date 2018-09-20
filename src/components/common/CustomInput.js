@@ -51,7 +51,6 @@ const styles = {
     color: colors.text.light,
     padding: (sizes.gutter / 2),
     fontSize: sizes.font_L,
-    lineHeight: sizes.gutter,
   },
 };
 
