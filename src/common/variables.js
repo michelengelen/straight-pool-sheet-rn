@@ -24,7 +24,6 @@ SPS.variables = {
       dark: 'rgba(112, 112, 112, 1)',
     },
     grey: {
-      svgIcon: 'rgba(230, 230, 230, 1)',
       light: 'rgba(61, 61, 61, 1)',
       mid: 'rgba(51, 51, 51, 1)',
       dark: 'rgba(48, 48, 48, 1)',

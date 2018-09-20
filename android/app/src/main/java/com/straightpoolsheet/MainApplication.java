@@ -3,7 +3,6 @@ package com.straightpoolsheet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.horcrux.svg.SvgPackage;
 import com.reactcommunity.rnlanguages.RNLanguagesPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -29,7 +28,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new SvgPackage(),
             new RNLanguagesPackage(),
             new RNFirebasePackage(),
             new FBSDKPackage(),

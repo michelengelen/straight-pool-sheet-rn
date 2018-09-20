@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
-import {View, Text} from 'react-native';
+import React from 'react';
+import {View, Text, Image} from 'react-native';
 import PropType from 'prop-types';
 import SPS from 'common/variables';
 
-import {AverageIcon, MaximumIcon} from 'assets';
+import Images from 'assets/images';
 
 /**
  * Renders the calculated score for a player
@@ -15,47 +15,30 @@ import {AverageIcon, MaximumIcon} from 'assets';
  * @return {*}
  * @constructor
  */
-class CalculatedScore extends PureComponent {
-  constructor(props) {
-    super(props);
+const CalculatedScore = (props) => {
+  const {iconType, calculatedScore} = props;
+  const {
+    calculatedScoreWrapper,
+    calculatedScoreViewStyle,
+    calculatedScoreTextStyle,
+    iconViewStyle,
+  } = styles.CalculatedScore;
 
-    this._wrapperHeight = 0;
-    this._wrapperWidth = 0;
-
-    this._getDimensions = this._getDimensions.bind(this);
-  }
-
-  _getDimensions(event) {
-    const {width, height} = event.nativeEvent.layout;
-    this._wrapperHeight = height;
-    this._wrapperWidth = width;
-  }
-
-  render() {
-    const {iconType, calculatedScore} = this.props;
-    const {
-      calculatedScoreWrapper,
-      calculatedScoreViewStyle,
-      calculatedScoreTextStyle,
-      iconViewStyle,
-    } = styles.CalculatedScore;
-
-    return (
-      <View style={calculatedScoreWrapper}>
-        <View style={iconViewStyle}>
-          {iconType === 'average'
-            ? <AverageIcon svgWidth={this._wrapperWidth} svgHeight={this._wrapperHeight} />
-            : <MaximumIcon svgWidth={this._wrapperWidth} svgHeight={this._wrapperHeight} />
-          }
-        </View>
-        <View style={calculatedScoreViewStyle}>
-          <Text style={calculatedScoreTextStyle}>
-            {calculatedScore}
-          </Text>
-        </View>
+  return (
+    <View style={calculatedScoreWrapper}>
+      <View style={iconViewStyle}>
+        <Image
+          source={{uri: Images.Icons[iconType]}}
+          style={{width: undefined, height: undefined, flex: 1, aspectRatio: 1}}
+        />
       </View>
-    );
-  }
+      <View style={calculatedScoreViewStyle}>
+        <Text style={calculatedScoreTextStyle}>
+          {calculatedScore}
+        </Text>
+      </View>
+    </View>
+  );
 };
 
 CalculatedScore.propTypes = {
