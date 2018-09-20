@@ -16,6 +16,22 @@ const de = {
   gameSettings: {
     title: 'Neues Spiel',
     drawerTitle: 'Neues Spiel',
+    player: 'Spieler',
+    players: 'Spieler',
+    accountSwitch: {
+      title: 'Account nutzen',
+      description: 'Wenn Sie das Spiel mit ihrem Account starten werden alle Spieldaten auf unseren Servern' +
+          ' gespeichert und ausgewertet. Ihre persönlichen Spielerstatistiken können nur auf diese Weise' +
+          ' erstellt werden.',
+    },
+    points: {
+      title: 'Ausspielziel',
+      description: '',
+    },
+    innings: {
+      title: 'Aufnahmen',
+      description: '',
+    },
   },
   gameSheet: {
     title: 'Laufendes Spiel',
@@ -35,10 +51,13 @@ const de = {
   buttons: {
     back: 'Zurück',
     cancelGame: 'Spiel abbrechen',
+    startGame: 'Spiel starten',
     logout: 'Abmelden',
     login: 'Anmelden',
     signup: 'Registrieren',
     facebook: 'Mit facebook anmelden',
+    createAccount: 'Account anlegen',
+    haveAccount: 'Mit Account anmelden',
   },
   messages: {
     notOnline: 'Keine Internetverbindung!',

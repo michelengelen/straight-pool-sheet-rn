@@ -16,6 +16,21 @@ const en = {
   gameSettings: {
     title: 'New Game',
     drawerTitle: 'New Game',
+    player: 'Player',
+    players: 'Players',
+    accountSwitch: {
+      title: 'Play with your account',
+      description: 'When you play with your account all scores get stored on our servers. Playerstatistics' +
+        ' can only be calculated when you play as yourself.',
+    },
+    points: {
+      title: 'Maximum Points',
+      description: '',
+    },
+    innings: {
+      title: 'Maximum Innings',
+      description: '',
+    },
   },
   gameSheet: {
     title: 'Current Game',
@@ -35,6 +50,7 @@ const en = {
   buttons: {
     back: 'Go back',
     cancelGame: 'Cancel current game',
+    startGame: 'Start Game',
     logout: 'Log out',
     login: 'Log in',
     signup: 'Sign up',

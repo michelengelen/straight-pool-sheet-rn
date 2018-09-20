@@ -21,6 +21,7 @@ import {getAuth} from 'reducers/AuthReducer';
 import SPS from 'common/variables';
 import {CustomSwitch} from './common/CustomSwitch';
 import {authActions} from 'actions';
+import {i18n} from 'assets';
 
 // global destructuring
 const {colors, sizes} = SPS.variables;
@@ -111,7 +112,7 @@ class GameSettings extends PureComponent {
       <CustomInput
         key={`playerInput_${index}`}
         id={`player${id}`}
-        label={`Player ${index + 1}`}
+        label={`${i18n.t('gameSettings.player')} ${index + 1}`}
         value={name}
         style={{textAlign: 'center'}}
         onChangeText={(name) =>
@@ -121,7 +122,7 @@ class GameSettings extends PureComponent {
           })
         }
         disabled={useAccount}
-        placeholder={`Player ${id}`}
+        placeholder={`${i18n.t('gameSettings.player')} ${id}`}
         secureTextEntry={false}
       />
     );
@@ -186,7 +187,7 @@ class GameSettings extends PureComponent {
     return (
       <View style={{flex: 1}}>
         <SceneContainer darkMode scrollable>
-          <InputContainer headline={'Players'}>
+          <InputContainer headline={i18n.t('gameSettings.players')}>
             <View style={{flex: 1, flexDirection: 'row', alignItems: 'stretch'}}>
               <View style={{flex: 5, alignItems: 'center', paddingBottom: 10}}>
                 {this.renderAvatar(players[0].avatar, players[0].name, 0)}
@@ -220,22 +221,21 @@ class GameSettings extends PureComponent {
           {isLoggedIn &&
             <CustomSwitch
               value={isLoggedIn && useAccount}
-              label={'Play with your account'}
+              label={i18n.t('gameSettings.accountSwitch.title')}
               switchWidth={58}
               onChange={this.useLoggedInUser}
-              description={'When you play with your account all scores get stored on our servers. Playerstatistics' +
-              ' can only be calculated when you play as yourself.'}
+              description={i18n.t('gameSettings.accountSwitch.description')}
             />
           }
           <CustomSlider
-            label={'Maximum Points'}
+            label={i18n.t('gameSettings.points.title')}
             value={gameSettings.maxPoints}
             minimumValue={50}
             maximumValue={200}
             onSlidingComplete={(value) => updatePoints(value)}
           />
           <CustomSlider
-            label={'Maximum Rounds'}
+            label={i18n.t('gameSettings.innings.title')}
             value={gameSettings.maxRounds}
             minimumValue={15}
             maximumValue={50}
@@ -243,7 +243,8 @@ class GameSettings extends PureComponent {
           />
           <CustomButton
             style={{marginTop: sizes.gutter / 2}}
-            buttonText={'Start Game'}
+            iconLeft={'md-play'}
+            buttonText={i18n.t('buttons.startGame')}
             disabled={
               !players[0].name || !players[1].name
             }
