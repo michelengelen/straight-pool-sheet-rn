@@ -28,9 +28,9 @@ class AverageIcon extends PureComponent {
 
     return (
       <View style={WRAPPER_STYLE}>
-        <Svg height={height} width={width} viewBox="0 0 50 50">
-          <Circle cx={25} cy={25} r={15} fill={'none'} stroke={colors.grey.svgIcon} strokeWidth={2} />
-          <Line x1={9.8} y1={40.2} x2={40.2} y2={9.8} fill={'none'} stroke={colors.primary.full} strokeWidth={4} />
+        <Svg height={height} width={width} viewBox="0 0 100 100">
+          <Circle cx={50} cy={50} r={25} fill={'none'} stroke={colors.grey.svgIcon} strokeWidth={4} />
+          <Line x1={25} y1={75} x2={75} y2={25} fill={'none'} stroke={colors.primary.full} strokeWidth={8} />
         </Svg>
       </View>
     );

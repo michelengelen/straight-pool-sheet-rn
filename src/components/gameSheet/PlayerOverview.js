@@ -16,42 +16,23 @@ import {AverageIcon, MaximumIcon} from 'assets';
  * @constructor
  */
 class CalculatedScore extends PureComponent {
-  /**
-   * constructor function
-   * @param {object} props
-   */
   constructor(props) {
     super(props);
 
-    this.state = {
-      _wrapperHeight: 0,
-      _wrapperWidth: 0,
-    };
+    this._wrapperHeight = 0;
+    this._wrapperWidth = 0;
 
     this._getDimensions = this._getDimensions.bind(this);
   }
 
-  /**
-   * store the wrappers width/height in the state to pass it to the Icons
-   * @param {object} event
-   * @private
-   */
   _getDimensions(event) {
     const {width, height} = event.nativeEvent.layout;
-
-    this.setState({
-      _wrapperHeight: height,
-      _wrapperWidth: width,
-    });
+    this._wrapperHeight = height;
+    this._wrapperWidth = width;
   }
 
-  /**
-   * React render function
-   * @return {*}
-   */
   render() {
     const {iconType, calculatedScore} = this.props;
-    const {_wrapperHeight, _wrapperWidth} = this.state;
     const {
       calculatedScoreWrapper,
       calculatedScoreViewStyle,
@@ -61,10 +42,10 @@ class CalculatedScore extends PureComponent {
 
     return (
       <View style={calculatedScoreWrapper}>
-        <View style={iconViewStyle} onLayout={(event) => this._getDimensions(event)}>
+        <View style={iconViewStyle}>
           {iconType === 'average'
-            ? <AverageIcon svgWidth={_wrapperWidth} svgHeight={_wrapperHeight} />
-            : <MaximumIcon svgWidth={_wrapperWidth} svgHeight={_wrapperHeight} />
+            ? <AverageIcon svgWidth={this._wrapperWidth} svgHeight={this._wrapperHeight} />
+            : <MaximumIcon svgWidth={this._wrapperWidth} svgHeight={this._wrapperHeight} />
           }
         </View>
         <View style={calculatedScoreViewStyle}>
@@ -75,7 +56,7 @@ class CalculatedScore extends PureComponent {
       </View>
     );
   }
-}
+};
 
 CalculatedScore.propTypes = {
   calculatedScore: PropType.oneOfType([
