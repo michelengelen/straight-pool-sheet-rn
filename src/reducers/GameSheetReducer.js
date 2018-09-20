@@ -26,6 +26,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
   // case: SwitchPlayer
   let newRoundSet = {
     ...roundTemplate,
+    startTime: new Date().toString(),
     breaks: [],
   };
 
@@ -37,6 +38,15 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         maxPoints: payload.maxPoints,
         maxRounds: payload.maxRounds,
         gameKey: payload.gameKey,
+        gameState: {
+          ...state.gameState,
+          startTime: new Date().toString(),
+        },
+        rounds: [
+          [
+            {...newRoundSet},
+          ],
+        ],
       };
 
     case gamesheetActionTypes.updatePlayerScore:
@@ -178,6 +188,8 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
       newRoundSet.remainingBalls =
         rounds[currentRoundIndex][currentPlayerIndex].remainingBalls;
 
+      newRoundSet.startTime = new Date().toString();
+
       if (currentPlayerIndex === 0) {
         const updateSwitchObject = {
           index: currentRoundIndex,
@@ -247,6 +259,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         gameState: {
           ...state.gameState,
           finished: true,
+          finishTime: new Date().toString,
         },
       };
 
@@ -256,6 +269,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         gameState: {
           ...state.gameState,
           cancelled: true,
+          finishTime: new Date().toString,
         },
       };
 

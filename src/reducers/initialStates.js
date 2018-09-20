@@ -46,6 +46,8 @@ const INITIAL_STATE = {
     gameState: {
       cancelled: false,
       finished: false,
+      startTime: null,
+      finishTime: null,
       currentRound: 1,
       currentRoundIndex: 0,
       currentPlayerIndex: 0,
