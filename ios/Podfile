@@ -10,8 +10,10 @@ target 'straightPoolSheet' do
 
 
   pod 'RNLanguages', :path => '../node_modules/react-native-languages'
-  pod 'React', :path => '../node_modules/react-native'
+  pod 'React', :path => '../node_modules/react-native', :subspecs => ['RCTImage']
   pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
   target 'straightPoolSheetTests' do
     inherit! :search_paths

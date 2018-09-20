@@ -49,14 +49,22 @@ PODS:
     - React/Core (= 0.56.0)
   - React/Core (0.56.0):
     - yoga (= 0.56.0.React)
+  - React/RCTImage (0.56.0):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTNetwork (0.56.0):
+    - React/Core
   - RNLanguages (3.0.0):
+    - React
+  - RNSVG (7.0.2):
     - React
   - yoga (0.56.0.React)
 
 DEPENDENCIES:
   - Firebase/Core
-  - React (from `../node_modules/react-native`)
+  - React/RCTImage (from `../node_modules/react-native`)
   - RNLanguages (from `../node_modules/react-native-languages`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -74,6 +82,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native"
   RNLanguages:
     :path: "../node_modules/react-native-languages"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -87,8 +97,9 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   RNLanguages: e3ae05ef105937645218272429dac0c3f7633451
+  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 6a1967e0085a72922399272455aabe47ab5fbbd1
+PODFILE CHECKSUM: aa2ce059e50fd791fd05d05f767b4eec0bd1fd1e
 
 COCOAPODS: 1.5.3
