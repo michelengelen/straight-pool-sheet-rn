@@ -62,6 +62,20 @@ const en = {
     notOnline: 'No internet connection!',
     createAccount: 'No account just yet?',
     haveAccount: 'Already have an account?',
+    gameCancelled: 'Cancelled',
+    gameFinished: 'Finished',
+    gameRunning: 'Running',
+  },
+  labels: {
+    points: 'Points',
+    rounds: 'Rounds',
+    gameStatus: 'Status',
+    maxPoints: 'max. Points',
+    maxRounds: 'max. Rounds',
+  },
+  abbr: {
+    points: 'Pts.',
+    rounds: 'Rnd.',
   },
 };
 

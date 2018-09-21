@@ -39,4 +39,5 @@ export const profileActionTypes = {
 export const storageActionTypes = {
   storeGame: 'storage/STORE_GAME',
   removeGame: 'storage/REMOVE_GAME',
+  clearGames: 'storage/CLEAR_GAMES',
 };

@@ -115,7 +115,7 @@ const _HOAstartGame = (gameSettings, userId) => {
 const _HOAfinishGame = (gameData) => {
   return (dispatch) => {
     gameData.gameState.finished = true;
-    gameData.gameState.finishTime = new Date();
+    gameData.gameState.finishTime = new Date().toString();
     dispatch(finishGame());
     dispatch(storeGame(gameData));
     dispatch(onStopGame());

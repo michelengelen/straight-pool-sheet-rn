@@ -259,7 +259,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         gameState: {
           ...state.gameState,
           finished: true,
-          finishTime: new Date().toString,
+          finishTime: new Date().toString(),
         },
       };
 
@@ -269,7 +269,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         gameState: {
           ...state.gameState,
           cancelled: true,
-          finishTime: new Date().toString,
+          finishTime: new Date().toString(),
         },
       };
 

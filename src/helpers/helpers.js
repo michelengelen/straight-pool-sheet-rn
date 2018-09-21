@@ -1,3 +1,5 @@
+import {i18n} from 'assets';
+
 /**
  * Helper Function to update objects inside an array.
  *
@@ -101,6 +103,49 @@ const buildCurrentScoreText = (score, breaks) => {
   return currentScore + score;
 };
 
+/**
+ * parse a timestring and return a full timeString (DD/MM/YYYY, HH:MM)
+ * @param   {string} timeString
+ * @return  {string}
+ */
+const getFullDate = (timeString) => {
+  const d = new Date(timeString);
+  const day = d.getDate();
+  const month = d.getMonth() + 1;
+  const year = d.getFullYear();
+  const hours = d.getHours();
+  let minutes = `${d.getMinutes()}`;
+
+  if (minutes.length < 2) minutes = `0${minutes}`;
+
+  if (i18n.locale.includes('de')) {
+    return `${day}. ${month}. ${year}, ${hours}:${minutes}`;
+  }
+
+  return `${month}/${day}/${year}, ${hours}:${minutes}`;
+};
+
+/**
+ * parse start- and endTime to calculate the time played
+ * @param   {string} startTime
+ * @param   {string} endTime
+ * @return  {string}
+ */
+const getTimePlayed = (startTime, endTime) => {
+  const start = new Date(startTime).getTime();
+  const end = new Date(endTime).getTime();
+  const playTime = new Date(end - start);
+
+  const hours = playTime.getUTCHours();
+  let minutes = `${playTime.getUTCMinutes()}`;
+  let seconds = `${playTime.getUTCSeconds()}`;
+
+  if (minutes.length < 2) minutes = `0${minutes}`;
+  if (seconds.length < 2) seconds = `0${seconds}`;
+
+  return `${hours}h ${minutes}m ${seconds}s`;
+};
+
 export {
   updateObjectsInArray,
   updateObjectInArray,
@@ -108,4 +153,6 @@ export {
   insertItem,
   removeItem,
   buildCurrentScoreText,
+  getFullDate,
+  getTimePlayed,
 };

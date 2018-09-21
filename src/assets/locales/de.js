@@ -63,6 +63,20 @@ const de = {
     notOnline: 'Keine Internetverbindung!',
     createAccount: 'Sie haben noch kein Profil?',
     haveAccount: 'Sie haben schon ein Profil?',
+    gameCancelled: 'Abgebrochen',
+    gameFinished: 'Beendet',
+    gameRunning: 'Läuft',
+  },
+  labels: {
+    points: 'Punkte',
+    rounds: 'Aufnahmen',
+    gameStatus: 'Status',
+    maxPoints: 'max. Punkte',
+    maxRounds: ' max. Aufnahmen',
+  },
+  abbr: {
+    points: 'Pkt.',
+    rounds: 'Aufn.',
   },
 };
 

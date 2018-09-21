@@ -1,4 +1,6 @@
 import {storageActionTypes} from './actionTypes';
+import {NetInfo} from 'react-native';
+import {updateRunningGame} from 'common';
 
 /**
  * store a game to the local redux store
@@ -8,12 +10,19 @@ import {storageActionTypes} from './actionTypes';
  */
 export function storeGame(gameData) {
   return (dispatch) => {
-    dispatch({type: storageActionTypes.storeGame, gameData});
+    const {gameKey = null} = gameData;
+    NetInfo.isConnected.fetch().then((isConnected) => {
+      if (isConnected && gameKey && gameKey !== '') {
+        updateRunningGame(gameData, gameKey).then(() => dispatch({type: storageActionTypes.storeGame, gameData}));
+      }
+
+      dispatch({type: storageActionTypes.storeGame, gameData});
+    });
   };
 }
 
 /**
- * hide the full-size LoadingIndicator
+ * remove a single game from the local storage
  *
  * @param   {number} index
  * @return  {function(*): *}
@@ -21,5 +30,16 @@ export function storeGame(gameData) {
 export function removeGame(index) {
   return (dispatch) => {
     dispatch({type: storageActionTypes.removeGame, index});
+  };
+}
+
+/**
+ * clear all games from local storage
+ *
+ * @return  {function(*): *}
+ */
+export function clearGames() {
+  return (dispatch) => {
+    dispatch({type: storageActionTypes.clearGames});
   };
 }

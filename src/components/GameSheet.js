@@ -12,7 +12,7 @@ import {getSettings} from 'reducers/GameSettingReducer';
 import {getAppState} from 'reducers/CommonReducer';
 import {getGameSheet, undoableFromState} from 'reducers/GameSheetReducer';
 import {gameSheetActions} from 'actions';
-import {updateRunningGame} from '../common';
+import {updateRunningGame} from 'common';
 
 /**
  * Gamesettings Component

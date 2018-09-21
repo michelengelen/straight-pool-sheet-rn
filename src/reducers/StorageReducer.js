@@ -1,5 +1,4 @@
 import {storageActionTypes} from 'actions/actionTypes';
-import {getGameSheet} from './GameSheetReducer';
 
 const INITIAL_STATE = {
   playedGames: [],
@@ -23,6 +22,12 @@ const StorageReducer = (state = INITIAL_STATE, action) => {
           ...state.playedGames.slice(0, action.index),
           ...state.playedGames.slice(action.index + 1),
         ],
+      };
+
+    case storageActionTypes.clearGames:
+      return {
+        ...state,
+        playedGames: [],
       };
 
     default:
