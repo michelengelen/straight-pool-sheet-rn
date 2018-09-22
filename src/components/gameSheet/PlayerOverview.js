@@ -182,7 +182,7 @@ const styles = {
       justifyContent: 'space-around',
     },
     currentScoreTextStyle: {
-      fontSize: sizes.font_XXL,
+      fontSize: sizes.font_XXXL,
       fontWeight: 'bold',
       color: colors.text.light,
       padding: sizes.gutter / 2,
@@ -191,6 +191,7 @@ const styles = {
       flex: 1,
       minHeight: sizes.gutter,
       alignItems: 'center',
+      justifyContent: 'space-around',
       padding: sizes.gutter / 4,
       backgroundColor: colors.grey.darker,
       borderBottomWidth: 1,
@@ -216,6 +217,7 @@ const styles = {
       flexDirection: 'row',
       alignItems: 'center',
       borderColor: colors.borderColors.darker,
+      overflow: 'hidden',
     },
     calculatedScoreViewStyle: {
       flex: 3,

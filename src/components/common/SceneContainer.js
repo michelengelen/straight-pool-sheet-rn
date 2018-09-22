@@ -59,11 +59,12 @@ const SceneContainer = (props) => {
         }
         centerComponent={{
           text: scenes[routeName].sceneName.toUpperCase(),
-          style: {color: colors.textColor, fontSize: sizes.font_L},
+          style: {color: colors.textColor, fontSize: sizes.font_XL},
         }}
         rightComponent={{
           icon: 'menu',
           color: colors.textColor,
+          underlayColor: 'transparent',
           onPress: () => {
             navigation.toggleDrawer();
           },

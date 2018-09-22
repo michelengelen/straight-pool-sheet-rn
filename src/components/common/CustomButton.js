@@ -17,7 +17,6 @@ const CustomButton = (props) => {
   textStyle.opacity = props.disabled ? 0.5 : 1;
 
   const renderIcon = (position, name) => {
-    if (typeof name !== 'string') return null;
     const marginKey = position === 'left' ? 'marginRight' : 'marginLeft';
     const alignSelf = position === 'left' ? 'flex-start' : 'flex-end';
     const iconSize = position === 'left' ? textStyle.fontSize * 1.2 : textStyle.fontSize * 1.3;

@@ -44,51 +44,53 @@ class Profile extends Component {
     const {user} = this.props.authState;
     return (
       <SceneContainer darkMode scrollable={false}>
-        <View
-          style={{
-            flex: 1,
-            alignitems: 'stretch',
-          }}
-        >
-          <View style={{alignItems: 'center', paddingVertical: sizes.gutter}}>
-            <Avatar
-              xlarge
-              rounded
-              avatarStyle={{transform: [{scale: .91}]}}
-              containerStyle={{borderWidth: 3, borderColor: colors.primary.full}}
-              source={{uri: user ? user.avatar + '?type=large' : null}}
-              /* eslint-disable-next-line */
+        {user &&
+          <View
+            style={{
+              flex: 1,
+              alignitems: 'stretch',
+            }}
+          >
+            <View style={{alignItems: 'center', paddingVertical: sizes.gutter}}>
+              <Avatar
+                xlarge
+                rounded
+                avatarStyle={{transform: [{scale: .91}]}}
+                containerStyle={{borderWidth: 3, borderColor: colors.primary.full}}
+                source={{uri: user ? user.avatar + '?type=large' : null}}
+                /* eslint-disable-next-line */
                   onPress={() => console.log('Works!')}
-              activeOpacity={0.7}
+                activeOpacity={0.7}
+              />
+            </View>
+            <View style={{alignItems: 'center', marginBottom: 30}}>
+              <Text style={{color: 'white'}}>{user.username || user.fullname}</Text>
+            </View>
+            <CustomButton
+              iconLeft={'md-trophy'}
+              buttonText={'Games played'}
+              loading={false}
+              onPress={() => this.props.navigation.navigate('GamesList')}
+            />
+            <CustomButton
+              disabled
+              iconLeft={'md-stats'}
+              buttonText={'Statistics (coming soon)'}
+              loading={false}
+              onPress={() => {
+                // eslint-disable-next-line
+                  console.log('shoudl not work!');
+              }}
+            />
+            <CustomButton
+              style={{backgroundColor: colors.useCase.error}}
+              iconLeft={'md-power'}
+              buttonText={'Log out'}
+              loading={false}
+              onPress={this.onSignOut}
             />
           </View>
-          <View style={{alignItems: 'center', marginBottom: 30}}>
-            <Text style={{color: 'white'}}>{user.username || user.fullname}</Text>
-          </View>
-          <CustomButton
-            iconLeft={'md-trophy'}
-            buttonText={'Games played'}
-            loading={false}
-            onPress={() => this.props.navigation.navigate('GamesList')}
-          />
-          <CustomButton
-            disabled
-            iconLeft={'md-stats'}
-            buttonText={'Statistics (coming soon)'}
-            loading={false}
-            onPress={() => {
-              // eslint-disable-next-line
-              console.log('shoudl not work!');
-            }}
-          />
-          <CustomButton
-            style={{backgroundColor: colors.useCase.error}}
-            iconLeft={'md-power'}
-            buttonText={'Log out'}
-            loading={false}
-            onPress={this.onSignOut}
-          />
-        </View>
+        }
       </SceneContainer>
     );
   }
@@ -96,8 +98,8 @@ class Profile extends Component {
 
 Profile.propTypes = {
   authState: PropType.shape({
-    isLoggedIn: PropType.bool.isRequired,
-    user: PropType.object.isRequired,
+    isLoggedIn: PropType.bool,
+    user: PropType.object,
   }),
   navigation: PropType.object,
   signOut: PropType.func.isRequired,

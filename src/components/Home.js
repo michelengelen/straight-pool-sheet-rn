@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
 import {Image} from 'react-native';
-
 import {SceneContainer, CustomButton} from 'components/common';
 
 import Images from 'assets/images';

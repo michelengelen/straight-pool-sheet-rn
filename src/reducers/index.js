@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
         gamesheetActionTypes.switchPlayer,
         gamesheetActionTypes.completeBook,
       ]),
+      syncFilter: true,
     }
   ),
   storage: StorageReducer,

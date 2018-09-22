@@ -65,6 +65,7 @@ SPS.variables = {
     font_L: 18,
     font_XL: 24,
     font_XXL: 28,
+    font_XXXL: 34,
     dimensions: Dimensions.get('window'),
   },
 };
