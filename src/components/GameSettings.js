@@ -16,6 +16,7 @@ import {
   gameSheetActions,
 } from 'actions';
 import {getSettings} from 'reducers/GameSettingReducer';
+import {getAppState} from 'reducers/CommonReducer';
 import {getAuth} from 'reducers/AuthReducer';
 
 import SPS from 'common/variables';
@@ -95,8 +96,9 @@ class GameSettings extends PureComponent {
    * @return {Promise<void>}
    */
   async startNewGame(gameSettings, userId) {
+    const {online} = this.props.appState;
     // start the game (pass settings to the new scene, then show it)
-    await this.props.startGame(gameSettings, userId);
+    await this.props.startGame(gameSettings, userId, online);
   }
 
   /**
@@ -266,6 +268,7 @@ class GameSettings extends PureComponent {
 }
 
 GameSettings.propTypes = {
+  appState: PropType.object,
   authState: PropType.object,
   gameSettings: PropType.object,
   updatePlayer: PropType.func,
@@ -280,6 +283,7 @@ GameSettings.propTypes = {
 const mapStateToProps = (state) => {
   return {
     ...getSettings(state),
+    ...getAppState(state),
     ...getAuth(state),
   };
 };
@@ -293,8 +297,8 @@ const mapDispatchToProps = (dispatch) => ({
     gameSettingActions.updateRoundsAction(dispatch, maxRounds),
   swapPlayers: () =>
     gameSettingActions.swapPlayersAction(dispatch),
-  startGame: (settings, userId) =>
-    gameSheetActions.startGameAction(dispatch, settings, userId),
+  startGame: (settings, userId, isConnected) =>
+    gameSheetActions.startGameAction(dispatch, settings, userId, isConnected),
   useAccount: async () =>
     await authActions.useAccount(dispatch),
 });

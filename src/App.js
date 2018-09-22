@@ -19,6 +19,7 @@ const {colors} = SPS.variables;
 import {store, persistor} from 'store/configureStore';
 import {i18n} from 'assets';
 import {commonActions, authActions} from 'actions';
+import {storageActions} from 'actions';
 
 const renderNavigationDrawer = (props) => (<CustomNavigationDrawer {...props} />);
 
@@ -107,8 +108,22 @@ export default class App extends Component {
    * @private
    */
   static _handleConnectivityChange(isConnected) {
-    store.dispatch(commonActions.appNetworkStatus(isConnected));
-    store.dispatch(authActions.checkLoginStatus(isConnected));
+    Promise.all([
+      Promise.resolve(
+        store.dispatch(commonActions.appNetworkStatus(isConnected))
+      ),
+      Promise.resolve(
+        store.dispatch(authActions.checkLoginStatus(isConnected))
+      ),
+    ]).then(() => {
+      const state = store.getState();
+      const {auth, storage} = state;
+
+      // if stored games are present and the user is logged in update all stored games in DB
+      if (isConnected && auth.user && auth.user.uid && storage.playedGames.length > 0) {
+        storageActions.addStoredGamestoDB(auth.user.uid, storage.playedGames, store.dispatch);
+      }
+    });
   }
 
   /**

@@ -50,7 +50,6 @@ class GamesList extends Component {
               .then((snap) => snap.val());
           })
         ).then((data) => {
-          console.log('### data: ', data);
           this.setState({
             loading: false,
             gameData: data.reverse(),

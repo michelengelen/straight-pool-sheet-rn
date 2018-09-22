@@ -15,6 +15,7 @@ const createNewGame = (initialGameData, userId) => {
   initialGameData.rounds = [[
     {
       ...roundTemplate,
+      startTime: new Date().toString(),
     },
   ]];
 

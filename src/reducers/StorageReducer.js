@@ -24,6 +24,12 @@ const StorageReducer = (state = INITIAL_STATE, action) => {
         ],
       };
 
+    case storageActionTypes.updateAllGames:
+      return {
+        ...state,
+        playedGames: [...action.games],
+      };
+
     case storageActionTypes.clearGames:
       return {
         ...state,

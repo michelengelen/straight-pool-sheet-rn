@@ -95,9 +95,9 @@ const _HOAundoScore = () => {
   };
 };
 
-const _HOAstartGame = (gameSettings, userId) => {
+const _HOAstartGame = (gameSettings, userId, isConnected) => {
   return (dispatch) => {
-    if (userId) {
+    if (userId && isConnected) {
       createNewGame(gameSettings, userId).then((gameKey) => {
         gameSettings.gameKey = gameKey;
         gameSettings.userId = userId;
@@ -159,8 +159,8 @@ const _HOAclearGame = (restart) => {
 };
 
 // Higher Order Action Creators
-export const startGameAction = (dispatch, settings, userId) => {
-  return dispatch(_HOAstartGame(settings, userId));
+export const startGameAction = (dispatch, settings, userId, isConnected) => {
+  return dispatch(_HOAstartGame(settings, userId, isConnected));
 };
 export const finishGameAction = (dispatch, gameData) => {
   return dispatch(_HOAfinishGame(gameData));
