@@ -40,6 +40,10 @@ const en = {
     title: 'Played Games',
     drawerTitle: 'Played Games',
   },
+  statistics: {
+    title: 'Playerstatistics',
+    drawerTitle: 'Playerstatistics',
+  },
   loginRegister: {
     title: 'Login / Register',
     drawerTitle: 'Login / Register',
@@ -76,6 +80,56 @@ const en = {
   abbr: {
     points: 'Pts.',
     rounds: 'Rnd.',
+  },
+  stats: {
+    allGamesPlayed: {
+      label: 'Played Games',
+      unit: 'Games',
+    },
+    allInningsPlayed: {
+      label: 'Played Innings',
+      unit: 'Innings',
+    },
+    averageLengthPerGame: {
+      label: 'AVG Game Length',
+      unit: '',
+    },
+    averageLengthPerInning: {
+      label: 'AVG Inning Length',
+      unit: '',
+    },
+    gamesWon: {
+      label: 'Won Games',
+      unit: 'Games',
+    },
+    gamesLost: {
+      label: 'Lost Games',
+      unit: 'Games',
+    },
+    averagePointsPerGame: {
+      label: 'AVG Points per Game',
+      unit: 'Points',
+    },
+    averagePointsPerInning: {
+      label: 'AVG Points Per Inning',
+      unit: 'Points',
+    },
+    highestRun: {
+      label: 'Highest Run',
+      unit: 'Points',
+    },
+    averageHighestRun: {
+      label: 'AVG Highest Run',
+      unit: 'Points',
+    },
+    totalFouls: {
+      label: 'Total Fouls',
+      unit: 'Fouls',
+    },
+    averageFoulsPerGame: {
+      label: 'AVG Fouls',
+      unit: 'Fouls per game',
+    },
   },
 };
 

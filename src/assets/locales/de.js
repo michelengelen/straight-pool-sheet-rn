@@ -41,6 +41,10 @@ const de = {
     title: 'Bisherige Spiele',
     drawerTitle: 'Bisherige Spiele',
   },
+  statistics: {
+    title: 'Spielerstatistiken',
+    drawerTitle: 'Spielerstatistiken',
+  },
   loginRegister: {
     title: 'Einloggen / Registrieren',
     drawerTitle: 'Einloggen / Registrieren',

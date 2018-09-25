@@ -127,23 +127,45 @@ const getFullDate = (timeString) => {
 
 /**
  * parse start- and endTime to calculate the time played
- * @param   {string} startTime
- * @param   {string} endTime
- * @return  {string}
+ * @param   {string}  startTime
+ * @param   {string}  endTime
+ * @param   {boolean} [getString]
+ * @return  {string | number}
  */
-const getTimePlayed = (startTime, endTime) => {
+const getTimePlayed = (startTime, endTime, getString = true) => {
   const start = new Date(startTime).getTime();
   const end = new Date(endTime).getTime();
-  const playTime = new Date(end - start);
 
-  const hours = playTime.getUTCHours();
-  let minutes = `${playTime.getUTCMinutes()}`;
-  let seconds = `${playTime.getUTCSeconds()}`;
+  if (!getString) return (end - start);
 
-  if (minutes.length < 2) minutes = `0${minutes}`;
-  if (seconds.length < 2) seconds = `0${seconds}`;
+  return getTimeString(end - start);
+};
 
-  return `${hours}h ${minutes}m ${seconds}s`;
+/**
+ * get a string representing the time passed into the function (in ms)
+ * @param   {number} time  time in millseconds
+ * @return  {string} returns string in format hh/mm/ss
+ */
+const getTimeString = (time) => {
+  const t = new Date(time);
+
+  const hours = t.getUTCHours();
+  const minutes = t.getUTCMinutes();
+  const seconds = t.getUTCSeconds();
+
+  let m = minutes.toString();
+  let s = seconds.toString();
+
+  if (m.length < 2) m = `0${minutes}`;
+  if (s.length < 2) s = `0${seconds}`;
+
+  if (hours > 0) {
+    return `${hours}h ${m}m ${s}s`;
+  } else if (hours === 0 && minutes > 0) {
+    return `${m}m ${s}s`;
+  }
+
+  return `${s}s`;
 };
 
 export {
@@ -155,4 +177,5 @@ export {
   buildCurrentScoreText,
   getFullDate,
   getTimePlayed,
+  getTimeString,
 };

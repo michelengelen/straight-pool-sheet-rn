@@ -17,6 +17,10 @@ const scenes = {
     sceneName: i18n.t('gamesPlayed.title'),
     drawerTitle: i18n.t('gamesPlayed.drawerTitle'),
   },
+  Statistics: {
+    sceneName: i18n.t('statistics.title'),
+    drawerTitle: i18n.t('statistics.drawerTitle'),
+  },
   Profile: {
     sceneName: i18n.t('profile.title'),
     drawerTitle: i18n.t('profile.drawerTitle'),

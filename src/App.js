@@ -13,6 +13,7 @@ import Home from 'components/Home';
 import Profile from 'components/Profile';
 import LoginRegister from 'components/LoginRegister';
 import GamesList from 'components/profile/GamesList';
+import Statistics from 'components/profile/Statistics';
 
 import SPS from 'common/variables';
 const {colors} = SPS.variables;
@@ -40,6 +41,7 @@ const navigationScenes = {
   Profile,
   GamesList,
   LoginRegister,
+  Statistics,
 };
 
 const StackNavigator = createStackNavigator(

@@ -73,14 +73,10 @@ class Profile extends Component {
               onPress={() => this.props.navigation.navigate('GamesList')}
             />
             <CustomButton
-              disabled
               iconLeft={'md-stats'}
               buttonText={'Statistics (coming soon)'}
               loading={false}
-              onPress={() => {
-                // eslint-disable-next-line
-                  console.log('shoudl not work!');
-              }}
+              onPress={() => this.props.navigation.navigate('Statistics')}
             />
             <CustomButton
               style={{backgroundColor: colors.useCase.error}}

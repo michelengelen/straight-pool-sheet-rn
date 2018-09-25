@@ -28,6 +28,10 @@ const filterVariables = {
     neverShow: true,
     iconName: 'md-play',
   },
+  Statistics: {
+    neverShow: true,
+    iconName: 'md-play',
+  },
   Profile: {
     showWhenLoggedIn: true,
     iconName: 'md-person',
