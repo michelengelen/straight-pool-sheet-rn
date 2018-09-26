@@ -169,7 +169,8 @@ class Statistics extends Component {
 
       timeStats.allInningsPlayed += timeStats.inningsPlayedInGame[i];
       timeStats.allTimesPlayed += timeStats.timePlayedInGame[i];
-      const averagePointsPerInning = (players[playerIndex].totalScore / timeStats.inningsPlayedInGame[i]).toFixed(2);
+      const averagePointsPerInning =
+        parseFloat((players[playerIndex].totalScore / timeStats.inningsPlayedInGame[i]).toFixed(2));
       if (averagePointsPerInning > charts.averagePointsPerInning.max) {
         charts.averagePointsPerInning.max = averagePointsPerInning;
       }
