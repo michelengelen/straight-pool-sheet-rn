@@ -112,7 +112,15 @@ class Statistics extends Component {
 
     const charts = {
       averagePointsPerInning: {
+        title: 'AVG points per inning',
         max: 0,
+        min: 0,
+        points: [],
+      },
+      averagePointsPerGame: {
+        title: 'AVG points per game',
+        max: 0,
+        min: 0,
         points: [],
       },
     };
@@ -174,6 +182,9 @@ class Statistics extends Component {
       if (averagePointsPerInning > charts.averagePointsPerInning.max) {
         charts.averagePointsPerInning.max = averagePointsPerInning;
       }
+      if (averagePointsPerInning < charts.averagePointsPerInning.min || charts.averagePointsPerInning.min === 0) {
+        charts.averagePointsPerInning.min = averagePointsPerInning;
+      }
       charts.averagePointsPerInning.points.push(averagePointsPerInning);
     }
 
@@ -201,9 +212,8 @@ class Statistics extends Component {
    * @return {*}
    */
   render() {
-    const {loading, gameData, stats} = this.state;
+    const {loading, stats} = this.state;
     const {
-      chartWrapper,
       headlineContainer,
       headlineText,
       statsWrapper,
@@ -212,40 +222,6 @@ class Statistics extends Component {
       statsLabel,
       statsText,
     } = styles;
-
-    if (stats) {
-      const {timeStats, pointStats} = stats;
-
-      console.log('### gameData: ', gameData);
-      console.log('### all stats: ', stats);
-
-      // number of games played
-      console.log('### number of games played: ', timeStats.allGamesPlayed);
-
-      // average time played per game
-      console.log('### average time played per game: ', getTimeString(timeStats.averageLengthPerGame));
-
-      // number of innings played
-      console.log('### number of innings played: ', timeStats.allInningsPlayed);
-
-      // average time played per inning
-      console.log('### average time played per inning: ', getTimeString(timeStats.averageLengthPerInning));
-
-      // average time played per game
-      console.log('### average time played per game: ', getTimeString(timeStats.averageTimePerGame));
-
-      // total time played
-      console.log('### total time played: ', getTimeString(timeStats.allTimesPlayed));
-
-      // High Run: highest run
-      console.log('### highest run: ', pointStats.highestRun);
-
-      // average  High runs per game:
-      console.log('### average highest run: ', pointStats.averageHighestRun);
-
-      // points per inning
-      console.log('### average points per inning: ', pointStats.averagePointsPerInning);
-    }
 
     // points per minute
     // fouls
@@ -276,8 +252,6 @@ class Statistics extends Component {
 
           {stats &&
             <View style={statsWrapper}>
-
-              <LineChart width={sizes.dimensions.width} data={stats.charts.averagePointsPerInning}/>
 
               <View style={headlineContainer}>
                 <Text style={headlineText}>Game-/Inning-Stats</Text>
@@ -437,11 +411,11 @@ const styles = StyleSheet.create({
     paddingVertical: sizes.gutter * .75,
   },
   statsLabel: {
-    fontSize: sizes.font_S,
+    fontSize: sizes.font_M,
     color: colors.text.mid,
   },
   statsText: {
-    fontSize: sizes.font_M,
+    fontSize: sizes.font_L,
     fontWeight: 'bold',
     color: colors.text.light,
   },

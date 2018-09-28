@@ -21,7 +21,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
   } = state.gameState;
   const currentPlayer = state.players[currentPlayerIndex];
   const currentRoundSet = rounds[currentRoundIndex][currentPlayerIndex];
-  let winner = -1;
+  let winner = state.gameState.winner;
 
   // case: SwitchPlayer
   let newRoundSet = {
@@ -179,9 +179,10 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
       };
 
     case gamesheetActionTypes.switchPlayer:
-      if (currentPlayerIndex === 1 && currentRound === state.maxRounds) {
+      if (currentPlayerIndex === 1 && currentRound >= state.maxRounds) {
         winner =
-          state.players[0].totalScore > state.players[1].totalScore ? 0 : 1;
+          state.players[0].totalScore === state.players[1].totalScore ? 2 :
+            state.players[0].totalScore > state.players[1].totalScore ? 0 : 1;
       }
 
       const newRemainingBalls =
@@ -189,6 +190,16 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
         rounds[currentRoundIndex][currentPlayerIndex].remainingBalls;
 
       newRoundSet.startTime = new Date().toString();
+      if (winner !== -1) {
+        return {
+          ...state,
+          gameState: {
+            ...state.gameState,
+            remainingBalls: newRemainingBalls,
+            winner: winner,
+          },
+        };
+      }
 
       if (currentPlayerIndex === 0) {
         const updateSwitchObject = {
@@ -208,6 +219,7 @@ const GameSheetReducer = (state = {...INITIAL_STATE.GameSheet}, action) => {
             ...state.gameState,
             currentPlayerIndex: 1,
             remainingBalls: newRemainingBalls,
+            winner: winner,
           },
           rounds: updateNestedArray(rounds, updateSwitchObject),
         };
