@@ -100,6 +100,7 @@ const styles = {
       backgroundColor: colors.grey.dark,
       borderBottomColor: colors.primary.full,
       height: 55,
+      zIndex: 100,
     },
   },
 };
