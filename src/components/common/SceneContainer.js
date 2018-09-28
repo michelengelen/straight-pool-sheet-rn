@@ -48,14 +48,14 @@ const SceneContainer = (props) => {
     <View style={{flex: 1}}>
       <Header
         leftComponent={
-          !home
-            ? {
+          (home || routeName === 'GameSheet')
+            ? {}
+            : {
               icon: 'arrow-back',
               color: colors.textColor,
               underlayColor: 'transparent',
               onPress: () => navigation.goBack(),
             }
-            : {}
         }
         centerComponent={{
           text: scenes[routeName].sceneName.toUpperCase(),
